@@ -101,11 +101,11 @@ const BeløpTab = () => {
     e.preventDefault();
     let hasError = false;
 
-    if (!formData.selectedCountry) {
+    if (!formData?.selectedCountry) {
       setErrors((prev) => ({ ...prev, selectedCountry: true }));
       hasError = true;
     }
-    if (!formData.amount) {
+    if (!formData?.amount) {
       setErrors((prev) => ({ ...prev, amount: true }));
       hasError = true;
     }
@@ -113,7 +113,7 @@ const BeløpTab = () => {
     if (hasError) return;
 
     router.push(
-      `housemodell-plot?city=${formData.selectedCountry}&pris=${formData.amount.replace(/\s+/g, "")}`
+      `housemodell-plot?city=${formData?.selectedCountry}&pris=${formData?.amount.replace(/\s+/g, "")}`
     );
     const currIndex = 0;
     localStorage.setItem("currIndex", currIndex.toString());
@@ -142,7 +142,7 @@ const BeløpTab = () => {
                 onClick={toggleDropdown}
                 className="text-darkBlack text-base font-medium flex items-center justify-between w-full"
               >
-                {formData.selectedCountry || "Velg et alternativ"}
+                {formData?.selectedCountry || "Velg et alternativ"}
                 <Image src={Ic_chevron_down} alt="arrow" fetchPriority="auto" />
               </button>
             </div>
@@ -174,7 +174,7 @@ const BeløpTab = () => {
                         }
                         className={`text-sm text-darkBlack px-4 py-[14px] cursor-pointer 
                       ${
-                        formData.selectedCountry ===
+                        formData?.selectedCountry ===
                         `${option.name} (${option.count})`
                           ? "bg-[#F9F5FF] font-semibold"
                           : "bg-white"
@@ -204,12 +204,12 @@ const BeløpTab = () => {
                   ${errors.amount ? "border border-red-500" : ""}`}
                 placeholder="Fyll inn beløp i NOK"
                 onChange={handleKartInputChange}
-                value={formData.amount}
+                value={formData?.amount}
                 type="text"
                 inputMode="numeric"
               />
             </div>
-            {formData.amount && (
+            {formData?.amount && (
               <Image
                 src={Ic_close}
                 alt="close"
@@ -226,12 +226,12 @@ const BeløpTab = () => {
 
         <button
           className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-primary rounded-[40px] transition-all duration-300 ease-out lg:h-[56px] my-[22px] mx-6 gap-2 ${
-            !formData.selectedCountry || !formData.amount
+            !formData?.selectedCountry || !formData?.amount
               ? "opacity-50 cursor-not-allowed"
               : ""
           }`}
           type="submit"
-          disabled={!formData.selectedCountry || !formData.amount}
+          disabled={!formData?.selectedCountry || !formData?.amount}
         >
           <Image
             src={Ic_Search2}

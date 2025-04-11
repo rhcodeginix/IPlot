@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
+import { useCustomizeHouse } from "@/context/selectHouseContext";
 
 const Tilpass: React.FC<any> = ({
   handleNext,
@@ -27,6 +28,7 @@ const Tilpass: React.FC<any> = ({
 }) => {
   const Huskonfigurator =
     HouseModelData?.Huskonfigurator?.hovedkategorinavn || [];
+  const { updateCustomizeHouse } = useCustomizeHouse();
 
   const [selectedTab, setSelectedTab] = useState<number>(0);
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
@@ -100,6 +102,42 @@ const Tilpass: React.FC<any> = ({
       setSelectedProductsArray(defaultSelectedProductsArray);
     }
   }, [Huskonfigurator]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("customizeHouse");
+
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+
+        if (Array.isArray(parsed)) {
+          const mappedProducts: any = {};
+          parsed.forEach((item) => {
+            const key = `${item.category}-${item.subCategory}`;
+            mappedProducts[key] = item;
+          });
+
+          setSelectedProductsArray(parsed);
+          setSelectedProducts(mappedProducts);
+        }
+      } catch (error) {
+        console.error(
+          "Failed to parse customizeHouse from localStorage:",
+          error
+        );
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedProductsArray) {
+      localStorage.setItem(
+        "customizeHouse",
+        JSON.stringify(selectedProductsArray)
+      );
+      updateCustomizeHouse(selectedProductsArray);
+    }
+  }, [selectedProductsArray]);
 
   const handleSelectProduct = (
     product: any,
@@ -259,7 +297,15 @@ const Tilpass: React.FC<any> = ({
                             ]?.produkter.map((product: any, index: number) => {
                               const key = `${selectedTab}-${selectedCategory}`;
                               const isSelected =
-                                selectedProducts[key]?.product === product;
+                                selectedProducts[key]?.product?.Produktnavn ===
+                                  product.Produktnavn &&
+                                selectedProducts[key]?.product?.pris ===
+                                  product.pris &&
+                                selectedProducts[key]?.product
+                                  ?.IncludingOffer === product.IncludingOffer &&
+                                selectedProducts[key]?.product
+                                  ?.Produktbeskrivelse ===
+                                  product.Produktbeskrivelse;
 
                               return (
                                 <div
@@ -382,10 +428,6 @@ const Tilpass: React.FC<any> = ({
                   className="border border-primary bg-primary text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                   onClick={() => {
                     handleNext();
-                    localStorage.setItem(
-                      "customizeHouse",
-                      JSON.stringify(selectedProductsArray)
-                    );
                   }}
                 />
               </div>

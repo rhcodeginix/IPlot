@@ -22,7 +22,6 @@ const Plots: React.FC<{
   const router: any = useRouter();
   const [HouseModelProperty, setHouseModelProperty] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  // const { hasReload } = router.query;
 
   const [formData, setFormData] = useState({
     address: "",

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { db } from "@/config/firebaseConfig";
 import { useRouter } from "next/router";
 import { formatCurrency } from "../RegulationHusmodell/Illustrasjoner";
+import { useCustomizeHouse } from "@/context/selectHouseContext";
 
 const PropertyHouseDetails: React.FC<{
   HouseModelData: any;
@@ -21,14 +22,10 @@ const PropertyHouseDetails: React.FC<{
     const cityQuery = queryParams.get("Kommue");
     setKommune(cityQuery);
   }, []);
-  const [custHouse, setCusHouse] = useState<any>(null);
   const [equityAmount, setEquityAmount] = useState<any>(null);
-  useEffect(() => {
-    const customizeHouse = localStorage.getItem("customizeHouse");
-    if (customizeHouse) {
-      setCusHouse(JSON.parse(customizeHouse));
-    }
-  }, []);
+
+  const { customizeHouse: custHouse } = useCustomizeHouse();
+
   const totalCustPris = custHouse
     ? custHouse?.reduce(
         (sum: any, item: any) =>
@@ -129,7 +126,6 @@ const PropertyHouseDetails: React.FC<{
               {totalCustPris
                 ? formatCurrency(totalCustPris.toLocaleString("nb-NO"))
                 : "0 NOK"}
-              {/* {Husdetaljer ? formatCurrency(Husdetaljer?.pris) : 0} */}
             </h4>
           </div>
           <div>

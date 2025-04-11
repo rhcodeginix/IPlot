@@ -54,8 +54,13 @@ const HusmodellFilterSection: React.FC<{
   formData: FormDataType;
   maxRangeData: number;
 }> = ({ setFormData, formData, maxRangeData }) => {
-  const [maxHousePrice, setMaxHousePrice] = useState("");
-
+  const [maxHousePrice, setMaxHousePrice] = useState(
+    String(
+      new Intl.NumberFormat("no-NO").format(
+        Number(formData?.maxRangeForHusmodell)
+      )
+    )
+  );
   const [openIndex, setOpenIndex] = useState<string[]>([
     "Eiendomstype",
     "Type husmodell",
@@ -489,7 +494,9 @@ const HusmodellFilterSection: React.FC<{
                       onClick={() => {
                         setFormData((prev: any) => ({
                           ...prev,
-                          maxRangeForHusmodell: maxHousePrice,
+                          maxRangeForHusmodell: Math.floor(
+                            Number(maxHousePrice.replace(/\s+/g, ""))
+                          ),
                         }));
                       }}
                     />

@@ -5,6 +5,7 @@ import { UserLayoutProvider } from "@/context/userLayoutContext";
 import { AddressProvider } from "@/context/addressContext";
 import Chatbot from "../Ui/chatbot";
 import { useRouter } from "next/router";
+import { CustomizeHouseProvider } from "@/context/selectHouseContext";
 
 type Props = {
   children: ReactNode;
@@ -42,9 +43,11 @@ const UserLayout = ({ children }: Props) => {
 
       <UserLayoutProvider>
         <AddressProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <CustomizeHouseProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </CustomizeHouseProvider>
         </AddressProvider>
       </UserLayoutProvider>
     </div>

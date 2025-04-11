@@ -79,15 +79,15 @@ const MatrikkelTab = () => {
     e.preventDefault();
     let hasError = false;
 
-    if (!formData.Gårsnummer) {
+    if (!formData?.Gårsnummer) {
       setErrors((prev) => ({ ...prev, Gårsnummer: true }));
       hasError = true;
     }
-    if (!formData.kommune) {
+    if (!formData?.kommune) {
       setErrors((prev) => ({ ...prev, kommune: true }));
       hasError = true;
     }
-    if (!formData.Bruksnummer) {
+    if (!formData?.Bruksnummer) {
       setErrors((prev) => ({ ...prev, Bruksnummer: true }));
       hasError = true;
     }
@@ -95,7 +95,7 @@ const MatrikkelTab = () => {
     if (hasError) return;
 
     router.push(
-      `/regulations?kommunenummer=${formData.kommune}&gardsnummer=${formData.Gårsnummer}&bruksnummer=${formData.Bruksnummer}${formData.Seksjonsnummer && `&kommunenavn=${formData.Seksjonsnummer}`}`
+      `/regulations?kommunenummer=${formData?.kommune}&gardsnummer=${formData?.Gårsnummer}&bruksnummer=${formData?.Bruksnummer}${formData?.Seksjonsnummer && `&kommunenavn=${formData?.Seksjonsnummer}`}`
     );
     const currIndex = 0;
     localStorage.setItem("currIndex", currIndex.toString());
@@ -121,10 +121,10 @@ const MatrikkelTab = () => {
                   ${errors.kommune ? "border border-red-500" : ""}`}
                   placeholder="Velg kommune"
                   onChange={handleKartInputChange}
-                  value={formData.kommune}
+                  value={formData?.kommune}
                 />
               </div>
-              {formData.kommune && (
+              {formData?.kommune && (
                 <Image
                   src={Ic_close}
                   alt="close"
@@ -150,10 +150,10 @@ const MatrikkelTab = () => {
                   ${errors.Gårsnummer ? "border border-red-500" : ""}`}
                   placeholder="Skriv Gnr."
                   onChange={handleGårsnummerInputChange}
-                  value={formData.Gårsnummer}
+                  value={formData?.Gårsnummer}
                 />
               </div>
-              {formData.Gårsnummer && (
+              {formData?.Gårsnummer && (
                 <Image
                   src={Ic_close}
                   alt="close"
@@ -181,10 +181,10 @@ const MatrikkelTab = () => {
                   ${errors.Bruksnummer ? "border border-red-500" : ""}`}
                   placeholder="Skriv Bnr."
                   onChange={handleBruksnummerInputChange}
-                  value={formData.Bruksnummer}
+                  value={formData?.Bruksnummer}
                 />
               </div>
-              {formData.Bruksnummer && (
+              {formData?.Bruksnummer && (
                 <Image
                   src={Ic_close}
                   alt="close"
@@ -213,10 +213,10 @@ const MatrikkelTab = () => {
                   className={`focus:outline-none text-black text-base desktop:text-xl font-medium bg-transparent w-full`}
                   placeholder="Velg Seksjonsnummer"
                   onChange={handleSeksjonsnummerInputChange}
-                  value={formData.Seksjonsnummer}
+                  value={formData?.Seksjonsnummer}
                 />
               </div>
-              {formData.Seksjonsnummer && (
+              {formData?.Seksjonsnummer && (
                 <Image
                   src={Ic_close}
                   alt="close"
@@ -231,13 +231,17 @@ const MatrikkelTab = () => {
 
         <button
           className={`p-3 lg:p-5 cursor-pointer flex justify-center items-center bg-primary rounded-full gap-[10px] transition-all duration-300 ease-out h-[48px] w-[48px] lg:h-[64px] lg:w-[64px] m-2 ${
-            !formData.Gårsnummer || !formData.kommune || !formData.Bruksnummer
+            !formData?.Gårsnummer ||
+            !formData?.kommune ||
+            !formData?.Bruksnummer
               ? "opacity-50 cursor-not-allowed"
               : ""
           }`}
           type="submit"
           disabled={
-            !formData.Gårsnummer || !formData.kommune || !formData.Bruksnummer
+            !formData?.Gårsnummer ||
+            !formData?.kommune ||
+            !formData?.Bruksnummer
           }
         >
           <Image

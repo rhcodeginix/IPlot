@@ -91,20 +91,20 @@ const HusmodellTab = () => {
     e.preventDefault();
     let hasError = false;
 
-    if (!formData.Kommue) {
+    if (!formData?.Kommue) {
       setErrors((prev) => ({ ...prev, Kommue: true }));
       hasError = true;
     }
 
     if (hasError) return;
-    formData.Kommue = formData.Kommue.replace(/ Kommune/, "");
+    formData.Kommue = formData?.Kommue.replace(/ Kommune/, "");
 
     const matchedCities: any = allCity.find((city: any) =>
-      city.kommunerList.find((kom: any) => formData.Kommue === kom.name)
+      city.kommunerList.find((kom: any) => formData?.Kommue === kom.name)
     );
 
     router.push(
-      `husmodells?Kommue=${formData.Kommue}&city=${matchedCities?.name}`
+      `husmodells?Kommue=${formData?.Kommue}&city=${matchedCities?.name}`
     );
     const currIndex = 0;
     localStorage.setItem("currIndex", currIndex.toString());
@@ -164,7 +164,7 @@ const HusmodellTab = () => {
                         onClick={() => handleSelect(`${city.name} Kommune`)}
                         className={`text-sm text-darkBlack px-4 py-[14px] cursor-pointer 
                           ${
-                            formData.Kommue === `${city.name} Kommune`
+                            formData?.Kommue === `${city.name} Kommune`
                               ? "bg-[#F9F5FF] font-semibold"
                               : "bg-white"
                           }`}
@@ -195,10 +195,10 @@ const HusmodellTab = () => {
 
         <button
           className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-primary rounded-full transition-all duration-300 ease-out lg:h-[56px] my-[22px] mx-6 gap-2 ${
-            !formData.Kommue ? "opacity-50 cursor-not-allowed" : ""
+            !formData?.Kommue ? "opacity-50 cursor-not-allowed" : ""
           }`}
           type="submit"
-          disabled={!formData.Kommue}
+          disabled={!formData?.Kommue}
         >
           <Image
             src={Ic_Search2}

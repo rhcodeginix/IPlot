@@ -61,8 +61,18 @@ const BelopFilterSection: React.FC<{
 }> = ({ setFormData, formData }) => {
   const router = useRouter();
   const [maxPrice, setMaxPrice] = useState(null);
-  const [maxPlotPrice, setMaxPlotPrice] = useState("");
-  const [maxHousePrice, setMaxHousePrice] = useState("");
+  const [maxPlotPrice, setMaxPlotPrice] = useState(
+    String(
+      new Intl.NumberFormat("no-NO").format(Number(formData?.maxRangeForPlot))
+    )
+  );
+  const [maxHousePrice, setMaxHousePrice] = useState(
+    String(
+      new Intl.NumberFormat("no-NO").format(
+        Number(formData?.maxRangeForHusmodell)
+      )
+    )
+  );
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
 
@@ -228,19 +238,19 @@ const BelopFilterSection: React.FC<{
                         <>
                           <label
                             className="container container_darkgray_withPurple"
-                            htmlFor={data.name}
+                            htmlFor={data?.name}
                             key={index}
                           >
                             <span
-                              className={`text-darkBlack text-sm md:text-base ${formData?.Område.includes(data.name) && "font-semibold"}`}
+                              className={`text-darkBlack text-sm md:text-base ${formData?.Område.includes(data?.name) && "font-semibold"}`}
                             >
-                              {data.name}
+                              {data?.name}
                             </span>
                             <input
                               type="checkbox"
-                              id={data.name}
-                              value={data.name}
-                              checked={formData?.Område.includes(data.name)}
+                              id={data?.name}
+                              value={data?.name}
+                              checked={formData?.Område.includes(data?.name)}
                               onChange={() => {
                                 setFormData((prev: any) => {
                                   const updatedOmradeSet = new Set(
@@ -251,9 +261,9 @@ const BelopFilterSection: React.FC<{
                                   );
 
                                   if (isSelected) {
-                                    updatedOmradeSet.delete(data.name);
+                                    updatedOmradeSet.delete(data?.name);
                                   } else {
-                                    updatedOmradeSet.add(data.name);
+                                    updatedOmradeSet.add(data?.name);
                                   }
 
                                   let updatedSubOmrade = [...prev?.SubOmråde];
@@ -304,7 +314,7 @@ const BelopFilterSection: React.FC<{
                             />
                             <span className="checkmark checkmark_darkgray_withPurple"></span>
                           </label>
-                          {formData?.Område.includes(data.name) && (
+                          {formData?.Område.includes(data?.name) && (
                             <div className="grid grid-cols-1 gap-x-8 gap-y-4 px-2.5 h-full max-h-52 overflow-y-auto overFlowYAuto">
                               {data?.kommunerList &&
                                 data?.kommunerList.length > 0 &&
@@ -407,25 +417,25 @@ const BelopFilterSection: React.FC<{
                     {HustypeArray.map((data: any, index: number) => (
                       <label
                         className="container container_darkgray_withPurple"
-                        htmlFor={data.name}
+                        htmlFor={data?.name}
                         key={index}
                       >
                         <span
-                          className={`text-darkBlack text-sm md:text-base ${formData?.Hustype.includes(data.name) && "font-semibold"}`}
+                          className={`text-darkBlack text-sm md:text-base ${formData?.Hustype.includes(data?.name) && "font-semibold"}`}
                         >
-                          {data.name}
+                          {data?.name}
                         </span>
                         <input
                           type="checkbox"
-                          id={data.name}
-                          value={data.name}
-                          checked={formData?.Hustype.includes(data.name)}
+                          id={data?.name}
+                          value={data?.name}
+                          checked={formData?.Hustype.includes(data?.name)}
                           onChange={() => {
                             setFormData((prev: any) => {
                               const updatedSet: any = new Set(prev?.Hustype);
-                              updatedSet.has(data.name)
-                                ? updatedSet.delete(data.name)
-                                : updatedSet.add(data.name);
+                              updatedSet.has(data?.name)
+                                ? updatedSet.delete(data?.name)
+                                : updatedSet.add(data?.name);
                               localStorage.setItem(
                                 "Hustype",
                                 JSON.stringify(Array.from(updatedSet))
@@ -488,27 +498,27 @@ const BelopFilterSection: React.FC<{
                     {TypeHusmodellArray.map((data: any, index: number) => (
                       <label
                         className="container container_darkgray_withPurple"
-                        htmlFor={data.name}
+                        htmlFor={data?.name}
                         key={index}
                       >
                         <span
-                          className={`text-darkBlack text-sm md:text-base ${formData?.TypeHusmodell.includes(data.name) && "font-semibold"}`}
+                          className={`text-darkBlack text-sm md:text-base ${formData?.TypeHusmodell.includes(data?.name) && "font-semibold"}`}
                         >
-                          {data.name}
+                          {data?.name}
                         </span>
                         <input
                           type="checkbox"
-                          id={data.name}
-                          value={data.name}
-                          checked={formData?.TypeHusmodell.includes(data.name)}
+                          id={data?.name}
+                          value={data?.name}
+                          checked={formData?.TypeHusmodell.includes(data?.name)}
                           onChange={() => {
                             setFormData((prev: any) => {
                               const updatedSet: any = new Set(
                                 prev?.TypeHusmodell
                               );
-                              updatedSet.has(data.name)
-                                ? updatedSet.delete(data.name)
-                                : updatedSet.add(data.name);
+                              updatedSet.has(data?.name)
+                                ? updatedSet.delete(data?.name)
+                                : updatedSet.add(data?.name);
                               return {
                                 ...prev,
                                 TypeHusmodell: Array.from(updatedSet),
@@ -554,27 +564,27 @@ const BelopFilterSection: React.FC<{
                     {AntallSoveromArray.map((data: any, index: number) => (
                       <label
                         className="container container_darkgray_withPurple"
-                        htmlFor={data.name}
+                        htmlFor={data?.name}
                         key={index}
                       >
                         <span
-                          className={`text-darkBlack text-sm md:text-base ${formData?.AntallSoverom.includes(data.name) && "font-semibold"}`}
+                          className={`text-darkBlack text-sm md:text-base ${formData?.AntallSoverom.includes(data?.name) && "font-semibold"}`}
                         >
-                          {data.name}
+                          {data?.name}
                         </span>
                         <input
                           type="checkbox"
-                          id={data.name}
-                          value={data.name}
-                          checked={formData?.AntallSoverom.includes(data.name)}
+                          id={data?.name}
+                          value={data?.name}
+                          checked={formData?.AntallSoverom.includes(data?.name)}
                           onChange={() => {
                             setFormData((prev: any) => {
                               const updatedSet: any = new Set(
                                 prev?.AntallSoverom
                               );
-                              updatedSet.has(data.name)
-                                ? updatedSet.delete(data.name)
-                                : updatedSet.add(data.name);
+                              updatedSet.has(data?.name)
+                                ? updatedSet.delete(data?.name)
+                                : updatedSet.add(data?.name);
 
                               localStorage.setItem(
                                 "soverom",
@@ -702,7 +712,9 @@ const BelopFilterSection: React.FC<{
                       onClick={() => {
                         setFormData((prev: any) => ({
                           ...prev,
-                          maxRangeForPlot: maxPlotPrice,
+                          maxRangeForPlot: Math.floor(
+                            Number(maxPlotPrice.replace(/\s+/g, ""))
+                          ),
                         }));
                         setTimeout(() => {
                           router.push(
@@ -818,7 +830,9 @@ const BelopFilterSection: React.FC<{
                       onClick={() => {
                         setFormData((prev: any) => ({
                           ...prev,
-                          maxRangeForHusmodell: maxHousePrice,
+                          maxRangeForHusmodell: Math.floor(
+                            Number(maxHousePrice.replace(/\s+/g, ""))
+                          ),
                         }));
                         setTimeout(() => {
                           router.push(

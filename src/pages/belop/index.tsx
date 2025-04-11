@@ -408,11 +408,11 @@ const Belop: React.FC = () => {
             <h3 className="text-darkBlack text-lg md:text-[24px] lg:text-[28px] desktop:text-[2rem] desktop:leading-[44.8px]">
               Kombinasjoner av <span className="font-bold">husmodell</span> og{" "}
               <span className="font-bold">tomt</span>{" "}
-              {formData.Område.length > 1 ? null : (
+              {formData?.Område.length > 1 ? null : (
                 <>
                   i{" "}
                   <span className="font-bold text-blue">
-                    {formData.Område[0]}
+                    {formData?.Område[0]}
                   </span>
                 </>
               )}

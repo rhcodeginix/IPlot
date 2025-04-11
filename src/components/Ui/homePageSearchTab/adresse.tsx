@@ -50,7 +50,7 @@ const AdresseTab = () => {
     e.preventDefault();
     let hasError = false;
 
-    if (!formData.address) {
+    if (!formData?.address) {
       setErrors((prev) => ({ ...prev, address: true }));
       hasError = true;
     }
@@ -79,10 +79,10 @@ const AdresseTab = () => {
                   ${errors.address ? "border border-red-500" : ""}`}
                 placeholder="Fyll inn ønsket adresse"
                 onChange={handleKartInputChange}
-                value={formData.address}
+                value={formData?.address}
               />
             </div>
-            {formData.address && (
+            {formData?.address && (
               <Image
                 src={Ic_close}
                 alt="close"
@@ -96,7 +96,7 @@ const AdresseTab = () => {
             <p className="text-red-500 text-xs mt-1">Adresse er påkrevd.</p>
           )}
         </div>
-        {formData.address && addressData && addressData.length > 0 && (
+        {formData?.address && addressData && addressData.length > 0 && (
           <div
             className="absolute top-[100px] desktop:top-[80px] left-0 bg-white rounded-[8px] py-[12px] p-2.5 desktop:px-[16px] w-full h-auto max-h-[400px] overflow-y-auto overFlowYAuto"
             style={{
@@ -142,10 +142,10 @@ const AdresseTab = () => {
 
         <button
           className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-primary rounded-[40px] transition-all duration-300 ease-out lg:h-[56px] my-[22px] mx-6 gap-2 ${
-            !formData.address ? "opacity-50 cursor-not-allowed" : ""
+            !formData?.address ? "opacity-50 cursor-not-allowed" : ""
           }`}
           type="submit"
-          disabled={!formData.address}
+          disabled={!formData?.address}
         >
           <Image
             src={Ic_Search2}
