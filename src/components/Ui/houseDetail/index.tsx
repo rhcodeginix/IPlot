@@ -264,11 +264,21 @@ const HouseDetailPage: React.FC = () => {
               <h2 className="mb-6 text-black text-2xl font-semibold">
                 Plantegninger og fasader
               </h2>
-              <img
-                src={husmodellData?.PlantegningerFasader[0]}
-                alt="map"
-                className="w-full"
-              />
+              <div className="grid grid-cols-2 gap-4">
+                {husmodellData?.PlantegningerFasader &&
+                  husmodellData?.PlantegningerFasader?.map(
+                    (item: string, index: number) => {
+                      return (
+                        <img
+                          src={item}
+                          alt="map"
+                          className="w-full"
+                          key={index}
+                        />
+                      );
+                    }
+                  )}
+              </div>
             </div>
             <div className="w-[57%]">
               <h2 className="text-black text-2xl font-semibold mb-4">

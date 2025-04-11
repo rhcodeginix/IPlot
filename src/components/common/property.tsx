@@ -69,7 +69,7 @@ const Property: React.FC<any> = ({ propertyList, LinkHref }) => {
                   <img
                     src={property?.Husdetaljer?.PlantegningerFasader[0]}
                     alt="product-map"
-                    className="p-2 h-full w-full object-cover"
+                    className="p-1.5 h-full w-full object-cover"
                   />
                 </div>
               </div>

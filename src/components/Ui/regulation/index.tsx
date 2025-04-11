@@ -206,7 +206,11 @@ const HusmodellPropertyPage: React.FC<{
             <Button
               text="Tilbake"
               className="border-2 border-[#6941C6] bg-white text-[#6941C6] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold desktop:px-[20px] relative desktop:py-[16px]"
-              path="/"
+              onClick={() => {
+                handlePrevious();
+                const currIndex = 0;
+                localStorage.setItem("currIndex", currIndex.toString());
+              }}
             />
           </div>
         </div>
