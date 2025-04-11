@@ -6,7 +6,7 @@ import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Ic_info_circle from "@/public/images/Ic_info_circle.svg";
 import Loader from "@/components/Loader";
 import Link from "next/link";
-import HouseDetailsection from "@/components/Ui/houseDetail/houseDetailSection";
+// import HouseDetailsection from "@/components/Ui/houseDetail/houseDetailSection";
 import Ic_close from "@/public/images/Ic_close.svg";
 import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjoner";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -205,10 +205,10 @@ const Tilpass: React.FC<any> = ({
               />
             </SideSpaceContainer>
           </div>
-          <HouseDetailsection
+          {/* <HouseDetailsection
             HouseModelData={HouseModelData}
             loading={loading}
-          />
+          /> */}
           <div className="py-8">
             <SideSpaceContainer>
               <h3 className="text-darkBlack text-2xl font-semibold mb-[22px]">
@@ -259,7 +259,7 @@ const Tilpass: React.FC<any> = ({
                       </h3>
                       {selectedTab < Huskonfigurator.length - 1 && (
                         <Button
-                          text="Skip this step"
+                          text="Hopp over steget"
                           className={`border-2 border-[#7839EE] text-[#7839EE] sm:text-sm md:text-sm rounded-[40px] w-max h-[36px] md:h-[36px] lg:h-[36px] font-semibold relative`}
                           onClick={() => {
                             setSelectedTab(selectedTab + 1);

@@ -8,7 +8,7 @@ import Button from "@/components/common/button";
 import Loader from "@/components/Loader";
 import Link from "next/link";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
-import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
+// import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
 import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjoner";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -30,9 +30,9 @@ const Tilpass: React.FC<{
 }> = ({
   handleNext,
   lamdaDataFromApi,
-  askData,
+  // askData,
   loadingLamdaData,
-  CadastreDataFromApi,
+  // CadastreDataFromApi,
   HouseModelData,
   handlePrevious,
   supplierData,
@@ -254,11 +254,11 @@ const Tilpass: React.FC<{
           />
         </SideSpaceContainer>
       </div>
-      <PropertyDetails
+      {/* <PropertyDetails
         askData={askData}
         CadastreDataFromApi={CadastreDataFromApi}
         lamdaDataFromApi={lamdaDataFromApi}
-      />
+      /> */}
 
       <div className="py-8">
         <SideSpaceContainer>
@@ -310,7 +310,7 @@ const Tilpass: React.FC<{
                   </h3>
                   {selectedTab < Huskonfigurator.length - 1 && (
                     <Button
-                      text="Skip this step"
+                      text="Hopp over steget"
                       className={`border-2 border-[#7839EE] text-[#7839EE] sm:text-sm md:text-sm rounded-[40px] w-max h-[36px] md:h-[36px] lg:h-[36px] font-semibold relative`}
                       onClick={() => {
                         setSelectedTab(selectedTab + 1);
