@@ -36,7 +36,7 @@ const Advantages = () => {
         <div className="text-center text-blue font-semibold text-sm lg:text-base mb-[12px]">
           Fordeler
         </div>
-        <h2 className="text-black font-semibold text-[24px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-3 lg:mb-[20px] text-center desktop:tracking-[-1px]">
+        <h2 className="text-black font-semibold text-[20px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-3 lg:mb-[20px] text-center desktop:tracking-[-1px]">
           Hva du kan forvente av MinTomt
         </h2>
         <p className="text-center text-secondary text-sm md:text-base lg:text-lg lg:leading-[30px] mb-6 lg:mb-[48px] desktop:mb-[60px]">
@@ -44,21 +44,23 @@ const Advantages = () => {
           <br className="hidden md:block" />
           komplett tomteanalyse på et øyeblikk!
         </p>
-        <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-8 lg:px-8 justify-evenly">
-          {advantages.map(({ id, image, title, description }) => (
-            <div
-              key={id}
-              className="sm:w-[33%] flex flex-col items-center justify-center"
-            >
-              <Image src={image} alt={title} fetchPriority="auto" />
-              <h4 className="text-black text-base desktop:text-xl font-medium text-center mt-3 md:mt-[20px] mb-2">
-                {title}
-              </h4>
-              <p className="text-secondary text-sm desktop:text-base text-center">
-                {description}
-              </p>
-            </div>
-          ))}
+        <div className="w-full overflow-x-auto overFlowScrollHidden">
+          <div className="min-w-[850px] flex flex-row items-center gap-4 md:gap-8 lg:px-8 justify-evenly">
+            {advantages.map(({ id, image, title, description }) => (
+              <div
+                key={id}
+                className="w-[33%] flex flex-col items-center justify-center"
+              >
+                <Image src={image} alt={title} fetchPriority="auto" />
+                <h4 className="text-black text-base desktop:text-xl font-medium text-center mt-3 md:mt-[20px] mb-2">
+                  {title}
+                </h4>
+                <p className="text-secondary text-sm desktop:text-base text-center">
+                  {description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </SideSpaceContainer>
     </>

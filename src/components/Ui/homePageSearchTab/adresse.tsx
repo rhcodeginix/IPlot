@@ -69,13 +69,13 @@ const AdresseTab = () => {
         <div className="flex flex-col sm:flex-row sm:items-center lg:justify-between w-full sm:w-11/12 lg:h-[80px]">
           <div className="w-full rounded-[12px] lg:rounded-[88px] py-3 px-2 lg:px-4 desktop:px-8 lg:items-center flex sm:justify-between relative">
             <div className="w-[92%]">
-              <div className="text-[#30374F] mb-2 text-sm">
+              <div className="text-[#30374F] mb-2 text-xs md:text-sm">
                 Vet du hvilken adresse du vil bygge på?
               </div>
               <input
                 ref={kartInputRef}
                 type="text"
-                className={`focus:outline-none text-black text-base desktop:text-lg font-medium bg-transparent w-full
+                className={`focus:outline-none text-black text-sm md:text-base desktop:text-lg font-medium bg-transparent w-full
                   ${errors.address ? "border border-red-500" : ""}`}
                 placeholder="Fyll inn ønsket adresse"
                 onChange={handleKartInputChange}
@@ -141,7 +141,7 @@ const AdresseTab = () => {
         )}
 
         <button
-          className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-primary rounded-[40px] transition-all duration-300 ease-out lg:h-[56px] my-[22px] mx-6 gap-2 ${
+          className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-primary rounded-[40px] transition-all duration-300 ease-out h-[40px] lg:h-[56px] my-4 md:my-[22px] mx-4 md:mx-6 gap-2 ${
             !formData?.address ? "opacity-50 cursor-not-allowed" : ""
           }`}
           type="submit"

@@ -14,6 +14,8 @@ import Button from "@/components/common/button";
 import Link from "next/link";
 import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Image from "next/image";
+import { MenuIcon, X } from "lucide-react";
+import { Drawer } from "@mui/material";
 
 const Belop: React.FC = () => {
   const router: any = useRouter();
@@ -387,6 +389,27 @@ const Belop: React.FC = () => {
     fetchProperty();
   }, [router.asPath]);
 
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const toggleDrawer = (open: boolean) => () => {
+    setOpenDrawer(open);
+  };
+
+  useEffect(() => {
+    const chatBot = document.getElementById("chatbase-bubble-button");
+    const addPlot = document.getElementById("addPlot");
+    const navbar = document.getElementById("navbar");
+
+    if (openDrawer) {
+      if (chatBot) chatBot.style.display = "none";
+      if (addPlot) addPlot.style.display = "none";
+      if (navbar) navbar.style.zIndex = "999";
+    } else {
+      if (chatBot) chatBot.style.display = "block";
+      if (addPlot) addPlot.style.display = "block";
+      if (navbar) navbar.style.zIndex = "9999";
+    }
+  }, [openDrawer]);
+
   return (
     <>
       <div className="bg-lightPurple2 py-4">
@@ -404,7 +427,7 @@ const Belop: React.FC = () => {
       </div>
       <div className="relative pt-8">
         <SideSpaceContainer>
-          <div className="flex items-end justify-between gap-4 mb-[40px]">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-3 lg:gap-4 mb-[40px]">
             <h3 className="text-darkBlack text-lg md:text-[24px] lg:text-[28px] desktop:text-[2rem] desktop:leading-[44.8px]">
               Kombinasjoner av <span className="font-bold">husmodell</span> og{" "}
               <span className="font-bold">tomt</span>{" "}
@@ -424,14 +447,27 @@ const Belop: React.FC = () => {
               </p>
             )}
           </div>
-          <div className="flex gap-6 relative pb-[56px]">
-            <div className="w-[35%]">
-              <BelopFilterSection
-                formData={formData}
-                setFormData={setFormData}
-              />
+          <div className="flex flex-col lg:flex-row gap-5 laptop:gap-6 relative pb-[56px]">
+            <div className="lg:w-[35%]">
+              <div className="sticky top-[56px] left-0 right-0 z-50 bg-white border-b border-gray p-3 flex items-center justify-between lg:hidden pt-0">
+                <h4 className="text-base font-medium">Filter</h4>
+                <button
+                  onClick={toggleDrawer(true)}
+                  className="text-white bg-primary px-4 py-2 rounded-md flex items-center gap-2"
+                >
+                  <MenuIcon className="text-white" />
+                  Åpne Filter
+                </button>
+              </div>
+
+              <div className="hidden lg:block w-full">
+                <BelopFilterSection
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              </div>
             </div>
-            <div className="w-[65%]">
+            <div className="w-full lg:w-[65%]">
               <BelopProperty
                 HouseModelProperty={HouseModelProperty}
                 isLoading={isLoading}
@@ -440,7 +476,7 @@ const Belop: React.FC = () => {
           </div>
         </SideSpaceContainer>
         <div
-          className="sticky bottom-0 bg-white p-6"
+          className="sticky bottom-0 bg-white p-4 md:p-6"
           style={{
             boxShadow:
               "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",
@@ -455,6 +491,28 @@ const Belop: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Bottom Drawer for mobile */}
+      <Drawer
+        anchor="bottom"
+        open={openDrawer}
+        onClose={toggleDrawer(false)}
+        PaperProps={{
+          style: {
+            borderTopLeftRadius: 16,
+            borderTopRightRadius: 16,
+            maxHeight: "90vh",
+          },
+          className: "filterDrawer",
+        }}
+      >
+        <div className="overflow-y-auto max-h-[90vh] pt-4 bg-[#F9F5FF]">
+          <BelopFilterSection formData={formData} setFormData={setFormData} />
+          <div className="absolute top-3 right-2" onClick={toggleDrawer(false)}>
+            <X className="h-4 w-4" />
+          </div>
+        </div>
+      </Drawer>
     </>
   );
 };

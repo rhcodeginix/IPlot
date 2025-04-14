@@ -16,43 +16,49 @@ const PropertyDetails: React.FC<{
         }}
       >
         <SideSpaceContainer>
-          <div className="flex gap-[70px] justify-between">
-            <div className="w-1/4 flex items-start gap-3">
+          <div className="flex flex-wrap md:flex-nowrap gap-4 lg:gap-5 laptop:gap-[70px] justify-between">
+            <div className="md:w-1/4 flex items-start gap-2.5 lg:gap-2 laptop:gap-3">
               <Image
                 fetchPriority="auto"
                 src={Ic_check_green_icon}
                 alt="check"
               />
               <div className="flex flex-col gap-1">
-                <p className="text-secondary2 text-sm">Eiendommen er</p>
-                <p className="text-black text-base font-semibold">
+                <p className="text-secondary2 text-xs lg:text-sm">
+                  Eiendommen er
+                </p>
+                <p className="text-black text-sm lg:text-base font-semibold">
                   ferdig regulert til boligformål
                 </p>
               </div>
             </div>
-            <div className="w-1/4 flex items-start gap-3">
+            <div className="md:w-1/4 flex items-start gap-2.5 lg:gap-2 laptop:gap-3">
               <Image
                 fetchPriority="auto"
                 src={Ic_check_green_icon}
                 alt="check"
               />
               <div className="flex flex-col gap-1">
-                <p className="text-secondary2 text-sm">Eiendommen har en</p>
-                <p className="text-black text-base font-semibold">
+                <p className="text-secondary2 text-xs lg:text-sm">
+                  Eiendommen har en
+                </p>
+                <p className="text-black text-sm lg:text-base font-semibold">
                   Utnyttelsesgrad på{" "}
                   {askData?.bya_calculations?.input?.bya_percentage}%
                 </p>
               </div>
             </div>
-            <div className="w-1/4 flex items-start gap-3">
+            <div className="md:w-1/4 flex items-start gap-2.5 lg:gap-2 laptop:gap-3">
               <Image
                 fetchPriority="auto"
                 src={Ic_check_green_icon}
                 alt="check"
               />
               <div className="flex flex-col gap-1">
-                <p className="text-secondary2 text-sm">Ekisterende BYA</p>
-                <p className="text-black text-base font-semibold">
+                <p className="text-secondary2 text-xs lg:text-sm">
+                  Ekisterende BYA
+                </p>
+                <p className="text-black text-sm lg:text-base font-semibold">
                   Utnyttelsesgrad på{" "}
                   {(() => {
                     const data =
@@ -85,7 +91,7 @@ const PropertyDetails: React.FC<{
                     }
                   })()}
                 </p>
-                <p className="text-black text-sm">
+                <p className="text-black text-xs lg:text-sm">
                   Tilgjengelig BYA{" "}
                   {(() => {
                     const data =
@@ -120,20 +126,22 @@ const PropertyDetails: React.FC<{
                 </p>
               </div>
             </div>
-            <div className="w-1/4 flex items-start gap-3">
+            <div className="md:w-1/4 flex items-start gap-2.5 lg:gap-2 laptop:gap-3">
               <Image
                 fetchPriority="auto"
                 src={Ic_check_green_icon}
                 alt="check"
               />
               <div className="flex flex-col gap-1">
-                <p className="text-secondary2 text-sm">Boligen kan ha en</p>
-                <p className="text-black text-base font-semibold">
+                <p className="text-secondary2 text-xs lg:text-sm">
+                  Boligen kan ha en
+                </p>
+                <p className="text-black text-sm lg:text-base font-semibold">
                   Grunnflate på{" "}
                   {askData?.bya_calculations?.results?.available_building_area}{" "}
                   m<sup>2</sup>
                 </p>
-                <p className="text-black text-sm">
+                <p className="text-black text-xs lg:text-sm">
                   Tilgjengelig{" "}
                   {(() => {
                     const data =

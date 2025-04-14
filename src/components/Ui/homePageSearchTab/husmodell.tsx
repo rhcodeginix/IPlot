@@ -124,7 +124,7 @@ const HusmodellTab = () => {
             ref={dropdownRef}
           >
             <div className="w-full">
-              <div className="text-[#30374F] mb-2 text-sm">
+              <div className="text-[#30374F] mb-2 text-xs md:text-sm">
                 Se hvilke husmodeller som tilbys i kommunen der du ønsker å
                 bygge:
               </div>
@@ -135,7 +135,7 @@ const HusmodellTab = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onClick={toggleDropdown}
                   placeholder="Søk opp kommune"
-                  className="w-full bg-white rounded-md text-base focus:outline-none"
+                  className="w-full bg-white rounded-md text-sm md:text-base desktop:text-lg focus:outline-none"
                 />
                 <Image
                   src={Ic_chevron_down}
@@ -194,7 +194,7 @@ const HusmodellTab = () => {
         </div>
 
         <button
-          className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-primary rounded-full transition-all duration-300 ease-out lg:h-[56px] my-[22px] mx-6 gap-2 ${
+          className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-primary rounded-[40px] transition-all duration-300 ease-out h-[40px] lg:h-[56px] my-4 md:my-[22px] mx-4 md:mx-6 gap-2 ${
             !formData?.Kommue ? "opacity-50 cursor-not-allowed" : ""
           }`}
           type="submit"

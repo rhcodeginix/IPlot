@@ -86,7 +86,7 @@ const HowItWorks = () => {
   return (
     <div className="py-[44px] md:py-[58px] desktop:py-[120px]">
       <SideSpaceContainer>
-        <h2 className="text-black font-semibold text-[24px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-[36px] desktop:mb-[50px] text-center">
+        <h2 className="text-black font-semibold text-[20px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-[36px] desktop:mb-[50px] text-center">
           Hvordan det fungerer
         </h2>
         <div className="hidden md:block">
@@ -154,11 +154,11 @@ const HowItWorks = () => {
                     alt={tab.label}
                     className="w-[24px]"
                   />
-                  <div className="flex flex-col gap-2 items-start">
-                    <h4 className="font-medium text-black text-base normal-case one_line_elipse">
+                  <div className="flex flex-col gap-1.5 items-start">
+                    <h4 className="font-medium text-black text-sm normal-case one_line_elipse">
                       {tab.label}
                     </h4>
-                    <span className="text-sm text-secondary font-normal leading-[24px] text-start normal-case">
+                    <span className="text-xs text-secondary font-normal text-start normal-case">
                       {tab.description}
                     </span>
                   </div>

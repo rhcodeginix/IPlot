@@ -216,8 +216,12 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
   }, [husmodellData?.Leverandører]);
   return (
     <>
-      <div className={`flex pt-6 gap-6 ${col && "flex-col"}`}>
-        <div className={`${!col && "w-1/2"} bg-[#F5F8FF] rounded-[12px] p-5`}>
+      <div
+        className={`flex flex-col md:flex-row pt-6 gap-4 md:gap-6 ${col && "flex-col"}`}
+      >
+        <div
+          className={`${!col ? "sm:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}
+        >
           <Formik
             initialValues={{
               sharingData: false,
@@ -250,9 +254,9 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
                       fetchPriority="auto"
                       src={Ic_spareBank}
                       alt="icon"
-                      className="mb-6"
+                      className="mb-4 md:mb-6 w-[152px]"
                     />
-                    <div className="text-black text-lg font-light mb-6">
+                    <div className="text-black text-sm md:text-base lg:text-lg font-light mb-4 md:mb-6">
                       Vil du å bli kontaktet angående{" "}
                       <span className="font-bold">finansiering</span> av denne
                       eiendommen?
@@ -293,7 +297,9 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
           </Formik>
         </div>
         {!isShow && (
-          <div className={`${!col && "w-1/2"} bg-[#F5F8FF] rounded-[12px] p-5`}>
+          <div
+            className={`${!col ? "sm:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}
+          >
             <Formik
               initialValues={{ checkbox: false }}
               validationSchema={validationSchema}
@@ -322,9 +328,9 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
                     <img
                       src={supplierData?.photo}
                       alt="icon"
-                      className="mb-6 w-[152px] h-[40px]"
+                      className="mb-4 md:mb-6 w-[152px]"
                     />
-                    <div className="text-black text-lg font-light mb-6">
+                    <div className="text-black text-sm md:text-base lg:text-lg font-light mb-4 md:mb-6">
                       Ønsker du å bli kontaktet av{" "}
                       <span className="font-bold">
                         {supplierData?.company_name}

@@ -38,6 +38,7 @@ const Chatbot: React.FC = () => {
             boxShadow:
               "0px -4px 12px -2px #1018281A, 0px 12px 16px -4px #1018281F",
           }}
+          id="addPlot"
         >
           <button
             onClick={() => setIsVisible(false)}

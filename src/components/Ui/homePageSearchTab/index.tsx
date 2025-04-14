@@ -196,22 +196,22 @@ const HomePageSearchTab: React.FC = () => {
           </div>
         </SideSpaceContainer>
       </div>
-      <div className="bg-lightPurple2 py-[60px]">
+      <div className="bg-lightPurple2 py-[48px] lg:py-[60px]">
         <SideSpaceContainer>
           {data.isLoading ? (
             <div className="relative">
               <Loading />
             </div>
           ) : (
-            <div className="flex items-start gap-5">
+            <div className="flex flex-col md:flex-row items-start gap-3 md:gap-5">
               <h5 className="text-darkBlack font-semibold text-sm md:text-base">
                 Tomte<span className="text-purple2">Banken</span>:
               </h5>
-              <div className="flex gap-3 flex-wrap">
+              <div className="flex gap-2 sm:gap-3 flex-wrap">
                 {data.cities.map((city: any, index: number) => (
                   <div
                     key={index}
-                    className="border border-[#ECE9FE] bg-white rounded-[50px] text-sm py-[7px] px-3 cursor-pointer"
+                    className="border border-[#ECE9FE] bg-white rounded-[50px] text-xs md:text-sm py-[7px] px-3 cursor-pointer"
                     onClick={() => {
                       router.push(
                         `tomtbaken?city=${`${city.name} (${city?.total_entries})`}`
@@ -229,10 +229,10 @@ const HomePageSearchTab: React.FC = () => {
           )}
         </SideSpaceContainer>
       </div>
-      <div className="py-[120px]">
+      <div className="py-[44px] md:py-[58px] desktop:py-[120px]">
         <div className={`${activeTab === "beløp" ? "block" : "hidden"}`}>
           <SideSpaceContainer>
-            <h2 className="text-darkBlack text-[24px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-5 lg:mb-[20px] text-center desktop:tracking-[-1px] md:mb-[32px] desktop:mb-[40px]">
+            <h2 className="text-darkBlack text-[20px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-5 lg:mb-[20px] text-center desktop:tracking-[-1px] md:mb-[32px] desktop:mb-[40px]">
               Populære kombinasjoner i{" "}
               <span className="font-bold text-purple2">Akershus</span>
             </h2>
@@ -249,7 +249,7 @@ const HomePageSearchTab: React.FC = () => {
                   return (
                     <div
                       key={index}
-                      className="border border-gray3 rounded-[8px] p-5"
+                      className="border border-gray3 rounded-[8px] p-3 md:p-5"
                       style={{
                         boxShadow:
                           "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
@@ -284,7 +284,7 @@ const HomePageSearchTab: React.FC = () => {
                             ?.line2
                         }
                       </p>
-                      <div className="flex gap-2 mb-2 md:mb-3 desktop:mb-4 h-[185px]">
+                      <div className="flex gap-2 mb-3 desktop:mb-4 h-[160px] sm:h-[185px]">
                         <div className="w-[63%] relative">
                           <img
                             src={property?.house?.Husdetaljer?.photo}
@@ -393,7 +393,7 @@ const HomePageSearchTab: React.FC = () => {
                           className="border border-[#6941C6] bg-[#6941C6] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                           onClick={() => {
                             router.push(
-                              `regulations?propertyId=${property?.plot?.id}&husodellId=${property?.house?.id}&emptyPlot=true&homePage=true`
+                              `housemodell-plot?propertyId=${property?.plot?.id}&husodellId=${property?.house?.id}&emptyPlot=true&homePage=true`
                             );
                             const currIndex = 0;
                             localStorage.setItem(
@@ -412,7 +412,7 @@ const HomePageSearchTab: React.FC = () => {
         </div>
         <div className={`${activeTab === "adresse" ? "block" : "hidden"}`}>
           <SideSpaceContainer>
-            <h2 className="text-darkBlack text-[24px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-5 lg:mb-[20px] text-center desktop:tracking-[-1px] md:mb-[32px] desktop:mb-[40px]">
+            <h2 className="text-darkBlack text-[20px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-5 lg:mb-[20px] text-center desktop:tracking-[-1px] md:mb-[32px] desktop:mb-[40px]">
               Populære tomter i{" "}
               <span className="font-bold text-purple2">Akershus</span>
             </h2>
@@ -426,7 +426,7 @@ const HomePageSearchTab: React.FC = () => {
                   (property: any, index: number) => (
                     <div
                       key={index}
-                      className="border border-gray3 rounded-[8px] p-5"
+                      className="border border-gray3 rounded-[8px] p-3 md:p-5"
                       style={{
                         boxShadow:
                           "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
@@ -444,8 +444,8 @@ const HomePageSearchTab: React.FC = () => {
                             ?.response?.item?.formatted?.line2
                         }
                       </p>
-                      <div className="relative mb-2 md:mb-3 desktop:mb-4">
-                        <div className="w-full h-[234px] rounded-[8px] overflow-hidden">
+                      <div className="relative mb-3 desktop:mb-4">
+                        <div className="w-full h-[200px] md:h-[234px] rounded-[8px] overflow-hidden">
                           <GoogleMapComponent
                             coordinates={
                               property?.lamdaDataFromApi?.coordinates
@@ -498,7 +498,7 @@ const HomePageSearchTab: React.FC = () => {
         </div>
         <div className={`${activeTab === "husmodell" ? "block" : "hidden"}`}>
           <SideSpaceContainer>
-            <h2 className="text-darkBlack text-[24px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-5 lg:mb-[20px] text-center desktop:tracking-[-1px] md:mb-[32px] desktop:mb-[40px]">
+            <h2 className="text-darkBlack text-[20px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-5 lg:mb-[20px] text-center desktop:tracking-[-1px] md:mb-[32px] desktop:mb-[40px]">
               Populære husmodeller i{" "}
               <span className="font-bold text-purple2">Asker</span>
             </h2>
@@ -514,7 +514,7 @@ const HomePageSearchTab: React.FC = () => {
                   return (
                     <div
                       key={index}
-                      className="border border-gray3 rounded-[8px] p-5"
+                      className="border border-gray3 rounded-[8px] p-3 md:p-5"
                       style={{
                         boxShadow:
                           "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
@@ -532,7 +532,7 @@ const HomePageSearchTab: React.FC = () => {
                       <img
                         src={property?.Husdetaljer?.photo}
                         alt="image"
-                        className="w-full h-[304px] rounded-[8px] mb-2 md:mb-3 desktop:mb-4 object-cover"
+                        className="w-full h-[230px] md:h-[304px] rounded-[8px] mb-3 desktop:mb-4 object-cover"
                       />
                       <h5 className="text-[#4A5578] font-medium text-sm md:text-base mb-2 two_line_elipse">
                         {property?.Husdetaljer?.OmHusmodellen}
@@ -577,7 +577,7 @@ const HomePageSearchTab: React.FC = () => {
                           className="border border-[#6941C6] bg-[#6941C6] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                           onClick={() => {
                             router.push(
-                              `husmodells?husodellId=${property?.id}&&city=${name}`
+                              `husmodells?husodellId=${property?.id}&city=Akershus`
                             );
                             const currIndex = 0;
                             localStorage.setItem(

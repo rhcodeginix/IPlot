@@ -147,8 +147,8 @@ const BelopFilterSection: React.FC<{
 
   return (
     <>
-      <div className="sticky top-[86px] bg-[#F9F5FF] rounded-[12px]">
-        <div className="p-6 flex items-center justify-between gap-3 border-b border-[#7D89B04D]">
+      <div className="sticky lg:top-[86px] bg-[#F9F5FF] rounded-[12px]">
+        <div className="p-4 laptop:p-6 flex items-center justify-between gap-3 border-b border-[#7D89B04D]">
           <h4 className="text-darkBlack font-medium text-base md:text-lg lg:text-xl desktop:text-2xl">
             Filter
           </h4>
@@ -177,7 +177,7 @@ const BelopFilterSection: React.FC<{
             Tilbakestill
           </h5>
         </div>
-        <div className="px-6 py-5 h-auto max-h-[600px] overflow-y-auto overFlowYAuto overflow-x-hidden">
+        <div className="p-4 laptop:px-6 laptop:py-5 h-auto lg:max-h-[600px] overflow-y-auto overFlowYAuto overflow-x-hidden">
           <div
             className="border border-gray3 rounded-[48px] p-1 pl-5 flex items-center justify-between gap-3 bg-white mb-5"
             style={{
@@ -208,7 +208,7 @@ const BelopFilterSection: React.FC<{
               </button>
             </div>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 lg:gap-6">
             <div
               className="w-full bg-white p-4 rounded-lg"
               style={{
@@ -237,12 +237,12 @@ const BelopFilterSection: React.FC<{
                       return (
                         <>
                           <label
-                            className="container container_darkgray_withPurple"
+                            className="container container_darkgray_withPurple truncate"
                             htmlFor={data?.name}
                             key={index}
                           >
                             <span
-                              className={`text-darkBlack text-sm md:text-base ${formData?.Område.includes(data?.name) && "font-semibold"}`}
+                              className={`text-darkBlack text-sm laptop:text-base truncate ${formData?.Område.includes(data?.name) && "font-semibold"}`}
                             >
                               {data?.name}
                             </span>
@@ -327,7 +327,7 @@ const BelopFilterSection: React.FC<{
                                         key={komIndex}
                                       >
                                         <span
-                                          className={`text-darkBlack text-sm md:text-base ${formData?.SubOmråde.includes(kom.name) && "font-semibold"}`}
+                                          className={`text-darkBlack text-sm laptop:text-base ${formData?.SubOmråde.includes(kom.name) && "font-semibold"}`}
                                         >
                                           {kom.name}
                                         </span>
@@ -413,15 +413,15 @@ const BelopFilterSection: React.FC<{
               {openIndex.includes("Hustype") && (
                 <>
                   <div className="my-4 border-t border-[#DCDFEA]"></div>
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                  <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {HustypeArray.map((data: any, index: number) => (
                       <label
-                        className="container container_darkgray_withPurple"
+                        className="container container_darkgray_withPurple truncate"
                         htmlFor={data?.name}
                         key={index}
                       >
                         <span
-                          className={`text-darkBlack text-sm md:text-base ${formData?.Hustype.includes(data?.name) && "font-semibold"}`}
+                          className={`text-darkBlack text-sm laptop:text-base truncate ${formData?.Hustype.includes(data?.name) && "font-semibold"}`}
                         >
                           {data?.name}
                         </span>
@@ -494,15 +494,15 @@ const BelopFilterSection: React.FC<{
               {openIndex.includes("Type husmodell") && (
                 <>
                   <div className="my-4 border-t border-[#DCDFEA]"></div>
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                  <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {TypeHusmodellArray.map((data: any, index: number) => (
                       <label
-                        className="container container_darkgray_withPurple"
+                        className="container container_darkgray_withPurple truncate"
                         htmlFor={data?.name}
                         key={index}
                       >
                         <span
-                          className={`text-darkBlack text-sm md:text-base ${formData?.TypeHusmodell.includes(data?.name) && "font-semibold"}`}
+                          className={`text-darkBlack text-sm laptop:text-base truncate ${formData?.TypeHusmodell.includes(data?.name) && "font-semibold"}`}
                         >
                           {data?.name}
                         </span>
@@ -560,15 +560,15 @@ const BelopFilterSection: React.FC<{
               {openIndex.includes("Antall soverom") && (
                 <>
                   <div className="my-4 border-t border-[#DCDFEA]"></div>
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                  <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {AntallSoveromArray.map((data: any, index: number) => (
                       <label
-                        className="container container_darkgray_withPurple"
+                        className="container container_darkgray_withPurple truncate"
                         htmlFor={data?.name}
                         key={index}
                       >
                         <span
-                          className={`text-darkBlack text-sm md:text-base ${formData?.AntallSoverom.includes(data?.name) && "font-semibold"}`}
+                          className={`text-darkBlack text-sm laptop:text-base truncate ${formData?.AntallSoverom.includes(data?.name) && "font-semibold"}`}
                         >
                           {data?.name}
                         </span>

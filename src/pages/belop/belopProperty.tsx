@@ -75,7 +75,7 @@ const BelopProperty: React.FC<{
                 return (
                   <div
                     key={index}
-                    className="border border-gray3 rounded-[8px] p-5"
+                    className="border border-gray3 rounded-[8px] p-3 laptop:p-5"
                     style={{
                       boxShadow:
                         "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
@@ -120,8 +120,8 @@ const BelopProperty: React.FC<{
                         className="cursor-pointer"
                       />
                     </div>
-                    <div className="flex items-center gap-4">
-                      <div className="flex gap-2 w-1/2">
+                    <div className="flex flex-col sm:flex-row items-center gap-3 laptop:gap-4">
+                      <div className="flex gap-2 w-full sm:w-1/2">
                         <div className="w-[63%] h-[160px] relative">
                           <img
                             src={property?.house?.Husdetaljer?.photo}
@@ -143,8 +143,8 @@ const BelopProperty: React.FC<{
                           />
                         </div>
                       </div>
-                      <div className="w-1/2">
-                        <div className="flex gap-3 items-center">
+                      <div className="w-full sm:w-1/2">
+                        <div className="flex gap-2 md:gap-3 lg:gap-1.5 laptop:gap-3 items-center">
                           <div className="text-darkBlack text-xs md:text-sm font-semibold">
                             {
                               property?.plot?.additionalData?.answer
@@ -169,7 +169,7 @@ const BelopProperty: React.FC<{
                               bad
                             </span>
                           </div>
-                          <div className="border-l-2 border-[#7F56D9] h-[12px] mx-4"></div>
+                          <div className="border-l-2 border-[#7F56D9] h-[12px] laptop:mx-4"></div>
                           <div className="text-darkBlack text-xs md:text-sm font-semibold">
                             {
                               property?.plot?.additionalData?.answer
@@ -237,7 +237,7 @@ const BelopProperty: React.FC<{
                           </div>
                           <Button
                             text="Utforsk"
-                            className="border border-[#6941C6] bg-[#6941C6] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                            className="border border-[#6941C6] bg-[#6941C6] text-white text-sm md:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                             onClick={() => {
                               router.push(
                                 `${router.asPath}&propertyId=${property?.plot?.id}&husodellId=${property?.house?.id}&emptyPlot=true`

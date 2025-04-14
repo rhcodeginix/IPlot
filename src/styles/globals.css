@@ -534,3 +534,7 @@ td {
 #chatbase-bubble-button {
   bottom: 5rem !important;
 }
+
+.filterDrawer {
+  z-index: 99999999999999999 !important;
+}

@@ -12,7 +12,7 @@ const LatestFromMedia = () => {
     <>
       <div className="py-[44px] md:py-[58px] desktop:py-[120px]">
         <SideSpaceContainer>
-          <h2 className="text-black font-semibold text-[24px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-3 lg:mb-[20px] text-center tracking-[-1px]">
+          <h2 className="text-black font-semibold text-[20px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-3 lg:mb-[20px] text-center tracking-[-1px]">
             Siste fra media
           </h2>
           <p className="text-center text-secondary text-sm md:text-base lg:text-lg lg:leading-[30px] mb-6 lg:mb-[48px] desktop:mb-[60px]">

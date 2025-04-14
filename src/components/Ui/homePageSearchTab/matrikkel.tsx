@@ -113,11 +113,13 @@ const MatrikkelTab = () => {
           <div className="lg:w-1/4">
             <div className="w-full rounded-[12px] lg:rounded-[88px] py-3 px-2 lg:px-4 desktop:px-8 lg:items-center flex lg:justify-between relative">
               <div className="w-[92%] lg:w-auto">
-                <div className="text-darkBlack mb-1 text-sm">Kommunenummer</div>
+                <div className="text-[#30374F] mb-2 text-xs md:text-sm">
+                  Kommunenummer
+                </div>
                 <input
                   ref={kartInputRef}
                   type="number"
-                  className={`focus:outline-none text-black text-base desktop:text-xl font-medium bg-transparent w-full
+                  className={`focus:outline-none text-black text-sm md:text-base desktop:text-lg font-medium bg-transparent w-full
                   ${errors.kommune ? "border border-red-500" : ""}`}
                   placeholder="Velg kommune"
                   onChange={handleKartInputChange}
@@ -230,7 +232,7 @@ const MatrikkelTab = () => {
         </div>
 
         <button
-          className={`p-3 lg:p-5 cursor-pointer flex justify-center items-center bg-primary rounded-full gap-[10px] transition-all duration-300 ease-out h-[48px] w-[48px] lg:h-[64px] lg:w-[64px] m-2 ${
+          className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-primary rounded-[40px] transition-all duration-300 ease-out h-[40px] lg:h-[56px] my-4 md:my-[22px] mx-4 md:mx-6 gap-2 ${
             !formData?.Gårsnummer ||
             !formData?.kommune ||
             !formData?.Bruksnummer

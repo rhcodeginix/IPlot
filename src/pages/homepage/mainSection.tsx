@@ -10,7 +10,7 @@ const MainSection = () => {
         style={{ zIndex: 999 }}
       >
         <SideSpaceContainer className="relative">
-          <div className="mb-[44px] flex flex-col justify-center items-center">
+          <div className="mb-[36px] md:mb-[44px] flex flex-col justify-center items-center">
             <h1 className="text-darkBlack text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] desktop:text-[52px] big:text-[72px] leading-tight text-center mb-3 md:mb-4 desktop:mb-5">
               Bygg ditt{" "}
               <span className="text-purple2 font-semibold">drømmehus</span>{" "}

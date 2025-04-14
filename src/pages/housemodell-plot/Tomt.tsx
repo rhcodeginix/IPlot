@@ -288,8 +288,11 @@ const Tomt: React.FC<{
     <div className="relative">
       <div className="bg-lightPurple2 py-4">
         <SideSpaceContainer>
-          <div className="flex items-center gap-1 mb-6">
-            <Link href={"/"} className="text-[#7839EE] text-sm font-medium">
+          <div className="flex flex-wrap items-center gap-1 mb-6">
+            <Link
+              href={"/"}
+              className="text-[#7839EE] text-xs md:text-sm font-medium"
+            >
               Hjem
             </Link>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
@@ -297,7 +300,7 @@ const Tomt: React.FC<{
               <>
                 <Link
                   href={"/"}
-                  className="text-[#7839EE] text-sm font-medium"
+                  className="text-[#7839EE] text-xs md:text-sm font-medium"
                   onClick={() => {
                     delete updatedQuery.propertyId;
                     delete updatedQuery.husodellId;
@@ -319,7 +322,9 @@ const Tomt: React.FC<{
                 <Image src={Ic_breadcrumb_arrow} alt="arrow" />
               </>
             )}
-            <span className="text-secondary2 text-sm">Husmodell og tomt</span>
+            <span className="text-secondary2 text-xs md:text-sm">
+              Husmodell og tomt
+            </span>
           </div>
           <PropertyHouseDetails
             HouseModelData={HouseModelData}
