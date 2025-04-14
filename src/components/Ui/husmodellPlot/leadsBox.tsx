@@ -220,7 +220,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
         className={`flex flex-col md:flex-row pt-6 gap-4 md:gap-6 ${col && "flex-col"}`}
       >
         <div
-          className={`${!col ? "sm:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}
+          className={`${!col ? "md:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}
         >
           <Formik
             initialValues={{
@@ -261,7 +261,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
                       <span className="font-bold">finansiering</span> av denne
                       eiendommen?
                     </div>
-                    <div className="flex items-center justify-between gap-3">
+                    <div className="flex flex-col sm:flex-row sn:items-center justify-between gap-3">
                       <div>
                         <label className="flex items-center container">
                           <Field type="checkbox" name="sharingData" />
@@ -271,7 +271,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
                             style={{ margin: "2px" }}
                           ></span>
 
-                          <div className="text-secondary2 text-sm">
+                          <div className="text-secondary2 text-xs md:text-sm">
                             Jeg aksepterer{" "}
                             <span className="font-bold"> deling av data</span>{" "}
                             med <span className="font-bold">SpareBank1</span>
@@ -298,7 +298,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
         </div>
         {!isShow && (
           <div
-            className={`${!col ? "sm:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}
+            className={`${!col ? "md:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}
           >
             <Formik
               initialValues={{ checkbox: false }}
@@ -337,7 +337,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
                       </span>{" "}
                       angående denne eiendommen?
                     </div>
-                    <div className="flex gap-3 items-center justify-between">
+                    <div className="flex flex-col sm:flex-row sn:items-center justify-between gap-3">
                       <div>
                         <label className="flex items-center container">
                           <Field type="checkbox" name="checkbox" />
@@ -347,7 +347,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
                             style={{ margin: "2px" }}
                           ></span>
 
-                          <div className="text-secondary2 text-sm">
+                          <div className="text-secondary2 text-xs md:text-sm">
                             Jeg aksepterer{" "}
                             <span className="font-bold"> deling av data</span>{" "}
                             med{" "}

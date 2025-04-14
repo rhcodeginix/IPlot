@@ -107,9 +107,9 @@ const PropertyHouseDetails: React.FC<{
                 )}
               </div>
             )}
-            <div className="flex items-center gap-1 sm:gap-2 rounded-[50px] bg-[#EDFCF2] py-2 px-3 truncate">
+            <div className="flex items-center gap-1 sm:gap-2 rounded-[50px] bg-[#EDFCF2] py-2 px-3 whitespace-normal">
               <Image src={Ic_Step_icon} alt="icon" className="w-4 sm:w-auto" />
-              <div className="text-black text-xs md:text-sm lg:text-base truncate">
+              <div className="text-black text-xs md:text-sm lg:text-base whitespace-normal">
                 <span className="font-bold">
                   {HouseModelData?.Husdetaljer?.husmodell_name || "Modellen"}
                 </span>{" "}

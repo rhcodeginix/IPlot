@@ -19,7 +19,7 @@ const Footer = () => {
               />
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-5 lg:gap-6 sm:items-end">
                 <span className="text-white font-medium text-sm md:text-base">
-                  IPlot AS
+                  iPlot AS
                   <br className="hidden sm:block" />
                   834632772
                   <br className="hidden sm:block" />
@@ -39,7 +39,7 @@ const Footer = () => {
                   href={""}
                   className="text-sm md:text-base text-white font-medium"
                 >
-                  Hvordan fungerer MinTomt?
+                  Hvordan fungerer iPlot?
                 </Link>
                 <Link
                   href={""}

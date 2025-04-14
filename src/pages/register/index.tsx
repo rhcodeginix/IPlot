@@ -3,9 +3,7 @@ import Button from "@/components/common/button";
 import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
-import Ic_logo from "@/public/images/Ic_logo.svg";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { doc, getDoc, setDoc } from "firebase/firestore";
@@ -74,9 +72,6 @@ const Register = () => {
               "0px 8px 8px -4px #10182808, 0px 20px 24px -4px #10182814",
           }}
         >
-          <Link href={"/"}>
-            <Image src={Ic_logo} alt="logo" fetchPriority="auto" />
-          </Link>
           <Formik
             initialValues={{ email: "", password: "", name: "" }}
             validationSchema={validationSchema}
@@ -143,7 +138,7 @@ const Register = () => {
                 <div className="flex justify-end mt-6">
                   <Button
                     text="Send inn"
-                    className="border border-primary bg-white text-primary sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
+                    className="border border-primary bg-primary text-white sm:text-base rounded-[40px] w-full h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
                     type="submit"
                   />
                 </div>

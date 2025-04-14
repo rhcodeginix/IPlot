@@ -264,12 +264,12 @@ const Tomt: React.FC<{
     {
       id: "Eiendomsinformasjon",
       label: "Eiendomsinformasjon",
-      icon: <Building2 />,
+      icon: <Building2 className="w-4 h-4 lg:w-6 lg:h-6" />,
     },
     {
       id: `house`,
       label: `${HouseModelData?.Husdetaljer?.husmodell_name} fra ${supplierData?.company_name}`,
-      icon: <House />,
+      icon: <House className="w-4 h-4 lg:w-6 lg:h-6" />,
     },
   ];
   const plotTabs: any = [
@@ -359,32 +359,35 @@ const Tomt: React.FC<{
         </div>
 
         <SideSpaceContainer className="relative pt-[38px] pb-[46px]">
-          <div>
-            <div className="flex border border-gray3 rounded-lg w-max bg-gray3 p-[6px] mb-[38px]">
-              {tabs.map((tab: any) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 py-2 text-base transition-colors duration-300 flex items-center gap-2 ${
-                    activeTab === tab.id
-                      ? "bg-white font-medium text-[#7839EE]"
-                      : "text-black"
-                  }`}
-                >
-                  {tab.icon}
-                  {tab.label}
-                </button>
-              ))}
+          <div className="flex flex-col items-start">
+            <div className="w-full sm:w-max overflow-x-auto overFlowScrollHidden">
+              <div className="flex flex-nowrap border border-gray3 rounded-lg bg-gray3 p-[6px] mb-6 md:mb-[38px]">
+                {tabs.map((tab: any) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`min-w-max whitespace-nowrap px-2 lg:px-4 py-2 text-sm lg:text-base transition-colors duration-300 flex items-center gap-2 ${
+                      activeTab === tab.id
+                        ? "bg-white font-medium text-[#7839EE]"
+                        : "text-black"
+                    }`}
+                  >
+                    {tab.icon}
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
             </div>
+
             <div
               className={`${activeTab === "Eiendomsinformasjon" ? "block" : "hidden"}`}
             >
               <div className="rounded-lg border border-[#EFF1F5]">
                 <div
-                  className="flex items-center justify-between gap-2 cursor-pointer p-5"
+                  className="flex items-center justify-between gap-2 cursor-pointer p-4 md:p-5"
                   onClick={toggleAccordion}
                 >
-                  <h3 className="text-black text-2xl font-semibold">
+                  <h3 className="text-black text-lg md:text-xl desktop:text-2xl font-semibold">
                     Eiendomsinformasjon
                   </h3>
                   {isOpen ? (
@@ -403,11 +406,11 @@ const Tomt: React.FC<{
                   )}
                 </div>
                 <div
-                  className={`${isOpen ? "block border-t border-[#EFF1F5] p-5" : "hidden"}`}
+                  className={`${isOpen ? "block border-t border-[#EFF1F5] p-3.5 md:p-5" : "hidden"}`}
                 >
-                  <div className="flex gap-6 justify-between">
-                    <div className="grid grid-cols-3 gap-6">
-                      <div className="bg-gray3 rounded-[8px] p-5 flex flex-col gap-4">
+                  <div className="flex flex-col md:flex-row gap-4 lg:gap-6 justify-between">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
+                      <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
                         <h2 className="text-black text-lg font-semibold flex items-center gap-2">
                           Tomteopplysninger
                           <div className="relative">
@@ -542,7 +545,7 @@ const Tomt: React.FC<{
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gray3 rounded-[8px] p-5 flex flex-col gap-4">
+                      <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
                         <h2 className="text-black text-lg font-semibold flex items-center gap-2">
                           Kommunale data
                           <div className="relative">
@@ -639,7 +642,7 @@ const Tomt: React.FC<{
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gray3 rounded-[8px] p-5 flex flex-col gap-4">
+                      <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
                         <h2 className="text-black text-lg font-semibold flex items-center gap-2">
                           Eiendomsstatus
                           <div className="relative">
@@ -779,7 +782,7 @@ const Tomt: React.FC<{
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gray3 rounded-[8px] p-5 flex flex-col gap-4">
+                      <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
                         <h2 className="text-black text-lg font-semibold flex items-center gap-2">
                           Parkeringsinformasjon
                           <div className="relative">
@@ -892,7 +895,7 @@ const Tomt: React.FC<{
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gray3 rounded-[8px] p-5 flex flex-col gap-4">
+                      <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
                         <h2 className="text-black text-lg font-semibold flex items-center gap-2">
                           Ytterligere eiendomsforhold
                           <div className="relative">
@@ -1042,7 +1045,7 @@ const Tomt: React.FC<{
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gray3 rounded-[8px] p-5 flex flex-col gap-4">
+                      <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
                         <h2 className="text-black text-lg font-semibold flex items-center gap-2">
                           Spesielle registreringer
                           <div className="relative">
@@ -1203,7 +1206,7 @@ const Tomt: React.FC<{
                         </div>
                       </div>
                     </div>
-                    <div className="rounded-[12px] overflow-hidden w-[407px]">
+                    <div className="rounded-lg sm:rounded-[12px] overflow-hidden w-full h-[300px] md:h-auto md:w-[407px]">
                       <GoogleMapComponent
                         coordinates={
                           lamdaDataFromApi?.coordinates?.convertedCoordinates

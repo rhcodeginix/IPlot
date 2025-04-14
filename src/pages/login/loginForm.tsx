@@ -3,7 +3,6 @@ import Button from "@/components/common/button";
 import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
-import Ic_logo from "@/public/images/Ic_logo.svg";
 import Img_login_google from "@/public/images/Img_login_google.svg";
 import { auth, db } from "@/config/firebaseConfig";
 import Image from "next/image";
@@ -30,11 +29,10 @@ const LoginForm: React.FC<{
   const [newUser, setNewUser] = useState<any>(null);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("Email is required"),
-
+    email: Yup.string().required("E-post is required"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+      .min(6, "Passord must be at least 6 characters")
+      .required("Passord is required"),
   });
 
   const handleSubmit = async (values: any) => {
@@ -152,16 +150,17 @@ const LoginForm: React.FC<{
   return (
     <div className="relative w-full max-w-[490px]">
       <div
-        className="mx-4 bg-white p-7 w-full"
+        className="mx-4 bg-white p-8 w-full rounded-lg"
         style={{
           boxShadow: "0px 8px 8px -4px #10182808, 0px 20px 24px -4px #10182814",
         }}
       >
-        <div className="flex justify-center mb-10">
-          <Link href={"/"}>
-            <Image src={Ic_logo} alt="logo" fetchPriority="high" />
-          </Link>
-        </div>
+        <h3 className="text-darkBlack text-[30px] font-semibold mb-3 text-center">
+          Logg in på din konto
+        </h3>
+        <p className="text-secondary text-base mb-8 text-center">
+          Velkommen tilbake! Vennligst oppgi dine detaljer.
+        </p>
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
@@ -174,14 +173,14 @@ const LoginForm: React.FC<{
                   htmlFor="email"
                   className={`${errors.email && touched.email ? "text-red" : "text-black"} text-sm`}
                 >
-                  Email
+                  E-post
                 </label>
                 <Field
                   type="text"
                   name="email"
                   id="email"
                   className={`w-full p-2 rounded-md border ${errors.email && touched.email ? "border-red" : "border-gray"} focus-visible:border-gray focus-visible:outline-none focus:border-gray `}
-                  placeholder="Enter your email"
+                  placeholder="Enter your e-post"
                 />
                 {errors.email && touched.email && (
                   <div className="text-red text-sm">{errors.email}</div>
@@ -193,24 +192,24 @@ const LoginForm: React.FC<{
                   htmlFor="password"
                   className={`${errors.password && touched.password ? "text-red" : "text-black"} text-sm`}
                 >
-                  Password
+                  Passord
                 </label>
                 <Field
                   type="password"
                   name="password"
                   id="password"
                   className={`w-full p-2 rounded-md border ${errors.password && touched.password ? "border-red" : "border-gray"} focus-visible:border-gray focus-visible:outline-none focus:border-gray `}
-                  placeholder="Enter your password"
+                  placeholder="Enter your Passord"
                 />
                 {errors.password && touched.password && (
                   <div className="text-red text-sm">{errors.password}</div>
                 )}
               </div>
 
-              <div className="flex justify-end mt-6">
+              <div className="mt-6">
                 <Button
-                  text="Send inn"
-                  className="border border-primary bg-white text-primary sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
+                  text="Logg inn"
+                  className="border border-primary bg-primary text-white sm:text-base rounded-[40px] w-full h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
                   type="submit"
                 />
               </div>
@@ -225,10 +224,13 @@ const LoginForm: React.FC<{
         </div>
         <div
           onClick={signInWithGoogle}
-          className="text-black bg-[#F8F6F4] border border-gray rounded-[8px] p-2 mt-6 flex gap-2 justify-center items-center font-semibold cursor-pointer"
+          className="text-black border border-[#DCDFEA] rounded-[8px] py-[10px] px-4 mt-6 flex gap-2 justify-center items-center cursor-pointer"
+          style={{
+            boxShadow: "0px 1px 2px 0px #1018280D",
+          }}
         >
           <Image src={Img_login_google} alt="google" fetchPriority="high" />
-          Continue with login
+          Logg inn med Google
         </div>
       </div>
       {loading && (
