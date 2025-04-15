@@ -39,14 +39,19 @@ const HusmodellDetail: React.FC<{
   return (
     <>
       <div className="relative">
-        <div className="bg-lightPurple2 py-4">
+        <div className="bg-lightPurple2 py-2 md:py-4">
           <SideSpaceContainer>
-            <div className="flex items-center gap-1 mb-6">
-              <Link href={"/"} className="text-[#7839EE] text-sm font-medium">
+            <div className="flex items-center flex-wrap gap-1 mb-4 md:mb-6">
+              <Link
+                href={"/"}
+                className="text-[#7839EE] text-xs md:text-sm font-medium"
+              >
                 Hjem
               </Link>
               <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-              <span className="text-secondary2 text-sm">Husmodell</span>
+              <span className="text-secondary2 text-xs md:text-sm">
+                Husmodell
+              </span>
             </div>
             <PropertyHouseDetails
               HouseModelData={HouseModelData}

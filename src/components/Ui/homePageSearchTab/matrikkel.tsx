@@ -230,6 +230,7 @@ const MatrikkelTab = () => {
             </div>
           </div>
         </div>
+        <div className="border-t border-gray3 w-full lg:hidden"></div>
 
         <button
           className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-primary rounded-[40px] transition-all duration-300 ease-out h-[40px] lg:h-[56px] my-4 md:my-[22px] mx-4 md:mx-6 gap-2 ${

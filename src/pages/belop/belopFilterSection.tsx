@@ -6,7 +6,6 @@ import { Slider, styled } from "@mui/material";
 import { useRouter } from "next/router";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
-import Button from "@/components/common/button";
 
 const CustomSlider = styled(Slider)({
   color: "#6941C6",
@@ -61,18 +60,7 @@ const BelopFilterSection: React.FC<{
 }> = ({ setFormData, formData }) => {
   const router = useRouter();
   const [maxPrice, setMaxPrice] = useState(null);
-  const [maxPlotPrice, setMaxPlotPrice] = useState(
-    String(
-      new Intl.NumberFormat("no-NO").format(Number(formData?.maxRangeForPlot))
-    )
-  );
-  const [maxHousePrice, setMaxHousePrice] = useState(
-    String(
-      new Intl.NumberFormat("no-NO").format(
-        Number(formData?.maxRangeForHusmodell)
-      )
-    )
-  );
+
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
 
@@ -231,7 +219,7 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Område") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-1 gap-x-8 gap-y-4">
                     {OmrådeArray.map((data: any, index: number) => {
                       return (
@@ -412,7 +400,7 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Hustype") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {HustypeArray.map((data: any, index: number) => (
                       <label
@@ -493,7 +481,7 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Type husmodell") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {TypeHusmodellArray.map((data: any, index: number) => (
                       <label
@@ -559,7 +547,7 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Antall soverom") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {AntallSoveromArray.map((data: any, index: number) => (
                       <label
@@ -643,7 +631,7 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Pris på tomt") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="mx-1">
                     <CustomSlider
                       value={[
@@ -670,7 +658,7 @@ const BelopFilterSection: React.FC<{
                           );
                         }, 2000);
                       }}
-                      valueLabelDisplay="auto"
+                      valueLabelDisplay="on"
                       aria-labelledby="range-slider"
                       min={formData?.minRangeForPlot}
                       step={100}
@@ -684,55 +672,6 @@ const BelopFilterSection: React.FC<{
                     <div className="text-grayText text-sm lg:text-base">
                       {maxPrice} NOK
                     </div>
-                  </div>
-                  <div className="flex justify-end mt-2 items-center gap-3">
-                    <input
-                      type="text"
-                      placeholder="Enter Pris"
-                      className="border border-gray2 rounded-lg px-3 py-2 focus-within:outline-none w-full"
-                      value={maxPlotPrice}
-                      onChange={(e: any) => {
-                        const rawValue = e.target.value.replace(/\D/g, "");
-
-                        if (rawValue) {
-                          const formattedValue = new Intl.NumberFormat(
-                            "no-NO"
-                          ).format(Number(rawValue));
-                          setMaxPlotPrice(formattedValue);
-                        } else {
-                          setMaxPlotPrice("");
-                        }
-                      }}
-                    />
-
-                    <Button
-                      text="Save"
-                      className="border border-[#6941C6] bg-[#6941C6] text-white md:text-sm rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative desktop:px-4 desktop:py-2"
-                      type="button"
-                      onClick={() => {
-                        setFormData((prev: any) => ({
-                          ...prev,
-                          maxRangeForPlot: Math.floor(
-                            Number(maxPlotPrice.replace(/\s+/g, ""))
-                          ),
-                        }));
-                        setTimeout(() => {
-                          router.push(
-                            {
-                              pathname: router.pathname,
-                              query: {
-                                ...router.query,
-                                maxRangePlot: Math.floor(
-                                  Number(maxPlotPrice.replace(/\s+/g, ""))
-                                ),
-                              },
-                            },
-                            undefined,
-                            { shallow: true }
-                          );
-                        }, 2000);
-                      }}
-                    />
                   </div>
                 </>
               )}
@@ -761,7 +700,7 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Pris på husmodell") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="mx-1">
                     <CustomSlider
                       value={[
@@ -788,7 +727,7 @@ const BelopFilterSection: React.FC<{
                           );
                         }, 2000);
                       }}
-                      valueLabelDisplay="auto"
+                      valueLabelDisplay="on"
                       aria-labelledby="range-slider"
                       min={formData?.minRangeForHusmodell}
                       max={Number(maxPrice)}
@@ -802,55 +741,6 @@ const BelopFilterSection: React.FC<{
                     <div className="text-grayText text-sm lg:text-base">
                       {maxPrice} NOK
                     </div>
-                  </div>
-                  <div className="flex justify-end mt-2 items-center gap-3">
-                    <input
-                      type="text"
-                      placeholder="Enter Pris"
-                      className="border border-gray2 rounded-lg px-3 py-2 focus-within:outline-none w-full"
-                      value={maxHousePrice}
-                      onChange={(e: any) => {
-                        const rawValue = e.target.value.replace(/\D/g, "");
-
-                        if (rawValue) {
-                          const formattedValue = new Intl.NumberFormat(
-                            "no-NO"
-                          ).format(Number(rawValue));
-                          setMaxHousePrice(formattedValue);
-                        } else {
-                          setMaxHousePrice("");
-                        }
-                      }}
-                    />
-
-                    <Button
-                      text="Save"
-                      className="border border-[#6941C6] bg-[#6941C6] text-white md:text-sm rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative desktop:px-4 desktop:py-2"
-                      type="button"
-                      onClick={() => {
-                        setFormData((prev: any) => ({
-                          ...prev,
-                          maxRangeForHusmodell: Math.floor(
-                            Number(maxHousePrice.replace(/\s+/g, ""))
-                          ),
-                        }));
-                        setTimeout(() => {
-                          router.push(
-                            {
-                              pathname: router.pathname,
-                              query: {
-                                ...router.query,
-                                maxRangeForHusmodell: Math.floor(
-                                  Number(maxHousePrice.replace(/\s+/g, ""))
-                                ),
-                              },
-                            },
-                            undefined,
-                            { shallow: true }
-                          );
-                        }, 2000);
-                      }}
-                    />
                   </div>
                 </>
               )}

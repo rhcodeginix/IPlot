@@ -85,34 +85,32 @@ const Tilpass: React.FC<{
       const defaultSelectedProducts: any = {};
       const defaultSelectedProductsArray: any[] = [];
 
-      const selectedTab = Huskonfigurator.find(
-        (tabItem: any) => tabItem.isSelected
-      );
+      Huskonfigurator.forEach((selectedTab: any, index: number) => {
+        if (selectedTab.isSelected && selectedTab.Kategorinavn?.length > 0) {
+          selectedTab.Kategorinavn.forEach(
+            (categoryItem: any, categoryIndex: number) => {
+              if (categoryItem.produkter?.length > 0) {
+                const product = categoryItem.produkter[0];
+                const key = `${index}-${categoryIndex}`;
 
-      if (selectedTab && selectedTab.Kategorinavn?.length > 0) {
-        selectedTab.Kategorinavn.forEach(
-          (categoryItem: any, categoryIndex: number) => {
-            if (categoryItem.produkter?.length > 0) {
-              const product = categoryItem.produkter[0];
-              const key = `0-${categoryIndex}`;
+                defaultSelectedProducts[key] = {
+                  category: index,
+                  subCategory: categoryIndex,
+                  product,
+                  index: 0,
+                };
 
-              defaultSelectedProducts[key] = {
-                category: 0,
-                subCategory: categoryIndex,
-                product,
-                index: 0,
-              };
-
-              defaultSelectedProductsArray.push({
-                category: 0,
-                subCategory: categoryIndex,
-                product,
-                index: 1,
-              });
+                defaultSelectedProductsArray.push({
+                  category: index,
+                  subCategory: categoryIndex,
+                  product,
+                  index: 1,
+                });
+              }
             }
-          }
-        );
-      }
+          );
+        }
+      });
 
       setSelectedProducts(defaultSelectedProducts);
       setSelectedProductsArray(defaultSelectedProductsArray);
@@ -188,15 +186,18 @@ const Tilpass: React.FC<{
   }
   return (
     <div className="relative">
-      <div className="bg-lightPurple2 py-4">
+      <div className="bg-lightPurple2 py-2 md:py-4">
         <SideSpaceContainer>
-          <div className="flex items-center gap-1 mb-6">
-            <Link href={"/"} className="text-[#7839EE] text-sm font-medium">
+          <div className="flex items-center flex-wrap gap-1 mb-4 md:mb-6">
+            <Link
+              href={"/"}
+              className="text-[#7839EE] text-xs md:text-sm font-medium"
+            >
               Hjem
             </Link>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 0;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -209,7 +210,7 @@ const Tilpass: React.FC<{
             {!homePage && (
               <>
                 <div
-                  className="text-[#7839EE] text-sm font-medium cursor-pointer"
+                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
                   onClick={() => {
                     delete updatedQuery.propertyId;
                     delete updatedQuery.husodellId;
@@ -235,7 +236,7 @@ const Tilpass: React.FC<{
               </>
             )}
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 2;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -245,7 +246,7 @@ const Tilpass: React.FC<{
               Detaljer
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-            <span className="text-secondary2 text-sm">Tilpass</span>
+            <span className="text-secondary2 text-xs md:text-sm">Tilpass</span>
           </div>
           <PropertyHouseDetails
             HouseModelData={HouseModelData}
@@ -267,7 +268,7 @@ const Tilpass: React.FC<{
           </h3>
           {Huskonfigurator?.length > 0 ? (
             <div className="flex gap-6 relative">
-              <div className="w-[27%] flex flex-col gap-3 min-h-max max-h-[calc(100vh-200px)] sticky top-[88px] overflow-y-auto overFlowYAuto">
+              <div className="w-[27%] flex flex-col gap-3 max-h-[calc(100vh-200px)] sticky top-[88px] overflow-y-auto overFlowYAuto">
                 {Huskonfigurator.map((item: any, index: number) => (
                   <div
                     key={index}
@@ -282,20 +283,22 @@ const Tilpass: React.FC<{
                         "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
                     }}
                   >
-                    <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs mt-1 ${
-                        selectedTab === index
-                          ? "bg-[#00359E] text-white"
-                          : "bg-[#ECE9FE] text-darkBlack"
-                      }`}
-                    >
-                      {index + 1}
+                    <div className="w-6 h-6">
+                      <div
+                        className={`w-6 h-6 rounded-full flex items-center justify-center text-xs mt-1 ${
+                          selectedTab === index
+                            ? "bg-[#00359E] text-white"
+                            : "bg-[#ECE9FE] text-darkBlack"
+                        }`}
+                      >
+                        {index + 1}
+                      </div>
                     </div>
                     <div>
                       <span className="text-black text-sm font-medium mb-2">
                         {item?.navn}
                       </span>
-                      <p className="text-secondary2 text-sm">
+                      <p className="text-secondary2 text-xs md:text-sm">
                         {item?.Beskrivelse}
                       </p>
                     </div>

@@ -128,15 +128,18 @@ const Oppsummering: React.FC<{
   }
   return (
     <div className="relative">
-      <div className="bg-lightPurple2 py-4">
+      <div className="bg-lightPurple2 py-2 md:py-4">
         <SideSpaceContainer>
-          <div className="flex items-center gap-1 mb-6">
-            <Link href={"/"} className="text-[#7839EE] text-sm font-medium">
+          <div className="flex items-center flex-wrap gap-1 mb-4 md:mb-6">
+            <Link
+              href={"/"}
+              className="text-[#7839EE] text-xs md:text-sm font-medium"
+            >
               Hjem
             </Link>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 0;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -149,7 +152,7 @@ const Oppsummering: React.FC<{
             {!homePage && (
               <>
                 <div
-                  className="text-[#7839EE] text-sm font-medium cursor-pointer"
+                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
                   onClick={() => {
                     delete updatedQuery.propertyId;
                     delete updatedQuery.husodellId;
@@ -175,7 +178,7 @@ const Oppsummering: React.FC<{
               </>
             )}
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 2;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -186,7 +189,7 @@ const Oppsummering: React.FC<{
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 3;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -197,7 +200,7 @@ const Oppsummering: React.FC<{
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 4;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -208,7 +211,7 @@ const Oppsummering: React.FC<{
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 5;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -218,7 +221,9 @@ const Oppsummering: React.FC<{
               Finansiering
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-            <span className="text-secondary2 text-sm">Oppsummering</span>
+            <span className="text-secondary2 text-xs md:text-sm">
+              Oppsummering
+            </span>
           </div>
           <PropertyHouseDetails
             HouseModelData={HouseModelData}
@@ -381,7 +386,7 @@ const Oppsummering: React.FC<{
                                   style={{ margin: "2px" }}
                                 ></span>
 
-                                <div className="text-secondary2 text-sm">
+                                <div className="text-secondary2 text-xs md:text-sm">
                                   Jeg samtykker til
                                   <span className="text-[#7839EE] font-medium">
                                     {" "}
@@ -425,7 +430,7 @@ const Oppsummering: React.FC<{
                             </h4>
                           </div>
                           <div className="flex items-center justify-between">
-                            <p className="text-secondary2 text-sm">
+                            <p className="text-secondary2 text-xs md:text-sm">
                               Egenkapital
                             </p>
                             <div className="flex items-center gap-4">
@@ -524,7 +529,7 @@ const Oppsummering: React.FC<{
                           </div>
                           <div className="flex flex-col gap-4 p-5 border-b border-[#DCDFEA]">
                             <div className="flex items-center justify-between">
-                              <div className="text-secondary2 text-sm">
+                              <div className="text-secondary2 text-xs md:text-sm">
                                 Nominell rente fra
                               </div>
                               <h6 className="text-black font-medium text-base">
@@ -532,7 +537,7 @@ const Oppsummering: React.FC<{
                               </h6>
                             </div>
                             <div className="flex items-center justify-between">
-                              <div className="text-secondary2 text-sm">
+                              <div className="text-secondary2 text-xs md:text-sm">
                                 Effektiv rente ved byggelån ved 2 MNOK ved 100%
                                 utnyttelse
                               </div>
@@ -561,7 +566,7 @@ const Oppsummering: React.FC<{
                                     style={{ margin: "2px" }}
                                   ></span>
 
-                                  <div className="text-secondary2 text-sm">
+                                  <div className="text-secondary2 text-xs md:text-sm">
                                     Jeg samtykker til{" "}
                                     <span className="text-[#7839EE] font-bold">
                                       deling av data
@@ -590,7 +595,7 @@ const Oppsummering: React.FC<{
                                 src={Ic_Info_gray}
                                 alt="icon"
                               />
-                              <p className="text-secondary2 text-sm">
+                              <p className="text-secondary2 text-xs md:text-sm">
                                 Loan facility for construction of a home/holiday
                                 home. Will be converted into a repayment loan
                                 upon completion of the home/holiday home.
@@ -628,7 +633,7 @@ const Oppsummering: React.FC<{
                           src={Ic_Info_gray}
                           alt="icon"
                         />
-                        <p className="text-secondary2 text-sm">
+                        <p className="text-secondary2 text-xs md:text-sm">
                           Et byggelån krever et forhåndsestimat av prosjektet.
                           Hvis <span className="font-bold">e-taksten</span> er
                           høyere enn byggekostnaden, kan du bruke dette som
@@ -654,7 +659,7 @@ const Oppsummering: React.FC<{
                             className="checkmark checkmark_primary"
                             style={{ margin: "2px" }}
                           ></span>
-                          <div className="text-secondary2 text-sm">
+                          <div className="text-secondary2 text-xs md:text-sm">
                             Jeg samtykker i å{" "}
                             <span className="font-bold text-[#7839EE]">
                               dele data

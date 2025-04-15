@@ -295,7 +295,7 @@ const AllPlot = () => {
                         <CustomSlider
                           value={priceRange}
                           onChange={handlePriceRangeChange}
-                          valueLabelDisplay="auto"
+                          valueLabelDisplay="on"
                           aria-labelledby="range-slider"
                           min={1.1}
                           max={5.1}
@@ -321,7 +321,7 @@ const AllPlot = () => {
                         <CustomSlider
                           value={sizeRange}
                           onChange={handleSizeRangeChange}
-                          valueLabelDisplay="auto"
+                          valueLabelDisplay="on"
                           aria-labelledby="range-slider"
                           min={0}
                           max={220}

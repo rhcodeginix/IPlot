@@ -193,8 +193,8 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="border border-[#DCDFEA] py-[20px] relative p-5 rounded-[8px]">
-          <div className="flex items-center gap-3 justify-between mb-4">
+        <div className="border border-[#DCDFEA] relative p-3 md:p-5 rounded-[8px]">
+          <div className="flex items-center gap-2 md:gap-3 justify-between mb-2 md:mb-4">
             <h4 className="text-darkBlack text-sm md:text-base lg:text-lg one_line_elipse">
               <span className="font-semibold">
                 {husmodellData?.husmodell_name}
@@ -213,16 +213,16 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
                 )
               </span>
             </h4>
-            <p className="text-secondary2 text-xs md:text-sm">
+            <p className="text-secondary2 text-xs md:text-sm whitespace-nowrap">
               {
                 finalData?.plot?.CadastreDataFromApi?.presentationAddressApi
                   ?.response?.item?.formatted?.line2
               }
             </p>
           </div>
-          <div className="flex items-center gap-6">
-            <div className="relative w-[37%] flex gap-2 h-[262px]">
-              <div className="w-[63%] relative h-full">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-3 sm:gap-4 desktop:gap-6">
+            <div className="relative w-full lg:w-[37%] flex gap-2 h-[200px] md:h-[262px]">
+              <div className="w-1/2 sm:w-[63%] relative h-full">
                 <img
                   src={husmodellData?.photo}
                   alt="image"
@@ -231,10 +231,10 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
                 <img
                   src={supplierData?.photo}
                   alt="image"
-                  className="absolute top-[12px] left-[12px] bg-[#FFFFFFB2] py-2 px-3 flex items-center justify-center rounded-[32px] w-[130px]"
+                  className="absolute top-[12px] left-[12px] bg-[#FFFFFFB2] py-2 px-3 flex items-center justify-center rounded-[32px] w-[100px] sm:w-[130px]"
                 />
               </div>
-              <div className="w-[37%] rounded-[8px] h-full overflow-hidden">
+              <div className="w-1/2 sm:w-[37%] rounded-[8px] h-full overflow-hidden">
                 <GoogleMapComponent
                   coordinates={
                     finalData?.plot?.lamdaDataFromApi?.coordinates
@@ -243,7 +243,7 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
                 />
               </div>
             </div>
-            <div className="w-[63%]">
+            <div className="w-full lg:w-[63%]">
               <div className="flex items-center gap-3">
                 <div className="text-secondary text-sm">
                   <span className="text-black font-semibold">
@@ -273,8 +273,8 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
                   <span className="text-[#4A5578] font-normal">m²</span>
                 </div>
               </div>
-              <div className="flex gap-8 my-5">
-                <div className="w-full flex flex-col gap-3">
+              <div className="flex flex-col md:flex-row lg:flex-col desktop:flex-row gap-2 md:gap-4 desktop:gap-8 my-3 md:my-5">
+                <div className="w-full flex flex-col gap-2 md:gap-3">
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-[#4A5578] text-xs md:text-sm mb-1 truncate">
                       Pris for{" "}
@@ -318,8 +318,8 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
                     </div>
                   )}
                 </div>
-                <div className="border-l border-[#DCDFEA]"></div>
-                <div className="w-full flex flex-col gap-3">
+                <div className="border-l border-[#DCDFEA] hidden sm:block lg:hidden desktop:block"></div>
+                <div className="w-full flex flex-col gap-2 md:gap-3">
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-[#4A5578] text-xs md:text-sm mb-1 truncate">
                       Pris for <span className="font-semibold">Tomt</span>
@@ -333,9 +333,9 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
                     </h6>
                   </div>
                   {isRemove ? null : (
-                    <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="flex items-center justify-between gap-1 mb-4">
                       <div className="flex flex-col gap-1 w-max">
-                        <p className="text-secondary text-sm whitespace-nowrap">
+                        <p className="text-secondary text-sm">
                           Estimert start kjøpsprosess
                         </p>
                         <h5 className="text-black text-sm font-semibold whitespace-nowrap">
@@ -346,7 +346,7 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
                         </h5>
                       </div>
                       <div className="flex flex-col gap-1 w-max">
-                        <p className="text-secondary text-sm whitespace-nowrap">
+                        <p className="text-secondary text-sm text-right">
                           Estimert overtakelse
                         </p>
                         <h5 className="text-black text-sm font-semibold text-right whitespace-nowrap">
@@ -360,12 +360,12 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
                   )}
                 </div>
               </div>
-              <div className="bg-[#F5F8FF] p-3 rounded-lg flex items-center justify-between">
+              <div className="bg-[#F5F8FF] p-2 md:p-3 rounded-lg flex flex-col md:flex-row items-center justify-between gap-1">
                 <div className="flex items-center gap-1">
-                  <p className="text-sm text-secondary text-center">
+                  <p className="text-xs md:text-sm text-secondary text-center">
                     Tilbudpris
                   </p>
-                  <h3 className="text-black font-semibold text-[20px] text-center">
+                  <h3 className="text-black font-semibold text-base md:text-lg desktop:text-xl text-center">
                     {formatCurrency(
                       (
                         totalCustPris +
@@ -375,11 +375,11 @@ const Tilbudsdetaljer: React.FC<{ isRemove?: any }> = ({ isRemove }) => {
                     )}
                   </h3>
                 </div>
-                <div className="text-secondary2 text-sm font-bold">
+                <div className="text-secondary2 text-xs md:text-sm font-bold">
                   (inkludert tilvalg <span className="font-normal">og</span>{" "}
                   utkjøp av tomt)
                 </div>
-                <div className="text-secondary text-base text-center">
+                <div className="text-secondary text-sm md:text-base text-center">
                   Tilbudet er gyldig til{" "}
                   <span className="font-semibold text-black">01.12.2024</span>
                 </div>

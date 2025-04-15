@@ -169,8 +169,7 @@ const BelopProperty: React.FC<{
                               bad
                             </span>
                           </div>
-                          <div className="border-l-2 border-[#7F56D9] h-[12px] laptop:mx-4"></div>
-                          <div className="text-darkBlack text-xs md:text-sm font-semibold">
+                          <div className="text-darkBlack text-xs md:text-sm font-semibold ml-auto">
                             {
                               property?.plot?.additionalData?.answer
                                 ?.bya_calculations?.input?.plot_size
@@ -219,7 +218,7 @@ const BelopProperty: React.FC<{
                             <p className="text-[#4A5578] text-xs md:text-sm mb-1">
                               Totalpris med tomt
                             </p>
-                            <h6 className="text-sm md:text-base font-semibold desktop:text-xl">
+                            <h6 className="text-base font-semibold desktop:text-xl">
                               {formatPrice(
                                 (property?.house?.Husdetaljer?.pris
                                   ? Math.round(

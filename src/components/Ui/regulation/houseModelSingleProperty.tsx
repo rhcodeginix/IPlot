@@ -340,15 +340,18 @@ const HouseModelSingleProperty: React.FC<{
   }
   return (
     <div className="relative">
-      <div className="bg-lightPurple2 py-4">
+      <div className="bg-lightPurple2 py-2 md:py-4">
         <SideSpaceContainer>
-          <div className="flex items-center gap-1 mb-6">
-            <Link href={"/"} className="text-[#7839EE] text-sm font-medium">
+          <div className="flex items-center flex-wrap gap-1 mb-4 md:mb-6">
+            <Link
+              href={"/"}
+              className="text-[#7839EE] text-xs md:text-sm font-medium"
+            >
               Hjem
             </Link>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 0;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -360,7 +363,7 @@ const HouseModelSingleProperty: React.FC<{
             {!homePage && (
               <>
                 <div
-                  className="text-[#7839EE] text-sm font-medium cursor-pointer"
+                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
                   onClick={() => {
                     delete updatedQuery.propertyId;
                     delete updatedQuery.husodellId;
@@ -384,7 +387,7 @@ const HouseModelSingleProperty: React.FC<{
                 <Image src={Ic_breadcrumb_arrow} alt="arrow" />
               </>
             )}
-            <span className="text-secondary2 text-sm">Detaljer</span>
+            <span className="text-secondary2 text-xs md:text-sm">Detaljer</span>
           </div>
           <PropertyHouseDetails
             HouseModelData={HouseModelData}

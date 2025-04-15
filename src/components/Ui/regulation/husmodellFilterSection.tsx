@@ -176,7 +176,7 @@ const HusmodellFilterSection: React.FC<{
 
               {openIndex.includes("Hustype") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                     {HustypeArray.map((data: any, index: number) => (
                       <label
@@ -238,7 +238,7 @@ const HusmodellFilterSection: React.FC<{
 
               {openIndex.includes("Type husmodell") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                     {TypeHusmodellArray.map((data: any, index: number) => (
                       <label
@@ -302,7 +302,7 @@ const HusmodellFilterSection: React.FC<{
 
               {openIndex.includes("Antall soverom") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                     {AntallSoveromArray.map((data: any, index: number) => (
                       <label
@@ -366,7 +366,7 @@ const HusmodellFilterSection: React.FC<{
 
               {openIndex.includes("Pris på husmodell") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div>
                     <div className="mx-1">
                       <CustomSlider
@@ -381,7 +381,7 @@ const HusmodellFilterSection: React.FC<{
                             maxRangeForHusmodell: newValue[1],
                           }));
                         }}
-                        valueLabelDisplay="auto"
+                        valueLabelDisplay="on"
                         aria-labelledby="range-slider"
                         min={0}
                         max={maxRangeData}

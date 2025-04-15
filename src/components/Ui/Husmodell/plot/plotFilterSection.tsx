@@ -174,7 +174,7 @@ const PlotFilterSection: React.FC<{
 
               {openIndex.includes("Område") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-1 gap-x-8 gap-y-4">
                     {OmrådeArray.map((data: any, index: number) => {
                       return (
@@ -359,7 +359,7 @@ const PlotFilterSection: React.FC<{
 
               {openIndex.includes("Pris på tomt") && (
                 <>
-                  <div className="my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
                   <div className="mx-1">
                     <CustomSlider
                       value={[
@@ -388,7 +388,7 @@ const PlotFilterSection: React.FC<{
                           );
                         }, 2000);
                       }}
-                      valueLabelDisplay="auto"
+                      valueLabelDisplay="on"
                       aria-labelledby="range-slider"
                       min={minPrice}
                       step={100}

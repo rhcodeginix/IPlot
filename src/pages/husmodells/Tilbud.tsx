@@ -247,15 +247,18 @@ const Tilbud: React.FC<{
         <Loader />
       ) : (
         <>
-          <div className="bg-lightPurple2 py-4">
+          <div className="bg-lightPurple2 py-2 md:py-4">
             <SideSpaceContainer>
-              <div className="flex items-center gap-1 mb-6">
-                <Link href={"/"} className="text-[#7839EE] text-sm font-medium">
+              <div className="flex items-center flex-wrap gap-1 mb-4 md:mb-6">
+                <Link
+                  href={"/"}
+                  className="text-[#7839EE] text-xs md:text-sm font-medium"
+                >
                   Hjem
                 </Link>
                 <Image src={Ic_breadcrumb_arrow} alt="arrow" />
                 <div
-                  className="text-[#7839EE] text-sm font-medium cursor-pointer"
+                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
                   onClick={() => {
                     const currIndex = 0;
                     localStorage.setItem("currIndex", currIndex.toString());
@@ -266,7 +269,7 @@ const Tilbud: React.FC<{
                 </div>
                 <Image src={Ic_breadcrumb_arrow} alt="arrow" />
                 <div
-                  className="text-[#7839EE] text-sm font-medium cursor-pointer"
+                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
                   onClick={() => {
                     const currIndex = 1;
                     localStorage.setItem("currIndex", currIndex.toString());
@@ -277,7 +280,7 @@ const Tilbud: React.FC<{
                 </div>
                 <Image src={Ic_breadcrumb_arrow} alt="arrow" />
                 <div
-                  className="text-[#7839EE] text-sm font-medium cursor-pointer"
+                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
                   onClick={() => {
                     handlePrevious();
                   }}
@@ -285,7 +288,9 @@ const Tilbud: React.FC<{
                   Tomt
                 </div>
                 <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-                <span className="text-secondary2 text-sm">Tilbud</span>
+                <span className="text-secondary2 text-xs md:text-sm">
+                  Tilbud
+                </span>
               </div>
               <PropertyHouseDetails
                 HouseModelData={HouseModelData}
@@ -505,7 +510,7 @@ const Tilbud: React.FC<{
                                             </div>
                                             <div className="flex items-center justify-between gap-2 w-full">
                                               <div>
-                                                <p className="text-secondary2 text-sm">
+                                                <p className="text-secondary2 text-xs md:text-sm">
                                                   {product?.Produktnavn}
                                                 </p>
                                                 <h5 className="text-black text-sm font-medium">
@@ -558,7 +563,7 @@ const Tilbud: React.FC<{
                                               key={proIndex}
                                               className="flex gap-2 w-full justify-between"
                                             >
-                                              <h4 className="text-secondary2 text-sm">
+                                              <h4 className="text-secondary2 text-xs md:text-sm">
                                                 {item?.navn}
                                               </h4>
                                               <div className="text-black font-medium text-sm">
@@ -584,7 +589,7 @@ const Tilbud: React.FC<{
                           )}
                           <div className="w-full border-t border-[#DCDFEA]"></div>
                           <div className="flex gap-2 w-full justify-between">
-                            <h4 className="text-secondary2 text-sm">
+                            <h4 className="text-secondary2 text-xs md:text-sm">
                               Totalt tilpassing
                             </h4>
                             <div className="text-black font-medium text-sm">
@@ -597,7 +602,7 @@ const Tilbud: React.FC<{
                           </div>
                           <div className="w-full border-t border-[#DCDFEA]"></div>
                           <div className="flex gap-2 w-full justify-between">
-                            <h4 className="text-secondary2 text-sm">
+                            <h4 className="text-secondary2 text-xs md:text-sm">
                               Husmodellpris
                             </h4>
                             <div className="text-black font-medium text-sm">
@@ -609,7 +614,9 @@ const Tilbud: React.FC<{
                         </div>
                       </div>
                       <div className="bg-[#ECE9FE] p-4 flex gap-2 w-full justify-between">
-                        <h4 className="text-secondary2 text-sm">Total</h4>
+                        <h4 className="text-secondary2 text-xs md:text-sm">
+                          Total
+                        </h4>
                         <div className="text-black font-medium text-sm">
                           {formatCurrency(
                             (

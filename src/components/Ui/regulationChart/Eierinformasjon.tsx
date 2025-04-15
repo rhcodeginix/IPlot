@@ -13,23 +13,25 @@ const Eierinformasjon: React.FC<{ data: any }> = ({ data }) => {
   }));
 
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col lg:flex-row gap-4 desktop:gap-6">
       <div
-        className="w-1/3 p-5 rounded-lg h-max"
+        className="w-full lg:w-1/3 p-4 desktop:p-5 rounded-lg h-max"
         style={{
           boxShadow: "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
         }}
       >
-        <h5 className="text-black text-lg font-semibold mb-8">Eierskap</h5>
+        <h5 className="text-black text-base desktop:text-lg font-semibold mb-4 md:mb-6 lg:mb-8">
+          Eierskap
+        </h5>
         <EierinformasjonChart chartData={EierinformasjonData} />
       </div>
-      <div className="w-2/3">
-        <div className="grid grid-cols-2 gap-6">
+      <div className="w-full lg:w-2/3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {data &&
             data?.map((item: any, index: number) => {
               return (
                 <div
-                  className="p-5 rounded-lg flex flex-col gap-4"
+                  className="p-4 md:p-5 rounded-lg flex flex-col gap-2.5 md:gap-4"
                   style={{
                     boxShadow:
                       "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
@@ -37,10 +39,10 @@ const Eierinformasjon: React.FC<{ data: any }> = ({ data }) => {
                   key={index}
                 >
                   <div>
-                    <h5 className="text-black text-lg font-semibold mb-2">
+                    <h5 className="text-black text-sm md:text-base lg:text-lg font-semibold mb-2">
                       ID: {item?.eierId}
                     </h5>
-                    <h6 className="text-black text-sm font-medium">
+                    <h6 className="text-black text-xs md:text-sm font-medium">
                       FØDSELSNUMMER (Code: {item?.personalNumberType?.code})
                     </h6>
                   </div>

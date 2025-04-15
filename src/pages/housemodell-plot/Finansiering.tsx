@@ -119,15 +119,18 @@ const Finansiering: React.FC<{
   }
   return (
     <div className="relative">
-      <div className="bg-lightPurple2 py-4">
+      <div className="bg-lightPurple2 py-2 md:py-4">
         <SideSpaceContainer>
-          <div className="flex items-center gap-1 mb-6">
-            <Link href={"/"} className="text-[#7839EE] text-sm font-medium">
+          <div className="flex items-center flex-wrap gap-1 mb-4 md:mb-6">
+            <Link
+              href={"/"}
+              className="text-[#7839EE] text-xs md:text-sm font-medium"
+            >
               Hjem
             </Link>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 0;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -138,7 +141,7 @@ const Finansiering: React.FC<{
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 1;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -149,7 +152,7 @@ const Finansiering: React.FC<{
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 2;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -159,7 +162,9 @@ const Finansiering: React.FC<{
               Tilbud
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-            <span className="text-secondary2 text-sm">Finansiering</span>
+            <span className="text-secondary2 text-xs md:text-sm">
+              Finansiering
+            </span>
           </div>
           <PropertyHouseDetails
             HouseModelData={HouseModelData}
@@ -177,11 +182,11 @@ const Finansiering: React.FC<{
 
       <div className="pt-6 pb-8">
         <SideSpaceContainer>
-          <h5 className="text-darkBlack text-xl font-semibold mb-4">
+          <h5 className="text-darkBlack text-base md:text-lg lg:text-xl font-semibold mb-2 md:mb-4">
             Tilbudsdetaljer
           </h5>
           <Tilbudsdetaljer isRemove={true} />
-          <div className="my-8">
+          <div className="my-5 md:my-8">
             <Formik
               initialValues={{
                 existingLoan: "",
@@ -246,17 +251,17 @@ const Finansiering: React.FC<{
                 }, [leadId]);
                 return (
                   <Form>
-                    <div className="w-full flex gap-[24px]">
-                      <div className="w-[34%] rounded-[8px] border border-[#DCDFEA]">
-                        <h3 className="text-darkBlack text-xl font-semibold p-5 border-b border-[#DCDFEA]">
+                    <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-[24px]">
+                      <div className="w-full lg:w-[34%] rounded-[8px] border border-[#DCDFEA]">
+                        <h3 className="text-darkBlack text-sm md:text-base desktop:text-xl font-semibold p-3 md:p-5 border-b border-[#DCDFEA]">
                           Spørsmål til lånesøknad
                         </h3>
-                        <div className="p-5 flex-col gap-5 flex">
+                        <div className="p-3 md:p-5 flex-col gap-5 flex">
                           <div>
-                            <h5 className="font-medium text-black mb-1">
+                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
                               Eksisterende lån
                             </h5>
-                            <p className="text-sm text-secondary2 mb-2">
+                            <p className="text-xs md:text-sm text-secondary2 mb-2">
                               Har du eksisterende lån, gjeld eller andre
                               økonomiske forpliktelser?
                             </p>
@@ -292,10 +297,10 @@ const Finansiering: React.FC<{
                           </div>
                           <div className="border-t border-[#DCDFEA] w-full"></div>
                           <div>
-                            <h5 className="font-medium text-black mb-1">
+                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
                               Tidligere erfaringer
                             </h5>
-                            <p className="text-sm text-secondary2 mb-2">
+                            <p className="text-xs md:text-sm text-secondary2 mb-2">
                               Har du tidligere erfaring med byggelån eller
                               større byggeprosjekter?
                             </p>
@@ -332,10 +337,10 @@ const Finansiering: React.FC<{
                           </div>
                           <div className="border-t border-[#DCDFEA] w-full"></div>
                           <div>
-                            <h5 className="font-medium text-black mb-1">
+                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
                               Pant
                             </h5>
-                            <p className="text-sm text-secondary2 mb-2">
+                            <p className="text-xs md:text-sm text-secondary2 mb-2">
                               Er det noe pant på eiendommer du eier, og kan
                               disse brukes som sikkerhet?
                             </p>
@@ -371,10 +376,10 @@ const Finansiering: React.FC<{
                           </div>
                           <div className="border-t border-[#DCDFEA] w-full"></div>
                           <div>
-                            <h5 className="font-medium text-black mb-1">
+                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
                               Tillatelser
                             </h5>
-                            <p className="text-sm text-secondary2 mb-2">
+                            <p className="text-xs md:text-sm text-secondary2 mb-2">
                               Er det andre relevante tillatelser som må på plass
                               før byggingen kan starte?
                             </p>
@@ -410,10 +415,10 @@ const Finansiering: React.FC<{
                           </div>
                           <div className="border-t border-[#DCDFEA] w-full"></div>
                           <div>
-                            <h5 className="font-medium text-black mb-1">
+                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
                               Buffer
                             </h5>
-                            <p className="text-sm text-secondary2 mb-2">
+                            <p className="text-xs md:text-sm text-secondary2 mb-2">
                               Er det satt av en buffer for uforutsette utgifter?
                               I så fall, hvor mye?
                             </p>
@@ -445,13 +450,13 @@ const Finansiering: React.FC<{
                           </div>
                         </div>
                       </div>
-                      <div className="w-[66%]">
-                        <div className="flex flex-col gap-4 mb-[40px]">
-                          <div className="flex items-center justify-between">
-                            <p className="text-secondary2 text-sm font-bold">
+                      <div className="w-full lg:w-[66%]">
+                        <div className="flex flex-col gap-2 md:gap-4 mb-6 md:mb-[40px]">
+                          <div className="flex items-center justify-between gap-1">
+                            <p className="text-secondary2 text-xs md:text-sm font-bold">
                               Totale bygge- og tomtekostnader (inkl. mva)
                             </p>
-                            <h4 className="text-black text-xl font-semibold">
+                            <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
                               {formatCurrency(
                                 (
                                   totalCustPris +
@@ -460,11 +465,11 @@ const Finansiering: React.FC<{
                               )}
                             </h4>
                           </div>
-                          <div className="flex items-center justify-between">
-                            <p className="text-secondary2 text-sm">
+                          <div className="flex items-center justify-between gap-1">
+                            <p className="text-secondary2 text-xs md:text-sm">
                               Egenkapital
                             </p>
-                            <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2 md:gap-4">
                               <div>
                                 <Field
                                   id="equityAmount"
@@ -484,16 +489,16 @@ const Finansiering: React.FC<{
                                     </p>
                                   )}
                               </div>
-                              <p className="border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-5 cursor-pointer">
+                              <p className="border-2 border-[#6927DA] text-[#6927DA] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer">
                                 Legg til
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-center justify-between">
-                            <p className="text-secondary text-sm font-bold">
+                          <div className="flex items-center justify-between gap-1">
+                            <p className="text-secondary text-xs md:text-sm font-bold">
                               Lånebeløp
                             </p>
-                            <h4 className="text-black text-xl font-semibold">
+                            <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
                               {(() => {
                                 const data: any =
                                   totalCustPris +
@@ -522,8 +527,8 @@ const Finansiering: React.FC<{
                           </div>
                         </div>
                         <div className="rounded-[8px] border border-[#DCDFEA]">
-                          <div className="flex items-center justify-between border-b border-[#DCDFEA] p-5">
-                            <h3 className="text-black text-xl font-semibold">
+                          <div className="flex items-center justify-between border-b border-[#DCDFEA] p-3 md:p-5 gap-1">
+                            <h3 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
                               Søk byggelån{" "}
                               {(() => {
                                 const data: any =
@@ -555,40 +560,40 @@ const Finansiering: React.FC<{
                               fetchPriority="auto"
                               src={Ic_spareBank}
                               alt="icon"
-                              className="w-[119px] h-[30px]"
+                              className="w-[90px] sm:w-[119px] h-[30px]"
                             />
                           </div>
-                          <div className="flex flex-col gap-4 p-5 border-b border-[#DCDFEA]">
-                            <div className="flex items-center justify-between">
-                              <div className="text-secondary2 text-sm">
+                          <div className="flex flex-col gap-2 md:gap-4 p-3 md:p-5 border-b border-[#DCDFEA]">
+                            <div className="flex items-center justify-between gap-1">
+                              <div className="text-secondary2 text-xs md:text-sm">
                                 Nominell rente fra
                               </div>
-                              <h6 className="text-black font-medium text-base">
+                              <h6 className="text-black font-medium text-sm md:text-base">
                                 8,75%
                               </h6>
                             </div>
-                            <div className="flex items-center justify-between">
-                              <div className="text-secondary2 text-sm">
+                            <div className="flex items-center justify-between gap-1">
+                              <div className="text-secondary2 text-xs md:text-sm">
                                 Effektiv rente ved byggelån ved 2 MNOK ved 100%
                                 utnyttelse
                               </div>
-                              <h6 className="text-black font-medium text-base">
+                              <h6 className="text-black font-medium text-sm md:text-base">
                                 11,01%
                               </h6>
                             </div>
                             <div className="border-t w-full border-[#DCDFEA]"></div>
                             <div className="flex items-center justify-between">
-                              <div className="text-secondary2 text-base font-bold">
+                              <div className="text-secondary2 text-sm md:text-base font-bold">
                                 Estimert kostnad per måned
                               </div>
-                              <h6 className="text-black font-medium text-xl">
+                              <h6 className="text-black font-medium text-sm md:text-base desktop:text-xl">
                                 48.667 NOK
                               </h6>
                             </div>
                           </div>
                           {!values.helpWithFinancing && (
-                            <div className="p-5">
-                              <div className="flex items-center justify-between">
+                            <div className="p-3 md:p-5">
+                              <div className="flex flex-col sm:flex-row gap-2 sm:items-center justify-between">
                                 <div>
                                   <label className="flex items-center container">
                                     <Field type="checkbox" name="sharingData" />
@@ -598,7 +603,7 @@ const Finansiering: React.FC<{
                                       style={{ margin: "2px" }}
                                     ></span>
 
-                                    <div className="text-secondary2 text-sm">
+                                    <div className="text-secondary2 text-xs md:text-sm">
                                       Jeg samtykker til{" "}
                                       <span className="text-[#7839EE] font-bold">
                                         deling av data
@@ -622,13 +627,13 @@ const Finansiering: React.FC<{
                                   type="submit"
                                 />
                               </div>
-                              <div className="flex items-start gap-3 mt-5">
+                              <div className="flex items-start gap-2 md:gap-3 mt-3 md:mt-5">
                                 <Image
                                   fetchPriority="auto"
                                   src={Ic_Info_gray}
                                   alt="icon"
                                 />
-                                <p className="text-secondary2 text-sm">
+                                <p className="text-secondary2 text-xs md:text-sm">
                                   Loan facility for construction of a
                                   home/holiday home. Will be converted into a
                                   repayment loan upon completion of the
@@ -640,7 +645,7 @@ const Finansiering: React.FC<{
                             </div>
                           )}
                           <div className="border-t w-full border-[#DCDFEA]"></div>
-                          <div className="p-5">
+                          <div className="p-3 md:p-5">
                             <div className="flex items-center justify-between">
                               <div>
                                 <label className="flex items-center container">
@@ -654,7 +659,7 @@ const Finansiering: React.FC<{
                                     style={{ margin: "2px" }}
                                   ></span>
 
-                                  <div className="text-secondary2 text-sm">
+                                  <div className="text-secondary2 text-xs md:text-sm">
                                     Jeg ønsker ikke hjelp med finansiering
                                   </div>
                                 </label>
@@ -673,8 +678,8 @@ const Finansiering: React.FC<{
                                 />
                               )}
                             </div>
-                            <div className="flex items-start gap-3 mt-5">
-                              <p className="text-secondary2 text-sm">
+                            <div className="flex items-start gap-3 mt-3 md:mt-5">
+                              <p className="text-secondary2 text-xs md:text-sm">
                                 Du kan fortsatt hente ut priskalkyler og gjøre
                                 tomteanalyse – uten å søke finansiering
                               </p>

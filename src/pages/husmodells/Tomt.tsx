@@ -20,15 +20,18 @@ const Tomt: React.FC<any> = ({
 
   return (
     <div className="relative">
-      <div className="bg-lightPurple2 py-4">
+      <div className="bg-lightPurple2 py-2 md:py-4">
         <SideSpaceContainer>
           <div className="flex items-center gap-1">
-            <Link href={"/"} className="text-[#7839EE] text-sm font-medium">
+            <Link
+              href={"/"}
+              className="text-[#7839EE] text-xs md:text-sm font-medium"
+            >
               Hjem
             </Link>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 const currIndex = 0;
                 localStorage.setItem("currIndex", currIndex.toString());
@@ -39,7 +42,7 @@ const Tomt: React.FC<any> = ({
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
             <div
-              className="text-[#7839EE] text-sm font-medium cursor-pointer"
+              className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
               onClick={() => {
                 handlePrevious();
               }}
@@ -47,7 +50,7 @@ const Tomt: React.FC<any> = ({
               Tilpass
             </div>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-            <span className="text-secondary2 text-sm">Tomt</span>
+            <span className="text-secondary2 text-xs md:text-sm">Tomt</span>
           </div>
         </SideSpaceContainer>
       </div>

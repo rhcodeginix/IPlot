@@ -14,7 +14,7 @@ import Button from "@/components/common/button";
 import Link from "next/link";
 import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Image from "next/image";
-import { MenuIcon, X } from "lucide-react";
+import { Settings2, X } from "lucide-react";
 import { Drawer } from "@mui/material";
 
 const Belop: React.FC = () => {
@@ -412,23 +412,26 @@ const Belop: React.FC = () => {
 
   return (
     <>
-      <div className="bg-lightPurple2 py-4">
+      <div className="bg-lightPurple2 py-2 md:py-4">
         <SideSpaceContainer>
           <div className="flex items-center gap-1">
-            <Link href={"/"} className="text-[#7839EE] text-sm font-medium">
+            <Link
+              href={"/"}
+              className="text-[#7839EE] text-xs md:text-sm font-medium"
+            >
               Hjem
             </Link>
             <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-            <span className="text-secondary2 text-sm">
+            <span className="text-secondary2 text-xs md:text-sm">
               Start med tomt og husmodell
             </span>
           </div>
         </SideSpaceContainer>
       </div>
-      <div className="relative pt-8">
+      <div className="relative pt-5">
         <SideSpaceContainer>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-3 lg:gap-4 mb-[40px]">
-            <h3 className="text-darkBlack text-lg md:text-[24px] lg:text-[28px] desktop:text-[2rem] desktop:leading-[44.8px]">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-2 md:gap-3 lg:gap-4 mb-6 lg:mb-[40px]">
+            <h3 className="text-darkBlack text-xl md:text-[24px] lg:text-[28px] desktop:text-[2rem] desktop:leading-[44.8px]">
               Kombinasjoner av <span className="font-bold">husmodell</span> og{" "}
               <span className="font-bold">tomt</span>{" "}
               {formData?.Område.length > 1 ? null : (
@@ -449,15 +452,12 @@ const Belop: React.FC = () => {
           </div>
           <div className="flex flex-col lg:flex-row gap-5 laptop:gap-6 relative pb-[56px]">
             <div className="lg:w-[35%]">
-              <div className="sticky top-[56px] left-0 right-0 z-50 bg-white border-b border-gray p-3 flex items-center justify-between lg:hidden pt-0">
-                <h4 className="text-base font-medium">Filter</h4>
-                <button
-                  onClick={toggleDrawer(true)}
-                  className="text-white bg-primary px-4 py-2 rounded-md flex items-center gap-2"
-                >
-                  <MenuIcon className="text-white" />
-                  Åpne Filter
-                </button>
+              <div
+                className="sticky top-[56px] w-max left-0 right-0 z-50 bg-white border rounded-lg border-[#DADDE8] p-2 gap-2 flex items-center justify-between lg:hidden"
+                onClick={toggleDrawer(true)}
+              >
+                <Settings2 className="text-[#7839EE] h-5 w-5" />
+                <h4 className="text-sm">Filter</h4>
               </div>
 
               <div className="hidden lg:block w-full">

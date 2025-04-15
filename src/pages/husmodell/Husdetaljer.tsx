@@ -52,8 +52,8 @@ const Husdetaljer: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const images = husmodellData?.photo3D || [];
-  const displayedImages = images.slice(0, 4);
-  const extraImagesCount = images.length - 4;
+  const displayedImages = images.slice(0, 5);
+  const extraImagesCount = images.length - 5;
 
   const handlePopup = () => {
     if (isOpen) {
@@ -86,7 +86,7 @@ const Husdetaljer: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
                     className="w-full h-full object-fill rounded-lg"
                   />
 
-                  {index === 3 && extraImagesCount > 0 && (
+                  {index === 5 && extraImagesCount > 0 && (
                     <div
                       className="absolute inset-0 bg-black bg-opacity-35 flex items-center justify-center text-white text-base font-bold cursor-pointer rounded-lg"
                       onClick={() => setIsOpen(true)}

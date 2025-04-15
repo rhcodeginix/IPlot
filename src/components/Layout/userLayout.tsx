@@ -1,6 +1,5 @@
 import React, { ReactNode, useEffect } from "react";
 import Header from "../Ui/navbar";
-import Footer from "../Ui/footer";
 import { UserLayoutProvider } from "@/context/userLayoutContext";
 import { AddressProvider } from "@/context/addressContext";
 import Chatbot from "../Ui/chatbot";
@@ -46,7 +45,6 @@ const UserLayout = ({ children }: Props) => {
           <CustomizeHouseProvider>
             <Header />
             <main>{children}</main>
-            <Footer />
           </CustomizeHouseProvider>
         </AddressProvider>
       </UserLayoutProvider>

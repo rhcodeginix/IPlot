@@ -14,7 +14,7 @@ const EierinformasjonChart: React.FC<{ chartData: any }> = ({ chartData }) => {
 
   return (
     <>
-      <div className="w-full h-[300px] relative">
+      <div className="w-full h-[270px] md:h-[300px] relative">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -37,7 +37,7 @@ const EierinformasjonChart: React.FC<{ chartData: any }> = ({ chartData }) => {
           <span className="text-black font-semibold text-[26px]">100%</span>
         </div>
       </div>
-      <div className="mt-[48px] mb-3">
+      <div className="mt-6 md:mt-[48px] md:mb-3">
         <div className="flex justify-between gap-4">
           {data?.map((item: any, index: any) => (
             <div key={index} className="flex items-start gap-2">
@@ -48,7 +48,7 @@ const EierinformasjonChart: React.FC<{ chartData: any }> = ({ chartData }) => {
                 ></div>
               </div>
               <div>
-                <div className="font-semibold text-[20px] h-[26px]">
+                <div className="font-semibold text-lg md:text-[20px] h-[26px]">
                   {item.value}%
                 </div>
                 <span className="text-sm font-medium text-darkBlack">

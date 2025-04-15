@@ -217,7 +217,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
   return (
     <>
       <div
-        className={`flex flex-col md:flex-row pt-6 gap-4 md:gap-6 ${col && "flex-col"}`}
+        className={`flex pt-6 gap-4 md:gap-6 ${col ? "flex-col" : "flex-col md:flex-row"}`}
       >
         <div
           className={`${!col ? "md:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}

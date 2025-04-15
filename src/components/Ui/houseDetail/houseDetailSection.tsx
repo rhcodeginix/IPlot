@@ -27,7 +27,7 @@ const HouseDetailsection: React.FC<{
                 alt="check"
               />
               <div className="flex flex-col gap-1">
-                <p className="text-secondary2 text-sm">
+                <p className="text-secondary2 text-xs md:text-sm">
                   <span className="font-bold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
                   </span>{" "}
@@ -45,7 +45,7 @@ const HouseDetailsection: React.FC<{
                 alt="check"
               />
               <div className="flex flex-col gap-1">
-                <p className="text-secondary2 text-sm">
+                <p className="text-secondary2 text-xs md:text-sm">
                   <span className="font-bold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
                   </span>{" "}
@@ -63,7 +63,7 @@ const HouseDetailsection: React.FC<{
                 alt="check"
               />
               <div className="flex flex-col gap-1">
-                <p className="text-secondary2 text-sm">
+                <p className="text-secondary2 text-xs md:text-sm">
                   <span className="font-bold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
                   </span>{" "}
@@ -81,7 +81,7 @@ const HouseDetailsection: React.FC<{
                 alt="check"
               />
               <div className="flex flex-col gap-1">
-                <p className="text-secondary2 text-sm">
+                <p className="text-secondary2 text-xs md:text-sm">
                   <span className="font-bold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
                   </span>{" "}
@@ -100,7 +100,7 @@ const HouseDetailsection: React.FC<{
                 alt="check"
               />
               <div className="flex flex-col gap-1">
-                <p className="text-secondary2 text-sm">
+                <p className="text-secondary2 text-xs md:text-sm">
                   <span className="font-bold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
                   </span>{" "}

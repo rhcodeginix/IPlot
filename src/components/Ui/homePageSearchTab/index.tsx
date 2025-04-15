@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import BeløpTab from "./beløp";
 import AdresseTab from "./adresse";
 import HusmodellTab from "./husmodell";
-import Image from "next/image";
-import Img_main_bg from "@/public/images/Img_main_bg.png";
 import SideSpaceContainer from "@/components/common/sideSpace";
 import Button from "@/components/common/button";
 import {
@@ -19,14 +17,34 @@ import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
 import { formatPrice } from "@/pages/belop/belopProperty";
 import dynamic from "next/dynamic";
+import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
+import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
+import { FileUser } from "lucide-react";
+
 const GoogleMapComponent = dynamic(() => import("../map"), {
   ssr: false,
 });
 
 const tabs = [
-  { id: "beløp", label: ["Start med", "beløp"] },
-  { id: "adresse", label: ["Start med", "adresse"] },
-  { id: "husmodell", label: ["Start med", "husmodell"] },
+  {
+    id: "beløp",
+    label: ["Start med", "beløp"],
+    description: "Vet du hvor mye du vil bruke på tomt og",
+    description2: "hytte?",
+    icon: <PaymentsOutlinedIcon />,
+  },
+  {
+    id: "adresse",
+    label: ["Start med", "adresse"],
+    description: "Har du egen tomt eller bare vil se en konkret adresse?",
+    icon: <FileUser />,
+  },
+  {
+    id: "husmodell",
+    label: ["Start med", "husmodell"],
+    description: "Vet du hvor mye du vil bruke på tomt og",
+    icon: <MapsHomeWorkIcon />,
+  },
 ];
 const HomePageSearchTab: React.FC = () => {
   const router = useRouter();
@@ -155,26 +173,53 @@ const HomePageSearchTab: React.FC = () => {
       <div className="relative pb-[40px] md:pb-[52px] lg:pb-[60px]">
         <SideSpaceContainer>
           <div
-            className="w-full flex flex-col justify-center items-center relative laptop:px-16"
+            className="w-full relative laptop:px-16"
             style={{
               zIndex: 999,
             }}
           >
-            <div className="flex justify-center gap-2 items-center border border-gray3 mb-6 overflow-x-auto bg-gray3 p-[6px] rounded-lg">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  className={`py-2 px-3 text-xs md:text-sm font-base rounded-lg transition-colors duration-200 ${
-                    activeTab === tab.id
-                      ? "text-blue bg-white"
-                      : "text-[#30374F]"
-                  }`}
-                  onClick={() => setActiveTab(tab.id)}
-                >
-                  {tab.label[0]}{" "}
-                  <span className="font-semibold">{tab.label[1]}</span>
-                </button>
-              ))}
+            <div className="flex flex-col lg:justify-center lg:items-center">
+              <div className="flex lg:justify-center gap-2 lg:items-center border border-gray3 mb-6 overflow-x-auto bg-gray3 p-[6px] rounded-lg overFlowScrollHidden">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    className={`py-2 px-3 rounded-lg transition-colors duration-200 flex items-center md:items-start gap-3 ${
+                      activeTab === tab.id ? "bg-white" : ""
+                    }`}
+                    onClick={() => setActiveTab(tab.id)}
+                  >
+                    <div
+                      className={`h-6 w-6 ${
+                        activeTab === tab.id
+                          ? "text-blue bg-white"
+                          : "text-[#30374F]"
+                      }`}
+                    >
+                      {tab.icon}
+                    </div>
+                    <div className="flex flex-col items-start">
+                      <div
+                        className={`text-xs md:text-sm whitespace-nowrap font-base ${
+                          activeTab === tab.id
+                            ? "text-blue bg-white"
+                            : "text-[#30374F]"
+                        }`}
+                      >
+                        {tab.label[0]}{" "}
+                        <span className="font-semibold">{tab.label[1]}</span>
+                      </div>
+                      <div
+                        className={`mt-1 text-secondary text-xs w-48 text-left hidden md:block`}
+                      >
+                        {tab.description}{" "}
+                        <span className="font-semibold">
+                          {tab.description2}
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className="w-full">
@@ -182,17 +227,6 @@ const HomePageSearchTab: React.FC = () => {
               {activeTab === "adresse" && <AdresseTab />}
               {activeTab === "husmodell" && <HusmodellTab />}
             </div>
-          </div>
-          <div
-            className="absolute bottom-[-94px] left-0 hidden lg:block w-full"
-            style={{ zIndex: -9 }}
-          >
-            <Image
-              src={Img_main_bg}
-              alt="image"
-              className="w-full"
-              fetchPriority="auto"
-            />
           </div>
         </SideSpaceContainer>
       </div>
@@ -309,7 +343,22 @@ const HomePageSearchTab: React.FC = () => {
                       <h5 className="text-darkBlack font-medium text-sm md:text-base mb-2">
                         {property.description}
                       </h5>
-                      <div className="flex gap-3 items-center">
+                      <div className="flex gap-3 items-center justify-between">
+                        <div className="flex gap-3 items-center">
+                          <div className="text-darkBlack text-xs md:text-sm font-semibold">
+                            {property?.house?.Husdetaljer?.Soverom}{" "}
+                            <span className="text-[#4A5578] font-normal">
+                              soverom
+                            </span>
+                          </div>
+                          <div className="border-l border-[#EAECF0] h-[12px]"></div>
+                          <div className="text-darkBlack text-xs md:text-sm font-semibold">
+                            {property?.house?.Husdetaljer?.Bad}{" "}
+                            <span className="text-[#4A5578] font-normal">
+                              bad
+                            </span>
+                          </div>
+                        </div>
                         <div className="text-darkBlack text-xs md:text-sm font-semibold">
                           {
                             property?.plot?.lamdaDataFromApi
@@ -317,20 +366,6 @@ const HomePageSearchTab: React.FC = () => {
                               ?.areal_beregnet
                           }{" "}
                           <span className="text-[#4A5578] font-normal">m²</span>
-                        </div>
-                        <div className="border-l border-[#EAECF0] h-[12px]"></div>
-                        <div className="text-darkBlack text-xs md:text-sm font-semibold">
-                          {property?.house?.Husdetaljer?.Soverom}{" "}
-                          <span className="text-[#4A5578] font-normal">
-                            soverom
-                          </span>
-                        </div>
-                        <div className="border-l border-[#EAECF0] h-[12px]"></div>
-                        <div className="text-darkBlack text-xs md:text-sm font-semibold">
-                          {property?.house?.Husdetaljer?.Bad}{" "}
-                          <span className="text-[#4A5578] font-normal">
-                            bad
-                          </span>
                         </div>
                       </div>
                       <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
@@ -372,7 +407,7 @@ const HomePageSearchTab: React.FC = () => {
                           <p className="text-[#4A5578] text-xs md:text-sm mb-1">
                             Totalpris med tomt
                           </p>
-                          <h6 className="text-sm md:text-base font-semibold desktop:text-xl">
+                          <h6 className="text-base font-semibold desktop:text-xl">
                             {formatPrice(
                               (property?.house?.Husdetaljer?.pris
                                 ? Math.round(

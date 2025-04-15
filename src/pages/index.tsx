@@ -8,6 +8,7 @@ import Advantages from "./homepage/advantages";
 import Analysis from "./homepage/analysis";
 import LatestFromMedia from "./homepage/latestFromMedia";
 import OurPartners from "./homepage/ourPartners";
+import Footer from "@/components/Ui/footer";
 
 const index = () => {
   return (
@@ -20,6 +21,7 @@ const index = () => {
       <Advantages />
       <Analysis />
       <LatestFromMedia />
+      <Footer />
     </div>
   );
 };
