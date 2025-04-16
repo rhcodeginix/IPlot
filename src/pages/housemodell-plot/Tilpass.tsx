@@ -20,8 +20,6 @@ const Tilpass: React.FC<{
   handleNext: any;
   lamdaDataFromApi: any;
   loadingLamdaData: any;
-  CadastreDataFromApi: any;
-  askData: any;
   HouseModelData: any;
   handlePrevious: any;
   supplierData: any;
@@ -29,9 +27,7 @@ const Tilpass: React.FC<{
 }> = ({
   handleNext,
   lamdaDataFromApi,
-  // askData,
   loadingLamdaData,
-  // CadastreDataFromApi,
   HouseModelData,
   handlePrevious,
   supplierData,

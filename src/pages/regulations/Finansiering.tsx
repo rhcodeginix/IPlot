@@ -495,12 +495,6 @@ const Finansiering: React.FC<{
                                 />
                               )}
                             </div>
-                            {/* <div className="flex items-start gap-3 mt-3 md:mt-5">
-                              <p className="text-secondary2 text-xs md:text-sm">
-                                Du kan fortsatt hente ut priskalkyler og gjøre
-                                tomteanalyse – uten å søke finansiering
-                              </p>
-                            </div> */}
                           </div>
                         </div>
                       </div>
