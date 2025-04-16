@@ -11,7 +11,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
-import Tilbudsdetaljer from "@/components/Ui/husmodellPlot/Tilbudsdetaljer";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
 import toast from "react-hot-toast";
@@ -21,6 +20,7 @@ import { Formik, Form, Field } from "formik";
 import Ic_spareBank from "@/public/images/Ic_spareBank.svg";
 import Ic_Info_gray from "@/public/images/Ic_Info_gray.svg";
 import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjoner";
+import Prisliste from "../husmodell/Prisliste";
 
 const Finansiering: React.FC<{
   handleNext: any;
@@ -62,21 +62,6 @@ const Finansiering: React.FC<{
   const router = useRouter();
 
   const validationSchema = Yup.object().shape({
-    existingLoan: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
-    previousExperience: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
-    collateral: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
-    permissions: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
-    buffer: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
     equityAmount: Yup.number()
       .typeError("Must be a number")
       .min(1, "Amount must be greater than 0")
@@ -183,17 +168,14 @@ const Finansiering: React.FC<{
       <div className="pt-6 pb-8">
         <SideSpaceContainer>
           <h5 className="text-darkBlack text-base md:text-lg lg:text-xl font-semibold mb-2 md:mb-4">
-            Tilbudsdetaljer
+            Finansieringstilbud
           </h5>
-          <Tilbudsdetaljer isRemove={true} />
+          <div className="mb-4 md:mb-8">
+            <Prisliste husmodellData={HouseModelData?.Prisliste} />
+          </div>
           <div className="my-5 md:my-8">
             <Formik
               initialValues={{
-                existingLoan: "",
-                previousExperience: "",
-                collateral: "",
-                permissions: "",
-                buffer: "",
                 equityAmount: "",
                 sharingData: false,
                 helpWithFinancing: false,
@@ -220,20 +202,6 @@ const Finansiering: React.FC<{
                           );
                         }
                         if (value) {
-                          setFieldValue(
-                            "existingLoan",
-                            value?.existingLoan || ""
-                          );
-                          setFieldValue(
-                            "previousExperience",
-                            value?.previousExperience || ""
-                          );
-                          setFieldValue("collateral", value?.collateral || "");
-                          setFieldValue(
-                            "permissions",
-                            value?.permissions || ""
-                          );
-                          setFieldValue("buffer", value?.buffer || "");
                           setFieldValue("equityAmount", value?.equityAmount);
                           setFieldValue(
                             "helpWithFinancing",
@@ -252,209 +220,11 @@ const Finansiering: React.FC<{
                 return (
                   <Form>
                     <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-[24px]">
-                      <div className="w-full lg:w-[34%] rounded-[8px] border border-[#DCDFEA]">
-                        <h3 className="text-darkBlack text-sm md:text-base desktop:text-xl font-semibold p-3 md:p-5 border-b border-[#DCDFEA]">
-                          Spørsmål til lånesøknad
-                        </h3>
-                        <div className="p-3 md:p-5 flex-col gap-5 flex">
-                          <div>
-                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
-                              Eksisterende lån
-                            </h5>
-                            <p className="text-xs md:text-sm text-secondary2 mb-2">
-                              Har du eksisterende lån, gjeld eller andre
-                              økonomiske forpliktelser?
-                            </p>
-                            <div className="w-full flex items-center gap-4">
-                              <Button
-                                text="Nei"
-                                className={`w-1/2 border text-black ${
-                                  values.existingLoan === "Nei"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() =>
-                                  setFieldValue("existingLoan", "Nei")
-                                }
-                              />
-                              <Button
-                                text="Ja"
-                                className={`w-1/2 border text-black ${
-                                  values.existingLoan === "Ja"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() =>
-                                  setFieldValue("existingLoan", "Ja")
-                                }
-                              />
-                            </div>
-                            {touched.existingLoan && errors.existingLoan && (
-                              <p className="text-red text-xs">
-                                {errors.existingLoan}
-                              </p>
-                            )}
-                          </div>
-                          <div className="border-t border-[#DCDFEA] w-full"></div>
-                          <div>
-                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
-                              Tidligere erfaringer
-                            </h5>
-                            <p className="text-xs md:text-sm text-secondary2 mb-2">
-                              Har du tidligere erfaring med byggelån eller
-                              større byggeprosjekter?
-                            </p>
-                            <div className="w-full flex items-center gap-4">
-                              <Button
-                                text="Nei"
-                                className={`w-1/2 border text-black ${
-                                  values.previousExperience === "Nei"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() =>
-                                  setFieldValue("previousExperience", "Nei")
-                                }
-                              />
-                              <Button
-                                text="Ja"
-                                className={`w-1/2 border text-black ${
-                                  values.previousExperience === "Ja"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() =>
-                                  setFieldValue("previousExperience", "Ja")
-                                }
-                              />
-                            </div>
-                            {touched.previousExperience &&
-                              errors.previousExperience && (
-                                <p className="text-red text-xs">
-                                  {errors.previousExperience}
-                                </p>
-                              )}
-                          </div>
-                          <div className="border-t border-[#DCDFEA] w-full"></div>
-                          <div>
-                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
-                              Pant
-                            </h5>
-                            <p className="text-xs md:text-sm text-secondary2 mb-2">
-                              Er det noe pant på eiendommer du eier, og kan
-                              disse brukes som sikkerhet?
-                            </p>
-                            <div className="w-full flex items-center gap-4">
-                              <Button
-                                text="Nei"
-                                className={`w-1/2 border text-black ${
-                                  values.collateral === "Nei"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() =>
-                                  setFieldValue("collateral", "Nei")
-                                }
-                              />
-                              <Button
-                                text="Ja"
-                                className={`w-1/2 border text-black ${
-                                  values.collateral === "Ja"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() =>
-                                  setFieldValue("collateral", "Ja")
-                                }
-                              />
-                            </div>
-                            {touched.collateral && errors.collateral && (
-                              <p className="text-red text-xs">
-                                {errors.collateral}
-                              </p>
-                            )}
-                          </div>
-                          <div className="border-t border-[#DCDFEA] w-full"></div>
-                          <div>
-                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
-                              Tillatelser
-                            </h5>
-                            <p className="text-xs md:text-sm text-secondary2 mb-2">
-                              Er det andre relevante tillatelser som må på plass
-                              før byggingen kan starte?
-                            </p>
-                            <div className="w-full flex items-center gap-4">
-                              <Button
-                                text="Nei"
-                                className={`w-1/2 border text-black ${
-                                  values.permissions === "Nei"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() =>
-                                  setFieldValue("permissions", "Nei")
-                                }
-                              />
-                              <Button
-                                text="Ja"
-                                className={`w-1/2 border text-black ${
-                                  values.permissions === "Ja"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() =>
-                                  setFieldValue("permissions", "Ja")
-                                }
-                              />
-                            </div>
-                            {touched.permissions && errors.permissions && (
-                              <p className="text-red text-xs">
-                                {errors.permissions}
-                              </p>
-                            )}
-                          </div>
-                          <div className="border-t border-[#DCDFEA] w-full"></div>
-                          <div>
-                            <h5 className="font-medium text-black mb-1 text-sm md:text-base">
-                              Buffer
-                            </h5>
-                            <p className="text-xs md:text-sm text-secondary2 mb-2">
-                              Er det satt av en buffer for uforutsette utgifter?
-                              I så fall, hvor mye?
-                            </p>
-                            <div className="w-full flex items-center gap-4">
-                              <Button
-                                text="Nei"
-                                className={`w-1/2 border text-black ${
-                                  values.buffer === "Nei"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() => setFieldValue("buffer", "Nei")}
-                              />
-                              <Button
-                                text="Ja"
-                                className={`w-1/2 border text-black ${
-                                  values.buffer === "Ja"
-                                    ? "border-[#6927DA] bg-[#ECE9FE]"
-                                    : "border-[#F9F9FB] bg-[#F9F9FB]"
-                                } sm:text-base rounded-[8px] h-[36px] md:h-[36px] lg:h-[36px]`}
-                                onClick={() => setFieldValue("buffer", "Ja")}
-                              />
-                            </div>
-                            {touched.buffer && errors.buffer && (
-                              <p className="text-red text-xs">
-                                {errors.buffer}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="w-full lg:w-[66%]">
-                        <div className="flex flex-col gap-2 md:gap-4 mb-6 md:mb-[40px]">
+                      <div className="w-full lg:w-[50%]">
+                        <div className="flex flex-col gap-2 md:gap-4">
                           <div className="flex items-center justify-between gap-1">
                             <p className="text-secondary2 text-xs md:text-sm font-bold">
-                              Totale bygge- og tomtekostnader (inkl. mva)
+                              Totale bygge- og <br /> tomtekostnader (inkl. mva)
                             </p>
                             <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
                               {formatCurrency(
@@ -526,7 +296,16 @@ const Finansiering: React.FC<{
                             </h4>
                           </div>
                         </div>
-                        <div className="rounded-[8px] border border-[#DCDFEA]">
+                        <LeadsBox isShow={true} col={true} />
+                      </div>
+                      <div className="w-full lg:w-[50%]">
+                        <div
+                          className="rounded-[8px] border border-[#DCDFEA]"
+                          style={{
+                            boxShadow:
+                              "0px 2px 4px -2px #1018280F, 0px 4px 8px -2px #1018281A",
+                          }}
+                        >
                           <div className="flex items-center justify-between border-b border-[#DCDFEA] p-3 md:p-5 gap-1">
                             <h3 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
                               Søk byggelån{" "}
@@ -563,36 +342,38 @@ const Finansiering: React.FC<{
                               className="w-[90px] sm:w-[119px] h-[30px]"
                             />
                           </div>
-                          <div className="flex flex-col gap-2 md:gap-4 p-3 md:p-5 border-b border-[#DCDFEA]">
-                            <div className="flex items-center justify-between gap-1">
-                              <div className="text-secondary2 text-xs md:text-sm">
-                                Nominell rente fra
-                              </div>
-                              <h6 className="text-black font-medium text-sm md:text-base">
-                                8,75%
-                              </h6>
-                            </div>
-                            <div className="flex items-center justify-between gap-1">
-                              <div className="text-secondary2 text-xs md:text-sm">
-                                Effektiv rente ved byggelån ved 2 MNOK ved 100%
-                                utnyttelse
-                              </div>
-                              <h6 className="text-black font-medium text-sm md:text-base">
-                                11,01%
-                              </h6>
-                            </div>
-                            <div className="border-t w-full border-[#DCDFEA]"></div>
-                            <div className="flex items-center justify-between">
-                              <div className="text-secondary2 text-sm md:text-base font-bold">
-                                Estimert kostnad per måned
-                              </div>
-                              <h6 className="text-black font-medium text-sm md:text-base desktop:text-xl">
-                                48.667 NOK
-                              </h6>
-                            </div>
-                          </div>
                           {!values.helpWithFinancing && (
-                            <div className="p-3 md:p-5">
+                            <div className="flex flex-col gap-2 md:gap-4 p-3 md:p-5 border-b border-[#DCDFEA]">
+                              <div className="flex items-center justify-between gap-1">
+                                <div className="text-secondary2 text-xs md:text-sm">
+                                  Nominell rente fra
+                                </div>
+                                <h6 className="text-black font-medium text-sm md:text-base">
+                                  8,75%
+                                </h6>
+                              </div>
+                              <div className="flex items-center justify-between gap-1">
+                                <div className="text-secondary2 text-xs md:text-sm">
+                                  Effektiv rente ved byggelån ved 2 MNOK ved
+                                  100% utnyttelse
+                                </div>
+                                <h6 className="text-black font-medium text-sm md:text-base">
+                                  11,01%
+                                </h6>
+                              </div>
+                              <div className="border-t w-full border-[#DCDFEA]"></div>
+                              <div className="flex items-center justify-between">
+                                <div className="text-secondary2 text-sm md:text-base font-bold">
+                                  Estimert månedskostnad ved 50% utnyttelse
+                                </div>
+                                <h6 className="text-black font-medium text-sm md:text-base desktop:text-xl">
+                                  48.667 NOK
+                                </h6>
+                              </div>
+                            </div>
+                          )}
+                          {!values.helpWithFinancing && (
+                            <div className="p-3 md:p-5 border-b border-[#DCDFEA]">
                               <div className="flex flex-col sm:flex-row gap-2 sm:items-center justify-between">
                                 <div>
                                   <label className="flex items-center container">
@@ -634,17 +415,16 @@ const Finansiering: React.FC<{
                                   alt="icon"
                                 />
                                 <p className="text-secondary2 text-xs md:text-sm">
-                                  Loan facility for construction of a
-                                  home/holiday home. Will be converted into a
-                                  repayment loan upon completion of the
-                                  home/holiday home. Interest rate will vary
-                                  based on an overall assessment of payment
-                                  ability and security.
+                                  Lån for bygging av bolig/fritidsbolig. Lånet
+                                  vil bli konvertert til et nedbetalingslån ved
+                                  ferdigstillelse av bolig/fritidsbolig.
+                                  Rentesatsen vil variere basert på en samlet
+                                  vurdering av betalingsevne og sikkerhet.
                                 </p>
                               </div>
                             </div>
                           )}
-                          <div className="border-t w-full border-[#DCDFEA]"></div>
+                          <div className="w-full"></div>
                           <div className="p-3 md:p-5">
                             <div className="flex items-center justify-between">
                               <div>
@@ -659,7 +439,7 @@ const Finansiering: React.FC<{
                                     style={{ margin: "2px" }}
                                   ></span>
 
-                                  <div className="text-secondary2 text-xs md:text-sm">
+                                  <div className="text-darkBlack text-xs md:text-sm">
                                     Jeg ønsker ikke hjelp med finansiering
                                   </div>
                                 </label>
@@ -678,12 +458,12 @@ const Finansiering: React.FC<{
                                 />
                               )}
                             </div>
-                            <div className="flex items-start gap-3 mt-3 md:mt-5">
+                            {/* <div className="flex items-start gap-3 mt-3 md:mt-5">
                               <p className="text-secondary2 text-xs md:text-sm">
                                 Du kan fortsatt hente ut priskalkyler og gjøre
                                 tomteanalyse – uten å søke finansiering
                               </p>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -693,12 +473,11 @@ const Finansiering: React.FC<{
               }}
             </Formik>
           </div>
-          <LeadsBox />
         </SideSpaceContainer>
       </div>
 
       <div
-        className="sticky bottom-0 bg-white py-6"
+        className="sticky bottom-0 bg-white py-4 md:py-6"
         style={{
           boxShadow:
             "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",

@@ -74,7 +74,7 @@ const BelopFilterSection: React.FC<{
     "Type husmodell",
     "Antall soverom",
     "Pris på tomt",
-    "Pris på husmodell",
+    "Husmodell",
   ]);
 
   const handleToggleAccordion = (type: string) => {
@@ -135,7 +135,7 @@ const BelopFilterSection: React.FC<{
 
   return (
     <>
-      <div className="sticky lg:top-[86px] bg-[#F9F5FF] rounded-[12px]">
+      <div className="sticky top-[86px] bg-[#F9F5FF] rounded-[12px]">
         <div className="p-4 laptop:p-6 flex items-center justify-between gap-3 border-b border-[#7D89B04D]">
           <h4 className="text-darkBlack font-medium text-base md:text-lg lg:text-xl desktop:text-2xl">
             Filter
@@ -219,13 +219,13 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Område") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-1 gap-x-8 gap-y-4">
                     {OmrådeArray.map((data: any, index: number) => {
                       return (
                         <>
                           <label
-                            className="container container_darkgray_withPurple truncate"
+                            className="container container_darkgray_withPurple"
                             htmlFor={data?.name}
                             key={index}
                           >
@@ -310,7 +310,7 @@ const BelopFilterSection: React.FC<{
                                   (kom: any, komIndex: any) => {
                                     return (
                                       <label
-                                        className="container container_darkgray_withPurple"
+                                        className="container container_darkgray_withPurple truncate"
                                         htmlFor={kom.name}
                                         key={komIndex}
                                       >
@@ -400,7 +400,7 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Hustype") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {HustypeArray.map((data: any, index: number) => (
                       <label
@@ -481,7 +481,7 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Type husmodell") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {TypeHusmodellArray.map((data: any, index: number) => (
                       <label
@@ -547,7 +547,7 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Antall soverom") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {AntallSoveromArray.map((data: any, index: number) => (
                       <label
@@ -631,8 +631,8 @@ const BelopFilterSection: React.FC<{
 
               {openIndex.includes("Pris på tomt") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
-                  <div className="mx-1">
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mx-2">
                     <CustomSlider
                       value={[
                         formData?.minRangeForPlot,
@@ -685,23 +685,23 @@ const BelopFilterSection: React.FC<{
             >
               <p
                 className={`text-darkBlack font-semibold text-base lg:text-lg flex items-center justify-between cursor-pointer`}
-                onClick={() => handleToggleAccordion("Pris på husmodell")}
+                onClick={() => handleToggleAccordion("Husmodell")}
               >
-                Pris på husmodell
+                Husmodell
                 <Image
                   src={Ic_chevron_down}
                   alt="arrow"
                   className={
-                    openIndex.includes("Pris på husmodell") ? "rotate-180" : ""
+                    openIndex.includes("Husmodell") ? "rotate-180" : ""
                   }
                   fetchPriority="auto"
                 />
               </p>
 
-              {openIndex.includes("Pris på husmodell") && (
+              {openIndex.includes("Husmodell") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
-                  <div className="mx-1">
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mx-2">
                     <CustomSlider
                       value={[
                         formData?.minRangeForHusmodell,

@@ -6,7 +6,6 @@ import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Ic_info_circle from "@/public/images/Ic_info_circle.svg";
 import Loader from "@/components/Loader";
 import Link from "next/link";
-// import HouseDetailsection from "@/components/Ui/houseDetail/houseDetailSection";
 import Ic_close from "@/public/images/Ic_close.svg";
 import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjoner";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -208,18 +207,51 @@ const Tilpass: React.FC<any> = ({
               />
             </SideSpaceContainer>
           </div>
-          {/* <HouseDetailsection
-            HouseModelData={HouseModelData}
-            loading={loading}
-          /> */}
-          <div className="py-8">
+          <div className="py-5 md:py-8">
             <SideSpaceContainer>
-              <h3 className="text-darkBlack text-2xl font-semibold mb-[22px]">
+              <h3 className="text-darkBlack text-lg md:text-xl desktop:text-2xl font-semibold mb-[22px]">
                 La oss begynne å tilpasse drømmehuset ditt
               </h3>
               {Huskonfigurator?.length > 0 ? (
-                <div className="flex gap-6 relative">
-                  <div className="w-[27%] flex flex-col gap-3 max-h-[calc(100vh-200px)] sticky top-[88px] overflow-y-auto overFlowYAuto">
+                <div className="flex flex-col md:flex-row gap-6 relative">
+                  <div className="md:hidden flex gap-2 overflow-x-auto">
+                    {Huskonfigurator.map((item: any, index: number) => (
+                      <div
+                        key={index}
+                        className={`p-4 cursor-pointer border-2 font-medium rounded-lg flex items-start gap-1 w-[160px] flex-none ${
+                          selectedTab === index
+                            ? "border-[#6927DA]"
+                            : "border-transparent"
+                        }`}
+                        onClick={() => setSelectedTab(index)}
+                        style={{
+                          boxShadow:
+                            "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
+                        }}
+                      >
+                        <div className="w-4 md:w-6 h-4 md:h-6">
+                          <div
+                            className={`w-4 md:w-6 h-4 md:h-6 rounded-full flex items-center justify-center text-xs mt-1 ${
+                              selectedTab === index
+                                ? "bg-[#00359E] text-white"
+                                : "bg-[#ECE9FE] text-darkBlack"
+                            }`}
+                          >
+                            {index + 1}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-black text-xs md:text-sm font-medium mb-2">
+                            {item?.navn}
+                          </div>
+                          <p className="text-secondary2 text-[10px] md:text-sm">
+                            {item?.Beskrivelse}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="w-full hidden md:w-[27%] md:flex flex-col gap-3 max-h-[calc(100vh-200px)] sticky top-[88px] overflow-y-auto overFlowYAuto">
                     {Huskonfigurator.map((item: any, index: number) => (
                       <div
                         key={index}
@@ -257,15 +289,15 @@ const Tilpass: React.FC<any> = ({
                     ))}
                   </div>
 
-                  <div className="w-[73%] border h-max border-[#DCDFEA] rounded-lg overflow-hidden">
-                    <div className="flex items-center justify-between gap-3 p-5 border-b border-[#DCDFEA]">
-                      <h3 className="text-darkBlack text-xl font-semibold">
+                  <div className="w-full md:w-[73%] border h-max border-[#DCDFEA] rounded-lg overflow-hidden">
+                    <div className="flex items-center justify-between gap-1.5 md:gap-3 p-3 md:p-5 border-b border-[#DCDFEA]">
+                      <h3 className="text-darkBlack text-base md:text-lg desktop:text-xl font-semibold one_line_elipse">
                         {Huskonfigurator[selectedTab]?.navn}
                       </h3>
                       {selectedTab < Huskonfigurator.length - 1 && (
                         <Button
                           text="Hopp over steget"
-                          className={`border-2 border-[#7839EE] text-[#7839EE] sm:text-sm md:text-sm rounded-[40px] w-max h-[36px] md:h-[36px] lg:h-[36px] font-semibold relative`}
+                          className={`border-2 border-[#7839EE] text-[#7839EE] text-xs sm:text-sm md:text-sm rounded-[40px] w-max h-[36px] md:h-[36px] lg:h-[36px] font-semibold relative`}
                           onClick={() => {
                             setSelectedTab(selectedTab + 1);
                           }}
@@ -274,13 +306,13 @@ const Tilpass: React.FC<any> = ({
                     </div>
                     {Huskonfigurator[selectedTab]?.Kategorinavn?.length > 0 ? (
                       <>
-                        <div className="bg-[#F9F9FB] border-[#EFF1F5] border rounded-lg m-6 p-[6px] flex items-center gap-2">
+                        <div className="bg-[#F9F9FB] border-[#EFF1F5] border rounded-lg m-3 md:m-6 p-[6px] flex items-center gap-1 md:gap-2 overflow-x-auto overFlowScrollHidden">
                           {Huskonfigurator[selectedTab]?.Kategorinavn.map(
                             (catItem: any, catIndex: number) => {
                               return (
                                 <div
                                   key={catIndex}
-                                  className={`py-2 px-3 text-sm rounded-lg cursor-pointer ${
+                                  className={`py-2 px-3 text-xs md:text-sm rounded-lg cursor-pointer whitespace-nowrap ${
                                     selectedCategory === catIndex
                                       ? "bg-white text-[#7839EE] font-medium shadow-shadow4"
                                       : "bg-transparent text-black"
@@ -293,7 +325,7 @@ const Tilpass: React.FC<any> = ({
                             }
                           )}
                         </div>
-                        <div className="grid grid-cols-3 big:grid-cols-4 gap-6 p-6 pt-0">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 big:grid-cols-4 gap-3 md:gap-4 desktop:gap-6 p-3 md:p-5 desktop:p-6 pt-0">
                           {Huskonfigurator[selectedTab]?.Kategorinavn[
                             selectedCategory
                           ]?.produkter?.length > 0 &&
@@ -301,6 +333,7 @@ const Tilpass: React.FC<any> = ({
                               selectedCategory
                             ]?.produkter.map((product: any, index: number) => {
                               const key = `${selectedTab}-${selectedCategory}`;
+
                               const isSelected =
                                 selectedProducts[key]?.product?.Produktnavn ===
                                   product.Produktnavn &&
@@ -360,7 +393,7 @@ const Tilpass: React.FC<any> = ({
                                       <Image src={Ic_info_circle} alt="icon" />
                                     </div>
                                   </div>
-                                  <p className="text-darkBlack text-sm two_line_elipse mb-3">
+                                  <p className="text-darkBlack text-xs md:text-sm two_line_elipse mb-1.5 md:mb-3">
                                     {product?.Produktbeskrivelse}
                                   </p>
                                   <div className="flex items-center gap-2 justify-between">
@@ -368,7 +401,7 @@ const Tilpass: React.FC<any> = ({
                                       <span className="text-secondary2 text-xs mb-1">
                                         Pris fra:
                                       </span>
-                                      <h5 className="text-black font-medium text-base">
+                                      <h5 className="text-black font-medium text-sm md:text-base">
                                         {product?.IncludingOffer === true
                                           ? "Standard"
                                           : formatCurrency(product?.pris)}
@@ -380,7 +413,7 @@ const Tilpass: React.FC<any> = ({
                                         isSelected
                                           ? "border-[#7839EE] bg-[#ECE9FE]"
                                           : "border-[#B9C0D4]"
-                                      } sm:text-sm md:text-sm rounded-[40px] w-max h-[36px] md:h-[36px] lg:h-[36px] font-semibold relative`}
+                                      } text-xs sm:text-sm md:text-sm rounded-[40px] w-max h-[36px] md:h-[36px] lg:h-[36px] font-semibold relative`}
                                       onClick={() =>
                                         handleSelectProduct(
                                           product,
@@ -410,7 +443,7 @@ const Tilpass: React.FC<any> = ({
             </SideSpaceContainer>
           </div>
           <div
-            className="sticky bottom-0 bg-white py-6"
+            className="sticky bottom-0 bg-white py-4 md:py-6"
             style={{
               boxShadow:
                 "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",

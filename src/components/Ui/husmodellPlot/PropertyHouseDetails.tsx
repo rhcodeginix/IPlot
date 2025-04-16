@@ -64,7 +64,7 @@ const PropertyHouseDetails: React.FC<{
             <img
               src={HouseModelData?.Husdetaljer?.photo}
               alt="image"
-              className="w-[190px] object-cover rounded-lg"
+              className="w-full sm:w-[190px] object-cover rounded-lg"
             />
             <img
               src={supplierData?.photo}

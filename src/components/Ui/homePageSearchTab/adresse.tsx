@@ -98,7 +98,7 @@ const AdresseTab = () => {
         </div>
         {formData?.address && addressData && addressData.length > 0 && (
           <div
-            className="absolute top-[100px] desktop:top-[80px] left-0 bg-white rounded-[8px] py-[12px] p-2.5 desktop:px-[16px] w-full h-auto max-h-[400px] overflow-y-auto overFlowYAuto"
+            className="absolute top-[80px] left-0 bg-white rounded-[8px] p-2 desktop:px-[16px] w-full h-auto max-h-[400px] overflow-y-auto overFlowYAuto"
             style={{
               zIndex: 999,
               boxShadow:
@@ -109,7 +109,7 @@ const AdresseTab = () => {
               addressData?.map((address: any, index: number) => (
                 <Link
                   href={`/regulations?kommunenummer=${address.kommunenummer}&gardsnummer=${address.gardsnummer}&bruksnummer=${address.bruksnummer}&kommunenavn=${address.kommunenavn}`}
-                  className="p-2 desktop:p-3 flex items-center gap-2.5 desktop:gap-4 hover:bg-lightGreen"
+                  className="p-2 desktop:p-3 flex items-center gap-2 desktop:gap-4 hover:bg-lightGreen"
                   key={index}
                   onClick={() => {
                     localStorage.setItem(
@@ -125,12 +125,13 @@ const AdresseTab = () => {
                     src={Ic_search_location}
                     alt="location"
                     fetchPriority="auto"
+                    className="w-6 h-6 md:w-auto md:h-auto"
                   />
                   <div>
-                    <span className="text-secondary text-sm desktop:text-base font-medium">
+                    <span className="text-secondary text-xs md:text-sm desktop:text-base font-medium">
                       Adresse:
                     </span>{" "}
-                    <span className="text-black font-medium text-base desktop:text-lg">
+                    <span className="text-black font-medium text-sm md:text-base desktop:text-lg">
                       {`${address.adressetekst}  ${address.postnummer} ${address.poststed}` ||
                         "N/A"}
                     </span>

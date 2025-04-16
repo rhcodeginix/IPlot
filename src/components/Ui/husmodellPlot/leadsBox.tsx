@@ -219,93 +219,18 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
       <div
         className={`flex pt-6 gap-4 md:gap-6 ${col ? "flex-col" : "flex-col md:flex-row"}`}
       >
-        <div
-          className={`${!col ? "md:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}
-        >
-          <Formik
-            initialValues={{
-              sharingData: false,
-            }}
-            validationSchema={validationBankSchema}
-            onSubmit={handleBankSubmit}
-          >
-            {({ setFieldValue, errors, touched, values }) => {
-              useEffect(() => {
-                (async () => {
-                  try {
-                    const docSnap = await getDoc(
-                      doc(db, "leads", String(leadId))
-                    );
-
-                    if (docSnap.exists()) {
-                      const data = docSnap.data();
-
-                      setFieldValue("sharingData", data.IsoptForBank || false);
-                    }
-                  } catch (error) {
-                    console.error("Error fetching IsoptForBank status:", error);
-                  }
-                })();
-              }, [leadId]);
-              return (
-                <Form>
-                  <div>
-                    <Image
-                      fetchPriority="auto"
-                      src={Ic_spareBank}
-                      alt="icon"
-                      className="mb-4 md:mb-6 w-[152px]"
-                    />
-                    <div className="text-black text-sm md:text-base lg:text-lg font-light mb-4 md:mb-6">
-                      Vil du å bli kontaktet angående{" "}
-                      <span className="font-bold">finansiering</span> av denne
-                      eiendommen?
-                    </div>
-                    <div className="flex flex-col sm:flex-row sn:items-center justify-between gap-3">
-                      <div>
-                        <label className="flex items-center container">
-                          <Field type="checkbox" name="sharingData" />
-
-                          <span
-                            className="checkmark checkmark_primary"
-                            style={{ margin: "2px" }}
-                          ></span>
-
-                          <div className="text-secondary2 text-xs md:text-sm">
-                            Jeg aksepterer{" "}
-                            <span className="font-bold"> deling av data</span>{" "}
-                            med <span className="font-bold">SpareBank1</span>
-                          </div>
-                        </label>
-                        {touched.sharingData && errors.sharingData && (
-                          <p className="text-red text-xs mt-1">
-                            {errors.sharingData}
-                          </p>
-                        )}
-                      </div>
-                      <Button
-                        text="Kontakt meg"
-                        className={`border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative ${!values.sharingData ? "opacity-50 cursor-not-allowed" : ""}`}
-                        type="submit"
-                        disabled={!values.sharingData}
-                      />
-                    </div>
-                  </div>
-                </Form>
-              );
-            }}
-          </Formik>
-        </div>
         {!isShow && (
           <div
             className={`${!col ? "md:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}
           >
             <Formik
-              initialValues={{ checkbox: false }}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
+              initialValues={{
+                sharingData: false,
+              }}
+              validationSchema={validationBankSchema}
+              onSubmit={handleBankSubmit}
             >
-              {({ errors, touched, setFieldValue, values }) => {
+              {({ setFieldValue, errors, touched, values }) => {
                 useEffect(() => {
                   (async () => {
                     try {
@@ -316,58 +241,60 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
                       if (docSnap.exists()) {
                         const data = docSnap.data();
 
-                        setFieldValue("checkbox", data.Isopt || false);
+                        setFieldValue(
+                          "sharingData",
+                          data.IsoptForBank || false
+                        );
                       }
                     } catch (error) {
-                      console.error("Error fetching Isopt status:", error);
+                      console.error(
+                        "Error fetching IsoptForBank status:",
+                        error
+                      );
                     }
                   })();
                 }, [leadId]);
                 return (
                   <Form>
-                    <img
-                      src={supplierData?.photo}
-                      alt="icon"
-                      className="mb-4 md:mb-6 w-[152px]"
-                    />
-                    <div className="text-black text-sm md:text-base lg:text-lg font-light mb-4 md:mb-6">
-                      Ønsker du å bli kontaktet av{" "}
-                      <span className="font-bold">
-                        {supplierData?.company_name}
-                      </span>{" "}
-                      angående denne eiendommen?
-                    </div>
-                    <div className="flex flex-col sm:flex-row sn:items-center justify-between gap-3">
-                      <div>
-                        <label className="flex items-center container">
-                          <Field type="checkbox" name="checkbox" />
-
-                          <span
-                            className="checkmark checkmark_primary"
-                            style={{ margin: "2px" }}
-                          ></span>
-
-                          <div className="text-secondary2 text-xs md:text-sm">
-                            Jeg aksepterer{" "}
-                            <span className="font-bold"> deling av data</span>{" "}
-                            med{" "}
-                            <span className="font-bold">
-                              {supplierData?.company_name}
-                            </span>
-                          </div>
-                        </label>
-                        {touched.checkbox && errors.checkbox && (
-                          <p className="text-red text-xs mt-1">
-                            {errors.checkbox}
-                          </p>
-                        )}
+                    <div>
+                      <Image
+                        fetchPriority="auto"
+                        src={Ic_spareBank}
+                        alt="icon"
+                        className="mb-4 md:mb-6 w-[152px]"
+                      />
+                      <div className="text-black text-sm md:text-base lg:text-lg font-light mb-4 md:mb-6">
+                        Vil du å bli kontaktet angående{" "}
+                        <span className="font-bold">finansiering</span> av denne
+                        eiendommen?
                       </div>
-                      <div>
+                      <div className="flex flex-col sm:flex-row sn:items-center justify-between gap-3">
+                        <div>
+                          <label className="flex items-center container">
+                            <Field type="checkbox" name="sharingData" />
+
+                            <span
+                              className="checkmark checkmark_primary"
+                              style={{ margin: "2px" }}
+                            ></span>
+
+                            <div className="text-secondary2 text-xs md:text-sm">
+                              Jeg aksepterer{" "}
+                              <span className="font-bold"> deling av data</span>{" "}
+                              med <span className="font-bold">SpareBank1</span>
+                            </div>
+                          </label>
+                          {touched.sharingData && errors.sharingData && (
+                            <p className="text-red text-xs mt-1">
+                              {errors.sharingData}
+                            </p>
+                          )}
+                        </div>
                         <Button
                           text="Kontakt meg"
-                          className={`border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative ${!values.checkbox ? "opacity-50 cursor-not-allowed" : ""}`}
+                          className={`border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative ${!values.sharingData ? "opacity-50 cursor-not-allowed" : ""}`}
                           type="submit"
-                          disabled={!values.checkbox}
+                          disabled={!values.sharingData}
                         />
                       </div>
                     </div>
@@ -377,6 +304,84 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
             </Formik>
           </div>
         )}
+        <div
+          className={`${!col ? "md:w-1/2" : "w-full"} bg-[#F5F8FF] rounded-[12px] p-4 md:p-5`}
+        >
+          <Formik
+            initialValues={{ checkbox: false }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ errors, touched, setFieldValue, values }) => {
+              useEffect(() => {
+                (async () => {
+                  try {
+                    const docSnap = await getDoc(
+                      doc(db, "leads", String(leadId))
+                    );
+
+                    if (docSnap.exists()) {
+                      const data = docSnap.data();
+
+                      setFieldValue("checkbox", data.Isopt || false);
+                    }
+                  } catch (error) {
+                    console.error("Error fetching Isopt status:", error);
+                  }
+                })();
+              }, [leadId]);
+              return (
+                <Form>
+                  <img
+                    src={supplierData?.photo}
+                    alt="icon"
+                    className="mb-4 md:mb-6 w-[152px]"
+                  />
+                  <div className="text-black text-sm md:text-base lg:text-lg font-light mb-4 md:mb-6">
+                    Ønsker du å bli kontaktet av{" "}
+                    <span className="font-bold">
+                      {supplierData?.company_name}
+                    </span>{" "}
+                    angående denne eiendommen?
+                  </div>
+                  <div className="flex flex-col sm:flex-row sn:items-center justify-between gap-3">
+                    <div>
+                      <label className="flex items-center container">
+                        <Field type="checkbox" name="checkbox" />
+
+                        <span
+                          className="checkmark checkmark_primary"
+                          style={{ margin: "2px" }}
+                        ></span>
+
+                        <div className="text-secondary2 text-xs md:text-sm">
+                          Jeg aksepterer{" "}
+                          <span className="font-bold"> deling av data</span> med{" "}
+                          <span className="font-bold">
+                            {supplierData?.company_name}
+                          </span>
+                        </div>
+                      </label>
+                      {touched.checkbox && errors.checkbox && (
+                        <p className="text-red text-xs mt-1">
+                          {errors.checkbox}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <Button
+                        text="Kontakt meg"
+                        className={`border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative ${!values.checkbox ? "opacity-50 cursor-not-allowed" : ""}`}
+                        type="submit"
+                        disabled={!values.checkbox}
+                      />
+                    </div>
+                  </div>
+                </Form>
+              );
+            }}
+          </Formik>
+        </div>
       </div>
     </>
   );

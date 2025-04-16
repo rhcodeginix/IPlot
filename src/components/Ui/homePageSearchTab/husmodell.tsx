@@ -162,7 +162,7 @@ const HusmodellTab = () => {
                       <li
                         key={index}
                         onClick={() => handleSelect(`${city.name} Kommune`)}
-                        className={`text-sm text-darkBlack px-4 py-[14px] cursor-pointer 
+                        className={`text-xs md:text-sm text-darkBlack px-3 md:px-4 py-2 md:py-[14px] cursor-pointer 
                           ${
                             formData?.Kommue === `${city.name} Kommune`
                               ? "bg-[#F9F5FF] font-semibold"

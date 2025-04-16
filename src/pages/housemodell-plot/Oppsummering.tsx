@@ -61,21 +61,6 @@ const Oppsummering: React.FC<{
     0
   );
   const validationSchema = Yup.object().shape({
-    existingLoan: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
-    previousExperience: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
-    collateral: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
-    permissions: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
-    buffer: Yup.string()
-      .oneOf(["Ja", "Nei"], "Please select an option")
-      .required("Påkrevd"),
     equityAmount: Yup.number()
       .typeError("Must be a number")
       .min(1, "Amount must be greater than 0")
@@ -205,18 +190,13 @@ const Oppsummering: React.FC<{
 
       <div className="pt-6 pb-8">
         <SideSpaceContainer>
-          <h5 className="text-darkBlack text-xl font-semibold mb-4">
+          <h5 className="text-darkBlack text-sm md:text-base desktop:text-xl font-semibold mb-4">
             Tilbudsdetaljer
           </h5>
           <Tilbudsdetaljer />
           <div className="my-5 md:my-8">
             <Formik
               initialValues={{
-                existingLoan: "",
-                previousExperience: "",
-                collateral: "",
-                permissions: "",
-                buffer: "",
                 equityAmount: "",
                 sharingData: false,
                 Isopt: false,
@@ -241,17 +221,6 @@ const Oppsummering: React.FC<{
                           data.IsoptForBank || false
                         );
                         setFieldValue("Isopt", data.Isopt || false);
-                        setFieldValue(
-                          "existingLoan",
-                          value?.existingLoan || ""
-                        );
-                        setFieldValue(
-                          "previousExperience",
-                          value?.previousExperience || ""
-                        );
-                        setFieldValue("collateral", value?.collateral || "");
-                        setFieldValue("permissions", value?.permissions || "");
-                        setFieldValue("buffer", value?.buffer || "");
                         setFieldValue("equityAmount", value?.equityAmount);
                       }
                     } catch (error) {
@@ -685,7 +654,7 @@ const Oppsummering: React.FC<{
         </SideSpaceContainer>
       </div>
       <div
-        className="sticky bottom-0 bg-white py-6"
+        className="sticky bottom-0 bg-white py-4 md:py-6"
         style={{
           boxShadow:
             "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",

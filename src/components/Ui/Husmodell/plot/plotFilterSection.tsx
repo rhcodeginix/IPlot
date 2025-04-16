@@ -97,7 +97,7 @@ const PlotFilterSection: React.FC<{
   return (
     <>
       <div className="sticky top-[86px] bg-[#F9F5FF] rounded-[12px]">
-        <div className="p-6 flex items-center justify-between gap-3 border-b border-[#7D89B04D]">
+        <div className="p-4 laptop:p-6 flex items-center justify-between gap-3 border-b border-[#7D89B04D]">
           <h4 className="text-darkBlack font-medium text-base md:text-lg lg:text-xl desktop:text-2xl">
             Filter
           </h4>
@@ -120,7 +120,7 @@ const PlotFilterSection: React.FC<{
             Tilbakestill
           </h5>
         </div>
-        <div className="px-6 py-5 h-auto max-h-[600px] overflow-y-auto overFlowYAuto overflow-x-hidden">
+        <div className="p-4 laptop:px-6 laptop:py-5 h-auto max-h-[600px] overflow-y-auto overFlowYAuto overflow-x-hidden">
           <div
             className="border border-gray3 rounded-[48px] p-1 pl-5 flex items-center justify-between gap-3 bg-white mb-5"
             style={{
@@ -151,7 +151,7 @@ const PlotFilterSection: React.FC<{
               </button>
             </div>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 lg:gap-6">
             <div
               className="w-full bg-white p-4 rounded-lg"
               style={{
@@ -174,18 +174,18 @@ const PlotFilterSection: React.FC<{
 
               {openIndex.includes("Område") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
                   <div className="grid grid-cols-1 gap-x-8 gap-y-4">
                     {OmrådeArray.map((data: any, index: number) => {
                       return (
                         <>
                           <label
-                            className="container container_darkgray_withPurple"
+                            className="container container_darkgray_withPurple truncate"
                             htmlFor={data.name}
                             key={index}
                           >
                             <span
-                              className={`text-darkBlack text-sm md:text-base ${formData?.Område.includes(data.name) && "font-semibold"}`}
+                              className={`text-darkBlack text-sm laptop:text-base ${formData?.Område.includes(data.name) && "font-semibold"}`}
                             >
                               {data.name}
                             </span>
@@ -271,7 +271,7 @@ const PlotFilterSection: React.FC<{
                                         key={komIndex}
                                       >
                                         <span
-                                          className={`text-darkBlack text-sm md:text-base ${formData?.SubOmråde.includes(kom.name) && "font-semibold"}`}
+                                          className={`text-darkBlack text-sm laptop:text-base ${formData?.SubOmråde.includes(kom.name) && "font-semibold"}`}
                                         >
                                           {kom.name}
                                         </span>
@@ -359,8 +359,8 @@ const PlotFilterSection: React.FC<{
 
               {openIndex.includes("Pris på tomt") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
-                  <div className="mx-1">
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="mx-2">
                     <CustomSlider
                       value={[
                         formData?.minRangeForPlot,

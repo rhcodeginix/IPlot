@@ -848,8 +848,6 @@ const Regulations = () => {
           handleNext={handleNext}
           lamdaDataFromApi={lamdaDataFromApi}
           loadingLamdaData={loading}
-          CadastreDataFromApi={CadastreDataFromApi}
-          askData={askData}
           HouseModelData={HouseModelData}
           handlePrevious={handlePrevious}
           supplierData={supplierData}

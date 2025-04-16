@@ -204,10 +204,12 @@ const Tilbud: React.FC<{
 
       <div className="pt-6 pb-8">
         <SideSpaceContainer>
-          <h5 className="text-darkBlack text-xl font-semibold mb-4">Tilbud</h5>
-          <div className="flex items-start gap-6">
-            <div className="w-[40%]">
-              <div className="border border-[#DCDFEA] rounded-lg p-5">
+          <h5 className="text-darkBlack text-base md:text-lg desktop:text-xl font-semibold mb-2 md:mb-4">
+            Tilbud
+          </h5>
+          <div className="flex flex-col desktop:flex-row items-start gap-6">
+            <div className="w-full desktop:w-[40%]">
+              <div className="border border-[#DCDFEA] rounded-lg p-3 md:p-5">
                 <h4 className="text-black text-sm md:text-base lg:text-lg mb-1">
                   <span className="font-semibold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
@@ -232,7 +234,7 @@ const Tilbud: React.FC<{
                       ?.formatted?.line2
                   }
                 </p>
-                <div className="flex gap-2 h-[189px] mb-4">
+                <div className="flex gap-2 h-[150px] sm:h-[189px] mb-2 md:mb-4">
                   <div className="w-[63%] h-full relative">
                     <img
                       src={Husdetaljer?.photo}
@@ -306,7 +308,7 @@ const Tilbud: React.FC<{
                     </h5>
                   </div>
                   <div className="flex flex-col gap-1 w-max">
-                    <p className="text-secondary text-sm whitespace-nowrap">
+                    <p className="text-secondary text-xs md:text-sm whitespace-nowrap">
                       Estimert Innflytting
                     </p>
                     <h5 className="text-black text-sm font-semibold text-right whitespace-nowrap">
@@ -314,41 +316,11 @@ const Tilbud: React.FC<{
                     </h5>
                   </div>
                 </div>
-                <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <p className="text-[#4A5578] text-xs md:text-sm mb-1 truncate">
-                    Pris for <span className="font-semibold">Tomt</span>
-                  </p>
-                  <h6 className="text-xs md:text-base font-semibold desktop:text-lg">
-                    0 NOK
-                  </h6>
-                </div>
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <div className="flex flex-col gap-1 w-max">
-                    <p className="text-secondary text-sm whitespace-nowrap">
-                      ESTIMERT BYGGESTART
-                    </p>
-                    <h5 className="text-black text-sm font-semibold whitespace-nowrap">
-                      {addDaysToDate(
-                        HouseModelData?.createdAt,
-                        Husdetaljer?.appSubmitApprove
-                      )}
-                    </h5>
-                  </div>
-                  <div className="flex flex-col gap-1 w-max">
-                    <p className="text-secondary text-sm whitespace-nowrap">
-                      ESTIMERT INNFLYTTING
-                    </p>
-                    <h5 className="text-black text-sm font-semibold text-right whitespace-nowrap">
-                      {addDaysToDate(HouseModelData?.createdAt, totalDays)}
-                    </h5>
-                  </div>
-                </div>
                 <div className="bg-[#F5F8FF] rounded-lg p-3">
-                  <p className="text-secondary2 text-sm mb-1 text-center">
+                  <p className="text-secondary2 text-xs md:text-sm mb-1 text-center">
                     Tilbudpris
                   </p>
-                  <h4 className="text-center font-semibold text-2xl text-black mb-2">
+                  <h4 className="text-center font-semibold text-lg md:text-lg desktop:text-2xl text-black mb-2">
                     {formatCurrency(
                       (
                         totalCustPris +
@@ -356,7 +328,7 @@ const Tilbud: React.FC<{
                       ).toLocaleString("nb-NO")
                     )}
                   </h4>
-                  <div className="text-secondary text-base text-center">
+                  <div className="text-secondary text-sm md:text-base text-center">
                     Tilbudet gjelder til{" "}
                     <span className="text-[#101828] font-semibold">
                       01.12.2024
@@ -366,24 +338,24 @@ const Tilbud: React.FC<{
               </div>
               <LeadsBox col={true} />
             </div>
-            <div className="w-[60%] border border-[#DCDFEA] rounded-lg overflow-hidden">
-              <div className="p-5 border-b w-full border-[#DCDFEA] text-darkBlack text-xl font-semibold">
+            <div className="w-full desktop:w-[60%] border border-[#DCDFEA] rounded-lg overflow-hidden">
+              <div className="p-3 md:p-5 border-b w-full border-[#DCDFEA] text-darkBlack text-base md:text-lg lg:text-xl font-semibold">
                 Ditt tilbud på{" "}
-                <span className="text-2xl">
+                <span className="text-lg md:text-xl desktop:text-2xl">
                   {HouseModelData?.Husdetaljer?.husmodell_name}
                 </span>{" "}
                 inkluderer
               </div>
-              <div className="p-5 flex gap-8">
-                <div className="w-[62%]">
+              <div className="p-3 md:p-5 flex flex-col md:flex-row gap-4 lg:gap-8">
+                <div className="w-full md:w-[62%]">
                   {updatedArray?.length > 0 ? (
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-4 md:gap-4 lg:gap-6">
                       {updatedArray.map((item: any, index: number) => (
                         <div key={index}>
-                          <h4 className="text-black font-semibold text-base mb-3">
+                          <h4 className="text-black font-semibold text-sm md:text-base mb-2 md:mb-3">
                             {item?.navn}
                           </h4>
-                          <div className="flex flex-col gap-3">
+                          <div className="flex flex-col gap-2 md:gap-3">
                             {item?.Kategorinavn?.map(
                               (cat: any, catIndex: number) => (
                                 <div key={catIndex}>
@@ -391,7 +363,7 @@ const Tilbud: React.FC<{
                                     (product: any, proIndex: number) => (
                                       <div
                                         key={proIndex}
-                                        className="flex gap-4 w-full"
+                                        className="flex gap-2 md:gap-4 w-full"
                                       >
                                         <div className="w-[57px] h-[40px] rounded-[4px] overflow-hidden">
                                           <img
@@ -405,11 +377,11 @@ const Tilbud: React.FC<{
                                             <p className="text-secondary2 text-xs md:text-sm">
                                               {product?.Produktnavn}
                                             </p>
-                                            <h5 className="text-black text-sm font-medium">
+                                            <h5 className="text-black text-xs md:text-sm font-medium">
                                               {cat?.navn}
                                             </h5>
                                           </div>
-                                          <div className="text-black font-semibold text-sm">
+                                          <div className="text-black font-semibold text-xs md:text-sm">
                                             {product?.IncludingOffer
                                               ? "Standard"
                                               : formatCurrency(product?.pris)}
@@ -431,16 +403,19 @@ const Tilbud: React.FC<{
                     </p>
                   )}
                 </div>
-                <div className="w-[38%] bg-lightPurple2 rounded-lg h-max overflow-hidden">
-                  <div className="p-4">
-                    <h5 className="text-black font-semibold text-base mb-[14px]">
+                <div className="w-full md:w-[38%] bg-lightPurple2 rounded-lg h-max overflow-hidden">
+                  <div className="p-3 md:p-4">
+                    <h5 className="text-black font-semibold text-sm md:text-base mb-2 md:mb-[14px]">
                       Prisliste (inkludert MVA)
                     </h5>
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-2 md:gap-3">
                       {updatedArray?.length > 0 ? (
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-2 md:gap-3">
                           {updatedArray.map((item: any, index: number) => (
-                            <div key={index} className="flex-col flex gap-3">
+                            <div
+                              key={index}
+                              className="flex-col flex gap-2 md:gap-3"
+                            >
                               {item?.Kategorinavn?.map(
                                 (cat: any, catIndex: number) => (
                                   <div key={catIndex}>
@@ -453,7 +428,7 @@ const Tilbud: React.FC<{
                                           <h4 className="text-secondary2 text-xs md:text-sm">
                                             {item?.navn}
                                           </h4>
-                                          <div className="text-black font-medium text-sm">
+                                          <div className="text-black font-medium text-xs md:text-sm">
                                             {product?.IncludingOffer
                                               ? "Standard"
                                               : formatCurrency(product?.pris)}
@@ -477,7 +452,7 @@ const Tilbud: React.FC<{
                         <h4 className="text-secondary2 text-xs md:text-sm">
                           Totalt tilpassing
                         </h4>
-                        <div className="text-black font-medium text-sm">
+                        <div className="text-black font-medium text-xs md:text-sm">
                           {totalCustPris
                             ? formatCurrency(
                                 totalCustPris.toLocaleString("nb-NO")
@@ -490,17 +465,17 @@ const Tilbud: React.FC<{
                         <h4 className="text-secondary2 text-xs md:text-sm">
                           Husmodellpris
                         </h4>
-                        <div className="text-black font-medium text-sm">
+                        <div className="text-black font-medium text-xs md:text-sm">
                           {Husdetaljer ? formatCurrency(Husdetaljer?.pris) : 0}
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-[#ECE9FE] p-4 flex gap-2 w-full justify-between">
+                  <div className="bg-[#ECE9FE] p-3 md:p-4 flex gap-2 w-full justify-between">
                     <h4 className="text-secondary2 text-xs md:text-sm">
                       Total
                     </h4>
-                    <div className="text-black font-medium text-sm">
+                    <div className="text-black font-medium text-xs md:text-sm">
                       {formatCurrency(
                         (
                           totalCustPris +
@@ -516,7 +491,7 @@ const Tilbud: React.FC<{
         </SideSpaceContainer>
       </div>
       <div
-        className="sticky bottom-0 bg-white py-6"
+        className="sticky bottom-0 bg-white py-4 md:py-6"
         style={{
           boxShadow:
             "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",

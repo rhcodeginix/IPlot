@@ -3,7 +3,6 @@ import Ic_search from "@/public/images/Ic_search.svg";
 import Ic_chevron_down from "@/public/images/Ic_chevron_down.svg";
 import { useState } from "react";
 import { Slider, styled } from "@mui/material";
-import Button from "@/components/common/button";
 
 const CustomSlider = styled(Slider)({
   color: "#6941C6",
@@ -53,18 +52,11 @@ const HusmodellFilterSection: React.FC<{
   formData: FormDataType;
   maxRangeData: number;
 }> = ({ setFormData, formData, maxRangeData }) => {
-  const [maxHousePrice, setMaxHousePrice] = useState(
-    String(
-      new Intl.NumberFormat("no-NO").format(
-        Number(formData?.maxRangeForHusmodell)
-      )
-    )
-  );
   const [openIndex, setOpenIndex] = useState<string[]>([
     "Hustype",
     "Type husmodell",
     "Antall soverom",
-    "Pris på husmodell",
+    "Husmodell",
   ]);
 
   const handleToggleAccordion = (type: string) => {
@@ -101,7 +93,7 @@ const HusmodellFilterSection: React.FC<{
   return (
     <>
       <div className="sticky top-[86px] bg-[#F9F5FF] rounded-[12px]">
-        <div className="p-6 flex items-center justify-between gap-3 border-b border-[#7D89B04D]">
+        <div className="p-4 laptop:p-6 flex items-center justify-between gap-3 border-b border-[#7D89B04D]">
           <h4 className="text-darkBlack font-medium text-base md:text-lg lg:text-xl desktop:text-2xl">
             Filter
           </h4>
@@ -111,10 +103,11 @@ const HusmodellFilterSection: React.FC<{
               setFormData((prev: any) => ({
                 ...prev,
                 address: "",
-                Hustype: [],
+                Eiendomstype: [],
                 TypeHusmodell: [],
                 AntallSoverom: [],
                 minRangeForHusmodell: 0,
+                Tomtetype: [],
                 maxRangeForHusmodell: maxRangeData,
               }));
             }}
@@ -122,7 +115,7 @@ const HusmodellFilterSection: React.FC<{
             Tilbakestill
           </h5>
         </div>
-        <div className="px-6 py-5 h-auto max-h-[600px] overflow-y-auto overFlowYAuto overflow-x-hidden">
+        <div className="p-4 laptop:px-6 laptop:py-5 h-auto lg:max-h-[600px] overflow-y-auto overFlowYAuto overflow-x-hidden">
           <div
             className="border border-gray3 rounded-[48px] p-1 pl-5 flex items-center justify-between gap-3 bg-white mb-5"
             style={{
@@ -153,7 +146,7 @@ const HusmodellFilterSection: React.FC<{
               </button>
             </div>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 lg:gap-6">
             <div
               className="w-full bg-white p-4 rounded-lg"
               style={{
@@ -176,15 +169,15 @@ const HusmodellFilterSection: React.FC<{
 
               {openIndex.includes("Hustype") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {HustypeArray.map((data: any, index: number) => (
                       <label
-                        className="container container_darkgray_withPurple"
+                        className="container container_darkgray_withPurple truncate"
                         htmlFor={data.name}
                         key={index}
                       >
-                        <span className="text-darkBlack text-sm md:text-base">
+                        <span className="text-darkBlack text-sm laptop:text-base truncate">
                           {data.name}
                         </span>
                         <input
@@ -238,15 +231,15 @@ const HusmodellFilterSection: React.FC<{
 
               {openIndex.includes("Type husmodell") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {TypeHusmodellArray.map((data: any, index: number) => (
                       <label
-                        className="container container_darkgray_withPurple"
+                        className="container container_darkgray_withPurple truncate"
                         htmlFor={data.name}
                         key={index}
                       >
-                        <span className="text-darkBlack text-sm md:text-base">
+                        <span className="text-darkBlack text-sm laptop:text-base truncate">
                           {data.name}
                         </span>
                         <input
@@ -302,15 +295,15 @@ const HusmodellFilterSection: React.FC<{
 
               {openIndex.includes("Antall soverom") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
+                  <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
                     {AntallSoveromArray.map((data: any, index: number) => (
                       <label
-                        className="container container_darkgray_withPurple"
+                        className="container container_darkgray_withPurple truncate"
                         htmlFor={data.name}
                         key={index}
                       >
-                        <span className="text-darkBlack text-sm md:text-base">
+                        <span className="text-darkBlack text-sm laptop:text-base truncate">
                           {data.name}
                         </span>
                         <input
@@ -351,24 +344,24 @@ const HusmodellFilterSection: React.FC<{
             >
               <p
                 className={`text-darkBlack font-semibold text-base lg:text-lg flex items-center justify-between cursor-pointer`}
-                onClick={() => handleToggleAccordion("Pris på husmodell")}
+                onClick={() => handleToggleAccordion("Husmodell")}
               >
-                Pris på husmodell
+                Husmodell
                 <Image
                   src={Ic_chevron_down}
                   alt="arrow"
                   className={
-                    openIndex.includes("Pris på husmodell") ? "rotate-180" : ""
+                    openIndex.includes("Husmodell") ? "rotate-180" : ""
                   }
                   fetchPriority="auto"
                 />
               </p>
 
-              {openIndex.includes("Pris på husmodell") && (
+              {openIndex.includes("Husmodell") && (
                 <>
-                  <div className="mt-4 mb-10 border-t border-[#DCDFEA]"></div>
+                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
                   <div>
-                    <div className="mx-1">
+                    <div className="mx-2">
                       <CustomSlider
                         value={[
                           formData?.minRangeForHusmodell,
@@ -395,40 +388,6 @@ const HusmodellFilterSection: React.FC<{
                       <div className="text-grayText text-sm lg:text-base">
                         {formData?.maxRangeForHusmodell} NOK
                       </div>
-                    </div>
-                    <div className="flex justify-end mt-2 items-center gap-3">
-                      <input
-                        type="text"
-                        placeholder="Enter Pris"
-                        className="border border-gray2 rounded-lg px-3 py-2 focus-within:outline-none w-full"
-                        value={maxHousePrice}
-                        onChange={(e: any) => {
-                          const rawValue = e.target.value.replace(/\D/g, "");
-
-                          if (rawValue) {
-                            const formattedValue = new Intl.NumberFormat(
-                              "no-NO"
-                            ).format(Number(rawValue));
-                            setMaxHousePrice(formattedValue);
-                          } else {
-                            setMaxHousePrice("");
-                          }
-                        }}
-                      />
-
-                      <Button
-                        text="Save"
-                        className="border border-[#6941C6] bg-[#6941C6] text-white md:text-sm rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative desktop:px-4 desktop:py-2"
-                        type="button"
-                        onClick={() => {
-                          setFormData((prev: any) => ({
-                            ...prev,
-                            maxRangeForHusmodell: Math.floor(
-                              Number(maxHousePrice.replace(/\s+/g, ""))
-                            ),
-                          }));
-                        }}
-                      />
                     </div>
                   </div>
                 </>

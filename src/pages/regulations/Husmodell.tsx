@@ -1,5 +1,5 @@
 import React from "react";
-import AllProperty from "@/components/Ui/RegulationHusmodell/allProperty";
+import HusmodellPropertyPage from "@/components/Ui/regulation";
 
 const Husmodell: React.FC<any> = ({
   handleNext,
@@ -10,9 +10,9 @@ const Husmodell: React.FC<any> = ({
 }) => {
   return (
     <div className="relative">
-      <AllProperty
-        lamdaDataFromApi={lamdaDataFromApi}
+      <HusmodellPropertyPage
         CadastreDataFromApi={CadastreDataFromApi}
+        lamdaDataFromApi={lamdaDataFromApi}
         askData={askData}
         handleNext={handleNext}
         handlePrevious={handlePrevious}

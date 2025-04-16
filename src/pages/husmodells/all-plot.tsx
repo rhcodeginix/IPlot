@@ -291,7 +291,7 @@ const AllPlot = () => {
                         Price{" "}
                         <span className="text-secondary">(byggekost)</span>
                       </div>
-                      <div className="mx-1">
+                      <div className="mx-2">
                         <CustomSlider
                           value={priceRange}
                           onChange={handlePriceRangeChange}
@@ -317,7 +317,7 @@ const AllPlot = () => {
                         Størrelse{" "}
                         <span className="text-secondary">(bruksareal)</span>
                       </div>
-                      <div className="mx-1">
+                      <div className="mx-2">
                         <CustomSlider
                           value={sizeRange}
                           onChange={handleSizeRangeChange}

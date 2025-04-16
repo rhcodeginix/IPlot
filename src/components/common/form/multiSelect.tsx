@@ -101,7 +101,7 @@ const MultiSelectDropDown: React.FC<MultiSelectDropDownProps> = ({
                   }`}
                   key={index}
                 >
-                  <span className="text-darkBlack text-sm md:text-base">
+                  <span className="text-darkBlack text-sm laptop:text-base truncate">
                     {option.label}
                   </span>
                   <input

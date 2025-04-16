@@ -66,7 +66,7 @@ const HusmodellProperty: React.FC<{
                 return (
                   <div
                     key={index}
-                    className="border border-gray3 rounded-[8px] p-5"
+                    className="border border-gray3 rounded-[8px] p-3 md:p-5"
                     style={{
                       boxShadow:
                         "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
@@ -74,8 +74,8 @@ const HusmodellProperty: React.FC<{
                   >
                     <div className="mb-2 md:mb-3 desktop:mb-4 flex items-start justify-between gap-3">
                       <div>
-                        <h4 className="text-darkBlack text-lg">
-                          <span className="font-bold text-2xl leading-[30px]">
+                        <h4 className="text-darkBlack text-sm md:text-base lg:text-lg lg:leading-[30px] one_line_elipse">
+                          <span className="font-bold text-lg md:text-xl desktop:text-2xl desktop:leading-[30px]">
                             {property?.Husdetaljer?.husmodell_name}
                           </span>{" "}
                           fra{" "}
@@ -88,11 +88,11 @@ const HusmodellProperty: React.FC<{
                         src={Ic_wishlist_heart}
                         alt="heart"
                         fetchPriority="auto"
-                        className="cursor-pointer"
+                        className="cursor-pointer h-6 w-6 md:w-auto md:h-auto"
                       />
                     </div>
-                    <div className="flex items-center gap-4">
-                      <div className="flex gap-2 w-[40%] relative">
+                    <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-4">
+                      <div className="flex gap-2 w-full sm:w-[40%] relative">
                         <img
                           key={index}
                           src={property?.Husdetaljer?.photo}
@@ -107,11 +107,11 @@ const HusmodellProperty: React.FC<{
                           />
                         </div>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full sm:w-[60%]">
                         <h5 className="text-darkBlack font-medium text-sm md:text-lg mb-1 one_line_elipse">
                           {property?.Husdetaljer?.Hustittel}
                         </h5>
-                        <h5 className="text-[#4A5578] text-sm mb-4 two_line_elipse">
+                        <h5 className="text-[#4A5578] text-xs md:text-sm mb-2 md:mb-4 two_line_elipse">
                           {property?.Husdetaljer?.OmHusmodellen}
                         </h5>
                         <div className="flex gap-3 items-center">

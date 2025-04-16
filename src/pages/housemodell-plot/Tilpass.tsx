@@ -216,7 +216,7 @@ const Tilpass: React.FC<{
         </SideSpaceContainer>
       </div>
 
-      <div className="py-8">
+      <div className="py-5 md:py-8">
         <SideSpaceContainer>
           <h3 className="text-darkBlack text-lg md:text-xl desktop:text-2xl font-semibold mb-[22px]">
             La oss begynne å tilpasse drømmehuset ditt
@@ -448,7 +448,7 @@ const Tilpass: React.FC<{
         </SideSpaceContainer>
       </div>
       <div
-        className="sticky bottom-0 bg-white py-6"
+        className="sticky bottom-0 bg-white py-4 md:py-6"
         style={{
           boxShadow:
             "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",
