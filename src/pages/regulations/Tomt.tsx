@@ -257,25 +257,24 @@ const Tomt: React.FC<{
           </div>
         </SideSpaceContainer>
       </div>
-
       {isPopupOpen && !loginUser && (
         <div className="fixed top-0 left-0 flex justify-center items-center h-full w-full">
           <div
-            className="bg-white p-8 rounded-[8px] w-[787px]"
+            className="bg-white mx-4 p-4 md:p-8 rounded-[8px] w-full max-w-[787px]"
             style={{
               boxShadow:
                 "0px 8px 8px -4px rgba(16, 24, 40, 0.031), 0px 20px 24px -4px rgba(16, 24, 40, 0.078)",
             }}
           >
-            <h2 className="text-black text-[24px] font-semibold mb-2 text-center">
+            <h2 className="text-black text-lg md:text-xl desktop:text-2xl font-semibold mb-2 text-center">
               Registrer deg
             </h2>
-            <p className="text-secondary text-base text-center mb-2">
+            <p className="text-secondary text-xs md:text-sm desktop:text-base text-center mb-2">
               Logg inn med{" "}
               <span className="font-semibold text-black">Vipps</span> for å få
               se{" "}
               <span className="font-semibold text-black">
-                alle bestemmelser og finne <br />
+                alle bestemmelser og finne <br className="hidden sm:block" />
                 boliger som passer på denne eiendommen
               </span>
             </p>
@@ -287,7 +286,7 @@ const Tomt: React.FC<{
               {({ values, setFieldValue, errors, touched }) => (
                 <Form>
                   <div className="flex items-center justify-center flex-col">
-                    <label className="flex items-center gap-[12px] container w-max">
+                    <label className="flex items-center gap-[12px] container sm:w-max">
                       <Field
                         type="checkbox"
                         name="terms_condition"
@@ -302,7 +301,7 @@ const Tomt: React.FC<{
                       />
                       <span className="checkmark checkmark_primary"></span>
 
-                      <div className="text-secondary text-base">
+                      <div className="text-secondary text-xs md:text-sm desktop:text-base">
                         Jeg aksepterer{" "}
                         <span className="text-primary">Vilkårene</span> og har
                         lest{" "}

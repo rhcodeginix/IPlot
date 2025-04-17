@@ -399,21 +399,21 @@ const AllPlot = () => {
       {isPopupOpen && !loginUser && (
         <div className="fixed top-0 left-0 flex justify-center items-center h-full w-full">
           <div
-            className="bg-white p-8 rounded-[8px] w-[787px]"
+            className="bg-white mx-4 p-4 md:p-8 rounded-[8px] w-full max-w-[787px]"
             style={{
               boxShadow:
                 "0px 8px 8px -4px rgba(16, 24, 40, 0.031), 0px 20px 24px -4px rgba(16, 24, 40, 0.078)",
             }}
           >
-            <h2 className="text-black text-[24px] font-semibold mb-2 text-center">
+            <h2 className="text-black text-lg md:text-xl desktop:text-2xl font-semibold mb-2 text-center">
               Registrer deg
             </h2>
-            <p className="text-secondary text-base text-center mb-2">
+            <p className="text-secondary text-xs md:text-sm desktop:text-base text-center mb-2">
               Logg inn med{" "}
               <span className="font-semibold text-black">Vipps</span> for å få
               se{" "}
               <span className="font-semibold text-black">
-                alle bestemmelser og finne <br />
+                alle bestemmelser og finne <br className="hidden sm:block" />
                 boliger som passer på denne eiendommen
               </span>
             </p>
@@ -425,7 +425,7 @@ const AllPlot = () => {
               {({ values, setFieldValue, errors, touched }) => (
                 <Form>
                   <div className="flex items-center justify-center flex-col">
-                    <label className="flex items-center gap-[12px] container w-max">
+                    <label className="flex items-center gap-[12px] container sm:w-max">
                       <Field
                         type="checkbox"
                         name="terms_condition"
@@ -440,7 +440,7 @@ const AllPlot = () => {
                       />
                       <span className="checkmark checkmark_primary"></span>
 
-                      <div className="text-secondary text-base">
+                      <div className="text-secondary text-xs md:text-sm desktop:text-base">
                         Jeg aksepterer{" "}
                         <span className="text-primary">Vilkårene</span> og har
                         lest{" "}
@@ -457,7 +457,7 @@ const AllPlot = () => {
                     <div className="flex justify-end mt-6">
                       <button
                         className="
-                            text-sm md:text-base whitespace-nowrap lg:py-[10px] py-[4px] px-2 md:px-[10px] lg:px-[18px] h-[36px] md:h-[40px] lg:h-[44px] flex items-center gap-[12px] justify-center border border-primary bg-primary text-white sm:text-base rounded-[8px] w-max font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                            text-sm md:text-base lg:py-[10px] py-[4px] px-2 md:px-[10px] lg:px-[18px] h-[36px] md:h-[40px] lg:h-[44px] flex items-center gap-[12px] justify-center border border-primary bg-primary text-white sm:text-base rounded-[8px] w-max font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                       >
                         Fortsett med{" "}
                         <Image fetchPriority="auto" src={Ic_vapp} alt="logo" />

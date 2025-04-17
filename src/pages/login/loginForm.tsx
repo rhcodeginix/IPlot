@@ -148,17 +148,17 @@ const LoginForm: React.FC<{
   };
 
   return (
-    <div className="relative w-full max-w-[490px]">
+    <div className="relative w-full max-w-[490px] mx-4">
       <div
-        className="mx-4 bg-white p-8 w-full rounded-lg"
+        className="bg-white p-4 md:p-8 w-full rounded-lg"
         style={{
           boxShadow: "0px 8px 8px -4px #10182808, 0px 20px 24px -4px #10182814",
         }}
       >
-        <h3 className="text-darkBlack text-[30px] font-semibold mb-3 text-center">
+        <h3 className="text-darkBlack text-xl md:text-2xl desktop:text-[30px] font-semibold mb-1.5 md:mb-3 text-center">
           Logg in på din konto
         </h3>
-        <p className="text-secondary text-base mb-8 text-center">
+        <p className="text-secondary text-sm md:text-base mb-4 md:mb-8 text-center">
           Velkommen tilbake! Vennligst oppgi dine detaljer.
         </p>
         <Formik
@@ -216,7 +216,7 @@ const LoginForm: React.FC<{
             </Form>
           )}
         </Formik>
-        <div className="flex items-center justify-center text-[#4F4F4F] mt-3">
+        <div className="flex items-center justify-center text-[#4F4F4F] mt-3 text-sm md:text-base">
           Didn’t Registered?{" "}
           <Link href={"/register"} className="text-black font-semibold">
             &nbsp;Register Here
@@ -224,7 +224,7 @@ const LoginForm: React.FC<{
         </div>
         <div
           onClick={signInWithGoogle}
-          className="text-black border border-[#DCDFEA] rounded-[8px] py-[10px] px-4 mt-6 flex gap-2 justify-center items-center cursor-pointer"
+          className="text-black border border-[#DCDFEA] rounded-[8px] py-[10px] px-4 mt-4 md:mt-6 flex gap-2 justify-center items-center cursor-pointer text-sm md:text-base"
           style={{
             boxShadow: "0px 1px 2px 0px #1018280D",
           }}

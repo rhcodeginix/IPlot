@@ -9,7 +9,10 @@ import Img_login_bg from "@/public/images/Img_login_bg.png";
 const Login = () => {
   return (
     <div className="relative">
-      <div className="border-b border-gray3 py-5 fixed top-0 w-full">
+      <div
+        className="border-b border-gray3 py-5 fixed top-0 w-full"
+        style={{ zIndex: 99999 }}
+      >
         <SideSpaceContainer>
           <Link href={"/"}>
             <Image
@@ -27,7 +30,10 @@ const Login = () => {
       >
         <LoginForm />
       </div>
-      <div className="absolute bottom-12 w-full" style={{ zIndex: 99 }}>
+      <div
+        className="absolute bottom-36 md:bottom-12 w-full"
+        style={{ zIndex: 99 }}
+      >
         <Image src={Img_login_bg} alt="image" className="w-full" />
       </div>
     </div>
