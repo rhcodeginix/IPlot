@@ -98,7 +98,20 @@ const HusmodellPropertyPage: React.FC<{
               house?.Husdetaljer?.pris.replace(/\s/g, ""),
               10
             );
+            const houseDetails = house?.Husdetaljer || {};
 
+            const boligtype = houseDetails?.VelgBoligtype;
+            const egenskaper = houseDetails?.VelgEgenskaperBoligtype || [];
+
+            const hasTypeFilter = formData.TypeHusmodell.length > 0;
+
+            const matchesBoligtype =
+              !hasTypeFilter || formData.TypeHusmodell.includes(boligtype);
+            const matchesEgenskaper =
+              !hasTypeFilter ||
+              egenskaper.some((item: string) =>
+                formData.TypeHusmodell.includes(item)
+              );
             return (
               (formData?.AntallSoverom.length > 0
                 ? soveromValues.includes(house?.Husdetaljer?.Soverom)
@@ -111,7 +124,8 @@ const HusmodellPropertyPage: React.FC<{
                 ? formData?.Hustype.map((item: any) =>
                     item.toLowerCase()
                   ).includes(house?.Husdetaljer?.TypeObjekt?.toLowerCase())
-                : true)
+                : true) &&
+              (matchesBoligtype || matchesEgenskaper)
             );
           }) || data;
 

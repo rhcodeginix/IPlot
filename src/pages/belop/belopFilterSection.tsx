@@ -507,6 +507,24 @@ const BelopFilterSection: React.FC<{
                               updatedSet.has(data?.name)
                                 ? updatedSet.delete(data?.name)
                                 : updatedSet.add(data?.name);
+
+                              localStorage.setItem(
+                                "TypeHusmodell",
+                                JSON.stringify(Array.from(updatedSet))
+                              );
+                              setTimeout(() => {
+                                router.push(
+                                  {
+                                    pathname: router.pathname,
+                                    query: {
+                                      ...router.query,
+                                      TypeHusmodell: new Date().toISOString(),
+                                    },
+                                  },
+                                  undefined,
+                                  { shallow: true }
+                                );
+                              }, 2000);
                               return {
                                 ...prev,
                                 TypeHusmodell: Array.from(updatedSet),

@@ -86,19 +86,39 @@ const HusmodellPropertyPage: React.FC = () => {
         );
         const filterData =
           data.filter((house: any) => {
+            const houseDetails = house?.Husdetaljer || {};
             const housePrice = parseInt(
-              house?.Husdetaljer?.pris.replace(/\s/g, ""),
+              houseDetails?.pris?.replace(/\s/g, "") || "0",
               10
             );
 
+            const boligtype = houseDetails?.VelgBoligtype;
+            const egenskaper = houseDetails?.VelgEgenskaperBoligtype || [];
+
+            const hasBedroomFilter = formData.AntallSoverom.length > 0;
+            const hasMinPriceFilter = formData.minRangeForHusmodell !== 0;
+            const hasMaxPriceFilter = formData.maxRangeForHusmodell !== 0;
+            const hasTypeFilter = formData.TypeHusmodell.length > 0;
+
+            const matchesBedrooms =
+              !hasBedroomFilter || soveromValues.includes(houseDetails.Soverom);
+            const matchesMinPrice =
+              !hasMinPriceFilter || housePrice >= formData.minRangeForHusmodell;
+            const matchesMaxPrice =
+              !hasMaxPriceFilter || housePrice <= formData.maxRangeForHusmodell;
+            const matchesBoligtype =
+              !hasTypeFilter || formData.TypeHusmodell.includes(boligtype);
+            const matchesEgenskaper =
+              !hasTypeFilter ||
+              egenskaper.some((item: string) =>
+                formData.TypeHusmodell.includes(item)
+              );
+
             return (
-              (formData?.AntallSoverom.length > 0
-                ? soveromValues.includes(house?.Husdetaljer?.Soverom)
-                : true) &&
-              (formData?.minRangeForHusmodell !== 0
-                ? housePrice >= formData?.minRangeForHusmodell
-                : true) &&
-              housePrice <= Number(formData?.maxRangeForHusmodell)
+              matchesBedrooms &&
+              matchesMinPrice &&
+              matchesMaxPrice &&
+              (matchesBoligtype || matchesEgenskaper)
             );
           }) || data;
 

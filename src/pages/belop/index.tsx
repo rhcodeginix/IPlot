@@ -95,11 +95,15 @@ const Belop: React.FC = () => {
         const HustypeFormLocalStorage = JSON.parse(
           localStorage.getItem("Hustype") || "[]"
         );
+        const TypeHusmodellFormLocalStorage = JSON.parse(
+          localStorage.getItem("TypeHusmodell") || "[]"
+        );
 
         setFormData((prev) => ({
           ...prev,
           AntallSoverom: soveromFormLocalStorage,
           Hustype: HustypeFormLocalStorage,
+          TypeHusmodell: TypeHusmodellFormLocalStorage,
         }));
 
         const maxRangePlot: any = queryParams.get("maxRangePlot");
@@ -195,6 +199,20 @@ const Belop: React.FC = () => {
               const maxPrice = maxRangeHusmodell
                 ? parseInt(maxRangeHusmodell)
                 : parseInt(queryPrice.replace(/\s/g, ""), 10) * 0.4;
+
+              const boligtype = plot?.Husdetaljer?.VelgBoligtype;
+              const egenskaper =
+                plot?.Husdetaljer?.VelgEgenskaperBoligtype || [];
+              const hasTypeFilter = formData.TypeHusmodell.length > 0;
+
+              const matchesBoligtype =
+                !hasTypeFilter || formData.TypeHusmodell.includes(boligtype);
+              const matchesEgenskaper =
+                !hasTypeFilter ||
+                egenskaper.some((item: string) =>
+                  formData.TypeHusmodell.includes(item)
+                );
+
               return (
                 price <= maxPrice &&
                 (soveromValues.length > 0
@@ -204,7 +222,8 @@ const Belop: React.FC = () => {
                   ? HustypeFormLocalStorage.map((item: any) =>
                       item.toLowerCase()
                     ).includes(plot?.Husdetaljer?.TypeObjekt?.toLowerCase())
-                  : true)
+                  : true) &&
+                (matchesBoligtype || matchesEgenskaper)
               );
             })
           : allHusmodell;
