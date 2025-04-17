@@ -20,7 +20,7 @@ const NameModal: React.FC<{ isOpen: any; onClose: any; onSubmit: any }> = ({
   return (
     isOpen && (
       <div className="fixed inset-0 flex items-center justify-center bg-gray2 bg-opacity-50 z-50">
-        <div className="bg-white p-6 rounded shadow-lg">
+        <div className="bg-white p-4 md:p-6 rounded shadow-lg">
           <h2 className="text-lg font-semibold mb-4">Enter Your Name</h2>
           <form onSubmit={handleSubmit}>
             <input
