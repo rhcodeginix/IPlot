@@ -209,7 +209,7 @@ const LoginForm: React.FC<{
               <div className="mt-6">
                 <Button
                   text="Logg inn"
-                  className="border border-primary bg-primary text-white sm:text-base rounded-[40px] w-full h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
+                  className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-full h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
                   type="submit"
                 />
               </div>

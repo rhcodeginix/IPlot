@@ -183,7 +183,7 @@ const AllPlot = () => {
                   <div className="text-black text-base flex items-center gap-1">
                     Antall soverom{" "}
                     {bedroomFilters.length > 0 && (
-                      <span className="bg-primary text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
+                      <span className="bg-greenBtn text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
                         {bedroomFilters.length}
                       </span>
                     )}
@@ -236,7 +236,7 @@ const AllPlot = () => {
                   <div className="text-black text-base flex items-center gap-1">
                     Fasiliteter{" "}
                     {facilityFilters.length > 0 && (
-                      <span className="bg-primary text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
+                      <span className="bg-greenBtn text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
                         {facilityFilters.length}
                       </span>
                     )}
@@ -457,7 +457,7 @@ const AllPlot = () => {
                     <div className="flex justify-end mt-6">
                       <button
                         className="
-                            text-sm md:text-base lg:py-[10px] py-[4px] px-2 md:px-[10px] lg:px-[18px] h-[36px] md:h-[40px] lg:h-[44px] flex items-center gap-[12px] justify-center border border-primary bg-primary text-white sm:text-base rounded-[8px] w-max font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                            text-sm md:text-base lg:py-[10px] py-[4px] px-2 md:px-[10px] lg:px-[18px] h-[36px] md:h-[40px] lg:h-[44px] flex items-center gap-[12px] justify-center border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[8px] w-max font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                       >
                         Fortsett med{" "}
                         <Image fetchPriority="auto" src={Ic_vapp} alt="logo" />

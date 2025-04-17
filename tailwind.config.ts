@@ -30,6 +30,7 @@ const config: Config = {
       grayText: "#4A5578",
       darkBlack: "#111322",
       purple2: "#6938EF",
+      greenBtn: "#099250",
     },
     borderColor: {
       transparent: "transparent",

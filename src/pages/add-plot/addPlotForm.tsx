@@ -636,7 +636,7 @@ const AddPlotForm = () => {
                         )}
 
                       <div
-                        className={`p-3 lg:p-5 cursor-pointer flex justify-center items-center bg-primary rounded-full gap-[10px] transition-all duration-300 ease-out h-[48px] w-[48px] lg:h-[64px] lg:w-[64px] m-2`}
+                        className={`p-3 lg:p-5 cursor-pointer flex justify-center items-center bg-greenBtn rounded-full gap-[10px] transition-all duration-300 ease-out h-[48px] w-[48px] lg:h-[64px] lg:w-[64px] m-2`}
                       >
                         <Image
                           src={Ic_search}
@@ -840,7 +840,7 @@ const AddPlotForm = () => {
                           </div>
                         </div>
                         <div
-                          className={`p-3 lg:p-5 cursor-pointer flex justify-center items-center bg-primary rounded-full gap-[10px] transition-all duration-300 ease-out h-[48px] w-[48px] lg:h-[64px] lg:w-[64px] m-2 ${
+                          className={`p-3 lg:p-5 cursor-pointer flex justify-center items-center bg-greenBtn rounded-full gap-[10px] transition-all duration-300 ease-out h-[48px] w-[48px] lg:h-[64px] lg:w-[64px] m-2 ${
                             !values.address2.Gårsnummer ||
                             !values.address2.kommune ||
                             !values.address2.Bruksnummer
@@ -1544,7 +1544,7 @@ const AddPlotForm = () => {
                 className="border-2 border-primary text-primary sm:text-base w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px] rounded-[40px]"
               />
               <button
-                className={`flex items-center border py-[4px] px-4 border-primary bg-primary text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px] ${isValid ? "" : "opacity-50"}`}
+                className={`flex items-center border py-[4px] px-4 border-primary bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px] ${isValid ? "" : "opacity-50"}`}
                 type="submit"
                 disabled={!isValid}
               >
