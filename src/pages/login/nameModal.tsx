@@ -21,14 +21,16 @@ const NameModal: React.FC<{ isOpen: any; onClose: any; onSubmit: any }> = ({
     isOpen && (
       <div className="fixed inset-0 flex items-center justify-center bg-gray2 bg-opacity-50 z-50">
         <div className="bg-white p-4 md:p-6 rounded shadow-lg">
-          <h2 className="text-lg font-semibold mb-4">Enter Your Name</h2>
+          <h2 className="text-sm md:text-base desktop:text-lg font-semibold mb-4">
+            Skriv inn navnet ditt
+          </h2>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
               className="w-full p-2 border rounded"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
+              placeholder="Skriv inn navnet ditt"
               required
             />
             <div className="flex justify-center gap-4 items-center mt-4">
