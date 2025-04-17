@@ -6,6 +6,9 @@ import Ic_logo from "@/public/images/Ic_logo.svg";
 import Ic_menu from "@/public/images/Ic_menu.svg";
 import Ic_close from "@/public/images/Ic_close.svg";
 import Ic_chevron_down from "@/public/images/Ic_chevron_down.svg";
+import Ic_search_file from "@/public/images/Ic_search_file.svg";
+import Ic_mic from "@/public/images/Ic_mic.svg";
+import Ic_logout from "@/public/images/Ic_logout.svg";
 import Image from "next/image";
 import { useUserLayoutContext } from "@/context/userLayoutContext";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -168,27 +171,45 @@ const Header = () => {
                     >
                       <Link
                         href={"/search-history"}
-                        className="block px-4 py-2 text-sm hover:bg-lightPurple text-black w-full text-left cursor-pointer"
+                        className="px-2 py-1.5 text-sm hover:bg-lightPurple text-black w-full text-left cursor-pointer flex gap-2 items-center"
                         onClick={() => {
                           setIsDropdownOpen(false);
                         }}
                       >
+                        <Image
+                          src={Ic_search_file}
+                          alt="search_file"
+                          className="w-[20px] h-[20px] md:w-auto md:h-auto"
+                          fetchPriority="auto"
+                        />
                         Søkehistorikk
                       </Link>
                       <Link
                         href={"/add-plot-list"}
-                        className="block px-4 py-2 text-sm hover:bg-lightPurple text-black w-full text-left cursor-pointer"
+                        className="px-2 py-1.5 text-sm hover:bg-lightPurple text-black w-full text-left cursor-pointer flex gap-2 items-center"
                         onClick={() => {
                           setIsDropdownOpen(false);
                         }}
                       >
+                        <Image
+                          src={Ic_mic}
+                          alt="mic"
+                          className="w-[20px] h-[20px] md:w-auto md:h-auto"
+                          fetchPriority="auto"
+                        />
                         Annonser din tomt
                       </Link>
                       <Link
                         href={"/login"}
-                        className="block px-4 py-2 text-sm hover:bg-lightPurple text-black w-full text-left cursor-pointer"
+                        className="px-2 py-1.5 text-sm hover:bg-lightPurple text-black w-full text-left cursor-pointer flex gap-2 items-center"
                         onClick={handleLogout}
                       >
+                        <Image
+                          src={Ic_logout}
+                          alt="logout"
+                          className="w-[20px] h-[20px] md:w-auto md:h-auto"
+                          fetchPriority="auto"
+                        />
                         Logg ut
                       </Link>
                     </div>

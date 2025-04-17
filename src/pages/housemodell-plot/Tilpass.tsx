@@ -215,7 +215,7 @@ const Tilpass: React.FC<{
       <div className="py-5 md:py-8">
         <SideSpaceContainer>
           <h3 className="text-darkBlack text-lg md:text-xl desktop:text-2xl font-semibold mb-[22px]">
-            La oss begynne å tilpasse drømmehuset ditt
+            Her gjør du dine tilpassninger:
           </h3>
           {Huskonfigurator?.length > 0 ? (
             <div className="flex flex-col md:flex-row gap-6 relative">
@@ -223,7 +223,7 @@ const Tilpass: React.FC<{
                 {Huskonfigurator.map((item: any, index: number) => (
                   <div
                     key={index}
-                    className={`p-4 cursor-pointer border-2 font-medium rounded-lg flex items-start gap-1 w-[160px] flex-none ${
+                    className={`p-3 cursor-pointer border-2 font-medium rounded-lg flex items-center gap-1 my-1 flex-none ${
                       selectedTab === index
                         ? "border-[#6927DA]"
                         : "border-transparent"
@@ -236,7 +236,7 @@ const Tilpass: React.FC<{
                   >
                     <div className="w-4 md:w-6 h-4 md:h-6">
                       <div
-                        className={`w-4 md:w-6 h-4 md:h-6 rounded-full flex items-center justify-center text-xs mt-1 ${
+                        className={`w-4 md:w-6 h-4 md:h-6 rounded-full flex items-center justify-center text-xs ${
                           selectedTab === index
                             ? "bg-[#00359E] text-white"
                             : "bg-[#ECE9FE] text-darkBlack"
@@ -245,13 +245,8 @@ const Tilpass: React.FC<{
                         {index + 1}
                       </div>
                     </div>
-                    <div>
-                      <div className="text-black text-xs md:text-sm font-medium mb-2">
-                        {item?.navn}
-                      </div>
-                      <p className="text-secondary2 text-[10px] md:text-sm">
-                        {item?.Beskrivelse}
-                      </p>
+                    <div className="text-black text-xs md:text-sm font-medium">
+                      {item?.navn}
                     </div>
                   </div>
                 ))}
@@ -260,7 +255,7 @@ const Tilpass: React.FC<{
                 {Huskonfigurator.map((item: any, index: number) => (
                   <div
                     key={index}
-                    className={`p-4 cursor-pointer border-2 font-medium rounded-lg flex items-start gap-2 ${
+                    className={`p-3 lg:p-4 cursor-pointer border-2 font-medium rounded-lg flex items-start gap-2 ${
                       selectedTab === index
                         ? "border-[#6927DA]"
                         : "border-transparent"

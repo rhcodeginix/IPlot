@@ -76,7 +76,7 @@ const PropertyDetail: React.FC<any> = ({
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-1 sm:gap-2 rounded-[50px] bg-[#EDFCF2] py-2 px-3 whitespace-normal">
+          <div className="hidden md:flex items-center gap-1 sm:gap-2 rounded-[50px] bg-[#EDFCF2] py-2 px-3 whitespace-normal">
             <Image src={Ic_Step_icon} alt="icon" className="w-4 sm:w-auto" />
             <div className="text-black text-xs md:text-sm lg:text-base whitespace-normal">
               <span className="font-bold">Tomten</span> er i samsvar med alle

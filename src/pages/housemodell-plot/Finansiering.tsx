@@ -5,8 +5,8 @@ import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Button from "@/components/common/button";
 import Loader from "@/components/Loader";
 import Link from "next/link";
-import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
-import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
+// import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
+// import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -34,14 +34,14 @@ const Finansiering: React.FC<{
   supplierData: any;
 }> = ({
   handleNext,
-  lamdaDataFromApi,
-  askData,
+  // lamdaDataFromApi,
+  // askData,
   loadingLamdaData,
-  CadastreDataFromApi,
+  // CadastreDataFromApi,
   HouseModelData,
   handlePrevious,
-  pris,
-  supplierData,
+  // pris,
+  // supplierData,
 }) => {
   const Husdetaljer = HouseModelData?.Husdetaljer;
 
@@ -106,7 +106,7 @@ const Finansiering: React.FC<{
     <div className="relative">
       <div className="bg-lightPurple2 py-2 md:py-4">
         <SideSpaceContainer>
-          <div className="flex items-center flex-wrap gap-1 mb-4 md:mb-6">
+          <div className="flex items-center flex-wrap gap-1">
             <Link
               href={"/"}
               className="text-[#7839EE] text-xs md:text-sm font-medium"
@@ -151,19 +151,21 @@ const Finansiering: React.FC<{
               Finansiering
             </span>
           </div>
-          <PropertyHouseDetails
-            HouseModelData={HouseModelData}
-            lamdaDataFromApi={lamdaDataFromApi}
-            supplierData={supplierData}
-            pris={pris}
-          />
+          {/* <div className="mt-4 md:mt-6">
+            <PropertyHouseDetails
+              HouseModelData={HouseModelData}
+              lamdaDataFromApi={lamdaDataFromApi}
+              supplierData={supplierData}
+              pris={pris}
+            />
+          </div> */}
         </SideSpaceContainer>
       </div>
-      <PropertyDetails
+      {/* <PropertyDetails
         askData={askData}
         CadastreDataFromApi={CadastreDataFromApi}
         lamdaDataFromApi={lamdaDataFromApi}
-      />
+      /> */}
 
       <div className="pt-6 pb-8">
         <SideSpaceContainer>
@@ -488,7 +490,7 @@ const Finansiering: React.FC<{
               }}
             />
             <Button
-              text="Next: Summary"
+              text="Nest: Oppsummering"
               className="border border-primary bg-primary text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
               onClick={() => {
                 handleNext();

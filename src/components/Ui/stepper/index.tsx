@@ -1,6 +1,6 @@
 import SideSpaceContainer from "@/components/common/sideSpace";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Ic_Check_white from "@/public/images/Ic_Check_white.svg";
 
 interface Step {
@@ -21,9 +21,15 @@ const Stepper: React.FC<StepperProps> = ({
   setCurrIndex,
   Style,
 }) => {
+  const stepRefs = useRef<any>([]);
+
   useEffect(() => {
     if (typeof window !== "undefined" && currIndex) {
       localStorage.setItem("currIndex", currIndex.toString());
+    }
+    const currentStepEl = stepRefs.current[currIndex];
+    if (currentStepEl) {
+      currentStepEl.scrollIntoView({ behavior: "smooth", inline: "start" });
     }
   }, [currIndex]);
 
@@ -45,6 +51,7 @@ const Stepper: React.FC<StepperProps> = ({
                 {steps.map((step, index) => (
                   <div
                     key={index}
+                    ref={(el: any) => (stepRefs.current[index] = el)}
                     className={`screen-indicator-span cursor-pointer ${
                       index < currIndex
                         ? "completed"
