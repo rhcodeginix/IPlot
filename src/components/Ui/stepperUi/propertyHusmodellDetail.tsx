@@ -77,7 +77,7 @@ const PropertyHusmodellDetail: React.FC<any> = ({
                     <p className="text-secondary text-sm font-semibold">
                       Denne eiendommen er{" "}
                       <span className="text-black">
-                        ferdig regulert til boligformål
+                        Ferdig regulert til boligformål
                       </span>
                     </p>
                   </div>

@@ -34,7 +34,7 @@ const HouseDetailsection: React.FC<{
                   krever
                 </p>
                 <p className="text-black text-sm md:text-base font-medium">
-                  ferdig regulert til boligformål
+                  Ferdig regulert til boligformål
                 </p>
               </div>
             </div>

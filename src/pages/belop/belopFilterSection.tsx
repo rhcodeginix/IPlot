@@ -310,7 +310,7 @@ const BelopFilterSection: React.FC<{
                                   (kom: any, komIndex: any) => {
                                     return (
                                       <label
-                                        className="container container_darkgray_withPurple truncate"
+                                        className="container container_darkgray_withPurple"
                                         htmlFor={kom.name}
                                         key={komIndex}
                                       >

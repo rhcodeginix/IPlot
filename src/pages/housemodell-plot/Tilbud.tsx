@@ -155,11 +155,13 @@ const Tilbud: React.FC<{
           />
         </SideSpaceContainer>
       </div>
-      <PropertyDetails
-        askData={askData}
-        CadastreDataFromApi={CadastreDataFromApi}
-        lamdaDataFromApi={lamdaDataFromApi}
-      />
+      <div className="hidden lg:block">
+        <PropertyDetails
+          askData={askData}
+          CadastreDataFromApi={CadastreDataFromApi}
+          lamdaDataFromApi={lamdaDataFromApi}
+        />
+      </div>
 
       <div className="pt-6 pb-8">
         <SideSpaceContainer>

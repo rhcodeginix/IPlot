@@ -65,10 +65,15 @@ const HusmodellProperty: React.FC<{
                 return (
                   <div
                     key={index}
-                    className="border border-gray3 rounded-[8px] p-3 md:p-5"
+                    className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer"
                     style={{
                       boxShadow:
                         "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
+                    }}
+                    onClick={() => {
+                      router.push(
+                        `${router.asPath}&husodellId=${property?.id}`
+                      );
                     }}
                   >
                     <div className="mb-2 md:mb-3 desktop:mb-4 flex items-start justify-between gap-3">

@@ -283,10 +283,17 @@ const HomePageSearchTab: React.FC = () => {
                   return (
                     <div
                       key={index}
-                      className="border border-gray3 rounded-[8px] p-3 md:p-5"
+                      className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer"
                       style={{
                         boxShadow:
                           "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
+                      }}
+                      onClick={() => {
+                        router.push(
+                          `housemodell-plot?propertyId=${property?.plot?.id}&husodellId=${property?.house?.id}&emptyPlot=true&homePage=true`
+                        );
+                        const currIndex = 0;
+                        localStorage.setItem("currIndex", currIndex.toString());
                       }}
                     >
                       <h4 className="text-darkBlack text-sm md:text-base lg:text-lg lg:leading-[30px] two_line_elipse">
@@ -461,11 +468,16 @@ const HomePageSearchTab: React.FC = () => {
                   (property: any, index: number) => (
                     <div
                       key={index}
-                      className="border border-gray3 rounded-[8px] p-3 md:p-5"
+                      className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer"
                       style={{
                         boxShadow:
                           "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
                       }}
+                      onClick={() =>
+                        router.push(
+                          `/regulations?kommunenummer=${property?.lamdaDataFromApi?.searchParameters?.kommunenummer}&gardsnummer=${property?.lamdaDataFromApi?.searchParameters?.gardsnummer}&bruksnummer=${property?.lamdaDataFromApi?.searchParameters?.bruksnummer}`
+                        )
+                      }
                     >
                       <h4 className="text-darkBlack text-sm md:text-base lg:text-lg lg:leading-[30px] mb-2 font-bold">
                         {
@@ -522,6 +534,11 @@ const HomePageSearchTab: React.FC = () => {
                         <Button
                           text="Utforsk"
                           className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                          onClick={() =>
+                            router.push(
+                              `/regulations?kommunenummer=${property?.lamdaDataFromApi?.searchParameters?.kommunenummer}&gardsnummer=${property?.lamdaDataFromApi?.searchParameters?.gardsnummer}&bruksnummer=${property?.lamdaDataFromApi?.searchParameters?.bruksnummer}`
+                            )
+                          }
                         />
                       </div>
                     </div>
@@ -549,10 +566,17 @@ const HomePageSearchTab: React.FC = () => {
                   return (
                     <div
                       key={index}
-                      className="border border-gray3 rounded-[8px] p-3 md:p-5"
+                      className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer"
                       style={{
                         boxShadow:
                           "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
+                      }}
+                      onClick={() => {
+                        router.push(
+                          `husmodells?husodellId=${property?.id}&city=Akershus`
+                        );
+                        const currIndex = 0;
+                        localStorage.setItem("currIndex", currIndex.toString());
                       }}
                     >
                       <h4 className="text-darkBlack text-sm md:text-base lg:text-lg lg:leading-[30px] mb-3">

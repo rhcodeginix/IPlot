@@ -85,9 +85,7 @@ const PropertyHouseDetails: React.FC<{
     : 0;
 
   const formattedNumber = (
-    totalPrisOfTomtekost +
-    totalPrisOfByggekostnader +
-    totalCustPris
+    totalPrisOfTomtekost + totalPrisOfByggekostnader
   ).toLocaleString("nb-NO");
 
   // const totalPrice =

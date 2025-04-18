@@ -294,23 +294,25 @@ const Oppsummering: React.FC<{
                             <div className="border w-full border-t border-b-0 border-r-0 border-l-0 border-darkGray"></div>
                             <p className="text-secondary2 text-sm md:text-base">
                               Ved å booke en avtale vil{" "}
-                              <span className="font-bold">
+                              <span className="font-semibold text-black">
                                 {supplierData?.Kontaktperson}
                               </span>{" "}
                               hos{" "}
-                              <span className="font-bold">
+                              <span className="font-semibold text-black">
                                 {supplierData?.company_name}
                               </span>{" "}
                               ringe deg etter å ha satt seg grundig inn i
                               drømmeboligen din.{" "}
-                              <span className="font-bold">
+                              <span className="font-semibold text-black">
                                 {supplierData?.company_name}
                               </span>{" "}
                               vil få tilgang til informasjonen du har lagt igjen
                               her på her på{" "}
-                              <span className="font-bold">MinTomt</span> for å
-                              sikre en mest mulig effektiv prosess og for å
-                              forstå dine ønsker på best mulig måte.
+                              <span className="font-semibold text-black">
+                                MinTomt
+                              </span>{" "}
+                              for å sikre en mest mulig effektiv prosess og for
+                              å forstå dine ønsker på best mulig måte.
                             </p>
                             <div>
                               <label className="flex items-center gap-[12px] container">
@@ -351,10 +353,10 @@ const Oppsummering: React.FC<{
                       <div className="w-full desktop:w-[66%]">
                         <div className="flex flex-col gap-2 md:gap-4 mb-6 md:mb-[40px]">
                           <div className="flex items-center justify-between">
-                            <p className="text-secondary2 text-xs md:text-sm font-bold">
+                            <p className="text-black text-xs md:text-sm font-bold">
                               Totale bygge- og tomtekostnader (inkl. mva)
                             </p>
-                            <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
+                            <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
                               {formatCurrency(
                                 (
                                   totalCustPris +
@@ -367,7 +369,7 @@ const Oppsummering: React.FC<{
                             </h4>
                           </div>
                           <div className="flex items-center justify-between">
-                            <p className="text-secondary2 text-xs md:text-sm">
+                            <p className="text-black text-xs md:text-sm">
                               Egenkapital
                             </p>
                             <div className="flex items-center gap-2 md:gap-4">
@@ -396,10 +398,10 @@ const Oppsummering: React.FC<{
                             </div>
                           </div>
                           <div className="flex items-center justify-between">
-                            <p className="text-secondary text-xs md:text-sm font-bold">
+                            <p className="text-black text-xs md:text-sm font-bold">
                               Lånebeløp
                             </p>
-                            <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
+                            <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
                               {(() => {
                                 const data: any =
                                   totalCustPris +
@@ -469,36 +471,8 @@ const Oppsummering: React.FC<{
                               fetchPriority="auto"
                               src={Ic_spareBank}
                               alt="icon"
-                              className="w-[119px] h-[30px]"
+                              className="w-[100px] md:w-[119px] h-[30px]"
                             />
-                          </div>
-                          <div className="flex flex-col gap-4 p-3 md:p-5 border-b border-[#DCDFEA]">
-                            <div className="flex items-center justify-between">
-                              <div className="text-secondary2 text-xs md:text-sm">
-                                Nominell rente fra
-                              </div>
-                              <h6 className="text-black font-medium text-sm md:text-base">
-                                8,75%
-                              </h6>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <div className="text-secondary2 text-xs md:text-sm">
-                                Effektiv rente ved byggelån ved 2 MNOK ved 100%
-                                utnyttelse
-                              </div>
-                              <h6 className="text-black font-medium text-sm md:text-base">
-                                11,01%
-                              </h6>
-                            </div>
-                            <div className="border-t w-full border-[#DCDFEA]"></div>
-                            <div className="flex items-center justify-between">
-                              <div className="text-secondary2 text-sm md:text-base font-bold">
-                                Estimert kostnad per måned
-                              </div>
-                              <h6 className="text-black font-medium text-sm md:text-base desktop:text-xl">
-                                48.667 NOK
-                              </h6>
-                            </div>
                           </div>
                           <div className="p-3 md:p-5">
                             <div className="flex flex-col sm:flex-row gap-2 sm:items-center justify-between">

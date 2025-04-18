@@ -5,7 +5,7 @@ import HomePageSearchTab from "@/components/Ui/homePageSearchTab";
 const MainSection = () => {
   const words = ["drømmehus", "drømmebolig", "drømmehytte"];
   const speed = 50;
-  const delayBetweenWords = 1000;
+  const delayBetweenWords = 3000;
 
   const [displayText, setDisplayText] = useState("");
   const [currentWordIndex, setCurrentWordIndex] = useState(0);

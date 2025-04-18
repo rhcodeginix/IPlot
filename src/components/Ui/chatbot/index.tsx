@@ -42,7 +42,7 @@ const Chatbot: React.FC = () => {
         >
           <button
             onClick={() => setIsVisible(false)}
-            className="absolute top-2 right-2 text-primary text-lg"
+            className="absolute top-2 right-2 text-primary text-xl"
           >
             ⨯
           </button>

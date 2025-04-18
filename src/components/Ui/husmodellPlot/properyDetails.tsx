@@ -28,7 +28,7 @@ const PropertyDetails: React.FC<{
                   Eiendommen er
                 </p>
                 <p className="text-black text-sm lg:text-base font-semibold">
-                  ferdig regulert til boligformål
+                  Ferdig regulert til boligformål
                 </p>
               </div>
             </div>

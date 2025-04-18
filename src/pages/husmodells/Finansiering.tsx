@@ -239,11 +239,11 @@ const Finansiering: React.FC<{
                           <div className="w-full lg:w-[50%]">
                             <div className="flex flex-col gap-2 md:gap-4">
                               <div className="flex items-center justify-between gap-1">
-                                <p className="text-secondary2 text-xs md:text-sm font-bold">
+                                <p className="text-black text-xs md:text-sm font-bold">
                                   Totale bygge- og <br /> tomtekostnader (inkl.
                                   mva)
                                 </p>
-                                <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
+                                <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
                                   {formatCurrency(
                                     (
                                       totalCustPris +
@@ -255,7 +255,7 @@ const Finansiering: React.FC<{
                                 </h4>
                               </div>
                               <div className="flex items-center justify-between gap-1">
-                                <p className="text-secondary2 text-xs md:text-sm">
+                                <p className="text-black text-xs md:text-sm">
                                   Egenkapital
                                 </p>
                                 <div className="flex items-center gap-2 md:gap-4">
@@ -285,10 +285,10 @@ const Finansiering: React.FC<{
                                 </div>
                               </div>
                               <div className="flex items-center justify-between gap-1">
-                                <p className="text-secondary text-xs md:text-sm font-bold">
+                                <p className="text-black text-xs md:text-sm font-bold">
                                   Lånebeløp
                                 </p>
-                                <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
+                                <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
                                   {(() => {
                                     const data: any =
                                       totalCustPris +
@@ -322,7 +322,9 @@ const Finansiering: React.FC<{
                                 </h4>
                               </div>
                             </div>
-                            <LeadsBox isShow={true} col={true} />
+                            <div className="hidden lg:block">
+                              <LeadsBox isShow={true} col={true} />
+                            </div>
                           </div>
                           <div className="w-full lg:w-[50%]">
                             <div
@@ -374,36 +376,6 @@ const Finansiering: React.FC<{
                                   className="w-[90px] sm:w-[119px] h-[30px]"
                                 />
                               </div>
-                              {!values.helpWithFinancing && (
-                                <div className="flex flex-col gap-2 md:gap-4 p-3 md:p-5 border-b border-[#DCDFEA]">
-                                  <div className="flex items-center justify-between gap-1">
-                                    <div className="text-secondary2 text-xs md:text-sm">
-                                      Nominell rente fra
-                                    </div>
-                                    <h6 className="text-black font-medium text-sm md:text-base">
-                                      8,75%
-                                    </h6>
-                                  </div>
-                                  <div className="flex items-center justify-between gap-1">
-                                    <div className="text-secondary2 text-xs md:text-sm">
-                                      Effektiv rente ved byggelån ved 2 MNOK ved
-                                      100% utnyttelse
-                                    </div>
-                                    <h6 className="text-black font-medium text-sm md:text-base">
-                                      11,01%
-                                    </h6>
-                                  </div>
-                                  <div className="border-t w-full border-[#DCDFEA]"></div>
-                                  <div className="flex items-center justify-between">
-                                    <div className="text-secondary2 text-sm md:text-base font-bold">
-                                      Estimert månedskostnad ved 50% utnyttelse
-                                    </div>
-                                    <h6 className="text-black font-medium text-sm md:text-base desktop:text-xl">
-                                      48.667 NOK
-                                    </h6>
-                                  </div>
-                                </div>
-                              )}
                               {!values.helpWithFinancing && (
                                 <div className="p-3 md:p-5 border-b border-[#DCDFEA]">
                                   <div className="flex flex-col sm:flex-row gap-2 sm:items-center justify-between">
@@ -498,6 +470,9 @@ const Finansiering: React.FC<{
                             </div>
                           </div>
                         </div>
+                        <div className="block lg:hidden">
+                          <LeadsBox isShow={true} col={true} />
+                        </div>
                       </Form>
                     );
                   }}
@@ -524,7 +499,7 @@ const Finansiering: React.FC<{
                   }}
                 />
                 <Button
-                  text="Nest: Oppsummering"
+                  text="Neste: Oppsummering"
                   className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                   onClick={() => {
                     handleNext();
