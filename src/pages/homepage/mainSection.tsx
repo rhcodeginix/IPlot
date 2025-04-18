@@ -42,7 +42,7 @@ const MainSection = () => {
           <div className="mb-[36px] md:mb-[44px] flex flex-col justify-center items-center">
             <h1 className="text-darkBlack text-[32px] md:text-[40px] lg:text-[48px] desktop:text-[52px] big:text-[72px] leading-tight text-center mb-3 md:mb-4 desktop:mb-5 w-[333px] md:w-[416px] lg:w-[493px] desktop:w-[540px] big:w-[733px]">
               <div className="flex justify-start gap-3">
-                Bygg ditt{" "}
+                Bygg din{" "}
                 <span className={`text-purple2 typewrite font-semibold`}>
                   {displayText}
                 </span>{" "}
