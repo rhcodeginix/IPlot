@@ -102,11 +102,13 @@ const HusmodellPropertyPage: React.FC<{
 
             const boligtype = houseDetails?.VelgBoligtype;
             const egenskaper = houseDetails?.VelgEgenskaperBoligtype || [];
+            const hasEgenskaper = egenskaper.length > 0;
 
             const hasTypeFilter = formData.TypeHusmodell.length > 0;
 
             const matchesBoligtype =
-              !hasTypeFilter || formData.TypeHusmodell.includes(boligtype);
+              (!hasTypeFilter || formData.TypeHusmodell.includes(boligtype)) &&
+              hasEgenskaper;
             const matchesEgenskaper =
               !hasTypeFilter ||
               egenskaper.some((item: string) =>

@@ -204,9 +204,12 @@ const Belop: React.FC = () => {
               const egenskaper =
                 plot?.Husdetaljer?.VelgEgenskaperBoligtype || [];
               const hasTypeFilter = formData.TypeHusmodell.length > 0;
+              const hasEgenskaper = egenskaper.length > 0;
 
               const matchesBoligtype =
-                !hasTypeFilter || formData.TypeHusmodell.includes(boligtype);
+                (!hasTypeFilter ||
+                  formData.TypeHusmodell.includes(boligtype)) &&
+                hasEgenskaper;
               const matchesEgenskaper =
                 !hasTypeFilter ||
                 egenskaper.some((item: string) =>

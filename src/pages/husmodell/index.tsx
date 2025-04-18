@@ -94,6 +94,7 @@ const HusmodellPropertyPage: React.FC = () => {
 
             const boligtype = houseDetails?.VelgBoligtype;
             const egenskaper = houseDetails?.VelgEgenskaperBoligtype || [];
+            const hasEgenskaper = egenskaper.length > 0;
 
             const hasBedroomFilter = formData.AntallSoverom.length > 0;
             const hasMinPriceFilter = formData.minRangeForHusmodell !== 0;
@@ -107,7 +108,8 @@ const HusmodellPropertyPage: React.FC = () => {
             const matchesMaxPrice =
               !hasMaxPriceFilter || housePrice <= formData.maxRangeForHusmodell;
             const matchesBoligtype =
-              !hasTypeFilter || formData.TypeHusmodell.includes(boligtype);
+              (!hasTypeFilter || formData.TypeHusmodell.includes(boligtype)) &&
+              hasEgenskaper;
             const matchesEgenskaper =
               !hasTypeFilter ||
               egenskaper.some((item: string) =>
