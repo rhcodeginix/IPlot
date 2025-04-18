@@ -11,7 +11,7 @@ const OurPartners = () => {
       <div className="py-[44px] md:py-[58px] desktop:py-[80px] overflow-hidden bg-purple">
         <SideSpaceContainer className="relative">
           <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 items-center justify-center">
-            <h3 className="text-white font-semibold text-lg md:text-[24px] lg:text-[28px] desktop:text-[2rem] desktop:leading-[44.8px]">
+            <h3 className="text-white font-semibold text-xl md:text-[24px] lg:text-[28px] desktop:text-[2rem] desktop:leading-[44.8px]">
               Våre samarbeidspartnere
             </h3>
             <div className="flex items-center justify-between sm:justify-center w-full gap-4 md:gap-8 lg:gap-12 desktop:gap-[96px] overflow-x-auto overFlowScrollHidden">
