@@ -542,3 +542,6 @@ td {
   width: 100% !important;
   height: 100% !important;
 }
+.mapboxgl-ctrl.mapboxgl-ctrl-scale {
+  display: none !important;
+}
