@@ -473,11 +473,13 @@ const HomePageSearchTab: React.FC = () => {
                         boxShadow:
                           "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
                       }}
-                      onClick={() =>
+                      onClick={() => {
                         router.push(
                           `/regulations?kommunenummer=${property?.lamdaDataFromApi?.searchParameters?.kommunenummer}&gardsnummer=${property?.lamdaDataFromApi?.searchParameters?.gardsnummer}&bruksnummer=${property?.lamdaDataFromApi?.searchParameters?.bruksnummer}`
-                        )
-                      }
+                        );
+                        const currIndex = 0;
+                        localStorage.setItem("currIndex", currIndex.toString());
+                      }}
                     >
                       <h4 className="text-darkBlack text-sm md:text-base lg:text-lg lg:leading-[30px] mb-2 font-bold">
                         {
@@ -534,11 +536,16 @@ const HomePageSearchTab: React.FC = () => {
                         <Button
                           text="Utforsk"
                           className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
-                          onClick={() =>
+                          onClick={() => {
                             router.push(
                               `/regulations?kommunenummer=${property?.lamdaDataFromApi?.searchParameters?.kommunenummer}&gardsnummer=${property?.lamdaDataFromApi?.searchParameters?.gardsnummer}&bruksnummer=${property?.lamdaDataFromApi?.searchParameters?.bruksnummer}`
-                            )
-                          }
+                            );
+                            const currIndex = 0;
+                            localStorage.setItem(
+                              "currIndex",
+                              currIndex.toString()
+                            );
+                          }}
                         />
                       </div>
                     </div>

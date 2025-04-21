@@ -64,6 +64,8 @@ const index = () => {
                       JSON.stringify(property?.getAddress)
                     );
                     setStoreAddress(property?.getAddress);
+                    const currIndex = 0;
+                    localStorage.setItem("currIndex", currIndex.toString());
                   }}
                 >
                   <div className="flex flex-col gap-3 cursor-pointer relative z-40">
