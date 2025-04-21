@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-const DEFAULT_ZOOM = 22;
+const DEFAULT_ZOOM = 18;
+// Add a maximum zoom constraint that's higher than default
+const MAX_ZOOM = 24;
 
 const NorkartMap: React.FC<{ coordinates: any }> = ({ coordinates }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -46,12 +48,13 @@ const NorkartMap: React.FC<{ coordinates: any }> = ({ coordinates }) => {
               type: "raster",
               source: "raster-tiles",
               minzoom: 0,
-              maxzoom: 22,
+              maxzoom: 24,
             },
           ],
         },
         center: DEFAULT_CENTER,
         zoom: DEFAULT_ZOOM,
+        maxZoom: MAX_ZOOM,
         collectResourceTiming: false,
       });
       map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
@@ -107,9 +110,18 @@ const NorkartMap: React.FC<{ coordinates: any }> = ({ coordinates }) => {
       BOUNDARY_POINTS.forEach((coord) => bounds.extend(coord));
       map.current?.fitBounds(bounds, {
         padding: 60,
-        maxZoom: DEFAULT_ZOOM,
+        maxZoom: MAX_ZOOM,
         duration: 1500,
       });
+
+      setTimeout(() => {
+        if (map.current) {
+          const currentZoom = map.current.getZoom();
+          map.current.zoomTo(Math.min(currentZoom + 2, MAX_ZOOM), {
+            duration: 500,
+          });
+        }
+      }, 800);
     });
 
     return () => {
@@ -121,10 +133,10 @@ const NorkartMap: React.FC<{ coordinates: any }> = ({ coordinates }) => {
   }, [coordinates]);
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full h-full relative">
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
         </div>
       )}
       <div className="relative w-full h-full">
