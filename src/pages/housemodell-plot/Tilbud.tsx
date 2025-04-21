@@ -214,6 +214,7 @@ const Tilbud: React.FC<{
                         coordinates={
                           lamdaDataFromApi?.coordinates?.convertedCoordinates
                         }
+                        MAX_ZOOM={20}
                       />
                     )}
                   </div>

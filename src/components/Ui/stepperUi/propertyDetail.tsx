@@ -20,6 +20,7 @@ const PropertyDetail: React.FC<any> = ({
                 coordinates={
                   lamdaDataFromApi?.coordinates?.convertedCoordinates
                 }
+                MAX_ZOOM={18}
               />
             )}
           </div>

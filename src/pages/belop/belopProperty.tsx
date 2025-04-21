@@ -145,6 +145,7 @@ const BelopProperty: React.FC<{
                                 property?.plot?.lamdaDataFromApi?.coordinates
                                   ?.convertedCoordinates
                               }
+                              MAX_ZOOM={20}
                             />
                           )}
                         </div>

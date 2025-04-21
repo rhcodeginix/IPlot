@@ -342,6 +342,7 @@ const HomePageSearchTab: React.FC = () => {
                                 property?.plot?.lamdaDataFromApi?.coordinates
                                   ?.convertedCoordinates
                               }
+                              MAX_ZOOM={20}
                             />
                           )}
                         </div>
@@ -501,6 +502,7 @@ const HomePageSearchTab: React.FC = () => {
                                 property?.lamdaDataFromApi?.coordinates
                                   ?.convertedCoordinates
                               }
+                              MAX_ZOOM={20}
                             />
                           )}
                         </div>

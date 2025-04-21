@@ -360,6 +360,7 @@ const Tilbud: React.FC<{
                               lamdaDataFromApi?.coordinates
                                 ?.convertedCoordinates
                             }
+                            MAX_ZOOM={20}
                           />
                         )}
                       </div>

@@ -1210,6 +1210,7 @@ const TomtBakenPropertyDetail: React.FC = () => {
                       coordinates={
                         lamdaDataFromApi?.coordinates?.convertedCoordinates
                       }
+                      MAX_ZOOM={20}
                     />
                   )}
                 </div>
