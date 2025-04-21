@@ -20,10 +20,10 @@ import Loader from "@/components/Loader";
 import { addDaysToDate } from "@/components/Ui/stepperUi/productDetailWithPrice";
 import Link from "next/link";
 import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
-import GoogleMapComponent from "@/components/Ui/map";
 import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
 import { formatPrice } from "../belop/belopProperty";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
+import NorkartMap from "@/components/map";
 
 const Tilbud: React.FC<{
   handleNext: any;
@@ -353,11 +353,15 @@ const Tilbud: React.FC<{
                         />
                       </div>
                       <div className="w-[37%] rounded-[8px] overflow-hidden h-full">
-                        <GoogleMapComponent
-                          coordinates={
-                            lamdaDataFromApi?.coordinates?.convertedCoordinates
-                          }
-                        />
+                        {lamdaDataFromApi?.coordinates
+                          ?.convertedCoordinates && (
+                          <NorkartMap
+                            coordinates={
+                              lamdaDataFromApi?.coordinates
+                                ?.convertedCoordinates
+                            }
+                          />
+                        )}
                       </div>
                     </div>
                     <div className="flex gap-3 items-center">

@@ -16,6 +16,7 @@ import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Image from "next/image";
 import { Settings2, X } from "lucide-react";
 import { Drawer } from "@mui/material";
+import Loading from "@/components/Loading";
 
 const Belop: React.FC = () => {
   const router: any = useRouter();
@@ -33,6 +34,15 @@ const Belop: React.FC = () => {
     Område: [] as string[],
     SubOmråde: [] as string[],
   });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentPlots = HouseModelProperty.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -563,12 +573,47 @@ const Belop: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="w-full lg:w-[65%]">
-              <BelopProperty
-                HouseModelProperty={HouseModelProperty}
-                isLoading={isLoading}
-              />
-            </div>
+            {isLoading ? (
+              <div className="relative w-full lg:w-[65%]">
+                <Loading />
+              </div>
+            ) : (
+              <div className="w-full lg:w-[65%]">
+                <BelopProperty
+                  HouseModelProperty={currentPlots}
+                  isLoading={isLoading}
+                />
+                <div className="flex justify-center mt-6 space-x-2">
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(prev - 1, 1))
+                    }
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 border rounded disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <span className="px-4 py-2">{currentPage}</span>
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) =>
+                        prev <
+                        Math.ceil(HouseModelProperty.length / itemsPerPage)
+                          ? prev + 1
+                          : prev
+                      )
+                    }
+                    disabled={
+                      currentPage ===
+                      Math.ceil(HouseModelProperty.length / itemsPerPage)
+                    }
+                    className="px-4 py-2 border rounded disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </SideSpaceContainer>
         <div
@@ -576,6 +621,7 @@ const Belop: React.FC = () => {
           style={{
             boxShadow:
               "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",
+            zIndex: 999999,
           }}
         >
           <div className="flex justify-end items-center gap-6">

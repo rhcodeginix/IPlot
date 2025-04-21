@@ -15,6 +15,7 @@ import PlotFilterSection from "./plotFilterSection";
 import PlotProperty from "./plotProperty";
 import { Settings2, X } from "lucide-react";
 import { Drawer } from "@mui/material";
+import Loading from "@/components/Loading";
 
 const Plots: React.FC<{
   handlePrevious: any;
@@ -24,6 +25,14 @@ const Plots: React.FC<{
   const router: any = useRouter();
   const [HouseModelProperty, setHouseModelProperty] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentPlots = HouseModelProperty.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const [formData, setFormData] = useState({
     address: "",
@@ -243,13 +252,48 @@ const Plots: React.FC<{
                 />
               </div>
             </div>
-            <div className="w-full lg:w-[65%]">
-              <PlotProperty
-                HouseModelProperty={HouseModelProperty}
-                isLoading={isLoading}
-                handleNext={handleNext}
-              />
-            </div>
+            {isLoading ? (
+              <div className="relative w-full lg:w-[65%]">
+                <Loading />
+              </div>
+            ) : (
+              <div className="w-full lg:w-[65%]">
+                <PlotProperty
+                  HouseModelProperty={currentPlots}
+                  isLoading={isLoading}
+                  handleNext={handleNext}
+                />
+                <div className="flex justify-center mt-6 space-x-2">
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(prev - 1, 1))
+                    }
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 border rounded disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <span className="px-4 py-2">{currentPage}</span>
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) =>
+                        prev <
+                        Math.ceil(HouseModelProperty.length / itemsPerPage)
+                          ? prev + 1
+                          : prev
+                      )
+                    }
+                    disabled={
+                      currentPage ===
+                      Math.ceil(HouseModelProperty.length / itemsPerPage)
+                    }
+                    className="px-4 py-2 border rounded disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </SideSpaceContainer>
 
@@ -258,6 +302,7 @@ const Plots: React.FC<{
           style={{
             boxShadow:
               "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",
+            zIndex: 9999999,
           }}
         >
           <SideSpaceContainer>

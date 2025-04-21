@@ -18,7 +18,6 @@ import TextInputField from "@/components/common/form/inputAddText";
 import MultiSelectDropDown from "@/components/common/form/multiSelect";
 import toast from "react-hot-toast";
 import InputField from "@/components/common/form/input";
-import GoogleMapComponent from "@/components/Ui/map";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db, storage } from "@/config/firebaseConfig";
 import {
@@ -31,6 +30,7 @@ import {
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/router";
+import NorkartMap from "@/components/map";
 
 const FasiliteterArray: any = [
   { name: "Fiskemuligheter" },
@@ -1060,9 +1060,9 @@ const AddPlotForm = () => {
                       {values.map_image ? (
                         <>
                           <div className="bg-[#EFF1F5] w-full h-[350px] rounded-[8px] overflow-hidden mt-2 relative">
-                            <GoogleMapComponent
-                              coordinates={values.map_image}
-                            />
+                            {values?.map_image && (
+                              <NorkartMap coordinates={values?.map_image} />
+                            )}
                           </div>
                         </>
                       ) : (

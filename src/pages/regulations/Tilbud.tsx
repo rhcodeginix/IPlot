@@ -11,10 +11,10 @@ import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjon
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import GoogleMapComponent from "@/components/Ui/map";
 import { addDaysToDate } from "@/components/Ui/stepperUi/productDetailWithPrice";
 import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
 import { useRouter } from "next/router";
+import NorkartMap from "@/components/map";
 
 const Tilbud: React.FC<{
   handleNext: any;
@@ -250,11 +250,13 @@ const Tilbud: React.FC<{
                     />
                   </div>
                   <div className="w-[37%] rounded-[8px] overflow-hidden h-full">
-                    <GoogleMapComponent
-                      coordinates={
-                        lamdaDataFromApi?.coordinates?.convertedCoordinates
-                      }
-                    />
+                    {lamdaDataFromApi?.coordinates?.convertedCoordinates && (
+                      <NorkartMap
+                        coordinates={
+                          lamdaDataFromApi?.coordinates?.convertedCoordinates
+                        }
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="flex gap-3 items-center">

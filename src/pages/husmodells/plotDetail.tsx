@@ -12,7 +12,7 @@ import Button from "@/components/common/button";
 import ContactForm from "@/components/Ui/stepperUi/contactForm";
 import { useAddress } from "@/context/addressContext";
 import Loader from "@/components/Loader";
-import GoogleMapComponent from "@/components/Ui/map";
+import NorkartMap from "@/components/map";
 
 const PlotDetail: React.FC<any> = ({ handleNext, lamdaDataFromApi }) => {
   const items = [
@@ -457,11 +457,13 @@ const PlotDetail: React.FC<any> = ({ handleNext, lamdaDataFromApi }) => {
             </h2>
             <div className="rounded-[12px] overflow-hidden w-full mb-[60px]">
               <div className="h-[400px]">
-                <GoogleMapComponent
-                  coordinates={
-                    lamdaDataFromApi?.coordinates?.convertedCoordinates
-                  }
-                />
+                {lamdaDataFromApi?.coordinates?.convertedCoordinates && (
+                  <NorkartMap
+                    coordinates={
+                      lamdaDataFromApi?.coordinates?.convertedCoordinates
+                    }
+                  />
+                )}
               </div>
             </div>
             <div>
