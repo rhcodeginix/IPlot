@@ -3,7 +3,7 @@ import SideSpaceContainer from "@/components/common/sideSpace";
 import HomePageSearchTab from "@/components/Ui/homePageSearchTab";
 
 const MainSection = () => {
-  const words = ["drømmehus", "drømmebolig", "drømmehytte"];
+  const words = ["drømmebolig", "drømmehytte"];
   const speed = 50;
   const delayBetweenWords = 3000;
 

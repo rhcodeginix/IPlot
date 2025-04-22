@@ -5,6 +5,7 @@ import {
   collection,
   getDocs,
   getFirestore,
+  limit,
   query,
   where,
 } from "firebase/firestore";
@@ -335,7 +336,7 @@ const Belop: React.FC = () => {
 
         setFormData((prev) => ({
           ...prev,
-          Område: citiesToUse,
+          Område: cityFormLocalStorage || 0,
           SubOmråde: subCityFormLocalStorage,
           AntallSoverom: soveromFormLocalStorage,
           Hustype: HustypeFormLocalStorage,
@@ -397,16 +398,32 @@ const Belop: React.FC = () => {
         const plotChunks = [];
 
         const chunkSize = 10;
+
         for (let i = 0; i < kommuneNumbers.length; i += chunkSize) {
           const chunk = kommuneNumbers.slice(i, i + chunkSize);
-          const q = query(
-            collection(db, "empty_plot"),
+
+          const shouldLimitResults =
+            cityFormLocalStorage.length === 0 &&
+            subCityFormLocalStorage.length === 0 &&
+            soveromFormLocalStorage.length === 0 &&
+            HustypeFormLocalStorage.length === 0 &&
+            TypeHusmodellFormLocalStorage.length === 0 &&
+            !maxRangePlot &&
+            !maxRangeHusmodell;
+
+          const constraints: any = [
             where(
               "lamdaDataFromApi.searchParameters.kommunenummer",
               "in",
               chunk
-            )
-          );
+            ),
+          ];
+
+          if (shouldLimitResults) {
+            constraints.push(limit(20));
+          }
+
+          const q = query(collection(db, "empty_plot"), ...constraints);
           plotChunks.push(getDocs(q));
         }
 

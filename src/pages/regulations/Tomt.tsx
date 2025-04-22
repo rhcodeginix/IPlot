@@ -18,7 +18,6 @@ import { useRouter } from "next/router";
 import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
 import Link from "next/link";
 import PropertyDetail from "@/components/Ui/stepperUi/propertyDetail";
-import { Building2 } from "lucide-react";
 import PlotDetailPage from "@/components/Ui/plotDetail";
 
 const buildOption: any = [
@@ -120,16 +119,6 @@ const Tomt: React.FC<{
 
   const queryString = new URLSearchParams(router_query).toString();
 
-  const tabs: any = [
-    {
-      id: "Eiendomsinformasjon",
-      label: "Eiendomsinformasjon",
-      icon: <Building2 className="w-4 h-4 lg:w-6 lg:h-6" />,
-    },
-  ];
-
-  const [activeTab, setActiveTab] = useState<string>(tabs[0].id);
-
   const [selectedBuildIndex, setSelectedBuildIndex] = useState<number | null>(
     null
   );
@@ -181,35 +170,13 @@ const Tomt: React.FC<{
 
         <SideSpaceContainer className="relative pt-[38px] pb-[46px]">
           <div>
-            <div className="w-max">
-              <div className="flex flex-nowrap border border-gray3 rounded-lg bg-gray3 p-[6px] mb-6 md:mb-[38px] overflow-x-auto overFlowScrollHidden">
-                {tabs.map((tab: any) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`min-w-max whitespace-nowrap px-2 lg:px-4 py-2 text-sm lg:text-base transition-colors duration-300 flex items-center gap-2 ${
-                      activeTab === tab.id
-                        ? "bg-white font-medium text-[#7839EE]"
-                        : "text-black"
-                    }`}
-                  >
-                    {tab.icon}
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div
-              className={`${activeTab === "Eiendomsinformasjon" ? "block" : "hidden"}`}
-            >
-              <PlotDetailPage
-                lamdaDataFromApi={lamdaDataFromApi}
-                loadingAdditionalData={loadingAdditionalData}
-                askData={askData}
-                loadingLamdaData={loadingLamdaData}
-                CadastreDataFromApi={CadastreDataFromApi}
-              />
-            </div>
+            <PlotDetailPage
+              lamdaDataFromApi={lamdaDataFromApi}
+              loadingAdditionalData={loadingAdditionalData}
+              askData={askData}
+              loadingLamdaData={loadingLamdaData}
+              CadastreDataFromApi={CadastreDataFromApi}
+            />
           </div>
           {!loginUser && (
             <div

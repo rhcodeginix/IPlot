@@ -125,12 +125,12 @@ const BeløpTab = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div
-        className="lg:h-[100px] bg-white border-gray3 border rounded-[8px] lg:rounded-[98px] flex flex-col lg:flex-row lg:items-center relative justify-between"
+        className="lg:h-[80px] bg-white border-gray3 border rounded-[8px] lg:rounded-[98px] flex flex-col lg:flex-row lg:items-center relative justify-between"
         style={{
           boxShadow: "0px 32px 82px -12px #10182812",
         }}
       >
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full lg:w-11/12 lg:h-[100px]">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full lg:w-11/12 lg:h-[80px]">
           {/* <div className="relative min-w-[30%] w-auto h-full" ref={dropdownRef}>
             <div
               className={`bg-[#F4EBFF] py-3 px-2 lg:py-4 lg:px-5 desktop:px-8 h-full flex flex-col justify-center lg:rounded-l-[98px] overflow-hidden ${
@@ -164,7 +164,7 @@ const BeløpTab = () => {
                 }}
               >
                 {isLoading ? (
-                  <div className="relative h-[100px]">
+                  <div className="relative h-[80px]">
                     <Loading />
                   </div>
                 ) : (
@@ -230,7 +230,7 @@ const BeløpTab = () => {
         <div className="border-t border-gray3 w-full lg:hidden"></div>
 
         <button
-          className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-greenBtn rounded-[40px] transition-all duration-300 ease-out h-[40px] lg:h-[56px] my-4 md:my-[22px] mx-4 md:mx-6 gap-2 ${
+          className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-greenBtn rounded-[40px] transition-all duration-300 ease-out h-[40px] lg:h-[56px] m-4 gap-2 ${
             !formData?.amount ? "opacity-50 cursor-not-allowed" : ""
           }`}
           type="submit"

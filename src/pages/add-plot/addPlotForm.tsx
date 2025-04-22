@@ -90,7 +90,7 @@ const AddPlotForm = () => {
     }),
     tomt_type: Yup.string().required("Type tomt er påkrevd"),
     Tomtestørrelse: Yup.number().required("Tomtestørrelse er påkrevd"),
-    Utnyttelsesgrad: Yup.number().required("Utnyttelsesgrad er påkrevd"),
+    Utnyttelsesgrad: Yup.number().optional(),
     Byggeklausul: Yup.string().required("Byggeklausul er påkrevd"),
     reguleringsstatus: Yup.string().required("Reguleringsstatus er påkrevd"),
     connectionStatus: Yup.array().required("Velg minst én"),
@@ -1014,7 +1014,7 @@ const AddPlotForm = () => {
                           },
                         ]}
                         value={values.Byggeklausul}
-                        disabled={values.Byggeklausul ? true : false}
+                        // disabled={values.Byggeklausul ? true : false}
                       />
                       <SelectDropDown
                         label="Reguleringsstatus"
@@ -1378,7 +1378,7 @@ const AddPlotForm = () => {
                     <div className="w-[22%] bg-[#F9F9FB] rounded-[8px] p-4 flex flex-col gap-5">
                       <div>
                         <h3 className="text-sm font-semibold mb-3">
-                          Entity Documents
+                          Diverse dokumenter
                         </h3>
                         <div className="flex flex-col gap-2">
                           <div className="flex items-center gap-3">
@@ -1543,7 +1543,7 @@ const AddPlotForm = () => {
                 }}
               />
               <Button
-                text="Fårhåndsvis"
+                text="Forhåndsvis"
                 className="border-2 border-primary text-primary sm:text-base w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px] rounded-[40px]"
               />
               <button
