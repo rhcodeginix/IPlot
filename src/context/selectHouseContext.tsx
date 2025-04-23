@@ -44,7 +44,6 @@ export const CustomizeHouseProvider: React.FC<{
   }, []);
 
   const updateCustomizeHouse = (data: ProductType[] | null) => {
-    console.log("updateCustomizeHouse called", data);
     if (data === null) {
       localStorage.removeItem("customizeHouse");
       setCustomizeHouse(null);
@@ -67,7 +66,6 @@ export const CustomizeHouseProvider: React.FC<{
 
 export const useCustomizeHouse = () => {
   const context = useContext(CustomizeHouseContext);
-  console.log("useCustomizeHouse called"); // Log when this hook is called
   if (!context) {
     throw new Error(
       "useCustomizeHouse must be used within CustomizeHouseProvider"
