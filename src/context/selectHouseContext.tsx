@@ -44,12 +44,15 @@ export const CustomizeHouseProvider: React.FC<{
   }, []);
 
   const updateCustomizeHouse = (data: ProductType[] | null) => {
-    if (data) {
-      localStorage.setItem("customizeHouse", JSON.stringify(data));
-    } else {
+    console.log("updateCustomizeHouse called", data);
+    if (data === null) {
       localStorage.removeItem("customizeHouse");
+      setCustomizeHouse(null);
+    } else {
+      localStorage.setItem("customizeHouse", JSON.stringify(data));
+      setCustomizeHouse(data);
     }
-    setCustomizeHouse(data);
+
     window.dispatchEvent(new Event("customizeHouseUpdated"));
   };
 
@@ -64,9 +67,11 @@ export const CustomizeHouseProvider: React.FC<{
 
 export const useCustomizeHouse = () => {
   const context = useContext(CustomizeHouseContext);
-  if (!context)
+  console.log("useCustomizeHouse called"); // Log when this hook is called
+  if (!context) {
     throw new Error(
       "useCustomizeHouse must be used within CustomizeHouseProvider"
     );
+  }
   return context;
 };

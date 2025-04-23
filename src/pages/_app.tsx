@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import UserLayout from "@/components/Layout/userLayout";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
+import { CustomizeHouseProvider } from "@/context/selectHouseContext";
 
 const publicRoutes = ["/login", "/register"];
 
@@ -59,16 +60,18 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
         </>
       ) : (
-        <UserLayout>
-          <Component {...pageProps} />
-          <Toaster
-            toastOptions={{
-              style: {
-                zIndex: 9999999999,
-              },
-            }}
-          />
-        </UserLayout>
+        <CustomizeHouseProvider>
+          <UserLayout>
+            <Component {...pageProps} />
+            <Toaster
+              toastOptions={{
+                style: {
+                  zIndex: 9999999999,
+                },
+              }}
+            />
+          </UserLayout>
+        </CustomizeHouseProvider>
       )}
     </>
   );

@@ -4,7 +4,7 @@ import { UserLayoutProvider } from "@/context/userLayoutContext";
 import { AddressProvider } from "@/context/addressContext";
 import Chatbot from "../Ui/chatbot";
 import { useRouter } from "next/router";
-import { CustomizeHouseProvider } from "@/context/selectHouseContext";
+import { useCustomizeHouse } from "@/context/selectHouseContext";
 
 type Props = {
   children: ReactNode;
@@ -12,6 +12,7 @@ type Props = {
 
 const UserLayout = ({ children }: Props) => {
   const router = useRouter();
+  const { updateCustomizeHouse } = useCustomizeHouse();
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -35,18 +36,17 @@ const UserLayout = ({ children }: Props) => {
       !pathname.startsWith("/regulations")
     ) {
       localStorage.removeItem("customizeHouse");
+      updateCustomizeHouse(null);
     }
-  }, [router.pathname, router.isReady]);
+  }, [router.pathname, router.isReady, updateCustomizeHouse]);
   return (
     <div>
       <Chatbot />
 
       <UserLayoutProvider>
         <AddressProvider>
-          <CustomizeHouseProvider>
-            <Header />
-            <main>{children}</main>
-          </CustomizeHouseProvider>
+          <Header />
+          <main>{children}</main>
         </AddressProvider>
       </UserLayoutProvider>
     </div>
