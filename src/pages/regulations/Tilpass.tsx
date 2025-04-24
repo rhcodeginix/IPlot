@@ -441,7 +441,9 @@ const Tilpass: React.FC<{
                                   <h5 className="text-black font-medium text-sm md:text-base">
                                     {product?.IncludingOffer === true
                                       ? "Standard"
-                                      : formatCurrency(product?.pris)}
+                                      : product?.pris == 0
+                                        ? "Kostnadsfritt"
+                                        : formatCurrency(product?.pris)}
                                   </h5>
                                 </div>
                                 <Button

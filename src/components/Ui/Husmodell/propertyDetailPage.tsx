@@ -196,7 +196,7 @@ const PropertyDetailPage: React.FC<any> = ({ handleNext }) => {
                       <tbody>
                         <tr>
                           <td className="text-left pb-[16px] text-secondary text-sm whitespace-nowrap">
-                            BRA total
+                            BRA total (bruksareal)
                           </td>
                           <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
                             {husmodellData?.BRATotal} m<sup>2</sup>
@@ -212,7 +212,7 @@ const PropertyDetailPage: React.FC<any> = ({ handleNext }) => {
                         </tr>
                         <tr>
                           <td className="text-left pb-[16px] text-secondary text-sm whitespace-nowrap">
-                            P-rom:
+                            GUA (Gulvareal):
                           </td>
                           <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
                             {husmodellData?.PRom} m<sup>2</sup>
