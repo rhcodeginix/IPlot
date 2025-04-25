@@ -103,26 +103,14 @@ const Welcome = () => {
         }
       )
         .then((response) => response.json())
-        // .then((data) => {
-        //   console.log("API response:", data);
 
-        //   // Display the API response
-        //   const responseDiv = document.createElement("div");
-        //   responseDiv.innerHTML = `
-        //   <h3>API Response</h3>
-        //   <pre>${JSON.stringify(data, null, 2)}</pre>
-        // `;
-        //   document.body.appendChild(responseDiv);
-        // })
         .then(async (data) => {
           console.log("API response:", data);
           const { user } = data;
 
-          // Extract the email from the user object
           const userEmail = user.email;
 
-          // Check Firestore for the user
-          const userRef = doc(db, "users", userEmail); // Assuming 'users' collection in Firestore
+          const userRef = doc(db, "users", userEmail);
           const userDoc = await getDoc(userRef);
 
           if (userDoc.exists()) {
@@ -146,22 +134,39 @@ const Welcome = () => {
             // User doesn't exist, create a new user
             console.log("User doesn't exist. Creating new user...");
             try {
-              await setDoc(userRef, {
-                name: user.name,
-                email: userEmail,
-                address: user.address,
-              });
-
               // Optionally create a user in Firebase Authentication as well
-              await createUserWithEmailAndPassword(
+              const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 userEmail,
                 "yourPasswordHere"
               ); // You can generate a password for them
 
-              localStorage.setItem("min_tomt_login", "true");
-              toast.success("Login successfully", { position: "top-right" });
-              localStorage.setItem("I_plot_email", user.email); // Navigate or perform other actions
+              // await setDoc(userRef, {
+              //   name: user.name,
+              //   email: userEmail,
+              //   address: user.address,
+              // });
+              // localStorage.setItem("min_tomt_login", "true");
+              // toast.success("Login successfully", { position: "top-right" });
+              // localStorage.setItem("I_plot_email", user.email); // Navigate or perform other actions
+              const userData = userCredential.user;
+
+              const userDocRef = doc(db, "users", user.uid);
+
+              const docSnap = await getDoc(userDocRef);
+
+              if (!docSnap.exists()) {
+                await setDoc(userDocRef, {
+                  email: user.email,
+                  uid: userData.uid,
+                  name: user.name,
+                  createdAt: new Date(),
+                });
+                router.push("/login");
+                toast.success("Login Successfully", {
+                  position: "top-right",
+                });
+              }
             } catch (error) {
               console.error("User creation error:", error);
               toast.error("Error creating user.");
