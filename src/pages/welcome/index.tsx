@@ -7,6 +7,12 @@ import Ic_logo from "@/public/images/Ic_logo.svg";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { auth, db } from "@/config/firebaseConfig";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const Welcome = () => {
   const validationSchema = Yup.object().shape({
@@ -97,16 +103,70 @@ const Welcome = () => {
         }
       )
         .then((response) => response.json())
-        .then((data) => {
-          console.log("API response:", data);
+        // .then((data) => {
+        //   console.log("API response:", data);
 
-          // Display the API response
-          const responseDiv = document.createElement("div");
-          responseDiv.innerHTML = `
-          <h3>API Response</h3>
-          <pre>${JSON.stringify(data, null, 2)}</pre>
-        `;
-          document.body.appendChild(responseDiv);
+        //   // Display the API response
+        //   const responseDiv = document.createElement("div");
+        //   responseDiv.innerHTML = `
+        //   <h3>API Response</h3>
+        //   <pre>${JSON.stringify(data, null, 2)}</pre>
+        // `;
+        //   document.body.appendChild(responseDiv);
+        // })
+        .then(async (data) => {
+          console.log("API response:", data);
+          const { user } = data;
+
+          // Extract the email from the user object
+          const userEmail = user.email;
+
+          // Check Firestore for the user
+          const userRef = doc(db, "users", userEmail); // Assuming 'users' collection in Firestore
+          const userDoc = await getDoc(userRef);
+
+          if (userDoc.exists()) {
+            // User exists, log them in
+            console.log("User exists. Logging in...");
+            try {
+              await signInWithEmailAndPassword(
+                auth,
+                userEmail,
+                "yourPasswordHere"
+              );
+              localStorage.setItem("min_tomt_login", "true");
+              toast.success("Login successfully", { position: "top-right" });
+              localStorage.setItem("I_plot_email", user.email);
+              // Navigate or perform other actions
+            } catch (error) {
+              console.error("Login error:", error);
+              toast.error("Login failed.");
+            }
+          } else {
+            // User doesn't exist, create a new user
+            console.log("User doesn't exist. Creating new user...");
+            try {
+              await setDoc(userRef, {
+                name: user.name,
+                email: userEmail,
+                address: user.address,
+              });
+
+              // Optionally create a user in Firebase Authentication as well
+              await createUserWithEmailAndPassword(
+                auth,
+                userEmail,
+                "yourPasswordHere"
+              ); // You can generate a password for them
+
+              localStorage.setItem("min_tomt_login", "true");
+              toast.success("Login successfully", { position: "top-right" });
+              localStorage.setItem("I_plot_email", user.email); // Navigate or perform other actions
+            } catch (error) {
+              console.error("User creation error:", error);
+              toast.error("Error creating user.");
+            }
+          }
         })
         .catch((error) => {
           console.error("API error:", error);
