@@ -43,6 +43,8 @@ const Welcome = () => {
 
     // If code exists, display it and provide an option to call your API
     if (code) {
+      callApi(code);
+
       // Create elements to show the code was received
       const infoDiv = document.createElement("div");
       infoDiv.innerHTML = `
@@ -54,10 +56,10 @@ const Welcome = () => {
       document.body.appendChild(infoDiv);
 
       // Add click handler for the button
-      const callApiVab: any = document.getElementById("callApi");
-      callApiVab.addEventListener("click", function () {
-        // callApi(code);
-      });
+      // const callApiVab: any = document.getElementById("callApi");
+      // callApiVab.addEventListener("click", function () {
+      // callApi(code);
+      // });
 
       router.push("/");
       sessionStorage.setItem("min_tomt_welcome", "true");
@@ -81,43 +83,43 @@ const Welcome = () => {
     }
 
     // Function to call your API with the code
-    // function callApi(code: any) {
-    //   console.log("Calling API with code:", code);
+    function callApi(code: any) {
+      console.log("Calling API with code:", code);
 
-    //   fetch(
-    //     "https://9spebvryg9.execute-api.eu-north-1.amazonaws.com/prod/vipps",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ code: code }),
-    //     }
-    //   )
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log("API response:", data);
+      fetch(
+        "https://9spebvryg9.execute-api.eu-north-1.amazonaws.com/prod/vipps",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ code: code }),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("API response:", data);
 
-    //       // Display the API response
-    //       const responseDiv = document.createElement("div");
-    //       responseDiv.innerHTML = `
-    //       <h3>API Response</h3>
-    //       <pre>${JSON.stringify(data, null, 2)}</pre>
-    //     `;
-    //       document.body.appendChild(responseDiv);
-    //     })
-    //     .catch((error) => {
-    //       console.error("API error:", error);
+          // Display the API response
+          const responseDiv = document.createElement("div");
+          responseDiv.innerHTML = `
+          <h3>API Response</h3>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+        `;
+          document.body.appendChild(responseDiv);
+        })
+        .catch((error) => {
+          console.error("API error:", error);
 
-    //       // Display the error
-    //       const errorDiv = document.createElement("div");
-    //       errorDiv.innerHTML = `
-    //       <h3>API Error</h3>
-    //       <p>${error.message || "Unknown error"}</p>
-    //     `;
-    //       document.body.appendChild(errorDiv);
-    //     });
-    // }
+          // Display the error
+          const errorDiv = document.createElement("div");
+          errorDiv.innerHTML = `
+          <h3>API Error</h3>
+          <p>${error.message || "Unknown error"}</p>
+        `;
+          document.body.appendChild(errorDiv);
+        });
+    }
   }, []);
 
   return (

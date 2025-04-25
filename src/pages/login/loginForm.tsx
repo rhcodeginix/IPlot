@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import Loader from "@/components/Loader";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import NameModal from "./nameModal";
-// import VippsButton from "@/components/vipps";
+import VippsButton from "@/components/vipps";
 
 const LoginForm: React.FC<{
   path?: any;
@@ -233,8 +233,7 @@ const LoginForm: React.FC<{
           <Image src={Img_login_google} alt="google" fetchPriority="high" />
           Logg inn med Google
         </div>
-
-        {/* <VippsButton /> */}
+        <VippsButton />
       </div>
       {loading && (
         <div className="absolute top-0 left-0">
