@@ -1,12 +1,14 @@
 "use client";
 import Button from "@/components/common/button";
 import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import * as Yup from "yup";
 import Ic_logo from "@/public/images/Ic_logo.svg";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { VIPPS_CONFIG } from "@/utils/vippsAuth";
+import axios from "axios";
 
 const Welcome = () => {
   const validationSchema = Yup.object().shape({
@@ -23,6 +25,67 @@ const Welcome = () => {
     router.push("/");
     sessionStorage.setItem("min_tomt_welcome", "true");
   };
+
+  const getUserInfoFromLocalStorage = async (): Promise<any> => {
+    const vippsAuthState = localStorage.getItem("vippsAuthState");
+
+    if (!vippsAuthState) {
+      console.log("No vippsAuthState found in localStorage");
+      return null;
+    }
+
+    console.log("Found vippsAuthState in localStorage:", vippsAuthState);
+
+    // Optionally, you can use the vippsAuthState for any further validation
+    // For instance, if you store the auth state in the session, verify it to prevent any tampering
+
+    try {
+      // Now fetch user details using the stored state (or token, depending on your implementation)
+      const userInfo = await getUserInfo(vippsAuthState); // Assuming this function uses the auth state to get user data
+
+      console.log("User info fetched using vippsAuthState", userInfo);
+
+      return userInfo;
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+      return null;
+    }
+  };
+
+  const getUserInfo = async (authState: string): Promise<any> => {
+    try {
+      console.log("Fetching user info using auth state...");
+
+      const response = await axios.get(VIPPS_CONFIG.userInfoEndpoint, {
+        headers: {
+          Authorization: `Bearer ${authState}`, // Assuming the auth state is the token or can be used for authentication
+          "Ocp-Apim-Subscription-Key": VIPPS_CONFIG.apiSubscriptionKey,
+        },
+      });
+
+      console.log("User info fetched successfully");
+
+      // Store the user info in sessionStorage (optional)
+      sessionStorage.setItem("vippsUserInfo", JSON.stringify(response.data));
+
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+      throw error;
+    }
+  };
+  // const [userInfo, setUserInfo] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const user = await getUserInfoFromLocalStorage();
+      console.log(user);
+
+      // setUserInfo(user);
+    };
+
+    fetchUserInfo();
+  }, []);
 
   return (
     <div className="relative">

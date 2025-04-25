@@ -261,7 +261,7 @@ const Regulations = () => {
 
       if (data) {
         const sheetData: any = data["Sheet1"];
-        const rowsToProcess = sheetData.slice(1000);
+        const rowsToProcess = sheetData.slice(1);
         for (const row of rowsToProcess) {
           const lamdaApiData: any = {
             kommunenummer: Number(row.kommunenummer),
@@ -457,7 +457,7 @@ const Regulations = () => {
     };
 
     const executeCabinFetchAndFind = async () => {
-      const response = await fetch("/Cabin_Plots.xlsx");
+      const response = await fetch("/CabinPlots.xlsx");
       const arrayBuffer = await response?.arrayBuffer();
       const workbook = XLSX.read(arrayBuffer, { type: "array" });
 

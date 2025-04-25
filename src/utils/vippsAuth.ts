@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const VIPPS_CONFIG = {
+export const VIPPS_CONFIG = {
   clientId: "73dc9a60-417a-46d7-85b5-0d9431b1dd31",
   redirectUri: "https://www.mintomt.no/welcome",
   scope: "openid name phoneNumber address email birthDate",
@@ -134,7 +134,6 @@ export const logoutVipps = (): void => {
   localStorage.removeItem("vippsTokenExpiresAt");
   localStorage.removeItem("vippsAuthState");
   localStorage.removeItem("vippsUserInfo");
-  console.log("Logged out from Vipps");
 };
 
 export const parseUrlParams = (url: string): URLSearchParams => {
