@@ -233,7 +233,7 @@ const LoginForm: React.FC<{
           <Image src={Img_login_google} alt="google" fetchPriority="high" />
           Logg inn med Google
         </div>
-        <VippsButton />
+{/*         <VippsButton /> */}
       </div>
       {loading && (
         <div className="absolute top-0 left-0">
