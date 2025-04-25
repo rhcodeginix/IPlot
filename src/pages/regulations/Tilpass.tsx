@@ -430,6 +430,9 @@ const Tilpass: React.FC<{
                                   <Image src={Ic_info_circle} alt="icon" />
                                 </div>
                               </div>
+                              <h3 className="text-darkBlack font-medium text-sm md:text-base lg:text-lg">
+                                {product?.Produktnavn}
+                              </h3>
                               <p className="text-darkBlack text-xs md:text-sm two_line_elipse mb-1.5 md:mb-3">
                                 {product?.Produktbeskrivelse}
                               </p>
