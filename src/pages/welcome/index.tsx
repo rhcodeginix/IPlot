@@ -58,6 +58,9 @@ const Welcome = () => {
       callApiVab.addEventListener("click", function () {
         callApi(code);
       });
+
+      router.push("/");
+      sessionStorage.setItem("min_tomt_welcome", "true");
     } else if (error) {
       // Display error information
       const errorDiv = document.createElement("div");
