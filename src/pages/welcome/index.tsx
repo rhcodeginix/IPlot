@@ -7,8 +7,6 @@ import Ic_logo from "@/public/images/Ic_logo.svg";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { VIPPS_CONFIG } from "@/utils/vippsAuth";
-import axios from "axios";
 
 const Welcome = () => {
   const validationSchema = Yup.object().shape({
@@ -26,65 +24,97 @@ const Welcome = () => {
     sessionStorage.setItem("min_tomt_welcome", "true");
   };
 
-  const getUserInfoFromLocalStorage = async (): Promise<any> => {
-    const vippsAuthState = localStorage.getItem("vippsAuthState");
-
-    if (!vippsAuthState) {
-      console.log("No vippsAuthState found in localStorage");
-      return null;
-    }
-
-    console.log("Found vippsAuthState in localStorage:", vippsAuthState);
-
-    // Optionally, you can use the vippsAuthState for any further validation
-    // For instance, if you store the auth state in the session, verify it to prevent any tampering
-
-    try {
-      // Now fetch user details using the stored state (or token, depending on your implementation)
-      const userInfo = await getUserInfo(vippsAuthState); // Assuming this function uses the auth state to get user data
-
-      console.log("User info fetched using vippsAuthState", userInfo);
-
-      return userInfo;
-    } catch (error) {
-      console.error("Error fetching user info:", error);
-      return null;
-    }
-  };
-
-  const getUserInfo = async (authState: string): Promise<any> => {
-    try {
-      console.log("Fetching user info using auth state...");
-
-      const response = await axios.get(VIPPS_CONFIG.userInfoEndpoint, {
-        headers: {
-          Authorization: `Bearer ${authState}`, // Assuming the auth state is the token or can be used for authentication
-          "Ocp-Apim-Subscription-Key": VIPPS_CONFIG.apiSubscriptionKey,
-        },
-      });
-
-      console.log("User info fetched successfully");
-
-      // Store the user info in sessionStorage (optional)
-      sessionStorage.setItem("vippsUserInfo", JSON.stringify(response.data));
-
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching user info:", error);
-      throw error;
-    }
-  };
-  // const [userInfo, setUserInfo] = useState<any>(null);
-
   useEffect(() => {
-    const fetchUserInfo = async () => {
-      const user = await getUserInfoFromLocalStorage();
-      console.log(user);
+    const urlParams = new URLSearchParams(window.location.search);
 
-      // setUserInfo(user);
-    };
+    // Log everything for debugging
+    console.log("=== Vipps Redirect Debug ===");
+    console.log("Full URL:", window.location.href);
+    console.log("All URL parameters:", Object.fromEntries(urlParams.entries()));
 
-    fetchUserInfo();
+    // Specifically check for code and state
+    const code: any = urlParams.get("code");
+    const state = urlParams.get("state");
+    const error = urlParams.get("error");
+
+    console.log("Authorization code:", code);
+    console.log("State parameter:", state);
+    console.log("Error (if any):", error);
+
+    // If code exists, display it and provide an option to call your API
+    if (code) {
+      // Create elements to show the code was received
+      const infoDiv = document.createElement("div");
+      infoDiv.innerHTML = `
+        <h3>Code received from Vipps</h3>
+        <p>Code: ${code}</p>
+        <p>State: ${state || "No state parameter"}</p>
+        <button id="callApi">Call API with this code</button>
+      `;
+      document.body.appendChild(infoDiv);
+
+      // Add click handler for the button
+      const callApiVab: any = document.getElementById("callApi");
+      callApiVab.addEventListener("click", function () {
+        callApi(code);
+      });
+    } else if (error) {
+      // Display error information
+      const errorDiv = document.createElement("div");
+      errorDiv.innerHTML = `
+        <h3>Error from Vipps</h3>
+        <p>Error: ${error}</p>
+        <p>Description: ${urlParams.get("error_description") || "No description"}</p>
+      `;
+      document.body.appendChild(errorDiv);
+    } else {
+      // No code or error found
+      const noParamsDiv = document.createElement("div");
+      noParamsDiv.innerHTML = `
+        <h3>No code or error parameters found</h3>
+        <p>This redirect doesn't contain the expected parameters from Vipps.</p>
+      `;
+      document.body.appendChild(noParamsDiv);
+    }
+
+    // Function to call your API with the code
+    function callApi(code: any) {
+      console.log("Calling API with code:", code);
+
+      fetch(
+        "https://9spebvryg9.execute-api.eu-north-1.amazonaws.com/prod/vipps",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ code: code }),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("API response:", data);
+
+          // Display the API response
+          const responseDiv = document.createElement("div");
+          responseDiv.innerHTML = `
+          <h3>API Response</h3>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+        `;
+          document.body.appendChild(responseDiv);
+        })
+        .catch((error) => {
+          console.error("API error:", error);
+
+          // Display the error
+          const errorDiv = document.createElement("div");
+          errorDiv.innerHTML = `
+          <h3>API Error</h3>
+          <p>${error.message || "Unknown error"}</p>
+        `;
+          document.body.appendChild(errorDiv);
+        });
+    }
   }, []);
 
   return (
