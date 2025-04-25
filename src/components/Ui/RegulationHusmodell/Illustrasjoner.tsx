@@ -10,9 +10,15 @@ import Modal from "@/components/common/modal";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/router";
 
-export function formatCurrency(nokValue: any) {
-  let number = nokValue?.replace(/\s/g, "");
-  return new Intl.NumberFormat("de-DE").format(Number(number)) + " NOK";
+export function formatCurrency(nokValue: number | string) {
+  const number =
+    typeof nokValue === "string"
+      ? Number(nokValue.replace(/\s/g, ""))
+      : Number(nokValue);
+
+  return (
+    new Intl.NumberFormat("de-DE", { style: "decimal" }).format(number) + " NOK"
+  );
 }
 
 const Illustrasjoner: React.FC = () => {

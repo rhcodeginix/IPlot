@@ -18,7 +18,7 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
         return acc + (numericValue ? parseFloat(numericValue) : 0);
       }, 0)
     : 0;
-  const formattedNumber = totalPrisOfTomtekost.toLocaleString("nb-NO");
+  const formattedNumber = totalPrisOfTomtekost;
   const { customizeHouse: custHouse } = useCustomizeHouse();
 
   const totalCustPris = custHouse
@@ -40,8 +40,7 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
         );
       }, 0)
     : 0;
-  const formattedNumberOfByggekostnader =
-    totalPrisOfByggekostnader.toLocaleString("nb-NO");
+  const formattedNumberOfByggekostnader = totalPrisOfByggekostnader;
   return (
     <>
       <div
@@ -92,9 +91,7 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
                 </p>
               </div>
               <h4 className="text-black font-medium text-sm md:text-base whitespace-nowrap border flex items-center border-darkGray rounded-lg h-[40px] py-[10px] px-3 bg-white">
-                {totalCustPris
-                  ? formatCurrency(totalCustPris.toLocaleString("nb-NO"))
-                  : "0 NOK"}
+                {totalCustPris ? formatCurrency(totalCustPris) : "0 NOK"}
               </h4>
             </div>
             <div className="flex items-center gap-2 justify-between">

@@ -17,9 +17,15 @@ import Loader from "@/components/Loader";
 import { onAuthStateChanged } from "firebase/auth";
 import Illustrasjoner from "./Illustrasjoner";
 
-export function formatCurrency(nokValue: any) {
-  let number = nokValue?.replace(/\s/g, "");
-  return new Intl.NumberFormat("de-DE").format(Number(number)) + " NOK";
+export function formatCurrency(nokValue: number | string) {
+  const number =
+    typeof nokValue === "string"
+      ? Number(nokValue.replace(/\s/g, ""))
+      : Number(nokValue);
+
+  return (
+    new Intl.NumberFormat("de-DE", { style: "decimal" }).format(number) + " NOK"
+  );
 }
 
 const PropertyDetailPage: React.FC<{

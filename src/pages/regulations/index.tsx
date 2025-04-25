@@ -261,7 +261,7 @@ const Regulations = () => {
 
       if (data) {
         const sheetData: any = data["Sheet1"];
-        const rowsToProcess = sheetData.slice(1);
+        const rowsToProcess = sheetData.slice(1000);
         for (const row of rowsToProcess) {
           const lamdaApiData: any = {
             kommunenummer: Number(row.kommunenummer),

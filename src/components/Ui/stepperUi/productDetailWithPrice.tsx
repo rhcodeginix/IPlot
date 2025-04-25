@@ -141,10 +141,9 @@ const PropertyDetailWithPrice: React.FC<any> = () => {
       husmodellData?.takeOver,
   ].reduce((acc, curr) => acc + (curr || 0), 0);
 
-  const total = (
+  const total =
     Number(husmodellData?.pris?.replace(/\s/g, "")) +
-    Number(plotData?.pris || 0)
-  ).toLocaleString("nb-NO");
+    Number(plotData?.pris || 0);
 
   return (
     <>
