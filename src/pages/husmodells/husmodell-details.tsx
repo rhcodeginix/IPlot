@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import SideSpaceContainer from "@/components/common/sideSpace";
 import Button from "@/components/common/button";
 import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
@@ -24,15 +24,6 @@ const HusmodellDetail: React.FC<{
   lamdaDataFromApi,
   supplierData,
 }) => {
-  const tabs: any = [
-    {
-      id: `house`,
-      label: "Husmodellinformasjon",
-    },
-  ];
-
-  const [activeTab, setActiveTab] = useState<string>(tabs[0].id);
-
   if (loading) {
     return <Loader />;
   }
@@ -63,26 +54,7 @@ const HusmodellDetail: React.FC<{
         </div>
         <HouseDetailsection HouseModelData={HouseModelData} loading={loading} />
         <SideSpaceContainer className="relative pt-[38px]">
-          <div>
-            <div className="flex border border-gray3 rounded-lg w-max bg-gray3 p-[6px] mb-[38px]">
-              {tabs.map((tab: any) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 py-2 text-base transition-colors duration-300 flex items-center gap-2 ${
-                    activeTab === tab.id
-                      ? "bg-white font-medium text-[#7839EE]"
-                      : "text-black"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-            <div className={`${activeTab === "house" ? "block" : "hidden"}`}>
-              <HouseDetailPage />
-            </div>
-          </div>
+          <HouseDetailPage />
         </SideSpaceContainer>
         <div
           className="sticky bottom-0 bg-white py-4 md:py-6"

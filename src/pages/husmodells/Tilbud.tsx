@@ -612,6 +612,18 @@ const Tilbud: React.FC<{
                                 : 0}
                             </div>
                           </div>
+                          <div className="flex gap-2 w-full justify-between">
+                            <h4 className="text-secondary2 text-xs md:text-sm">
+                              Tomtpris
+                            </h4>
+                            <div className="text-black font-medium text-xs md:text-sm">
+                              {pris
+                                ? pris === 0
+                                  ? "0 NOK"
+                                  : formatCurrency(pris)
+                                : "0 NOK"}
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div className="bg-[#ECE9FE] p-3 md:p-4 flex gap-2 w-full justify-between">

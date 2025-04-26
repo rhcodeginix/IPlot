@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Img_product_3d_img1 from "@/public/images/Img_product_3d_img1.png";
 import Image from "next/image";
 import Ic_close from "@/public/images/Ic_close.svg";
 import { doc, getDoc } from "firebase/firestore";
@@ -56,22 +55,28 @@ const Illustrasjoner: React.FC = () => {
     fetchData();
   }, [id]);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupMode, setPopupMode] = useState<"single" | "gallery">("single");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
   const images = finalData?.Husdetaljer?.photo3D || [];
 
-  const displayedImages = images.slice(0, 5);
-  const extraImagesCount = images.length - 5;
+  const displayedImages = images.slice(0, 6);
+  const extraImagesCount = images.length - 6;
 
-  const handlePopup = () => {
-    if (isPopupOpen) {
-      setIsPopupOpen(false);
-    } else {
-      setIsPopupOpen(true);
-    }
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    setPopupMode("single");
+    setIsPopupOpen(true);
+  };
+
+  const handleGalleryClick = () => {
+    setPopupMode("gallery");
+    setIsPopupOpen(true);
   };
   return (
     <div className="relative">
@@ -113,20 +118,25 @@ const Illustrasjoner: React.FC = () => {
                 transition: "max-height 0.2s ease-out",
               }}
             >
-              <div className="gap-4 lg:gap-6 flex flex-col lg:flex-row md:h-[400px]">
-                <div className="w-full lg:w-[40%]">
-                  <Image
-                    src={Img_product_3d_img1}
-                    alt="product"
-                    className="w-full h-full"
-                  />
-                </div>
-                <div className="w-full lg:w-[60%] grid grid-cols-3 grid-rows-2 gap-4 md:gap-6">
+              <div
+                className={`gap-4 lg:gap-6 flex flex-col lg:flex-row ${displayedImages.length < 4 ? "md:h-[400px]" : "md:h-[500px]"}`}
+              >
+                <div
+                  className={`w-full grid gap-4 md:gap-6 grid-cols-3
+      ${displayedImages.length < 4 ? "grid-rows-1" : "grid-rows-2"}
+    `}
+                >
                   {displayedImages.map((image: any, index: number) => (
                     <div
                       key={index}
-                      className="relative overflow-hidden h-full"
-                    >
+                      className="relative overflow-hidden h-full cursor-pointer"
+                      onClick={() => {
+                        if (index === 5 && extraImagesCount > 0) {
+                          handleGalleryClick();
+                        } else {
+                          handleImageClick(image);
+                        }
+                      }}                    >
                       <img
                         src={image}
                         alt="product"
@@ -136,7 +146,6 @@ const Illustrasjoner: React.FC = () => {
                       {index === 5 && extraImagesCount > 0 && (
                         <div
                           className="absolute inset-0 bg-black bg-opacity-35 flex items-center justify-center text-white text-base font-bold cursor-pointer rounded-lg"
-                          onClick={handlePopup}
                         >
                           +{extraImagesCount}
                         </div>
@@ -149,26 +158,38 @@ const Illustrasjoner: React.FC = () => {
           </div>
         </>
       )}
-      {isPopupOpen && (
-        <Modal isOpen={true} onClose={handlePopup}>
+     {isPopupOpen && (
+        <Modal isOpen={true} onClose={() => setIsPopupOpen(false)}>
           <div className="bg-white p-6 rounded-lg max-w-4xl w-full relative">
             <button
               className="absolute top-3 right-3"
-              onClick={() => handlePopup()}
+              onClick={() => setIsPopupOpen(false)}
             >
               <Image src={Ic_close} alt="close" />
             </button>
 
-            <div className="grid grid-cols-3 gap-2 my-4">
-              {images.map((image: any, index: number) => (
+            {popupMode === "single" && selectedImage && (
+              <div className="flex justify-center items-center h-[500px]">
                 <img
-                  key={index}
-                  src={image}
-                  alt="product"
-                  className="w-full h-[200px]"
+                  src={selectedImage}
+                  alt="Selected"
+                  className="max-h-full max-w-full object-contain"
                 />
-              ))}
-            </div>
+              </div>
+            )}
+
+            {popupMode === "gallery" && (
+              <div className="grid grid-cols-3 gap-2 my-4">
+                {images.map((image: any, index: number) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt="product"
+                    className="w-full h-[200px] object-cover"
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </Modal>
       )}
