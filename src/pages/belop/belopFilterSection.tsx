@@ -151,8 +151,8 @@ const BelopFilterSection: React.FC<{
                 Område: [],
                 minRangeForPlot: 0,
                 minRangeForHusmodell: 0,
-                maxRangeForPlot: Number(maxPrice) * 0.4,
-                maxRangeForHusmodell: Number(maxPrice) * 0.6,
+                maxRangeForPlot: Number(maxPrice) * 0.2,
+                maxRangeForHusmodell: Number(maxPrice) * 0.8,
               }));
               delete updatedQuery.maxRangeHusmodell;
               delete updatedQuery.maxRangePlot;
