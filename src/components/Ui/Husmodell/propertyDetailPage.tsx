@@ -17,7 +17,7 @@ import LoginForm from "@/pages/login/loginForm";
 
 const PropertyDetailPage: React.FC<any> = ({ handleNext }) => {
   const router = useRouter();
-  const id = router.query["husodellId"];
+  const id = router.query["husmodellId"];
   const city = router.query["city"];
   const getEmbedUrl = (url: string) => {
     const videoId = url?.split("v=")[1]?.split("&")[0];
@@ -98,7 +98,9 @@ const PropertyDetailPage: React.FC<any> = ({ handleNext }) => {
         console.error("Error fetching supplier data:", error);
       }
     };
-    getData();
+    if (husmodellData?.Leverandører) {
+      getData();
+    }
   }, [husmodellData?.Leverandører]);
 
   const [loginPopup, setLoginPopup] = useState(false);
@@ -200,14 +202,6 @@ const PropertyDetailPage: React.FC<any> = ({ handleNext }) => {
                           </td>
                           <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
                             {husmodellData?.BRATotal} m<sup>2</sup>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="text-left pb-[16px] text-secondary text-sm whitespace-nowrap">
-                            BRA bolig
-                          </td>
-                          <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
-                            {husmodellData?.BebygdAreal} m<sup>2</sup>
                           </td>
                         </tr>
                         <tr>

@@ -6,8 +6,17 @@ import { db } from "@/config/firebaseConfig";
 import Ic_chevron_up from "@/public/images/Ic_chevron_up.svg";
 import Ic_chevron_down from "@/public/images/Ic_chevron_down.svg";
 import Modal from "@/components/common/modal";
+import Ic_download_primary from "@/public/images/Ic_download.svg";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/router";
+import FileInfo from "@/components/FileInfo";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { File } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export function formatCurrency(nokValue: number | string) {
   const number =
@@ -20,13 +29,37 @@ export function formatCurrency(nokValue: number | string) {
   );
 }
 
+const handleDownload = async (filePath: string) => {
+  try {
+    if (!filePath) {
+      console.error("File path is missing!");
+      return;
+    }
+
+    const storage = getStorage();
+    const fileRef = ref(storage, filePath);
+    const url = await getDownloadURL(fileRef);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.download = filePath.split("/").pop() || "download";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } catch (error) {
+    console.error("Error downloading file:", error);
+  }
+};
+
 const Illustrasjoner: React.FC = () => {
   const [finalData, setFinalData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const textareaRef = useRef<any>(null);
   const husmodellData = finalData?.Husdetaljer;
   const router = useRouter();
-  const id = router.query["husodellId"];
+  const id = router.query["husmodellId"];
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -52,7 +85,9 @@ const Illustrasjoner: React.FC = () => {
       }
     };
 
-    fetchData();
+    if (id) {
+      fetchData();
+    }
   }, [id]);
 
   const [isOpen, setIsOpen] = useState(true);
@@ -119,10 +154,10 @@ const Illustrasjoner: React.FC = () => {
               }}
             >
               <div
-                className={`gap-4 lg:gap-6 flex flex-col lg:flex-row ${displayedImages.length < 4 ? "md:h-[400px]" : "md:h-[500px]"}`}
+                className={`gap-4 lg:gap-6 flex flex-col desktop:flex-row ${displayedImages.length < 4 ? "md:h-[400px]" : "md:h-[500px]"}`}
               >
                 <div
-                  className={`w-full grid gap-4 md:gap-6 grid-cols-3
+                  className={`w-full desktop:w-2/3 grid gap-4 md:gap-6 grid-cols-3
       ${displayedImages.length < 4 ? "grid-rows-1" : "grid-rows-2"}
     `}
                 >
@@ -136,29 +171,67 @@ const Illustrasjoner: React.FC = () => {
                         } else {
                           handleImageClick(image);
                         }
-                      }}                    >
+                      }}
+                    >
                       <img
                         src={image}
                         alt="product"
-                        className="w-full h-full object-fill rounded-lg"
+                        className="w-full h-full object-cover rounded-lg"
                       />
 
                       {index === 5 && extraImagesCount > 0 && (
-                        <div
-                          className="absolute inset-0 bg-black bg-opacity-35 flex items-center justify-center text-white text-base font-bold cursor-pointer rounded-lg"
-                        >
+                        <div className="absolute inset-0 bg-black bg-opacity-35 flex items-center justify-center text-white text-base font-bold cursor-pointer rounded-lg">
                           +{extraImagesCount}
                         </div>
                       )}
                     </div>
                   ))}
                 </div>
+                <div className="w-full desktop:w-1/3 border border-gray2 shadow-shadow2 rounded-lg h-full">
+                  <div className="px-3 md:px-4 py-3 md:py-5 border-b border-gray2 text-darkBlack text-sm md:text-base font-semibold">
+                    Dokumenter
+                  </div>
+                  <div className="p-3 md:p-4 flex flex-col gap-2.5 md:gap-4 overflow-y-auto desktop:h-[calc(100%-65px)] overFlowAutoY">
+                    {husmodellData?.documents &&
+                    husmodellData?.documents.length > 0 ? (
+                      husmodellData?.documents.map(
+                        (doc: any, index: number) => {
+                          return (
+                            <div
+                              className="border border-gray2 rounded-lg p-2 md:p-3 bg-[#F9FAFB] flex items-center justify-between"
+                              key={index}
+                            >
+                              <div className="flex items-start gap-2 md:gap-3 truncate">
+                                <div className="border-[4px] border-lightPurple rounded-full flex items-center justify-center">
+                                  <div className="bg-darkPurple w-6 md:w-7 h-6 md:h-7 rounded-full flex justify-center items-center">
+                                    <File className="text-primary w-4 h-4" />
+                                  </div>
+                                </div>
+                                <FileInfo file={doc} />
+                              </div>
+                              <Image
+                                src={Ic_download_primary}
+                                alt="download"
+                                className="cursor-pointer w-5 h-5 md:w-6 md:h-6"
+                                onClick={() => handleDownload(doc)}
+                              />
+                            </div>
+                          );
+                        }
+                      )
+                    ) : (
+                      <>
+                        <p>Ingen dokument funnet.</p>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </>
       )}
-     {isPopupOpen && (
+      {isPopupOpen && (
         <Modal isOpen={true} onClose={() => setIsPopupOpen(false)}>
           <div className="bg-white p-6 rounded-lg max-w-4xl w-full relative">
             <button
@@ -169,25 +242,77 @@ const Illustrasjoner: React.FC = () => {
             </button>
 
             {popupMode === "single" && selectedImage && (
-              <div className="flex justify-center items-center h-[500px]">
+              <div className="flex justify-center items-center w-[400px] h-[400px] my-4 relative">
+                <button
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 px-4 py-2 rounded-full"
+                  onClick={() => {
+                    const previousIndex =
+                      (images.indexOf(selectedImage) - 1 + images.length) %
+                      images.length;
+                    setSelectedImage(images[previousIndex]);
+                  }}
+                >
+                  &lt;
+                </button>
+
                 <img
                   src={selectedImage}
                   alt="Selected"
-                  className="max-h-full max-w-full object-contain"
+                  className="h-full w-full object-cover"
                 />
+
+                <button
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 px-4 py-2 rounded-full"
+                  onClick={() => {
+                    const nextIndex =
+                      (images.indexOf(selectedImage) + 1) % images.length;
+                    setSelectedImage(images[nextIndex]);
+                  }}
+                >
+                  &gt;
+                </button>
               </div>
             )}
 
             {popupMode === "gallery" && (
-              <div className="grid grid-cols-3 gap-2 my-4">
-                {images.map((image: any, index: number) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt="product"
-                    className="w-full h-[200px] object-cover"
-                  />
-                ))}
+              <div className="my-4 galleryImage">
+                <Swiper
+                  spaceBetween={10}
+                  slidesPerView={3}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 1,
+                    },
+                    768: {
+                      slidesPerView: 2,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                    },
+                  }}
+                  navigation={images.length > 1}
+                  modules={[Navigation, Pagination]}
+                  className="custom-swiper w-full h-[200px] relative"
+                  pagination={
+                    images.length > 1
+                      ? {
+                          el: ".swiper-pagination",
+                          clickable: true,
+                        }
+                      : false
+                  }
+                >
+                  {images.map((image: any, index: number) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={image}
+                        alt="product"
+                        className="w-full h-full object-cover"
+                      />
+                    </SwiperSlide>
+                  ))}
+                  <div className="swiper-pagination"></div>
+                </Swiper>
               </div>
             )}
           </div>

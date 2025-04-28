@@ -78,7 +78,7 @@ const BelopProperty: React.FC<{
                     }}
                     onClick={() => {
                       router.push(
-                        `${router.asPath}&propertyId=${property?.plot?.id}&husodellId=${property?.house?.id}&emptyPlot=true`
+                        `${router.asPath}&propertyId=${property?.plot?.id}&husmodellId=${property?.house?.id}&emptyPlot=true`
                       );
                       const currIndex = 0;
                       localStorage.setItem("currIndex", currIndex.toString());
@@ -246,7 +246,7 @@ const BelopProperty: React.FC<{
                             className="border border-greenBtn bg-greenBtn text-white text-sm md:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                             onClick={() => {
                               router.push(
-                                `${router.asPath}&propertyId=${property?.plot?.id}&husodellId=${property?.house?.id}&emptyPlot=true`
+                                `${router.asPath}&propertyId=${property?.plot?.id}&husmodellId=${property?.house?.id}&emptyPlot=true`
                               );
                               const currIndex = 0;
                               localStorage.setItem(

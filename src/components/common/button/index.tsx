@@ -5,7 +5,7 @@ interface ButtonProps {
   text: string;
   className: string;
   type?: "button" | "submit" | "reset";
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   path?: string;
   disabled?: boolean;
 }
@@ -20,11 +20,12 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const router = useRouter();
 
-  const handleClick = () => {
+  // const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (path) {
       router.push(path);
-    } else {
-      onClick?.();
+    } else if (onClick) {
+      onClick?.(e);
     }
   };
 

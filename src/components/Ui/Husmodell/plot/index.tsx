@@ -68,7 +68,7 @@ const Plots: React.FC<{
         const maxRangePlot = Number(
           queryParams.get("maxRangePlot") || Infinity
         );
-        const husodellId = queryParams.get("husodellId");
+        const husmodellId = queryParams.get("husmodellId");
         const cityQuery = queryParams.get("city");
 
         const db = getFirestore();
@@ -139,7 +139,7 @@ const Plots: React.FC<{
           return;
         }
 
-        const husmodellDocRef = doc(db, "house_model", String(husodellId));
+        const husmodellDocRef = doc(db, "house_model", String(husmodellId));
         const husmodellSnap = await getDoc(husmodellDocRef);
 
         if (!husmodellSnap.exists()) {

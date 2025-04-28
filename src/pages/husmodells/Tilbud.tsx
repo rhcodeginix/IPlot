@@ -21,7 +21,6 @@ import { addDaysToDate } from "@/components/Ui/stepperUi/productDetailWithPrice"
 import Link from "next/link";
 import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
 import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
-import { formatPrice } from "../belop/belopProperty";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
 import NorkartMap from "@/components/map";
 
@@ -49,17 +48,10 @@ const Tilbud: React.FC<{
   const Huskonfigurator =
     HouseModelData?.Huskonfigurator?.hovedkategorinavn || [];
   const Husdetaljer = HouseModelData?.Husdetaljer;
-  const [plotId, setPlotId] = useState<string | null>(null);
-  const [husmodellId, setHusmodellId] = useState<string | null>(null);
-  const [user, setUser] = useState<any>(null);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const queryParams = new URLSearchParams(window.location.search);
-      setPlotId(queryParams.get("plotId"));
-      setHusmodellId(queryParams.get("husodellId"));
-    }
-  }, []);
+  const [user, setUser] = useState<any>(null);
+  const { plotId, husmodellId } = router.query;
+
   const [finalData, setFinalData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const husmodellData = finalData?.husmodell?.Husdetaljer;
@@ -92,7 +84,9 @@ const Tilbud: React.FC<{
       }
     };
 
-    fetchData();
+    if (husmodellId && plotId) {
+      fetchData();
+    }
   }, [husmodellId, plotId]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
@@ -127,9 +121,9 @@ const Tilbud: React.FC<{
       queryParams.delete("leadId");
 
       try {
-        const plotDocSnap = await getDoc(doc(db, "empty_plot", plotId));
+        const plotDocSnap = await getDoc(doc(db, "empty_plot", String(plotId)));
         const husmodellDocSnap = await getDoc(
-          doc(db, "house_model", husmodellId)
+          doc(db, "house_model", String(husmodellId))
         );
 
         const finalData = {
@@ -420,36 +414,6 @@ const Tilbud: React.FC<{
                       <div className="flex flex-col gap-1 w-max">
                         <p className="text-secondary text-xs md:text-sm whitespace-nowrap">
                           Estimert Innflytting
-                        </p>
-                        <h5 className="text-black text-sm font-semibold text-right whitespace-nowrap">
-                          {addDaysToDate(HouseModelData?.createdAt, totalDays)}
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <p className="text-[#4A5578] text-xs md:text-sm mb-1 truncate">
-                        Pris for <span className="font-semibold">Tomt</span>
-                      </p>
-                      <h6 className="text-xs md:text-base font-semibold desktop:text-lg">
-                        {Husdetaljer?.pris ? formatPrice(pris) : "0 NOK"}
-                      </h6>
-                    </div>
-                    <div className="flex items-center justify-between gap-1 sm:gap-2 mb-4">
-                      <div className="flex flex-col gap-1 w-max">
-                        <p className="text-secondary text-xs md:text-sm whitespace-nowrap truncate">
-                          ESTIMERT BYGGESTART
-                        </p>
-                        <h5 className="text-black text-sm font-semibold whitespace-nowrap">
-                          {addDaysToDate(
-                            HouseModelData?.createdAt,
-                            Husdetaljer?.appSubmitApprove
-                          )}
-                        </h5>
-                      </div>
-                      <div className="flex flex-col gap-1 w-max">
-                        <p className="text-secondary text-xs md:text-sm whitespace-nowrap truncate">
-                          ESTIMERT INNFLYTTING
                         </p>
                         <h5 className="text-black text-sm font-semibold text-right whitespace-nowrap">
                           {addDaysToDate(HouseModelData?.createdAt, totalDays)}

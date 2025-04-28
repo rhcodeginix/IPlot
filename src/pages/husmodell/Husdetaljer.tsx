@@ -186,14 +186,6 @@ const Husdetaljer: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
                   </tr>
                   <tr>
                     <td className="text-left pb-[16px] text-secondary text-sm whitespace-nowrap">
-                      BRA bolig
-                    </td>
-                    <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
-                      {husmodellData?.BebygdAreal} m<sup>2</sup>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-left pb-[16px] text-secondary text-sm whitespace-nowrap">
                       GUA (Gulvareal):
                     </td>
                     <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">

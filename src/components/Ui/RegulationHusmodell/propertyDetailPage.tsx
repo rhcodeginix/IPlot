@@ -80,7 +80,7 @@ const PropertyDetailPage: React.FC<{
     if (typeof window !== "undefined") {
       const queryParams = new URLSearchParams(window.location.search);
       setPlotId(queryParams.get("plotId"));
-      setHusmodellId(queryParams.get("husodellId"));
+      setHusmodellId(queryParams.get("husmodellId"));
     }
   }, []);
 
@@ -227,7 +227,9 @@ const PropertyDetailPage: React.FC<{
         console.error("Error fetching supplier data:", error);
       }
     };
-    getData();
+    if (husmodellData?.Leverandører) {
+      getData();
+    }
   }, [husmodellData?.Leverandører]);
 
   return (
@@ -296,14 +298,6 @@ const PropertyDetailPage: React.FC<{
                             </td>
                             <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
                               {husmodellData?.BRATotal} m<sup>2</sup>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="text-left pb-[16px] text-secondary text-sm whitespace-nowrap">
-                              BRA bolig
-                            </td>
-                            <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
-                              {husmodellData?.BebygdAreal} m<sup>2</sup>
                             </td>
                           </tr>
                           <tr>

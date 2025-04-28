@@ -27,7 +27,7 @@ const HusmodellDetail = () => {
     }
   }, [currIndex]);
   const router = useRouter();
-  const { plotId, husodellId } = router.query;
+  const { plotId, husmodellId } = router.query;
   const [lamdaDataFromApi, setLamdaDataFromApi] = useState<any | null>(null);
   const [loading, setLoading] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
@@ -181,7 +181,7 @@ const HusmodellDetail = () => {
       setLoading(true);
 
       try {
-        const husmodellDocRef = doc(db, "house_model", String(husodellId));
+        const husmodellDocRef = doc(db, "house_model", String(husmodellId));
         const husmodellDocSnap = await getDoc(husmodellDocRef);
 
         if (husmodellDocSnap.exists()) {
@@ -195,9 +195,10 @@ const HusmodellDetail = () => {
         setLoading(false);
       }
     };
-
-    fetchData();
-  }, [husodellId, isCall, user]);
+    if (husmodellId) {
+      fetchData();
+    }
+  }, [husmodellId, isCall, user]);
   const husmodellData = HouseModelData?.Husdetaljer;
   const [supplierData, setSupplierData] = useState<any>(null);
 
@@ -223,7 +224,9 @@ const HusmodellDetail = () => {
         console.error("Error fetching supplier data:", error);
       }
     };
-    getData();
+    if (husmodellData?.Leverandører) {
+      getData();
+    }
   }, [husmodellData?.Leverandører]);
   const steps = [
     {

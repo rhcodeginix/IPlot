@@ -178,11 +178,10 @@ const PlotFilterSection: React.FC<{
                   <div className="grid grid-cols-1 gap-x-8 gap-y-4">
                     {OmrådeArray.map((data: any, index: number) => {
                       return (
-                        <>
+                        <div key={index}>
                           <label
                             className="container container_darkgray_withPurple truncate"
                             htmlFor={data.name}
-                            key={index}
                           >
                             <span
                               className={`text-darkBlack text-sm laptop:text-base ${formData?.Område.includes(data.name) && "font-semibold"}`}
@@ -328,7 +327,7 @@ const PlotFilterSection: React.FC<{
                                 )}
                             </div>
                           )}
-                        </>
+                        </div>
                       );
                     })}
                   </div>

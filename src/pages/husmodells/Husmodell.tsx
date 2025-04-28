@@ -22,7 +22,7 @@ const Husmodell: React.FC<any> = ({
 }) => {
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
-  const { husodellId } = router.query;
+  const { husmodellId } = router.query;
 
   const [loginPopup, setLoginPopup] = useState(false);
 
@@ -67,7 +67,7 @@ const Husmodell: React.FC<any> = ({
 
   return (
     <div className="relative">
-      {!husodellId ? (
+      {!husmodellId ? (
         <HusmodellPropertyPage />
       ) : (
         <HusmodellDetail

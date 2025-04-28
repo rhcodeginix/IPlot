@@ -143,7 +143,7 @@ const Tilbud: React.FC<{
                   className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
                   onClick={() => {
                     delete updatedQuery.propertyId;
-                    delete updatedQuery.husodellId;
+                    delete updatedQuery.husmodellId;
                     delete updatedQuery.leadId;
                     delete updatedQuery.emptyPlot;
 

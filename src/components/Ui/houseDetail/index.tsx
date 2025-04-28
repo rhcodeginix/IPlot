@@ -13,7 +13,7 @@ import Image from "next/image";
 
 const HouseDetailPage: React.FC = () => {
   const router = useRouter();
-  const id = router.query["husodellId"];
+  const id = router.query["husmodellId"];
   const getEmbedUrl = (url: string) => {
     const videoId = url?.split("v=")[1]?.split("&")[0];
     return videoId
@@ -44,8 +44,9 @@ const HouseDetailPage: React.FC = () => {
         setLoading(false);
       }
     };
-
-    fetchData();
+    if (id && isCall) {
+      fetchData();
+    }
   }, [id, isCall]);
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("min_tomt_login") === "true";
@@ -86,7 +87,9 @@ const HouseDetailPage: React.FC = () => {
         console.error("Error fetching supplier data:", error);
       }
     };
-    getData();
+    if (husmodellData?.Leverandører) {
+      getData();
+    }
   }, [husmodellData?.Leverandører]);
 
   useEffect(() => {
@@ -170,14 +173,6 @@ const HouseDetailPage: React.FC = () => {
                         </td>
                         <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.BRATotal} m<sup>2</sup>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          BRA bolig
-                        </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.BebygdAreal} m<sup>2</sup>
                         </td>
                       </tr>
                       <tr>

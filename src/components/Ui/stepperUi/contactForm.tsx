@@ -50,7 +50,7 @@ const ContactForm: React.FC<{ leadId?: any }> = ({ leadId }) => {
     }
   };
   const [finalData, setFinalData] = useState<any>(null);
-  const id = router.query["husodellId"];
+  const id = router.query["husmodellId"];
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -94,7 +94,9 @@ const ContactForm: React.FC<{ leadId?: any }> = ({ leadId }) => {
         console.error("Error fetching supplier data:", error);
       }
     };
-    getData();
+    if (husmodellData?.Leverandører) {
+      getData();
+    }
   }, [husmodellData?.Leverandører]);
 
   return (

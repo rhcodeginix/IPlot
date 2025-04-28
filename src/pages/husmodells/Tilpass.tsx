@@ -343,58 +343,87 @@ const Tilpass: React.FC<any> = ({
                               return (
                                 <div
                                   key={index}
-                                  className="bg-gray3 rounded-lg p-3"
+                                  className="bg-gray3 rounded-lg p-3 flex flex-col justify-between cursor-pointer"
+                                  onClick={(e: any) => {
+                                    if (
+                                      !e.target.closest(
+                                        ".swiper-button-next"
+                                      ) &&
+                                      !e.target.closest(".swiper-button-prev")
+                                    ) {
+                                      openDrawer(product);
+                                    }
+                                  }}
                                 >
-                                  <div className="w-full h-[158px] mb-3 relative">
-                                    {product?.Hovedbilde?.length > 0 && (
-                                      <Swiper
-                                        navigation={
-                                          product?.Hovedbilde?.length > 1
-                                        }
-                                        modules={[Navigation, Pagination]}
-                                        className="custom-swiper w-full h-[158px] relative"
-                                        pagination={
-                                          product?.Hovedbilde?.length > 1
-                                            ? {
-                                                el: ".swiper-pagination",
-                                                clickable: false,
-                                              }
-                                            : false
-                                        }
-                                        style={{ zIndex: 99 }}
+                                  <div>
+                                    <div className="w-full h-[158px] mb-3 relative">
+                                      {product?.Hovedbilde?.length > 0 && (
+                                        <Swiper
+                                          navigation={
+                                            product?.Hovedbilde?.length > 1
+                                              ? true
+                                              : false
+                                          }
+                                          modules={[Navigation, Pagination]}
+                                          className="custom-swiper w-full h-[158px] relative"
+                                          pagination={
+                                            product?.Hovedbilde?.length > 1
+                                              ? {
+                                                  el: ".swiper-pagination",
+                                                  clickable: false,
+                                                }
+                                              : false
+                                          }
+                                          style={{ zIndex: 99 }}
+                                        >
+                                          {product?.Hovedbilde.map(
+                                            (img: string, index: number) => (
+                                              <SwiperSlide
+                                                key={index}
+                                                className="w-full h-[158px]"
+                                              >
+                                                <img
+                                                  src={img}
+                                                  alt="image"
+                                                  className="h-full w-full object-cover rounded-lg"
+                                                />
+                                              </SwiperSlide>
+                                            )
+                                          )}
+                                          <div className="swiper-pagination"></div>
+                                        </Swiper>
+                                      )}
+                                      <div
+                                        className="w-[28px] h-[28px] rounded-full flex items-center justify-center cursor-pointer absolute top-2 right-2 bg-white"
+                                        style={{ zIndex: 9999 }}
+                                        onClick={() => openDrawer(product)}
                                       >
-                                        {product?.Hovedbilde.map(
-                                          (img: string, index: number) => (
-                                            <SwiperSlide
-                                              key={index}
-                                              className="w-full h-[158px]"
-                                            >
-                                              <img
-                                                src={img}
-                                                alt="image"
-                                                className="h-full w-full object-cover rounded-lg"
-                                              />
-                                            </SwiperSlide>
-                                          )
-                                        )}
-                                        <div className="swiper-pagination"></div>
-                                      </Swiper>
-                                    )}
-                                    <div
-                                      className="w-[28px] h-[28px] rounded-full flex items-center justify-center cursor-pointer absolute top-2 right-2 bg-white"
-                                      style={{ zIndex: 9999 }}
-                                      onClick={() => openDrawer(product)}
-                                    >
-                                      <Image src={Ic_info_circle} alt="icon" />
+                                        <Image
+                                          src={Ic_info_circle}
+                                          alt="icon"
+                                        />
+                                      </div>
+                                    </div>
+                                    <h3 className="text-darkBlack font-medium text-sm md:text-base lg:text-lg truncate">
+                                      {product?.Produktnavn}
+                                    </h3>
+                                    <div className="relative group">
+                                      <p className="text-darkBlack text-xs md:text-sm two_line_elipse mb-1.5 md:mb-3 cursor-pointer">
+                                        {product?.Produktbeskrivelse}
+                                      </p>
+                                      <div
+                                        className="absolute hidden group-hover:block bg-white shadow-lg border border-gray p-2 rounded-md w-64 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                                        style={{
+                                          zIndex: 999,
+                                        }}
+                                      >
+                                        <p className="text-xs text-black">
+                                          {product?.Produktbeskrivelse}
+                                        </p>
+                                      </div>
                                     </div>
                                   </div>
-                                  <h3 className="text-darkBlack font-medium text-sm md:text-base lg:text-lg">
-                                    {product?.Produktnavn}
-                                  </h3>
-                                  <p className="text-darkBlack text-xs md:text-sm two_line_elipse mb-1.5 md:mb-3">
-                                    {product?.Produktbeskrivelse}
-                                  </p>
-                                  <div className="flex items-center gap-2 justify-between">
+                                  <div className="flex items-center gap-1 justify-between">
                                     <div>
                                       <span className="text-secondary2 text-xs mb-1">
                                         Pris fra:
@@ -414,13 +443,16 @@ const Tilpass: React.FC<any> = ({
                                           ? "border-[#7839EE] bg-[#ECE9FE]"
                                           : "border-[#B9C0D4]"
                                       } text-xs sm:text-sm md:text-sm rounded-[40px] w-max h-[36px] md:h-[36px] lg:h-[36px] font-semibold relative`}
-                                      onClick={() =>
+                                      onClick={(
+                                        e: React.MouseEvent<HTMLButtonElement>
+                                      ) => {
+                                        e.stopPropagation();
                                         handleSelectProduct(
                                           product,
                                           selectedCategory,
                                           index
-                                        )
-                                      }
+                                        );
+                                      }}
                                     />
                                   </div>
                                 </div>
@@ -481,26 +513,33 @@ const Tilpass: React.FC<any> = ({
         onClick={closeDrawer}
       ></div>
       <div
-        className={`fixed right-0 top-0 h-full w-1/2 bg-white shadow-lg transition-transform duration-700 transform z-[999999] ${
+        className={`fixed right-0 top-0 h-full w-full md:w-[80%] lg:w-1/2 bg-white shadow-lg transition-transform duration-700 transform z-[999999] ${
           isDrawerOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {selectedDrawerProduct && (
           <div>
-            <div className="py-5 px-8 flex items-center justify-between gap-6 border-b border-[#DCDFEA]">
-              <h2 className="text-xl font-semibold text-darkBlack">
+            <div className="py-4 md:py-5 px-4 md:px-8 flex items-center justify-between gap-6 border-b border-[#DCDFEA]">
+              <h2 className="text-base md:text-lg desktop:text-xl font-semibold text-darkBlack">
                 {selectedDrawerProduct?.Produktnavn}
               </h2>
               <button onClick={closeDrawer}>
                 <Image src={Ic_close} alt="close" />
               </button>
             </div>
-            <div className="py-5 px-8">
-              <img
-                src={selectedDrawerProduct?.Hovedbilde[0]}
-                alt="image"
-                className="w-[254px] h-[161px] mb-6"
-              />
+            <div className="py-4 md:py-5 px-4 md:px-8">
+              <div className="grid grid-cols-2 gap-4 mb-4 md:mb-6">
+                {selectedDrawerProduct?.Hovedbilde?.map(
+                  (img: any, index: number) => (
+                    <img
+                      src={img}
+                      alt="image"
+                      className="h-[181px] w-full object-cover"
+                      key={index}
+                    />
+                  )
+                )}
+              </div>
               <textarea
                 value={selectedDrawerProduct?.Produktbeskrivelse}
                 className="text-base text-secondary h-full focus-within:outline-none resize-none w-full"

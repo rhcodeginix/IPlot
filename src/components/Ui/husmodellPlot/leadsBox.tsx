@@ -29,7 +29,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
     checkbox: Yup.boolean().oneOf([true], "Påkrevd").required("Påkrevd"),
   });
   const router = useRouter();
-  const { propertyId, husodellId } = router.query;
+  const { propertyId, husmodellId } = router.query;
 
   const [leadId, setLeadId] = useState(router.query["leadId"]);
 
@@ -66,7 +66,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
   }, []);
   useEffect(() => {
     const fetchData = async () => {
-      if (!user || !propertyId || !husodellId) {
+      if (!user || !propertyId || !husmodellId) {
         return;
       }
 
@@ -79,12 +79,12 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
         const plotDocRef = doc(plotCollectionRef, String(propertyId));
         const plotDocSnap = await getDoc(plotDocRef);
 
-        const husmodellDocRef = doc(db, "house_model", String(husodellId));
+        const husmodellDocRef = doc(db, "house_model", String(husmodellId));
         const husmodellDocSnap = await getDoc(husmodellDocRef);
 
         const finalData = {
           plot: { id: propertyId, ...plotDocSnap.data() },
-          husmodell: { id: husodellId, ...husmodellDocSnap.data() },
+          husmodell: { id: husmodellId, ...husmodellDocSnap.data() },
         };
 
         const leadsCollectionRef = collection(db, "leads");
@@ -92,7 +92,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
           query(
             leadsCollectionRef,
             where("finalData.plot.id", "==", propertyId),
-            where("finalData.husmodell.id", "==", husodellId)
+            where("finalData.husmodell.id", "==", husmodellId)
           )
         );
 
@@ -125,10 +125,10 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
       }
     };
 
-    if (propertyId && husodellId && !leadId) {
+    if (propertyId && husmodellId && !leadId) {
       fetchData();
     }
-  }, [propertyId, husodellId, user]);
+  }, [propertyId, husmodellId, user]);
 
   const handleSubmit = async () => {
     try {
@@ -168,7 +168,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
   };
 
   const [finalData, setFinalData] = useState<any>(null);
-  const id = router.query["husodellId"];
+  const id = router.query["husmodellId"];
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -184,8 +184,9 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
         console.error("Error fetching data:", error);
       }
     };
-
-    fetchData();
+    if (id) {
+      fetchData();
+    }
   }, [id]);
   const husmodellData = finalData?.Husdetaljer;
   const [supplierData, setSupplierData] = useState<any>(null);
@@ -212,7 +213,9 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
         console.error("Error fetching supplier data:", error);
       }
     };
-    getData();
+    if (husmodellData?.Leverandører) {
+      getData();
+    }
   }, [husmodellData?.Leverandører]);
   return (
     <>

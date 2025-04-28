@@ -545,3 +545,31 @@ td {
 .mapboxgl-ctrl.mapboxgl-ctrl-scale {
   display: none !important;
 }
+.galleryImage .custom-swiper .swiper-button-prev,
+.galleryImage .custom-swiper .swiper-button-next {
+  width: 34px !important;
+  height: 34px !important;
+  top: 53% !important;
+  bottom: auto !important;
+}
+
+.galleryImage .custom-swiper .swiper-pagination-bullet,
+.galleryImage .custom-swiper .swiper-pagination-bullet {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.galleryImage .custom-swiper .swiper-pagination {
+  bottom: 10px !important;
+  padding: 4px !important;
+}
+
+.galleryImage .custom-swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+}
+
+.galleryImage .custom-swiper .swiper-pagination-bullet-active {
+  width: 28px !important;
+  border-radius: 10px;
+}

@@ -11,7 +11,6 @@ import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjon
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { formatPrice } from "../belop/belopProperty";
 import { addDaysToDate } from "@/components/Ui/stepperUi/productDetailWithPrice";
 import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
 import NorkartMap from "@/components/map";
@@ -272,36 +271,6 @@ const Tilbud: React.FC<{
                   <div className="flex flex-col gap-1 w-max">
                     <p className="text-secondary text-xs md:text-sm whitespace-nowrap">
                       Estimert Innflytting
-                    </p>
-                    <h5 className="text-black text-sm font-semibold text-right whitespace-nowrap">
-                      {addDaysToDate(HouseModelData?.createdAt, totalDays)}
-                    </h5>
-                  </div>
-                </div>
-                <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <p className="text-[#4A5578] text-xs md:text-sm mb-1 truncate">
-                    Pris for <span className="font-semibold">Tomt</span>
-                  </p>
-                  <h6 className="text-xs md:text-base font-semibold desktop:text-lg">
-                    {Husdetaljer?.pris ? formatPrice(pris) : "0 NOK"}
-                  </h6>
-                </div>
-                <div className="flex items-center justify-between gap-1 sm:gap-2 mb-4">
-                  <div className="flex flex-col gap-1 w-max">
-                    <p className="text-secondary text-xs md:text-sm whitespace-nowrap truncate">
-                      ESTIMERT BYGGESTART
-                    </p>
-                    <h5 className="text-black text-sm font-semibold whitespace-nowrap">
-                      {addDaysToDate(
-                        HouseModelData?.createdAt,
-                        Husdetaljer?.appSubmitApprove
-                      )}
-                    </h5>
-                  </div>
-                  <div className="flex flex-col gap-1 w-max">
-                    <p className="text-secondary text-xs md:text-sm whitespace-nowrap truncate">
-                      ESTIMERT INNFLYTTING
                     </p>
                     <h5 className="text-black text-sm font-semibold text-right whitespace-nowrap">
                       {addDaysToDate(HouseModelData?.createdAt, totalDays)}

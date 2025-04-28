@@ -48,7 +48,7 @@ const Property: React.FC<any> = ({ propertyList, LinkHref }) => {
         return (
           <Link
             key={index}
-            href={`${LinkHref}&husodellId=${property.id}`}
+            href={`${LinkHref}&husmodellId=${property.id}`}
             className="flex flex-col justify-between"
           >
             <div>
