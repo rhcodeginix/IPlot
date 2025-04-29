@@ -32,7 +32,7 @@ const advantages = [
 const Advantages = () => {
   return (
     <>
-      <SideSpaceContainer className="pb-[44px] md:pb-[58px] desktop:pb-[120px]">
+      <SideSpaceContainer className="py-[44px] md:py-[58px] desktop:py-[120px]">
         <div className="text-center text-blue font-semibold text-sm lg:text-base mb-[12px]">
           Fordeler
         </div>

@@ -50,8 +50,10 @@ const MainSection = () => {
               <span className="font-semibold">trygt</span> og{" "}
               <span className="font-semibold">enkelt</span>
             </h1>
-            <p className="text-xs md:text-sm lg:text-base big:text-lg text-secondary2 text-center">
-              Få umiddelbar tomteanalyse og oppdag hva du kan bygge.
+            <p className="text-xs md:text-sm lg:text-base big:text-lg text-black text-center">
+              Se mulige <span className="font-bold">tomter, boligmodeller</span>{" "}
+              og <span className="font-bold">kostnadsestimat</span> –{" "}
+              <span className="text-primary font-bold">helt gratis!</span>
             </p>
           </div>
         </SideSpaceContainer>

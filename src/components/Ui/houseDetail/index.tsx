@@ -322,12 +322,50 @@ const HouseDetailPage: React.FC = () => {
             >
               <Image src={Ic_close} alt="close" />
             </button>
+
             {selectedImage && (
-              <img
-                src={selectedImage}
-                alt={selectedImage || "Image"}
-                className="max-w-full max-h-screen object-contain"
-              />
+              <div className="flex justify-center items-center w-[400px] h-[400px] my-4 relative">
+                <button
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 px-4 py-2 rounded-full"
+                  onClick={() => {
+                    const previousIndex =
+                      (husmodellData?.PlantegningerFasader.indexOf(
+                        selectedImage
+                      ) -
+                        1 +
+                        husmodellData?.PlantegningerFasader.length) %
+                      husmodellData?.PlantegningerFasader.length;
+                    setSelectedImage(
+                      husmodellData?.PlantegningerFasader[previousIndex]
+                    );
+                  }}
+                >
+                  &lt;
+                </button>
+
+                <img
+                  src={selectedImage}
+                  alt="Selected"
+                  className="h-full w-full object-cover"
+                />
+
+                <button
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 px-4 py-2 rounded-full"
+                  onClick={() => {
+                    const nextIndex =
+                      (husmodellData?.PlantegningerFasader.indexOf(
+                        selectedImage
+                      ) +
+                        1) %
+                      husmodellData?.PlantegningerFasader.length;
+                    setSelectedImage(
+                      husmodellData?.PlantegningerFasader[nextIndex]
+                    );
+                  }}
+                >
+                  &gt;
+                </button>
+              </div>
             )}
           </div>
         </Modal>

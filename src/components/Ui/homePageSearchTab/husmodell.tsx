@@ -144,7 +144,7 @@ const HusmodellTab = () => {
                 />
               </div>
 
-              {isOpen && searchTerm && (
+              {isOpen && (
                 <ul
                   className="absolute top-20 left-0 w-full bg-white rounded-[8px] overflow-hidden max-h-[238px] overflow-y-auto"
                   style={{

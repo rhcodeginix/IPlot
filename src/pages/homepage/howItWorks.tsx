@@ -84,7 +84,7 @@ const HowItWorks = () => {
   };
 
   return (
-    <div className="py-[44px] md:py-[58px] desktop:py-[120px]">
+    <div className="pb-[44px] md:pb-[58px] desktop:pb-[120px]">
       <SideSpaceContainer>
         <h2 className="text-black font-semibold text-[20px] md:text-[28px] lg:text-[32px] desktop:text-[48px] desktop:leading-[56px] mb-[36px] desktop:mb-[50px] text-center">
           Hvordan det fungerer
