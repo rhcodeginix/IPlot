@@ -146,6 +146,7 @@ const Welcome = () => {
                       position: "top-right",
                     }
                   );
+                  return;
                 }
                 try {
                   await signInWithEmailAndPassword(auth, userEmail, userUid);
