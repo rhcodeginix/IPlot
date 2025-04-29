@@ -157,9 +157,32 @@ const Welcome = () => {
                   position: "top-right",
                 });
               }
-            } catch (error) {
-              console.error("User creation error:", error);
-              toast.error("Error creating user.");
+            } catch (error: any) {
+              // console.error("User creation error:", error);
+              // toast.error("Error creating user.");
+              if (error.code === "auth/email-already-in-use") {
+                try {
+                  await signInWithEmailAndPassword(
+                    auth,
+                    userEmail,
+                    "Iplot@2025"
+                  );
+                  localStorage.setItem("min_tomt_login", "true");
+                  toast.success("Login successfully", {
+                    position: "top-right",
+                  });
+                  localStorage.setItem("I_plot_email", user.email);
+                  // Navigate or perform other actions
+                } catch (error) {
+                  console.error("Login error:", error);
+                  toast.error("Login failed.");
+                }
+              } else {
+                console.error("Error:", error.message);
+                toast.error("An error occurred. Please try again.", {
+                  position: "top-right",
+                });
+              }
             }
           }
         })
