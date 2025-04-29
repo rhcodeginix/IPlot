@@ -48,6 +48,7 @@ const Register = () => {
           uid: user.uid,
           name: values.name,
           createdAt: new Date(),
+          loginType: "form",
         });
         router.push("/login");
         toast.success("User Create Successfully", { position: "top-right" });

@@ -115,6 +115,7 @@ const Welcome = () => {
                 await setDoc(userDocRef, {
                   email: createdUser.email,
                   uid: createdUser.uid,
+                  loginType: "vipps",
                   name: userName,
                   createdAt: new Date(),
                 });
@@ -138,10 +139,12 @@ const Welcome = () => {
                   localStorage.setItem("I_plot_email", user.email);
                 } catch (error) {
                   console.error("Login error:", error);
+                  router.push("/login");
                   toast.error("Vipps login failed.");
                 }
               } else {
                 console.error("Error:", error.message);
+                router.push("/login");
                 toast.error("An error occurred. Please try again.", {
                   position: "top-right",
                 });
@@ -150,6 +153,7 @@ const Welcome = () => {
           }
         })
         .catch((error) => {
+          router.push("/login");
           console.error("API error:", error);
         });
     }

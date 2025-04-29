@@ -15,7 +15,15 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Loader from "@/components/Loader";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import NameModal from "./nameModal";
 import VippsButton from "@/components/vipps";
 
@@ -39,6 +47,32 @@ const LoginForm: React.FC<{
   const handleSubmit = async (values: any) => {
     setLoading(true);
     try {
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("email", "==", values.email));
+      const querySnapshot: any = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        toast.error("No account found with this email.", {
+          position: "top-right",
+        });
+        setLoading(false);
+        return;
+      }
+
+      const userData = querySnapshot.docs[0].data();
+      const loginType = userData.loginType;
+
+      if (loginType !== "form") {
+        toast.error(
+          `This account uses ${loginType} login. so login with ${loginType} login!`,
+          {
+            position: "top-right",
+          }
+        );
+        setLoading(false);
+        return;
+      }
+
       const userCredential = await signInWithEmailAndPassword(
         auth,
         values.email,
@@ -80,6 +114,8 @@ const LoginForm: React.FC<{
           email: newUser.email,
           name: name,
           uid: newUser.uid,
+          createdAt: new Date(),
+          loginType: "google",
         });
 
         toast.success("Google sign-in successful!", { position: "top-right" });
