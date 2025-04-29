@@ -157,7 +157,12 @@ const Illustrasjoner: React.FC = () => {
                 className={`gap-4 lg:gap-6 flex flex-col desktop:flex-row ${displayedImages.length < 4 ? "md:h-[400px]" : "md:h-[500px]"}`}
               >
                 <div
-                  className={`w-full desktop:w-2/3 grid gap-4 md:gap-6 grid-cols-3
+                  className={`w-full ${
+                    husmodellData?.documents &&
+                    husmodellData?.documents.length > 0
+                      ? "desktop:w-2/3"
+                      : "desktop:w-full"
+                  } grid gap-4 md:gap-6 grid-cols-3
       ${displayedImages.length < 4 ? "grid-rows-1" : "grid-rows-2"}
     `}
                 >
@@ -187,45 +192,41 @@ const Illustrasjoner: React.FC = () => {
                     </div>
                   ))}
                 </div>
-                <div className="w-full desktop:w-1/3 border border-gray2 shadow-shadow2 rounded-lg h-full">
-                  <div className="px-3 md:px-4 py-3 md:py-5 border-b border-gray2 text-darkBlack text-sm md:text-base font-semibold">
-                    Dokumenter
-                  </div>
-                  <div className="p-3 md:p-4 flex flex-col gap-2.5 md:gap-4 overflow-y-auto desktop:h-[calc(100%-65px)] overFlowAutoY">
-                    {husmodellData?.documents &&
-                    husmodellData?.documents.length > 0 ? (
-                      husmodellData?.documents.map(
-                        (doc: any, index: number) => {
-                          return (
-                            <div
-                              className="border border-gray2 rounded-lg p-2 md:p-3 bg-[#F9FAFB] flex items-center justify-between"
-                              key={index}
-                            >
-                              <div className="flex items-start gap-2 md:gap-3 truncate">
-                                <div className="border-[4px] border-lightPurple rounded-full flex items-center justify-center">
-                                  <div className="bg-darkPurple w-6 md:w-7 h-6 md:h-7 rounded-full flex justify-center items-center">
-                                    <File className="text-primary w-4 h-4" />
+                {husmodellData?.documents &&
+                  husmodellData?.documents.length > 0 && (
+                    <div className="w-full desktop:w-1/3 border border-gray2 shadow-shadow2 rounded-lg h-full">
+                      <div className="px-3 md:px-4 py-3 md:py-5 border-b border-gray2 text-darkBlack text-sm md:text-base font-semibold">
+                        Dokumenter
+                      </div>
+                      <div className="p-3 md:p-4 flex flex-col gap-2.5 md:gap-4 overflow-y-auto desktop:h-[calc(100%-65px)] overFlowAutoY">
+                        {husmodellData?.documents.map(
+                          (doc: any, index: number) => {
+                            return (
+                              <div
+                                className="border border-gray2 rounded-lg p-2 md:p-3 bg-[#F9FAFB] flex items-center justify-between"
+                                key={index}
+                              >
+                                <div className="flex items-start gap-2 md:gap-3 truncate">
+                                  <div className="border-[4px] border-lightPurple rounded-full flex items-center justify-center">
+                                    <div className="bg-darkPurple w-6 md:w-7 h-6 md:h-7 rounded-full flex justify-center items-center">
+                                      <File className="text-primary w-4 h-4" />
+                                    </div>
                                   </div>
+                                  <FileInfo file={doc} />
                                 </div>
-                                <FileInfo file={doc} />
+                                <Image
+                                  src={Ic_download_primary}
+                                  alt="download"
+                                  className="cursor-pointer w-5 h-5 md:w-6 md:h-6"
+                                  onClick={() => handleDownload(doc)}
+                                />
                               </div>
-                              <Image
-                                src={Ic_download_primary}
-                                alt="download"
-                                className="cursor-pointer w-5 h-5 md:w-6 md:h-6"
-                                onClick={() => handleDownload(doc)}
-                              />
-                            </div>
-                          );
-                        }
-                      )
-                    ) : (
-                      <>
-                        <p>Ingen dokument funnet.</p>
-                      </>
-                    )}
-                  </div>
-                </div>
+                            );
+                          }
+                        )}
+                      </div>
+                    </div>
+                  )}
               </div>
             </div>
           </div>

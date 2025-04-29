@@ -57,10 +57,22 @@ const HusmodellPropertyPage: React.FC<{
             where("Husdetaljer.TilgjengeligBolig", "==", "Ja")
           )
         );
-        const data: any = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const data: any = querySnapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .sort((a: any, b: any) => {
+            const priceA = parseInt(
+              a?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
+              10
+            );
+            const priceB = parseInt(
+              b?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
+              10
+            );
+            return priceA - priceB;
+          });
 
         const maxHousePrice = Math.max(
           ...data?.map((house: any) =>
@@ -90,10 +102,22 @@ const HusmodellPropertyPage: React.FC<{
 
         const querySnapshot = await getDocs(q);
 
-        const data: any = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const data: any = querySnapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .sort((a: any, b: any) => {
+            const priceA = parseInt(
+              a?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
+              10
+            );
+            const priceB = parseInt(
+              b?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
+              10
+            );
+            return priceA - priceB;
+          });
         setTotal(data.length);
         const soveromValues = formData?.AntallSoverom.map((item: any) =>
           parseInt(item.replace(" Soverom", ""), 10)

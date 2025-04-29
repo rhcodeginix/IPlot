@@ -104,29 +104,31 @@ const Husdetaljer: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
             Plandokumenter
           </div>
           <div className="p-4 flex flex-col gap-4 overflow-y-auto h-[calc(100%-65px)] overFlowYAuto">
-            {husmodellData?.documents.map((doc: any, index: number) => {
-              return (
-                <div
-                  className="border border-gray rounded-lg p-3 bg-[#F9FAFB] flex items-center justify-between"
-                  key={index}
-                >
-                  <div className="flex items-start gap-3 truncate">
-                    <div className="border-[4px] border-lightPurple rounded-full flex items-center justify-center">
-                      <div className="bg-darkPurple w-7 h-7 rounded-full flex justify-center items-center">
-                        <Image src={Ic_file} alt="file" />
+            {husmodellData?.documents &&
+              husmodellData?.documents.length > 0 &&
+              husmodellData?.documents.map((doc: any, index: number) => {
+                return (
+                  <div
+                    className="border border-gray rounded-lg p-3 bg-[#F9FAFB] flex items-center justify-between"
+                    key={index}
+                  >
+                    <div className="flex items-start gap-3 truncate">
+                      <div className="border-[4px] border-lightPurple rounded-full flex items-center justify-center">
+                        <div className="bg-darkPurple w-7 h-7 rounded-full flex justify-center items-center">
+                          <Image src={Ic_file} alt="file" />
+                        </div>
                       </div>
+                      <FileInfo file={doc} />
                     </div>
-                    <FileInfo file={doc} />
+                    <Image
+                      src={Ic_download}
+                      alt="download"
+                      className="cursor-pointer"
+                      onClick={() => handleDownload(doc)}
+                    />
                   </div>
-                  <Image
-                    src={Ic_download}
-                    alt="download"
-                    className="cursor-pointer"
-                    onClick={() => handleDownload(doc)}
-                  />
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
       </div>

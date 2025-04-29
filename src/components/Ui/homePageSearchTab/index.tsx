@@ -81,10 +81,22 @@ const HomePageSearchTab: React.FC = () => {
             where("Husdetaljer.TilgjengeligBolig", "==", "Ja")
           )
         );
-        const houseModels = houseModelSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const houseModels = houseModelSnapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .sort((a: any, b: any) => {
+            const priceA = parseInt(
+              a?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
+              10
+            );
+            const priceB = parseInt(
+              b?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
+              10
+            );
+            return priceA - priceB;
+          });
 
         const filteredHouseModels = houseModels.filter((house: any) =>
           house?.Husdetaljer?.pris

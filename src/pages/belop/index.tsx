@@ -209,10 +209,22 @@ const Belop: React.FC = () => {
           ...plotChunks,
         ]);
 
-        const allHusmodell = husmodellSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const allHusmodell = husmodellSnapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .sort((a: any, b: any) => {
+            const priceA = parseInt(
+              a?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
+              10
+            );
+            const priceB = parseInt(
+              b?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
+              10
+            );
+            return priceA - priceB;
+          });
 
         const allPlots = plotSnapshots.flatMap((snapshot) =>
           snapshot.docs
