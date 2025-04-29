@@ -90,7 +90,9 @@ const Welcome = () => {
             try {
               await signInWithEmailAndPassword(auth, userEmail, userUid);
               localStorage.setItem("min_tomt_login", "true");
-              toast.success("Login successfully", { position: "top-right" });
+              toast.success("Vipps login successfully", {
+                position: "top-right",
+              });
               localStorage.setItem("I_plot_email", user.email);
             } catch (error) {
               console.error("Login error:", error);
@@ -98,7 +100,6 @@ const Welcome = () => {
             }
           } else {
             try {
-              // Optionally create a user in Firebase Authentication as well
               const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 userEmail,
@@ -119,7 +120,7 @@ const Welcome = () => {
                 });
                 await signInWithEmailAndPassword(auth, userEmail, userUid);
                 localStorage.setItem("min_tomt_login", "true");
-                toast.success("Login successfully", {
+                toast.success("Vipps login successfully", {
                   position: "top-right",
                 });
                 router.push("/");
@@ -130,14 +131,14 @@ const Welcome = () => {
                 try {
                   await signInWithEmailAndPassword(auth, userEmail, userUid);
                   localStorage.setItem("min_tomt_login", "true");
-                  toast.success("Login successfully", {
+                  toast.success("Vipps login successfully", {
                     position: "top-right",
                   });
                   router.push("/");
                   localStorage.setItem("I_plot_email", user.email);
                 } catch (error) {
                   console.error("Login error:", error);
-                  toast.error("Login failed.");
+                  toast.error("Vipps login failed.");
                 }
               } else {
                 console.error("Error:", error.message);
