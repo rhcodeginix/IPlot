@@ -166,7 +166,12 @@ const Belop: React.FC = () => {
           return;
         }
 
-        const husmodellPromise = getDocs(collection(db, "house_model"));
+        const husmodellPromise = getDocs(
+          query(
+            collection(db, "house_model"),
+            where("Husdetaljer.TilgjengeligBolig", "==", "Ja")
+          )
+        );
         const plotChunks = [];
 
         const chunkSize = 10;

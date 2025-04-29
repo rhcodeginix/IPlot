@@ -75,7 +75,12 @@ const HomePageSearchTab: React.FC = () => {
               .filter((num) => !isNaN(num))
           : [];
 
-        const houseModelSnapshot = await getDocs(collection(db, "house_model"));
+        const houseModelSnapshot = await getDocs(
+          query(
+            collection(db, "house_model"),
+            where("Husdetaljer.TilgjengeligBolig", "==", "Ja")
+          )
+        );
         const houseModels = houseModelSnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),

@@ -1,6 +1,6 @@
 import SideSpaceContainer from "@/components/common/sideSpace";
 import { useEffect, useState } from "react";
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
 import Button from "@/components/common/button";
 import HusmodellFilterSection from "./husmodellFilterSection";
@@ -44,7 +44,10 @@ const HusmodellPropertyPage: React.FC = () => {
     const fetchMaxPrice = async () => {
       try {
         const querySnapshot = await getDocs(
-          query(collection(db, "house_model"))
+          query(
+            collection(db, "house_model"),
+            where("Husdetaljer.TilgjengeligBolig", "==", "Ja")
+          )
         );
         const data: any = querySnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -72,7 +75,10 @@ const HusmodellPropertyPage: React.FC = () => {
       setIsLoading(true);
 
       try {
-        const q = query(collection(db, "house_model"));
+        const q = query(
+          collection(db, "house_model"),
+          where("Husdetaljer.TilgjengeligBolig", "==", "Ja")
+        );
 
         const querySnapshot = await getDocs(q);
 
