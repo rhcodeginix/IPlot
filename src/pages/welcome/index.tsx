@@ -74,6 +74,8 @@ const Welcome = () => {
         .then((response) => response.json())
 
         .then(async (data) => {
+          console.log(data);
+
           const { user } = data;
           console.log(user);
 
