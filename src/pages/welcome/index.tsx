@@ -110,9 +110,9 @@ const Welcome = () => {
 
           const userEmail = user.email;
           const userName = user.name;
-          // const userUid = user.uid;
+          const userUid = user.id;
 
-          const userRef = doc(db, "users", userEmail);
+          const userRef = doc(db, "users", userUid);
           const userDoc = await getDoc(userRef);
 
           if (userDoc.exists()) {
