@@ -109,6 +109,8 @@ const Welcome = () => {
           const { user } = data;
 
           const userEmail = user.email;
+          const userName = user.name;
+          // const userUid = user.uid;
 
           const userRef = doc(db, "users", userEmail);
           const userDoc = await getDoc(userRef);
@@ -117,11 +119,7 @@ const Welcome = () => {
             // User exists, log them in
             console.log("User exists. Logging in...");
             try {
-              await signInWithEmailAndPassword(
-                auth,
-                userEmail,
-                "yourPasswordHere"
-              );
+              await signInWithEmailAndPassword(auth, userEmail, "Iplot@2025");
               localStorage.setItem("min_tomt_login", "true");
               toast.success("Login successfully", { position: "top-right" });
               localStorage.setItem("I_plot_email", user.email);
@@ -138,8 +136,9 @@ const Welcome = () => {
               const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 userEmail,
-                "yourPasswordHere"
+                "Iplot@2025"
               ); // You can generate a password for them
+              console.log(userCredential);
 
               // await setDoc(userRef, {
               //   name: user.name,
@@ -149,24 +148,39 @@ const Welcome = () => {
               // localStorage.setItem("min_tomt_login", "true");
               // toast.success("Login successfully", { position: "top-right" });
               // localStorage.setItem("I_plot_email", user.email); // Navigate or perform other actions
-              const userData = userCredential.user;
 
-              const userDocRef = doc(db, "users", user.uid);
+              // const userData = userCredential.user;
 
-              const docSnap = await getDoc(userDocRef);
+              // const userDocRef = doc(db, "users", user.uid);
 
-              if (!docSnap.exists()) {
-                await setDoc(userDocRef, {
-                  email: user.email,
-                  uid: userData.uid,
-                  name: user.name,
-                  createdAt: new Date(),
-                });
-                router.push("/login");
-                toast.success("Login Successfully", {
-                  position: "top-right",
-                });
-              }
+              // const docSnap = await getDoc(userDocRef);
+
+              // if (!docSnap.exists()) {
+              //   await setDoc(userDocRef, {
+              //     email: user.email,
+              //     uid: userData.uid,
+              //     name: user.name,
+              //     createdAt: new Date(),
+              //   });
+              //   router.push("/login");
+              //   toast.success("Login Successfully", {
+              //     position: "top-right",
+              //   });
+              // }
+
+              await setDoc(userRef, {
+                name: userName,
+                email: userEmail,
+                uid: userCredential.user.uid,
+                createdAt: new Date(),
+              });
+
+              localStorage.setItem("min_tomt_login", "true");
+              localStorage.setItem("I_plot_email", userEmail);
+              toast.success("Account created and logged in successfully!", {
+                position: "top-right",
+              });
+              router.push("/");
             } catch (error) {
               console.error("User creation error:", error);
               toast.error("Error creating user.");
@@ -175,14 +189,6 @@ const Welcome = () => {
         })
         .catch((error) => {
           console.error("API error:", error);
-
-          // Display the error
-          const errorDiv = document.createElement("div");
-          errorDiv.innerHTML = `
-          <h3>API Error</h3>
-          <p>${error.message || "Unknown error"}</p>
-        `;
-          document.body.appendChild(errorDiv);
         });
     }
   }, []);
