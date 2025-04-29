@@ -77,7 +77,6 @@ const Welcome = () => {
           console.log(data);
 
           const { user } = data;
-          console.log(user);
 
           const userEmail = user.email;
           const userName = user.name;
@@ -93,7 +92,6 @@ const Welcome = () => {
             try {
               const existingUserDoc: any = querySnapshot.docs[0];
               const userData = existingUserDoc.data();
-              console.log(userData);
 
               if (
                 userData.loginType === "form" ||
@@ -152,7 +150,6 @@ const Welcome = () => {
               if (error.code === "auth/email-already-in-use") {
                 const existingUserDoc: any = querySnapshot.docs[0];
                 const userData = existingUserDoc.data();
-                console.log(userData);
 
                 if (
                   userData.loginType === "form" ||
