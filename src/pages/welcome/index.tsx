@@ -78,7 +78,7 @@ const Welcome = () => {
 
           const { user } = data;
 
-          const userEmail = user.email;
+          const userEmail = "test2025@gmail.com";
           const userName = user.name;
           const userUid = user.id;
 
