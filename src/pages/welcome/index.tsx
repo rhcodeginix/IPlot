@@ -134,6 +134,7 @@ const Welcome = () => {
               if (error.code === "auth/email-already-in-use") {
                 const existingUserDoc: any = querySnapshot.docs[0];
                 const userData = existingUserDoc.data();
+                console.log(userData);
 
                 if (
                   userData.loginType === "form" ||
