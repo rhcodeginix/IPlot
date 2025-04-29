@@ -91,12 +91,30 @@ const Welcome = () => {
 
           if (!querySnapshot.empty) {
             try {
+              const existingUserDoc: any = querySnapshot.docs[0];
+              const userData = existingUserDoc.data();
+              console.log(userData);
+
+              if (
+                userData.loginType === "form" ||
+                userData.loginType === "google"
+              ) {
+                router.push("/login");
+                toast.error(
+                  `Already have user with ${userData.loginType === "form" ? "form fill" : `${userData.loginType} login`}`,
+                  {
+                    position: "top-right",
+                  }
+                );
+                return;
+              }
               await signInWithEmailAndPassword(auth, userEmail, userUid);
               localStorage.setItem("min_tomt_login", "true");
               toast.success("Vipps login successfully", {
                 position: "top-right",
               });
               localStorage.setItem("I_plot_email", user.email);
+              router.push("/");
             } catch (error) {
               console.error("Login error:", error);
               toast.error("Login failed.");
