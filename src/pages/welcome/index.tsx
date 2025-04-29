@@ -153,7 +153,6 @@ const Welcome = () => {
                 userEmail,
                 "Iplot@2025"
               ); // You can generate a password for them
-              console.log(userCredential);
               const createdUser = userCredential.user;
 
               const userDocRef = doc(db, "users", createdUser.uid);
@@ -176,6 +175,7 @@ const Welcome = () => {
                 toast.success("Login successfully", {
                   position: "top-right",
                 });
+                router.push("/");
                 localStorage.setItem("I_plot_email", user.email);
               }
             } catch (error: any) {
@@ -192,6 +192,7 @@ const Welcome = () => {
                   toast.success("Login successfully", {
                     position: "top-right",
                   });
+                  router.push("/");
                   localStorage.setItem("I_plot_email", user.email);
                   // Navigate or perform other actions
                 } catch (error) {
