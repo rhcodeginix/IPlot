@@ -1,15 +1,14 @@
 import axios from "axios";
 
 export const VIPPS_CONFIG = {
-  clientId: "73dc9a60-417a-46d7-85b5-0d9431b1dd31",
+  clientId: "b2017e3c-4ca5-440d-93aa-f695711ccc91",
   redirectUri: "https://www.mintomt.no/welcome",
   scope: "openid name phoneNumber address email birthDate",
-  apiSubscriptionKey: "f5f359d4672b4062a790da3acf9e2c2d",
-  authEndpoint:
-    "https://apitest.vipps.no/access-management-1.0/access/oauth2/auth",
+  apiSubscriptionKey: "73f0a1f14f2a4d73937831a1117bc513",
+  authEndpoint: "https://api.vipps.no/access-management-1.0/access/oauth2/auth",
   tokenEndpoint:
-    "https://apitest.vipps.no/access-management-1.0/access/oauth2/token",
-  userInfoEndpoint: "https://apitest.vipps.no/vipps-userinfo-api/userinfo",
+    "https://api.vipps.no/access-management-1.0/access/oauth2/token",
+  userInfoEndpoint: "https://api.vipps.no/vipps-userinfo-api/userinfo",
 };
 
 export const generateState = (): string => {
