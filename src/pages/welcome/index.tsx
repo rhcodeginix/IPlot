@@ -67,8 +67,8 @@ const Welcome = () => {
       // callApi(code);
       // });
 
-      router.push("/");
-      sessionStorage.setItem("min_tomt_welcome", "true");
+      // router.push("/");
+      // sessionStorage.setItem("min_tomt_welcome", "true");
     } else if (error) {
       // Display error information
       const errorDiv = document.createElement("div");
@@ -133,57 +133,30 @@ const Welcome = () => {
             console.log("User doesn't exist. Creating new user...");
             try {
               // Optionally create a user in Firebase Authentication as well
-              console.log(auth);
-              console.log(userEmail);
-
               const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 userEmail,
                 "Iplot@2025"
               ); // You can generate a password for them
               console.log(userCredential);
+              const user = userCredential.user;
 
-              // await setDoc(userRef, {
-              //   name: user.name,
-              //   email: userEmail,
-              //   address: user.address,
-              // });
-              // localStorage.setItem("min_tomt_login", "true");
-              // toast.success("Login successfully", { position: "top-right" });
-              // localStorage.setItem("I_plot_email", user.email); // Navigate or perform other actions
+              const userDocRef = doc(db, "users", user.uid);
 
-              // const userData = userCredential.user;
+              const docSnap = await getDoc(userDocRef);
 
-              // const userDocRef = doc(db, "users", user.uid);
-
-              // const docSnap = await getDoc(userDocRef);
-
-              // if (!docSnap.exists()) {
-              //   await setDoc(userDocRef, {
-              //     email: user.email,
-              //     uid: userData.uid,
-              //     name: user.name,
-              //     createdAt: new Date(),
-              //   });
-              //   router.push("/login");
-              //   toast.success("Login Successfully", {
-              //     position: "top-right",
-              //   });
-              // }
-
-              await setDoc(userRef, {
-                name: userName,
-                email: userEmail,
-                uid: userCredential.user.uid,
-                createdAt: new Date(),
-              });
-
-              localStorage.setItem("min_tomt_login", "true");
-              localStorage.setItem("I_plot_email", userEmail);
-              toast.success("Account created and logged in successfully!", {
-                position: "top-right",
-              });
-              router.push("/");
+              if (!docSnap.exists()) {
+                await setDoc(userDocRef, {
+                  email: user.email,
+                  uid: user.uid,
+                  name: userName,
+                  createdAt: new Date(),
+                });
+                router.push("/login");
+                toast.success("User Create Successfully", {
+                  position: "top-right",
+                });
+              }
             } catch (error) {
               console.error("User creation error:", error);
               toast.error("Error creating user.");
