@@ -133,6 +133,9 @@ const Welcome = () => {
             console.log("User doesn't exist. Creating new user...");
             try {
               // Optionally create a user in Firebase Authentication as well
+              console.log(auth);
+              console.log(userEmail);
+
               const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 userEmail,
