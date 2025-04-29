@@ -7,7 +7,15 @@ import Ic_logo from "@/public/images/Ic_logo.svg";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { auth, db } from "@/config/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
@@ -110,12 +118,19 @@ const Welcome = () => {
 
           const userEmail = user.email;
           const userName = user.name;
-          const userUid = user.id;
+          // const userUid = user.id;
 
-          const userRef = doc(db, "users", userUid);
-          const userDoc = await getDoc(userRef);
+          // const userRef = doc(db, "users");
+          // const userDoc = await getDoc(userRef);
+          const usersRef = collection(db, "users");
 
-          if (userDoc.exists()) {
+          // Query where email matches
+          const q = query(usersRef, where("email", "==", userEmail));
+
+          // Fetch matching documents
+          const querySnapshot = await getDocs(q);
+
+          if (!querySnapshot.empty) {
             // User exists, log them in
             console.log("User exists. Logging in...");
             try {
@@ -139,23 +154,29 @@ const Welcome = () => {
                 "Iplot@2025"
               ); // You can generate a password for them
               console.log(userCredential);
-              const user = userCredential.user;
+              const createdUser = userCredential.user;
 
-              const userDocRef = doc(db, "users", user.uid);
+              const userDocRef = doc(db, "users", createdUser.uid);
 
               const docSnap = await getDoc(userDocRef);
 
               if (!docSnap.exists()) {
                 await setDoc(userDocRef, {
-                  email: user.email,
-                  uid: user.uid,
+                  email: createdUser.email,
+                  uid: createdUser.uid,
                   name: userName,
                   createdAt: new Date(),
                 });
-                router.push("/login");
-                toast.success("User Create Successfully", {
+                // router.push("/login");
+                // toast.success("User Create Successfully", {
+                //   position: "top-right",
+                // });
+                await signInWithEmailAndPassword(auth, userEmail, "Iplot@2025");
+                localStorage.setItem("min_tomt_login", "true");
+                toast.success("Login successfully", {
                   position: "top-right",
                 });
+                localStorage.setItem("I_plot_email", user.email);
               }
             } catch (error: any) {
               // console.error("User creation error:", error);
