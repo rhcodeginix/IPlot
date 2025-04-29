@@ -289,7 +289,7 @@ const BelopFilterSection: React.FC<{
                                       undefined,
                                       { shallow: true }
                                     );
-                                  }, 2000);
+                                  }, 500);
 
                                   return {
                                     ...prev,
@@ -354,7 +354,7 @@ const BelopFilterSection: React.FC<{
                                                   undefined,
                                                   { shallow: true }
                                                 );
-                                              }, 2000);
+                                              }, 500);
                                               return {
                                                 ...prev,
                                                 SubOmråde:
@@ -440,7 +440,7 @@ const BelopFilterSection: React.FC<{
                                   undefined,
                                   { shallow: true }
                                 );
-                              }, 2000);
+                              }, 500);
                               return {
                                 ...prev,
                                 Hustype: Array.from(updatedSet),
@@ -524,7 +524,7 @@ const BelopFilterSection: React.FC<{
                                   undefined,
                                   { shallow: true }
                                 );
-                              }, 2000);
+                              }, 500);
                               return {
                                 ...prev,
                                 TypeHusmodell: Array.from(updatedSet),
@@ -608,7 +608,7 @@ const BelopFilterSection: React.FC<{
                                   undefined,
                                   { shallow: true }
                                 );
-                              }, 2000);
+                              }, 500);
                               return {
                                 ...prev,
                                 AntallSoverom: Array.from(updatedSet),
@@ -674,7 +674,7 @@ const BelopFilterSection: React.FC<{
                             undefined,
                             { shallow: true }
                           );
-                        }, 2000);
+                        }, 500);
                       }}
                       valueLabelDisplay="on"
                       aria-labelledby="range-slider"
@@ -743,7 +743,7 @@ const BelopFilterSection: React.FC<{
                             undefined,
                             { shallow: true }
                           );
-                        }, 2000);
+                        }, 500);
                       }}
                       valueLabelDisplay="on"
                       aria-labelledby="range-slider"

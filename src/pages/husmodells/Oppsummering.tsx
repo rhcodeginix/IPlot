@@ -528,8 +528,8 @@ const Oppsummering: React.FC<{
           <div className="mb-5 md:mb-8 border border-[#DCDFEA] rounded-[8px]">
             <h4 className="text-darkBlack text-sm md:text-base desktop:text-xl border-b border-[#DCDFEA] p-3 md:p-5">
               Vil du at{" "}
-              <span className="font-semibold">EIE Eiendomsmegling</span>
-              EIE Eiendomsmegling skal gi deg en forhåndstakst på prosjektet?
+              <span className="font-semibold">EIE Eiendomsmegling</span> skal gi
+              deg en forhåndstakst på prosjektet?
             </h4>
             <div className="p-3 md:p-5">
               <Formik
