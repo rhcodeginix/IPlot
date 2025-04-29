@@ -41,51 +41,14 @@ const Welcome = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Log everything for debugging
-    console.log("=== Vipps Redirect Debug ===");
-    console.log("Full URL:", window.location.href);
-    console.log("All URL parameters:", Object.fromEntries(urlParams.entries()));
-
-    // Specifically check for code and state
     const code: any = urlParams.get("code");
-    const state = urlParams.get("state");
+    // const state = urlParams.get("state");
     const error = urlParams.get("error");
 
-    console.log("Authorization code:", code);
-    console.log("State parameter:", state);
-    console.log("Error (if any):", error);
-
-    // If code exists, display it and provide an option to call your API
     if (code) {
       callApi(code);
-
-      // Create elements to show the code was received
-      const infoDiv = document.createElement("div");
-      infoDiv.innerHTML = `
-        <h3>Code received from Vipps</h3>
-        <p>Code: ${code}</p>
-        <p>State: ${state || "No state parameter"}</p>
-        <button id="callApi">Call API with this code</button>
-      `;
-      document.body.appendChild(infoDiv);
-
-      // Add click handler for the button
-      // const callApiVab: any = document.getElementById("callApi");
-      // callApiVab.addEventListener("click", function () {
-      // callApi(code);
-      // });
-
-      // router.push("/");
-      // sessionStorage.setItem("min_tomt_welcome", "true");
     } else if (error) {
-      // Display error information
-      const errorDiv = document.createElement("div");
-      errorDiv.innerHTML = `
-        <h3>Error from Vipps</h3>
-        <p>Error: ${error}</p>
-        <p>Description: ${urlParams.get("error_description") || "No description"}</p>
-      `;
-      document.body.appendChild(errorDiv);
+      console.error(error);
     } else {
       // No code or error found
       const noParamsDiv = document.createElement("div");
@@ -98,8 +61,6 @@ const Welcome = () => {
 
     // Function to call your API with the code
     function callApi(code: any) {
-      console.log("Calling API with code:", code);
-
       fetch(
         "https://9spebvryg9.execute-api.eu-north-1.amazonaws.com/prod/vipps",
         {
@@ -113,46 +74,36 @@ const Welcome = () => {
         .then((response) => response.json())
 
         .then(async (data) => {
-          console.log("API response:", data);
           const { user } = data;
 
           const userEmail = user.email;
           const userName = user.name;
-          // const userUid = user.id;
+          const userUid = user.id;
 
-          // const userRef = doc(db, "users");
-          // const userDoc = await getDoc(userRef);
           const usersRef = collection(db, "users");
 
-          // Query where email matches
           const q = query(usersRef, where("email", "==", userEmail));
 
-          // Fetch matching documents
           const querySnapshot = await getDocs(q);
 
           if (!querySnapshot.empty) {
-            // User exists, log them in
-            console.log("User exists. Logging in...");
             try {
-              await signInWithEmailAndPassword(auth, userEmail, "Iplot@2025");
+              await signInWithEmailAndPassword(auth, userEmail, userUid);
               localStorage.setItem("min_tomt_login", "true");
               toast.success("Login successfully", { position: "top-right" });
               localStorage.setItem("I_plot_email", user.email);
-              // Navigate or perform other actions
             } catch (error) {
               console.error("Login error:", error);
               toast.error("Login failed.");
             }
           } else {
-            // User doesn't exist, create a new user
-            console.log("User doesn't exist. Creating new user...");
             try {
               // Optionally create a user in Firebase Authentication as well
               const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 userEmail,
-                "Iplot@2025"
-              ); // You can generate a password for them
+                userUid
+              );
               const createdUser = userCredential.user;
 
               const userDocRef = doc(db, "users", createdUser.uid);
@@ -166,11 +117,7 @@ const Welcome = () => {
                   name: userName,
                   createdAt: new Date(),
                 });
-                // router.push("/login");
-                // toast.success("User Create Successfully", {
-                //   position: "top-right",
-                // });
-                await signInWithEmailAndPassword(auth, userEmail, "Iplot@2025");
+                await signInWithEmailAndPassword(auth, userEmail, userUid);
                 localStorage.setItem("min_tomt_login", "true");
                 toast.success("Login successfully", {
                   position: "top-right",
@@ -179,22 +126,15 @@ const Welcome = () => {
                 localStorage.setItem("I_plot_email", user.email);
               }
             } catch (error: any) {
-              // console.error("User creation error:", error);
-              // toast.error("Error creating user.");
               if (error.code === "auth/email-already-in-use") {
                 try {
-                  await signInWithEmailAndPassword(
-                    auth,
-                    userEmail,
-                    "Iplot@2025"
-                  );
+                  await signInWithEmailAndPassword(auth, userEmail, userUid);
                   localStorage.setItem("min_tomt_login", "true");
                   toast.success("Login successfully", {
                     position: "top-right",
                   });
                   router.push("/");
                   localStorage.setItem("I_plot_email", user.email);
-                  // Navigate or perform other actions
                 } catch (error) {
                   console.error("Login error:", error);
                   toast.error("Login failed.");

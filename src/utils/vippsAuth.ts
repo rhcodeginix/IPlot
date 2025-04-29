@@ -40,12 +40,6 @@ export const getVippsLoginUrl = (): string => {
     state: state,
   });
 
-  console.log("Generated Vipps login URL parameters:", {
-    clientId: VIPPS_CONFIG.clientId,
-    redirectUri: VIPPS_CONFIG.redirectUri,
-    state: state,
-  });
-
   return `${VIPPS_CONFIG.authEndpoint}?${params.toString()}`;
 };
 
@@ -57,12 +51,6 @@ export const exchangeCodeForTokens = async (code: string): Promise<any> => {
     params.append("redirect_uri", VIPPS_CONFIG.redirectUri);
     params.append("client_id", VIPPS_CONFIG.clientId);
 
-    console.log("Token exchange parameters:", {
-      grantType: "authorization_code",
-      redirectUri: VIPPS_CONFIG.redirectUri,
-      endpoint: VIPPS_CONFIG.tokenEndpoint,
-    });
-
     const response = await axios.post(VIPPS_CONFIG.tokenEndpoint, params, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -70,7 +58,6 @@ export const exchangeCodeForTokens = async (code: string): Promise<any> => {
       },
     });
 
-    console.log("Token exchange successful");
     return response.data;
   } catch (error) {
     console.error("Error exchanging code for tokens:", error);
@@ -80,8 +67,6 @@ export const exchangeCodeForTokens = async (code: string): Promise<any> => {
 
 export const getUserInfo = async (accessToken: string): Promise<any> => {
   try {
-    console.log("Fetching user info...");
-
     const response = await axios.get(VIPPS_CONFIG.userInfoEndpoint, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -89,7 +74,6 @@ export const getUserInfo = async (accessToken: string): Promise<any> => {
       },
     });
 
-    console.log("User info fetched successfully");
     return response.data;
   } catch (error) {
     console.error("Error fetching user info:", error);
@@ -105,11 +89,6 @@ export const storeTokens = (tokens: any): void => {
     "vippsTokenExpiresAt",
     (Date.now() + tokens.expires_in * 1000).toString()
   );
-
-  console.log(
-    "Tokens stored successfully, expires at:",
-    new Date(Date.now() + tokens.expires_in * 1000).toISOString()
-  );
 };
 
 export const isVippsAuthenticated = (): boolean => {
@@ -123,7 +102,6 @@ export const isVippsAuthenticated = (): boolean => {
     !!userInfo &&
     Date.now() < parseInt(expiresAt);
 
-  console.log("Authentication status:", isAuthenticated);
   return isAuthenticated;
 };
 

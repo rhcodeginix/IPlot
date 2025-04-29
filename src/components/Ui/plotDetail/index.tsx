@@ -145,26 +145,6 @@ const PlotDetailPage: React.FC<{
     }
   }, [isValidBBOX, BBOXData]);
 
-  // useEffect(() => {
-  //   const searchParams = lamdaDataFromApi?.searchParameters;
-  //   const { kommunenummer, gardsnummer, bruksnummer } = searchParams;
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await fetch(
-  //         `https://seeiendom.kartverket.no/api/kartutsnitt/${kommunenummer}/${gardsnummer}/${bruksnummer}/0/0`
-  //       );
-  //       console.log(res);
-
-  //       const json = await res.json();
-  //       console.log("Fetched data:", json);
-  //     } catch (err) {
-  //       console.error("Error:", err);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [lamdaDataFromApi]);
-
   const images = isValidBBOX
     ? [
         {
@@ -177,11 +157,6 @@ const PlotDetailPage: React.FC<{
           src: `https://wms.geonorge.no/skwms1/wms.matrikkelkart?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=MatrikkelKart&STYLES=default&CRS=EPSG:25833&BBOX=${adjustedBBOX[0]},${adjustedBBOX[1]},${adjustedBBOX[2]},${adjustedBBOX[3]}&WIDTH=1024&HEIGHT=768&FORMAT=image/png`,
           alt: "Matrikkelkart image",
         },
-        // {
-        //   id: 2,
-        //   src: `https://seeiendom.kartverket.no/api/kartutsnitt/id/440202139/3203/243/592/0`,
-        //   alt: "Matrikkelkart image",
-        // },
       ]
     : [];
 
