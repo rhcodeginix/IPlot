@@ -75,6 +75,7 @@ const Welcome = () => {
 
         .then(async (data) => {
           const { user } = data;
+          console.log(user);
 
           const userEmail = user.email;
           const userName = user.name;
