@@ -1,32 +1,32 @@
 import Button from "@/components/common/button";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 const Chatbot: React.FC = () => {
   const router = useRouter();
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  // const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://www.chatbase.co/embed.min.js";
-    script.defer = true;
-    script.setAttribute("chatbotId", "YbrgBkNnNWTkrRpQ23myI");
-    script.setAttribute("domain", "www.chatbase.co");
-    document.body.appendChild(script);
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://www.chatbase.co/embed.min.js";
+  //   script.defer = true;
+  //   script.setAttribute("chatbotId", "YbrgBkNnNWTkrRpQ23myI");
+  //   script.setAttribute("domain", "www.chatbase.co");
+  //   document.body.appendChild(script);
 
-    const configScript = document.createElement("script");
-    configScript.innerHTML = `
-      window.embeddedChatbotConfig = {
-        chatbotId: "YbrgBkNnNWTkrRpQ23myI",
-        domain: "www.chatbase.co"
-      }
-    `;
-    document.body.appendChild(configScript);
+  //   const configScript = document.createElement("script");
+  //   configScript.innerHTML = `
+  //     window.embeddedChatbotConfig = {
+  //       chatbotId: "YbrgBkNnNWTkrRpQ23myI",
+  //       domain: "www.chatbase.co"
+  //     }
+  //   `;
+  //   document.body.appendChild(configScript);
 
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "instant" });
-    }
-  }, []);
+  //   if (messagesEndRef.current) {
+  //     messagesEndRef.current.scrollIntoView({ behavior: "instant" });
+  //   }
+  // }, []);
 
   return (
     <>

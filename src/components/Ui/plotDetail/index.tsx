@@ -1282,10 +1282,15 @@ const PlotDetailPage: React.FC<{
                             </div>
                           </div>
                         </div>
-                        {/* <div className="relative w-full md:w-1/2">
+                        <div className="relative w-full md:w-1/2">
                           <div className="flex justify-between items-center mb-4 lg:mb-6">
                             <h2 className="text-black text-base md:text-lg lg:text-xl desktop:text-2xl font-semibold">
-                              Kommuneplan for Asker
+                              Kommuneplan for{" "}
+                              {
+                                CadastreDataFromApi?.presentationAddressApi
+                                  ?.response?.item?.municipality
+                                  ?.municipalityName
+                              }
                             </h2>
                             <Image
                               fetchPriority="auto"
@@ -1316,7 +1321,7 @@ const PlotDetailPage: React.FC<{
                                 )
                               )}
                           </div>
-                        </div> */}
+                        </div>
                       </div>
                     )}
                   </div>

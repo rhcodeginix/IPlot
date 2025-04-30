@@ -41,7 +41,7 @@ const Finansiering: React.FC<{
   HouseModelData,
   handlePrevious,
   // pris,
-  // supplierData,
+  supplierData,
 }) => {
   const Husdetaljer = HouseModelData?.Husdetaljer;
 
@@ -61,6 +61,9 @@ const Finansiering: React.FC<{
 
   const router = useRouter();
 
+  const [skipSharingDataValidation, setSkipSharingDataValidation] =
+    useState(false);
+
   const validationSchema = Yup.object().shape({
     equityAmount: Yup.number()
       .typeError("Must be a number")
@@ -70,7 +73,7 @@ const Finansiering: React.FC<{
     sharingData: Yup.boolean().when(
       "helpWithFinancing",
       ([helpWithFinancing], schema) => {
-        return helpWithFinancing
+        return helpWithFinancing || skipSharingDataValidation
           ? schema.notRequired()
           : schema
               .oneOf([true], "You must accept the sharing data")
@@ -201,6 +204,19 @@ const Finansiering: React.FC<{
           <h5 className="text-darkBlack text-base md:text-lg lg:text-xl font-semibold mb-2 md:mb-4">
             Finansieringstilbud
           </h5>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2 md:mb-4">
+            <h5 className="text-darkBlack text-base md:text-lg lg:text-xl font-semibold">
+              {Husdetaljer?.husmodell_name}{" "}
+              <span className="font-normal">fra</span>{" "}
+              {supplierData?.company_name}
+            </h5>
+            <p className="text-secondary text-sm md:text-base lg:text-lg">
+              Pris fra:{" "}
+              <span className="text-black font-semibold">
+                ({formatCurrency(Husdetaljer?.pris)})
+              </span>
+            </p>
+          </div>
           <div className="mb-4 md:mb-8">
             <Prisliste husmodellData={HouseModelData?.Prisliste} />
           </div>
@@ -288,7 +304,17 @@ const Finansiering: React.FC<{
                                     </p>
                                   )}
                               </div>
-                              <p className="border-2 border-[#6927DA] text-[#6927DA] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer">
+                              <p
+                                className="border-2 border-[#6927DA] text-[#6927DA] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer"
+                                onClick={() => {
+                                  setSkipSharingDataValidation(true);
+                                  setTimeout(() => {
+                                    document
+                                      .querySelector("form")
+                                      ?.requestSubmit();
+                                  }, 0);
+                                }}
+                              >
                                 Legg til
                               </p>
                             </div>

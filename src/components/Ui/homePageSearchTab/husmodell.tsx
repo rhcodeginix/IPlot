@@ -41,9 +41,11 @@ const HusmodellTab = () => {
         const mergedCities = fetchedProperties.flatMap((property: any) =>
           Array.isArray(property.kommunerList) ? property.kommunerList : []
         );
-
-        setCities(mergedCities);
-        setFilteredCities(mergedCities);
+        const sortedCities = mergedCities.sort((a: any, b: any) =>
+          a.name.localeCompare(b.name, "no", { sensitivity: "base" })
+        );
+        setCities(sortedCities);
+        setFilteredCities(sortedCities);
       } catch (error) {
         console.error("Error fetching cities:", error);
       } finally {
@@ -110,6 +112,25 @@ const HusmodellTab = () => {
     localStorage.setItem("currIndex", currIndex.toString());
   };
 
+  const highlightMatch = (text: string, query: string) => {
+    if (!query) return text;
+
+    const index = text.toLowerCase().indexOf(query.toLowerCase());
+    if (index === -1) return text;
+
+    return (
+      <>
+        {text.slice(0, index)}
+        <strong className="font-bold">
+          {text.slice(index, index + query.length)}
+        </strong>
+        {text.slice(index + query.length)}
+      </>
+    );
+  };
+
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
+
   return (
     <form onSubmit={handleSubmit}>
       <div
@@ -129,14 +150,43 @@ const HusmodellTab = () => {
                 bygge:
               </div>
               <div className="relative flex items-center gap-2">
-                <input
+                {/* <input
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onClick={toggleDropdown}
                   placeholder="Søk opp kommune"
                   className="w-full bg-white rounded-md text-sm md:text-base desktop:text-lg focus:outline-none"
+                /> */}
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                  }}
+                  onClick={toggleDropdown}
+                  onKeyDown={(e) => {
+                    if (!isOpen) return;
+
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault();
+                      setHighlightedIndex((prev) =>
+                        Math.min(prev + 1, filteredCities.length - 1)
+                      );
+                    } else if (e.key === "ArrowUp") {
+                      e.preventDefault();
+                      setHighlightedIndex((prev) => Math.max(prev - 1, 0));
+                    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+                      e.preventDefault();
+                      const selectedCity: any =
+                        filteredCities[highlightedIndex];
+                      handleSelect(`${selectedCity.name} Kommune`);
+                    }
+                  }}
+                  placeholder="Søk opp kommune"
+                  className="w-full bg-white rounded-md text-sm md:text-base desktop:text-lg focus:outline-none"
                 />
+
                 <Image
                   src={Ic_chevron_down}
                   alt="arrow"
@@ -163,14 +213,20 @@ const HusmodellTab = () => {
                         key={index}
                         onClick={() => handleSelect(`${city.name} Kommune`)}
                         className={`text-xs md:text-sm text-darkBlack px-3 md:px-4 py-2 md:py-[14px] cursor-pointer 
-                          ${
-                            formData?.Kommue === `${city.name} Kommune`
-                              ? "bg-[#F9F5FF] font-semibold"
-                              : "bg-white"
-                          }`}
+                        ${highlightedIndex === index ? "bg-[#E4E7EC]" : ""}
+                        ${
+                          formData?.Kommue === `${city.name} Kommune`
+                            ? "bg-[#F9F5FF] font-semibold"
+                            : "bg-white"
+                        }`}
+                        ref={
+                          highlightedIndex === index
+                            ? (el) => el?.scrollIntoView({ block: "nearest" })
+                            : null
+                        }
                       >
                         <span>
-                          {city.name}{" "}
+                          {highlightMatch(city.name, searchTerm)}{" "}
                           <span className="text-grayText font-normal">
                             Kommune
                           </span>

@@ -413,7 +413,7 @@ const PlotDetail: React.FC<any> = ({ handleNext, lamdaDataFromApi }) => {
                 )}
               </div>
             </div>
-            {/* <div>
+            <div>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-black text-2xl font-semibold">
                   Kommuneplan for Asker
@@ -449,7 +449,7 @@ const PlotDetail: React.FC<any> = ({ handleNext, lamdaDataFromApi }) => {
                   </>
                 )}
               </div>
-            </div> */}
+            </div>
           </div>
           <div className="w-[34%]">
             <h2 className="text-black text-2xl font-semibold mb-6">
