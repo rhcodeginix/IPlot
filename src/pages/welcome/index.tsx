@@ -49,14 +49,6 @@ const Welcome = () => {
       callApi(code);
     } else if (error) {
       console.error(error);
-    } else {
-      // No code or error found
-      const noParamsDiv = document.createElement("div");
-      noParamsDiv.innerHTML = `
-        <h3>No code or error parameters found</h3>
-        <p>This redirect doesn't contain the expected parameters from Vipps.</p>
-      `;
-      document.body.appendChild(noParamsDiv);
     }
 
     // Function to call your API with the code
