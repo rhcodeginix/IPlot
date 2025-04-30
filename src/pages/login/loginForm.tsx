@@ -193,7 +193,7 @@ const LoginForm: React.FC<{
         }}
       >
         <h3 className="text-darkBlack text-xl md:text-2xl desktop:text-[30px] font-semibold mb-1.5 md:mb-3 text-center">
-          Logg in på din konto
+          Logg inn på din konto
         </h3>
         <p className="text-secondary text-sm md:text-base mb-4 md:mb-8 text-center">
           Velkommen tilbake! Vennligst oppgi dine detaljer.

@@ -289,13 +289,33 @@ const Finansiering: React.FC<{
                                 <Field
                                   id="equityAmount"
                                   name="equityAmount"
-                                  type="number"
                                   className={`w-[160px] border border-darkGray focus:outline-none text-black rounded-[8px] py-2 px-4 text-sm ${
                                     errors.equityAmount && touched.equityAmount
                                       ? "border-red"
                                       : "border-darkGray"
                                   }`}
                                   placeholder="Enter"
+                                  type="text"
+                                  inputMode="numeric"
+                                  onChange={(e: any) => {
+                                    let rawValue = e.target.value.replace(
+                                      /\D/g,
+                                      ""
+                                    );
+
+                                    if (rawValue) {
+                                      const formattedValue =
+                                        new Intl.NumberFormat("no-NO").format(
+                                          Number(rawValue)
+                                        );
+                                      setFieldValue(
+                                        "equityAmount",
+                                        formattedValue
+                                      );
+                                    } else {
+                                      setFieldValue("equityAmount", "");
+                                    }
+                                  }}
                                 />
                                 {touched.equityAmount &&
                                   errors.equityAmount && (
@@ -330,8 +350,12 @@ const Finansiering: React.FC<{
                                   formattedNumberOfByggekostnader;
 
                                 if (values.equityAmount) {
+                                  const equityAmount: any =
+                                    typeof values.equityAmount === "number"
+                                      ? values.equityAmount
+                                      : values.equityAmount.replace(/\s/g, "");
                                   const totalData: any =
-                                    Number(data) - Number(values.equityAmount);
+                                    Number(data) - Number(equityAmount);
 
                                   return formatCurrency(totalData);
                                 } else {
@@ -365,8 +389,12 @@ const Finansiering: React.FC<{
                                   Number(Husdetaljer?.pris?.replace(/\s/g, ""));
 
                                 if (values.equityAmount) {
+                                  const equityAmount: any =
+                                    typeof values.equityAmount === "number"
+                                      ? values.equityAmount
+                                      : values.equityAmount.replace(/\s/g, "");
                                   const totalData: any =
-                                    Number(data) - Number(values.equityAmount);
+                                    Number(data) - Number(equityAmount);
 
                                   return formatCurrency(totalData);
                                 } else {
@@ -429,7 +457,7 @@ const Finansiering: React.FC<{
                                   src={Ic_Info_gray}
                                   alt="icon"
                                 />
-                                <p className="text-secondary2 text-xs md:text-sm">
+                                <p className="text-[#667085] text-xs md:text-sm">
                                   Lån for bygging av bolig/fritidsbolig. Lånet
                                   vil bli konvertert til et nedbetalingslån ved
                                   ferdigstillelse av bolig/fritidsbolig.

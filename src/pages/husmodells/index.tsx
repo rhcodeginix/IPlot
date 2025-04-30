@@ -13,6 +13,7 @@ import { auth, db } from "@/config/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { useUserLayoutContext } from "@/context/userLayoutContext";
 import Tilpass from "./Tilpass";
+import TomtHouseDetails from "./tomtDetail";
 
 const HusmodellDetail = () => {
   const [currIndex, setCurrIndex] = useState(0);
@@ -267,6 +268,24 @@ const HusmodellDetail = () => {
           handleNext={handleNext}
           handlePrevious={handlePrevious}
           HouseModelData={HouseModelData}
+        />
+      ),
+    },
+    {
+      name: "Detaljer",
+      component: (
+        <TomtHouseDetails
+          handleNext={handleNext}
+          handlePrevious={handlePrevious}
+          loadingAdditionalData={loading}
+          loginUser={loginUser}
+          loadingLamdaData={loading}
+          supplierData={supplierData}
+          CadastreDataFromApi={CadastreDataFromApi}
+          HouseModelData={HouseModelData}
+          askData={askData}
+          lamdaDataFromApi={lamdaDataFromApi}
+          user={user}
         />
       ),
     },

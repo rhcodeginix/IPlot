@@ -8,6 +8,7 @@ import HouseDetailsection from "@/components/Ui/houseDetail/houseDetailSection";
 import Loader from "@/components/Loader";
 import HouseDetailPage from "@/components/Ui/houseDetail";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
+import { useRouter } from "next/router";
 
 const HusmodellDetail: React.FC<{
   handleNext: any;
@@ -24,6 +25,7 @@ const HusmodellDetail: React.FC<{
   lamdaDataFromApi,
   supplierData,
 }) => {
+  const router = useRouter();
   if (loading) {
     return <Loader />;
   }
@@ -69,7 +71,21 @@ const HusmodellDetail: React.FC<{
               <Button
                 text="Tilbake"
                 className="border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
-                path="/"
+                onClick={() => {
+                  const router_query: any = { ...router.query };
+
+                  delete router_query.husmodellId;
+                  delete router_query.leadId;
+
+                  router.push(
+                    {
+                      pathname: router.pathname,
+                      query: router_query,
+                    },
+                    undefined,
+                    { shallow: true }
+                  );
+                }}
               />
               <Button
                 text="Neste: Tilpass"
