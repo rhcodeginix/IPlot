@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import SideSpaceContainer from "@/components/common/sideSpace";
-import Button from "@/components/common/button";
+import Ic_vapp from "@/public/images/Ic_vapp.svg";
 import Link from "next/link";
 import Ic_logo from "@/public/images/Ic_logo.svg";
 import Ic_menu from "@/public/images/Ic_menu.svg";
@@ -15,6 +15,8 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "@/config/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
+import { getVippsLoginUrl } from "@/utils/vippsAuth";
+import { toast } from "@/hooks/use-toast";
 
 const Header = () => {
   const { loginUser, setLoginUser } = useUserLayoutContext();
@@ -84,6 +86,29 @@ const Header = () => {
       setIsDropdownOpen(false);
     } catch (error) {
       console.error("Error logging out:", error);
+    }
+  };
+
+  const handleVippsLogin = () => {
+    try {
+      const vippsUrl = getVippsLoginUrl();
+      console.log("Redirecting to Vipps login:", vippsUrl);
+
+      toast({
+        title: "Redirecting to Vipps",
+        description: `You'll be redirected to Vipps login page (${new URL(vippsUrl).origin}). Redirect URL: ${new URL(vippsUrl).searchParams.get("redirect_uri")}`,
+      });
+
+      setTimeout(() => {
+        window.location.href = vippsUrl;
+      }, 800);
+    } catch (error) {
+      console.error("Failed to initiate Vipps login:", error);
+      toast({
+        title: "Login Error",
+        description: "Could not connect to Vipps. Please try again.",
+        variant: "destructive",
+      });
     }
   };
   return (
@@ -216,12 +241,27 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <Link href={"/login"}>
-                  <Button
-                    text="Logg inn"
-                    className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
+                // <Link href={"/login"}>
+                //   <Button
+                //     text="Logg inn"
+                //     className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
+                //   />
+                // </Link>
+                <div
+                  onClick={handleVippsLogin}
+                  className="text-white border border-[#DCDFEA] bg-primary rounded-[8px] py-[10px] px-4 flex gap-2 justify-center items-center cursor-pointer text-xs sm:text-sm md:text-base"
+                  style={{
+                    boxShadow: "0px 1px 2px 0px #1018280D",
+                  }}
+                >
+                  Fortsett med
+                  <Image
+                    fetchPriority="auto"
+                    src={Ic_vapp}
+                    alt="logo"
+                    className="w-[40px] md:w-auto"
                   />
-                </Link>
+                </div>
               )}
             </div>
           </div>

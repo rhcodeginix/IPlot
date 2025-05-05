@@ -3,7 +3,7 @@ import SideSpaceContainer from "@/components/common/sideSpace";
 import Image from "next/image";
 import Ic_logo from "@/public/images/Ic_logo.svg";
 import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
-import Ic_vapp from "@/public/images/Ic_vapp.svg";
+import Img_vipps_login from "@/public/images/Img_vipps_login.png";
 import Ic_garaje from "@/public/images/Ic_garaje.svg";
 import Ic_house from "@/public/images/Ic_house.svg";
 import Ic_ofc from "@/public/images/Ic_ofc.svg";
@@ -11,7 +11,7 @@ import Ic_pergola from "@/public/images/Ic_pergola.svg";
 import Ic_cabin from "@/public/images/Ic_cabin.svg";
 import Button from "@/components/common/button";
 import * as Yup from "yup";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import Loader from "@/components/Loader";
 import LoginForm from "../login/loginForm";
 import { useRouter } from "next/router";
@@ -19,6 +19,7 @@ import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
 import Link from "next/link";
 import PropertyDetail from "@/components/Ui/stepperUi/propertyDetail";
 import PlotDetailPage from "@/components/Ui/plotDetail";
+import VippsButton from "@/components/vipps";
 
 const buildOption: any = [
   {
@@ -77,10 +78,10 @@ const Tomt: React.FC<{
     terms_condition: Yup.boolean().oneOf([true], "Påkrevd").required("Påkrevd"),
   });
 
-  const [isLoginChecked, setIsLoginChecked] = useState(false);
-  const handleLoginCheckboxChange = () => {
-    setIsLoginChecked(!isLoginChecked);
-  };
+  // const [isLoginChecked, setIsLoginChecked] = useState(false);
+  // const handleLoginCheckboxChange = () => {
+  //   setIsLoginChecked(!isLoginChecked);
+  // };
 
   const handleLoginSubmit = async () => {
     setIsPopupOpen(false);
@@ -225,7 +226,12 @@ const Tomt: React.FC<{
         </SideSpaceContainer>
       </div>
       {isPopupOpen && !loginUser && (
-        <div className="fixed top-0 left-0 flex justify-center items-center h-full w-full">
+        <div
+          className="fixed top-0 left-0 flex justify-center items-center h-full w-full"
+          style={{
+            zIndex: 999999,
+          }}
+        >
           <div
             className="bg-white mx-4 p-4 md:p-8 rounded-[8px] w-full max-w-[787px]"
             style={{
@@ -233,68 +239,49 @@ const Tomt: React.FC<{
                 "0px 8px 8px -4px rgba(16, 24, 40, 0.031), 0px 20px 24px -4px rgba(16, 24, 40, 0.078)",
             }}
           >
-            <h2 className="text-black text-lg md:text-xl desktop:text-2xl font-semibold mb-2 text-center">
-              Registrer deg
+            <div className="flex justify-center w-full mb-[46px]">
+              <Image src={Img_vipps_login} alt="vipps login" />
+            </div>
+            <h2 className="text-black text-[24px] md:text-[32px] desktop:text-[40px] font-extrabold mb-2 text-center">
+              Din <span className="text-primary">Min</span>Tomt-profil
             </h2>
-            <p className="text-secondary text-xs md:text-sm desktop:text-base text-center mb-2">
-              Logg inn med{" "}
-              <span className="font-semibold text-black">Vipps</span> for å få
-              se{" "}
-              <span className="font-semibold text-black">
-                alle bestemmelser og finne <br className="hidden sm:block" />
-                boliger som passer på denne eiendommen
-              </span>
+            <p className="text-black text-xs md:text-sm desktop:text-base text-center mb-4">
+              Logg inn for å få tilgang til alt{" "}
+              <span className="font-bold">MinTomt</span> har å by på.
             </p>
             <Formik
               initialValues={{ terms_condition: false }}
               validationSchema={validationLoginSchema}
               onSubmit={handleLoginSubmit}
             >
-              {({ values, setFieldValue, errors, touched }) => (
+              {({}) => (
                 <Form>
                   <div className="flex items-center justify-center flex-col">
-                    <label className="flex items-center gap-[12px] container sm:w-max">
-                      <Field
-                        type="checkbox"
-                        name="terms_condition"
-                        checked={isLoginChecked}
-                        onChange={() => {
-                          setFieldValue(
-                            "terms_condition",
-                            !values.terms_condition
-                          );
-                          handleLoginCheckboxChange();
-                        }}
-                      />
-                      <span className="checkmark checkmark_primary"></span>
-
-                      <div className="text-secondary text-xs md:text-sm desktop:text-base">
-                        Jeg aksepterer{" "}
-                        <span className="text-primary">Vilkårene</span> og har
-                        lest{" "}
-                        <span className="text-primary">
-                          Personvernerklæringen
-                        </span>
-                      </div>
-                    </label>
-                    {errors.terms_condition && touched.terms_condition && (
-                      <div className="text-red text-sm">
-                        {errors.terms_condition}
-                      </div>
-                    )}
-                    <div className="flex justify-end mt-6">
-                      <button
-                        className="
-                            text-sm md:text-base lg:py-[10px] py-[4px] px-2 md:px-[10px] lg:px-[18px] h-[36px] md:h-[40px] lg:h-[44px] flex items-center gap-[12px] justify-center border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[8px] w-max font-semibold relative desktop:px-[28px] desktop:py-[16px]"
-                      >
-                        Fortsett med{" "}
-                        <Image fetchPriority="auto" src={Ic_vapp} alt="logo" />
-                      </button>
+                    <div className="flex justify-end">
+                      <VippsButton />
                     </div>
                   </div>
                 </Form>
               )}
             </Formik>
+            <p className="text-secondary text-sm md:text-base mt-[46px] text-center">
+              Når du går videre, aksepterer du <br /> våre vilkår for{" "}
+              <a
+                className="underline"
+                target="__blank"
+                href="https://fjellheimhytta.mintomt.no/vilkaar-personvern/brukervilkaar"
+              >
+                bruk
+              </a>{" "}
+              og{" "}
+              <a
+                className="underline"
+                target="__blank"
+                href="https://fjellheimhytta.mintomt.no/vilkaar-personvern/personvaern"
+              >
+                personvern
+              </a>
+            </p>
           </div>
         </div>
       )}
