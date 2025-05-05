@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const VIPPS_CONFIG = {
   clientId: "b2017e3c-4ca5-440d-93aa-f695711ccc91",
-  redirectUri: "https://www.mintomt.no/welcome",
+  redirectUri: "https://www.mintomt.no",
   scope: "openid name phoneNumber address email birthDate",
   apiSubscriptionKey: "73f0a1f14f2a4d73937831a1117bc513",
   authEndpoint: "https://api.vipps.no/access-management-1.0/access/oauth2/auth",
