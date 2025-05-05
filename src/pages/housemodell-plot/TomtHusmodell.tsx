@@ -155,7 +155,7 @@ const TomtHusmodell: React.FC<{
               <a
                 className="underline"
                 target="__blank"
-                href="https://fjellheimhytta.mintomt.no/vilkaar-personvern/brukervilkaar"
+                href="https://mintomt.no/vilkaar-personvern/brukervilkaar"
               >
                 bruk
               </a>{" "}
@@ -163,7 +163,7 @@ const TomtHusmodell: React.FC<{
               <a
                 className="underline"
                 target="__blank"
-                href="https://fjellheimhytta.mintomt.no/vilkaar-personvern/personvaern"
+                href="https://mintomt.no/vilkaar-personvern/personvaern"
               >
                 personvern
               </a>
