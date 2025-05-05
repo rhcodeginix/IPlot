@@ -39,6 +39,7 @@ const index = () => {
     } else if (error) {
       console.error(error);
     }
+    console.log(code);
 
     // Function to call your API with the code
     function callApi(code: any) {
