@@ -1,12 +1,11 @@
 import axios from "axios";
 
 export const VIPPS_CONFIG = {
-  clientId: process.env.NEXT_PUBLIC_VIPPS_CLIENT_ID || "",
-  redirectUri: process.env.NEXT_PUBLIC_VIPPS_REDIRECT_URI || "",
-  scope: process.env.NEXT_PUBLIC_VIPPS_SCOPE || "",
-  apiSubscriptionKey: process.env.NEXT_PUBLIC_VIPPS_API_SUBSCRIPTION_KEY || "",
-  apiSubscriptionKeySecondary:
-    process.env.NEXT_PUBLIC_VIPPS_API_SUBSCRIPTION_KEY_SECONDARY || "",
+  clientId: "b2017e3c-4ca5-440d-93aa-f695711ccc91",
+  redirectUri: "https://www.mintomt.no/",
+  scope: "openid name phoneNumber address email birthDate",
+  apiSubscriptionKey: "73f0a1f14f2a4d73937831a1117bc513",
+  apiSubscriptionKeySecondary: "d15b342674824d70bca599a5bd46beef",
   authEndpoint: "https://api.vipps.no/access-management-1.0/access/oauth2/auth",
   tokenEndpoint:
     "https://api.vipps.no/access-management-1.0/access/oauth2/token",
