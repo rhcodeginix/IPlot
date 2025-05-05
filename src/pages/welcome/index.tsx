@@ -129,6 +129,7 @@ const Welcome = () => {
                   loginType: "vipps",
                   name: userName,
                   createdAt: new Date(),
+                  address: user.address,
                 });
                 await signInWithEmailAndPassword(auth, userEmail, userUid);
                 localStorage.setItem("min_tomt_login", "true");
