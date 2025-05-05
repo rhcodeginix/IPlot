@@ -43,7 +43,7 @@ const index = () => {
     // Function to call your API with the code
     function callApi(code: any) {
       fetch(
-        "https://5o7tsblxfe.execute-api.eu-north-1.amazonaws.com/prod/auth",
+        "https://ox9ncjtau6.execute-api.eu-north-1.amazonaws.com/prod/auth",
         {
           method: "POST",
           headers: {
