@@ -59,9 +59,9 @@ const index = () => {
 
           const { user } = data;
 
-          const userEmail = user.email || data?.email;
-          const userName = user.name || data?.name;
-          const userUid = user.id || data?.sub;
+          const userEmail = user ? user.email : data?.email;
+          const userName = user ? user.name : data?.name;
+          const userUid = user ? user.id : data?.sub;
 
           const usersRef = collection(db, "users");
 
@@ -92,7 +92,7 @@ const index = () => {
               toast.success("Vipps login successfully", {
                 position: "top-right",
               });
-              localStorage.setItem("I_plot_email", user.email);
+              localStorage.setItem("I_plot_email", userEmail);
               router.push("/");
             } catch (error) {
               console.error("Login error:", error);
@@ -118,7 +118,7 @@ const index = () => {
                   loginType: "vipps",
                   name: userName,
                   createdAt: new Date(),
-                  address: user.address,
+                  address: user ? user.address : data?.address,
                   data: data,
                 });
                 await signInWithEmailAndPassword(auth, userEmail, userUid);
@@ -127,7 +127,7 @@ const index = () => {
                   position: "top-right",
                 });
                 router.push("/");
-                localStorage.setItem("I_plot_email", user.email);
+                localStorage.setItem("I_plot_email", userEmail);
               }
             } catch (error: any) {
               if (error.code === "auth/email-already-in-use") {
