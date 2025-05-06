@@ -59,9 +59,9 @@ const index = () => {
 
           const { user } = data;
 
-          const userEmail = user.email;
-          const userName = user.name;
-          const userUid = user.id;
+          const userEmail = user.email || data?.email;
+          const userName = user.name || data?.name;
+          const userUid = user.id || data?.sub;
 
           const usersRef = collection(db, "users");
 
@@ -119,6 +119,7 @@ const index = () => {
                   name: userName,
                   createdAt: new Date(),
                   address: user.address,
+                  data: data,
                 });
                 await signInWithEmailAndPassword(auth, userEmail, userUid);
                 localStorage.setItem("min_tomt_login", "true");
