@@ -354,7 +354,7 @@ const Oppsummering: React.FC<{
                           <div className="flex justify-end">
                             <Button
                               text="Kontakt meg"
-                              className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                              className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                               type="submit"
                             />
                           </div>
@@ -421,7 +421,7 @@ const Oppsummering: React.FC<{
                                   )}
                               </div>
                               <p
-                                className="border-2 border-[#6927DA] text-[#6927DA] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer"
+                                className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer"
                                 onClick={() => {
                                   setSkipSharingDataValidation(true);
                                   setTimeout(() => {
@@ -540,7 +540,7 @@ const Oppsummering: React.FC<{
                               </div>
                               <Button
                                 text="Send inn lånesøknad"
-                                className="border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-medium desktop:px-[20px] relative desktop:py-[16px]"
+                                className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-medium desktop:px-[20px] relative desktop:py-[16px]"
                                 type="submit"
                               />
                             </div>
@@ -652,7 +652,7 @@ const Oppsummering: React.FC<{
                     <div className="flex justify-end">
                       <Button
                         text="Send til EIE"
-                        className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                        className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                         type="submit"
                       />
                     </div>
@@ -675,14 +675,14 @@ const Oppsummering: React.FC<{
           <div className="flex justify-end gap-4 items-center">
             <Button
               text="Tilbake"
-              className="border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
+              className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
               onClick={() => {
                 handlePrevious();
               }}
             />
             <Button
               text={`Send til ${supplierData?.company_name}`}
-              className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+              className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
               onClick={() => {
                 handleNext();
               }}

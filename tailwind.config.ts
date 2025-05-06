@@ -40,6 +40,7 @@ const config: Config = {
       red: "red",
       gray: "#EAECF0",
       darkGray: "#B9C0D4",
+      greenBtn: "#099250",
       gray2: "#D0D5DD",
       gray3: "#EFF1F5",
     },

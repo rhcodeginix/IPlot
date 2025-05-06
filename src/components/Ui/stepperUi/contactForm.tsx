@@ -147,7 +147,7 @@ const ContactForm: React.FC<{ leadId?: any }> = ({ leadId }) => {
                   <div>
                     <Button
                       text="Send inn"
-                      className={`border border-primary bg-white text-primary sm:text-base rounded-[40px] w-[176px] h-[48px] font-semibold ${!isChecked ? "opacity-50 cursor-not-allowed" : ""}`}
+                      className={`border border-primary bg-white text-primary hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-[176px] h-[48px] font-semibold ${!isChecked ? "opacity-50 cursor-not-allowed" : ""}`}
                       type="submit"
                       disabled={!isChecked}
                     />

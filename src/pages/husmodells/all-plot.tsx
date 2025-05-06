@@ -179,7 +179,7 @@ const AllPlot = () => {
                   <div className="text-black text-base flex items-center gap-1">
                     Antall soverom{" "}
                     {bedroomFilters.length > 0 && (
-                      <span className="bg-greenBtn text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
+                      <span className="bg-greenBtn hover:bg-[#28AA6C] focus:bg-[#09723F] text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
                         {bedroomFilters.length}
                       </span>
                     )}
@@ -232,7 +232,7 @@ const AllPlot = () => {
                   <div className="text-black text-base flex items-center gap-1">
                     Fasiliteter{" "}
                     {facilityFilters.length > 0 && (
-                      <span className="bg-greenBtn text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
+                      <span className="bg-greenBtn hover:bg-[#28AA6C] focus:bg-[#09723F] text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
                         {facilityFilters.length}
                       </span>
                     )}

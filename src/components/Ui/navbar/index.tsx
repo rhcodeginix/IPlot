@@ -243,12 +243,12 @@ const Header = () => {
                 // <Link href={"/login"}>
                 //   <Button
                 //     text="Logg inn"
-                //     className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
+                //     className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
                 //   />
                 // </Link>
                 <div
                   onClick={handleVippsLogin}
-                  className="text-white border border-[#DCDFEA] bg-primary rounded-[8px] py-[10px] px-4 flex gap-2 justify-center items-center cursor-pointer text-xs sm:text-sm md:text-base"
+                  className="text-white border border-primary bg-primary hover:bg-[#7A5AF8] hover:border-[#7A5AF8] focus:bg-[#5925DC] focus:border-[#5925DC] rounded-[8px] py-[10px] px-4 flex gap-2 justify-center items-center cursor-pointer text-xs sm:text-sm md:text-base"
                   style={{
                     boxShadow: "0px 1px 2px 0px #1018280D",
                   }}

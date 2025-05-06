@@ -433,7 +433,7 @@ const Belop: React.FC = () => {
           <div className="flex justify-end items-center gap-6">
             <Button
               text="Tilbake"
-              className="border-2 border-[#6941C6] bg-white text-[#6941C6] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold desktop:px-[20px] relative desktop:py-[16px]"
+              className="border-2 border-[#6941C6] bg-white text-[#6941C6] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold desktop:px-[20px] relative desktop:py-[16px]"
               onClick={() => router.push("/")}
             />
           </div>

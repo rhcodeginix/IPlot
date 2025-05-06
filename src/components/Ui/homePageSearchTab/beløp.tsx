@@ -164,7 +164,7 @@ const BeløpTab = () => {
         <div className="border-t border-gray3 w-full lg:hidden"></div>
 
         <button
-          className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-greenBtn rounded-[40px] transition-all duration-300 ease-out h-[40px] lg:h-[56px] m-4 gap-2 ${
+          className={`p-3 lg:px-5 lg:py-4 cursor-pointer flex justify-center items-center bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] rounded-[40px] transition-all duration-300 ease-out h-[40px] lg:h-[56px] m-4 gap-2 ${
             !formData?.amount ? "opacity-50 cursor-not-allowed" : ""
           }`}
           type="submit"

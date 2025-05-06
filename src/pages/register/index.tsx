@@ -161,7 +161,7 @@ const Register = () => {
                 <div className="flex justify-end mt-6">
                   <Button
                     text="Send inn"
-                    className="border border-greenBtn bg-greenBtn text-white sm:text-base rounded-[40px] w-full h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
+                    className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-full h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative"
                     type="submit"
                   />
                 </div>

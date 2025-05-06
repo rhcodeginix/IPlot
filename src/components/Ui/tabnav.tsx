@@ -18,7 +18,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, setActiveTab, activeTab }) => {
           key={index}
           className={`border-b-[3px] text-black py-3 px-5 ${
             activeTab === index
-              ? "border-primary font-semibold bg-lightPurple rounded-t-[12px]"
+              ? "border-primary hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] font-semibold bg-lightPurple rounded-t-[12px]"
               : "border-transparent"
           } ${setActiveTab ? "cursor-pointer" : "cursor-auto"}`}
           onClick={() => (setActiveTab ? setActiveTab(index) : undefined)}

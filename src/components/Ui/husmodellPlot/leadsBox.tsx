@@ -295,7 +295,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
                         </div>
                         <Button
                           text="Kontakt meg"
-                          className={`border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative ${!values.sharingData ? "opacity-50 cursor-not-allowed" : ""}`}
+                          className={`border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative ${!values.sharingData ? "opacity-50 cursor-not-allowed" : ""}`}
                           type="submit"
                           disabled={!values.sharingData}
                         />
@@ -374,7 +374,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
                     <div>
                       <Button
                         text="Kontakt meg"
-                        className={`border-2 border-[#6927DA] text-[#6927DA] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative ${!values.checkbox ? "opacity-50 cursor-not-allowed" : ""}`}
+                        className={`border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-semibold relative ${!values.checkbox ? "opacity-50 cursor-not-allowed" : ""}`}
                         type="submit"
                         disabled={!values.checkbox}
                       />
