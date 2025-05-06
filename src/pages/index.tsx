@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
 import MainSection from "./homepage/mainSection";
-// import HouseCabinMould from "./homepage/houseCabinMould";
 import HowItWorks from "./homepage/howItWorks";
 import Advantages from "./homepage/advantages";
 import Analysis from "./homepage/analysis";
@@ -31,7 +30,6 @@ const index = () => {
     const urlParams = new URLSearchParams(window.location.search);
 
     const code: any = urlParams.get("code");
-    // const state = urlParams.get("state");
     const error = urlParams.get("error");
 
     if (code) {
@@ -40,7 +38,6 @@ const index = () => {
       console.error(error);
     }
 
-    // Function to call your API with the code
     function callApi(code: any) {
       fetch(
         "https://ox9ncjtau6.execute-api.eu-north-1.amazonaws.com/prod/auth",

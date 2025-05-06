@@ -1014,7 +1014,6 @@ const AddPlotForm = () => {
                           },
                         ]}
                         value={values.Byggeklausul}
-                        // disabled={values.Byggeklausul ? true : false}
                       />
                       <SelectDropDown
                         label="Reguleringsstatus"

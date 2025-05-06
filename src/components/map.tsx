@@ -3,9 +3,6 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const DEFAULT_ZOOM = 18;
-// Add a maximum zoom constraint that's higher than default
-// const MAX_ZOOM = 20;
-
 const NorkartMap: React.FC<{ coordinates: any; MAX_ZOOM: any }> = ({
   coordinates,
   MAX_ZOOM,

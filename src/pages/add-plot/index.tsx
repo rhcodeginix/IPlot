@@ -46,11 +46,6 @@ const AddPlot = () => {
 
   const queryString = new URLSearchParams(router_query).toString();
 
-  // const [isLoginChecked, setIsLoginChecked] = useState(false);
-  // const handleLoginCheckboxChange = () => {
-  //   setIsLoginChecked(!isLoginChecked);
-  // };
-
   return (
     <>
       <div className="relative">

@@ -53,36 +53,6 @@ const PropertyHouseDetails: React.FC<{
   const husPris = Number(Husdetaljer?.pris?.replace(/\s/g, "")) || 0;
   const extraPris = Number(pris) || 0;
 
-  // const Byggekostnader = HouseModelData?.Prisliste?.Byggekostnader;
-
-  // const Tomtekost = HouseModelData?.Prisliste?.Tomtekost;
-
-  // const totalPrisOfTomtekost = Tomtekost
-  //   ? Tomtekost.reduce((acc: any, prod: any) => {
-  //       const numericValue = prod.pris
-  //         ?.replace(/\s/g, "")
-  //         .replace(/\./g, "")
-  //         .replace(",", ".");
-  //       return acc + (numericValue ? parseFloat(numericValue) : 0);
-  //     }, 0)
-  //   : 0;
-
-  // const totalPrisOfByggekostnader = Byggekostnader
-  //   ? Byggekostnader.reduce((acc: any, prod: any) => {
-  //       const numericValue = prod.pris
-  //         ?.replace(/\s/g, "")
-  //         .replace(/\./g, "")
-  //         .replace(",", ".");
-  //       return (
-  //         acc + (numericValue ? parseFloat(numericValue) : 0) + totalCustPris
-  //       );
-  //     }, 0)
-  //   : 0;
-
-  // const formattedNumber = totalPrisOfTomtekost + totalPrisOfByggekostnader;
-
-  // const totalPrice =
-  //   Number(totalCustPris) + Number(husPris) + Number(extraPris);
   const totalPrice = totalCustPris + husPris + extraPris;
 
   return (

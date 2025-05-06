@@ -275,56 +275,6 @@ const Belop: React.FC = () => {
             })
           : allHusmodell;
 
-        // const husmodellMultipliers = [0.8, 0.9, 1.0];
-
-        // let filteredHusmodell: any[] = [];
-
-        // for (const multiplier of husmodellMultipliers) {
-        //   const a: any = queryPrice;
-
-        //   const maxPriceHusmodell = maxRangeHusmodell
-        //     ? parseInt(maxRangeHusmodell)
-        //     : parseInt(a.replace(/\s/g, ""), 10) * multiplier;
-
-        //   filteredHusmodell = allHusmodell.filter((plot: any) => {
-        //     const price = parseInt(
-        //       plot?.Husdetaljer?.pris.replace(/\s/g, ""),
-        //       10
-        //     );
-
-        //     const boligtype = plot?.Husdetaljer?.VelgBoligtype;
-        //     const egenskaper = plot?.Husdetaljer?.VelgEgenskaperBoligtype || [];
-        //     const hasTypeFilter = formData.TypeHusmodell.length > 0;
-        //     const hasEgenskaper = egenskaper.length > 0;
-
-        //     const matchesBoligtype =
-        //       (!hasTypeFilter || formData.TypeHusmodell.includes(boligtype)) &&
-        //       hasEgenskaper;
-        //     const matchesEgenskaper =
-        //       !hasTypeFilter ||
-        //       egenskaper.some((item: string) =>
-        //         formData.TypeHusmodell.includes(item)
-        //       );
-
-        //     return (
-        //       price <= maxPriceHusmodell &&
-        //       (soveromValues.length > 0
-        //         ? soveromValues.includes(plot?.Husdetaljer?.Soverom)
-        //         : true) &&
-        //       (HustypeFormLocalStorage.length > 0
-        //         ? HustypeFormLocalStorage.map((item: any) =>
-        //             item.toLowerCase()
-        //           ).includes(plot?.Husdetaljer?.TypeObjekt?.toLowerCase())
-        //         : true) &&
-        //       (matchesBoligtype || matchesEgenskaper)
-        //     );
-        //   });
-
-        //   if (filteredHusmodell.length > 0) {
-        //     break; // If some housemodell found, stop here
-        //   }
-        // }
-
         const filteredPlots = queryPrice
           ? allPlots.filter(
               (plot: any) =>

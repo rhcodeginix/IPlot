@@ -2,81 +2,22 @@ import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Ic_Search2 from "@/public/images/Ic_Search2.svg";
 import Ic_close from "@/public/images/Ic_close.svg";
-// import Ic_chevron_down from "@/public/images/Ic_chevron_down.svg";
-// import { collection, getDocs } from "firebase/firestore";
-// import { db } from "@/config/firebaseConfig";
-// import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
 
 const BeløpTab = () => {
   const [formData, setFormData] = useState({
     amount: "",
-    // selectedCountry: "Agder (210)",
   });
 
-  // const [isOpen, setIsOpen] = useState(false);
   const [errors, setErrors] = useState<{
-    // selectedCountry: boolean;
     amount: boolean;
   }>({
-    // selectedCountry: false,
     amount: false,
   });
 
-  // const [Cities, setCities] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const fetchProperty = async () => {
-  //     setIsLoading(true);
-  //     const citiesCollectionRef = collection(db, "cities");
-
-  //     try {
-  //       const citiesSnapshot = await getDocs(citiesCollectionRef);
-  //       const fetchedProperties: any = citiesSnapshot.docs.map((doc) => ({
-  //         propertyId: doc.id,
-  //         ...doc.data(),
-  //       }));
-  //       setCities(fetchedProperties);
-  //     } catch (error) {
-  //       console.error("Error fetching cities:", error);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   fetchProperty();
-  // }, [db]);
-
-  // const options = Cities.map((city: any) => ({
-  //   name: city?.name,
-  //   count: city?.total_entries,
-  // }));
-
-  // const dropdownRef = useRef<HTMLDivElement>(null);
   const kartInputRef = useRef<HTMLInputElement | null>(null);
-
-  // const toggleDropdown = () => setIsOpen(!isOpen);
-
-  // const handleSelect = (option: string) => {
-  //   setFormData((prev) => ({ ...prev, selectedCountry: option }));
-  //   setErrors((prev) => ({ ...prev, selectedCountry: false }));
-  //   setIsOpen(false);
-  // };
-
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     if (
-  //       dropdownRef.current &&
-  //       !dropdownRef.current.contains(event.target as Node)
-  //     ) {
-  //       setIsOpen(false);
-  //     }
-  //   };
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => document.removeEventListener("mousedown", handleClickOutside);
-  // }, []);
 
   const handleKartInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let rawValue = e.target.value.replace(/\D/g, "");
@@ -101,10 +42,6 @@ const BeløpTab = () => {
     e.preventDefault();
     let hasError = false;
 
-    // if (!formData?.selectedCountry) {
-    //   setErrors((prev) => ({ ...prev, selectedCountry: true }));
-    //   hasError = true;
-    // }
     if (!formData?.amount) {
       setErrors((prev) => ({ ...prev, amount: true }));
       hasError = true;
@@ -112,9 +49,6 @@ const BeløpTab = () => {
 
     if (hasError) return;
 
-    // router.push(
-    //   `housemodell-plot?city=${formData?.selectedCountry}&pris=${formData?.amount.replace(/\s+/g, "")}`
-    // );
     router.push(
       `housemodell-plot?pris=${formData?.amount.replace(/\s+/g, "")}`
     );

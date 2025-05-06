@@ -5,7 +5,6 @@ import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Button from "@/components/common/button";
 import Loader from "@/components/Loader";
 import Link from "next/link";
-// import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -19,7 +18,6 @@ import { Formik, Form, Field } from "formik";
 import Ic_spareBank from "@/public/images/Ic_spareBank.svg";
 import Ic_Info_gray from "@/public/images/Ic_Info_gray.svg";
 import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjoner";
-// import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
 import Prisliste from "../husmodell/Prisliste";
 
 const Finansiering: React.FC<{

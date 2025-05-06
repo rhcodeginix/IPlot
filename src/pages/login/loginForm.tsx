@@ -25,7 +25,6 @@ import {
   where,
 } from "firebase/firestore";
 import NameModal from "./nameModal";
-// import VippsButton from "@/components/vipps";
 
 const LoginForm: React.FC<{
   path?: any;

@@ -20,7 +20,6 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const router = useRouter();
 
-  // const handleClick = () => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (path) {
       router.push(path);

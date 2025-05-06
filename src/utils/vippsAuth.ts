@@ -23,7 +23,6 @@ export const generateState = (): string => {
 export const storeState = (state: string): void => {
   try {
     localStorage.setItem("vippsAuthState", state);
-    console.log("State stored successfully:", state);
   } catch (error) {
     console.error("Failed to store state in localStorage:", error);
   }
@@ -33,7 +32,6 @@ export const getVippsLoginUrl = (): string => {
   const state = generateState();
   storeState(state);
 
-  // Build URL with parameters directly
   const authUrl = new URL(VIPPS_CONFIG.authEndpoint);
   authUrl.searchParams.append("client_id", VIPPS_CONFIG.clientId);
   authUrl.searchParams.append("redirect_uri", VIPPS_CONFIG.redirectUri);
@@ -54,26 +52,22 @@ export const getVippsLoginUrl = (): string => {
     state: state,
   });
 
-  // Check if state was properly stored
   const verifyState = localStorage.getItem("vippsAuthState");
   console.log("Verifying state was stored:", verifyState);
 
   return fullUrl;
 };
 
-// Parse hash or search parameters from URL
 export const parseUrlParams = (url: string): URLSearchParams => {
   try {
     console.log("Parsing URL parameters from:", url);
     const parsedUrl = new URL(url);
 
-    // Check for hash parameters (e.g. #code=xyz)
     if (parsedUrl.hash) {
       console.log("Found hash parameters:", parsedUrl.hash);
       return new URLSearchParams(parsedUrl.hash.substring(1));
     }
 
-    // Check for query parameters (e.g. ?code=xyz)
     console.log("Using query parameters:", parsedUrl.search);
     return new URLSearchParams(parsedUrl.search);
   } catch (error) {

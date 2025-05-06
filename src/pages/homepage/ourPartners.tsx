@@ -2,7 +2,6 @@ import React from "react";
 import SideSpaceContainer from "@/components/common/sideSpace";
 import Image from "next/image";
 import Img_pms_SB1_Halling_Valdr_verti_pos from "@/public/images/Img_pms_SB1_Halling_Valdr_verti_pos.png";
-// import Img_steddy from "@/public/images/Img_steddy.png";
 import Img_NexonTechWhite from "@/public/images/Img_NexonTechWhite.png";
 
 const OurPartners = () => {
@@ -21,12 +20,6 @@ const OurPartners = () => {
                 alt="logo"
                 className="w-[130px] md:w-[170px] desktop:w-auto"
               />
-              {/* <Image
-                fetchPriority="auto"
-                src={Img_steddy}
-                alt="logo"
-                className="w-[130px] md:w-[170px] desktop:w-auto"
-              /> */}
               <Image
                 fetchPriority="auto"
                 src={Img_NexonTechWhite}

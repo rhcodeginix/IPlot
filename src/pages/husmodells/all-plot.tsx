@@ -129,11 +129,6 @@ const AllPlot = () => {
     terms_condition: Yup.boolean().oneOf([true], "Påkrevd").required("Påkrevd"),
   });
 
-  // const [isLoginChecked, setIsLoginChecked] = useState(false);
-  // const handleLoginCheckboxChange = () => {
-  //   setIsLoginChecked(!isLoginChecked);
-  // };
-
   const { loginUser, setLoginUser } = useUserLayoutContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 

@@ -92,7 +92,6 @@ const Header = () => {
   const handleVippsLogin = () => {
     try {
       const vippsUrl = getVippsLoginUrl();
-      console.log("Redirecting to Vipps login:", vippsUrl);
 
       toast({
         title: "Redirecting to Vipps",

@@ -5,8 +5,6 @@ import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Button from "@/components/common/button";
 import Loader from "@/components/Loader";
 import Link from "next/link";
-// import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
-// import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

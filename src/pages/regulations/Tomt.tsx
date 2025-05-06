@@ -78,11 +78,6 @@ const Tomt: React.FC<{
     terms_condition: Yup.boolean().oneOf([true], "Påkrevd").required("Påkrevd"),
   });
 
-  // const [isLoginChecked, setIsLoginChecked] = useState(false);
-  // const handleLoginCheckboxChange = () => {
-  //   setIsLoginChecked(!isLoginChecked);
-  // };
-
   const handleLoginSubmit = async () => {
     setIsPopupOpen(false);
     setLoginPopup(true);
