@@ -57,11 +57,9 @@ const index = () => {
         .then(async (data) => {
           console.log("data---------", data);
 
-          const { user } = data;
-
-          const userEmail = user ? user.email : data?.email;
-          const userName = user ? user.name : data?.name;
-          const userUid = user ? user.id : data?.sub;
+          const userEmail = data?.email;
+          const userName = data?.name;
+          const userUid = data?.sub;
 
           const usersRef = collection(db, "users");
 
@@ -118,7 +116,7 @@ const index = () => {
                   loginType: "vipps",
                   name: userName,
                   createdAt: new Date(),
-                  address: user ? user.address : data?.address,
+                  address: data?.address,
                   data: data,
                 });
                 await signInWithEmailAndPassword(auth, userEmail, userUid);
@@ -154,7 +152,7 @@ const index = () => {
                     position: "top-right",
                   });
                   router.push("/");
-                  localStorage.setItem("I_plot_email", user.email);
+                  localStorage.setItem("I_plot_email", userEmail);
                 } catch (error) {
                   console.error("Login error:", error);
                   router.push("/login");
