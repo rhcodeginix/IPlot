@@ -55,7 +55,8 @@ const index = () => {
         .then((response) => response.json())
 
         .then(async (data) => {
-          console.log("data---------", data);
+          data = JSON.stringify(data);
+          console.log("data-----", data);
 
           const userEmail = data?.email;
           const userName = data?.name;
