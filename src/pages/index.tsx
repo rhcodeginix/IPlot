@@ -40,7 +40,6 @@ const index = () => {
       console.error(error);
     }
 
-    console.log(code);
     // Function to call your API with the code
     function callApi(code: any) {
       fetch(
@@ -56,7 +55,7 @@ const index = () => {
         .then((response) => response.json())
 
         .then(async (data) => {
-          console.log(data);
+          console.log("data---------", data);
 
           const { user } = data;
 
