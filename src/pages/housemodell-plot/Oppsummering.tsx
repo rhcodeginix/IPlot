@@ -662,7 +662,7 @@ const Oppsummering: React.FC<{
         </SideSpaceContainer>
       </div>
       <div
-        className="sticky bottom-0 bg-white py-4 md:py-6"
+        className="sticky bottom-0 bg-white py-4"
         style={{
           boxShadow:
             "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",

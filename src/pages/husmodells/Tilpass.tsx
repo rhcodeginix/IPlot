@@ -475,7 +475,7 @@ const Tilpass: React.FC<any> = ({
             </SideSpaceContainer>
           </div>
           <div
-            className="sticky bottom-0 bg-white py-4 md:py-6"
+            className="sticky bottom-0 bg-white py-4"
             style={{
               boxShadow:
                 "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",
@@ -519,7 +519,7 @@ const Tilpass: React.FC<any> = ({
       >
         {selectedDrawerProduct && (
           <div>
-            <div className="py-4 md:py-5 px-4 md:px-8 flex items-center justify-between gap-6 border-b border-[#DCDFEA]">
+            <div className="py-4 px-4 md:px-8 flex items-center justify-between gap-6 border-b border-[#DCDFEA]">
               <h2 className="text-base md:text-lg desktop:text-xl font-semibold text-darkBlack">
                 {selectedDrawerProduct?.Produktnavn}
               </h2>
@@ -527,7 +527,7 @@ const Tilpass: React.FC<any> = ({
                 <Image src={Ic_close} alt="close" />
               </button>
             </div>
-            <div className="py-4 md:py-5 px-4 md:px-8">
+            <div className="py-4 px-4 md:px-8">
               <div className="grid grid-cols-2 gap-4 mb-4 md:mb-6">
                 {selectedDrawerProduct?.Hovedbilde?.map(
                   (img: any, index: number) => (

@@ -235,7 +235,7 @@ const HusmodellPropertyPage: React.FC<{
       <div className="relative pt-5 lg:pt-8">
         <SideSpaceContainer>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-2 md:gap-3 lg:gap-4 mb-6 lg:mb-[40px]">
-            <h3 className="text-darkBlack text-xl md:text-[24px] lg:text-[28px] desktop:text-[2rem] desktop:leading-[44.8px]">
+            <h3 className="text-darkBlack text-lg md:text-xl lg:text-2xl desktop:leading-[44.8px]">
               <span className="font-bold">Husmodeller</span> du kan bygge i{" "}
               <span className="font-bold text-blue">
                 {
