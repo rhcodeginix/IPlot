@@ -234,9 +234,9 @@ const Illustrasjoner: React.FC = () => {
       )}
       {isPopupOpen && (
         <Modal isOpen={true} onClose={() => setIsPopupOpen(false)}>
-          <div className="bg-white p-6 rounded-lg max-w-4xl w-full relative">
+          <div className="bg-white p-2 md:p-6 rounded-lg max-w-[300px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-4xl mx-4 w-full relative">
             <button
-              className="absolute top-3 right-3"
+              className="absolute top-3 right-0 md:right-3"
               onClick={() => setIsPopupOpen(false)}
             >
               <Image src={Ic_close} alt="close" />
@@ -281,6 +281,9 @@ const Illustrasjoner: React.FC = () => {
                   spaceBetween={10}
                   slidesPerView={3}
                   breakpoints={{
+                    280: {
+                      slidesPerView: 1,
+                    },
                     640: {
                       slidesPerView: 1,
                     },

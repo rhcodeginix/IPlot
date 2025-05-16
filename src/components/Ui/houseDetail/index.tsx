@@ -315,16 +315,16 @@ const HouseDetailPage: React.FC = () => {
       )}
       {isOpen && (
         <Modal isOpen={true} onClose={() => setIsPopupOpen(false)}>
-          <div className="bg-white p-6 rounded-lg max-w-4xl w-full relative">
+          <div className="bg-white p-2 md:p-6 rounded-lg mx-4 max-w-[85vw] md:max-w-4xl w-full relative">
             <button
-              className="absolute top-3 right-3"
+              className="absolute top-3 right-0 md:right-3"
               onClick={() => setIsOpen(false)}
             >
               <Image src={Ic_close} alt="close" />
             </button>
 
             {selectedImage && (
-              <div className="flex justify-center items-center w-[400px] h-[400px] my-4 relative">
+              <div className="flex justify-center items-center sm:w-[400px] h-[400px] my-4 relative">
                 <button
                   className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 px-4 py-2 rounded-full"
                   onClick={() => {
@@ -346,7 +346,7 @@ const HouseDetailPage: React.FC = () => {
                 <img
                   src={selectedImage}
                   alt="Selected"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full"
                 />
 
                 <button
