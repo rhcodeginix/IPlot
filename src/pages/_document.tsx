@@ -14,6 +14,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="stylesheet" href="../styles/globals.css" />
+          <link rel="icon" type="image/png" href="/Ic_logo.svg" />
         </Head>
         <body>
           <Main />
