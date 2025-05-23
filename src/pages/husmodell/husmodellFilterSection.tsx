@@ -91,7 +91,7 @@ const HusmodellFilterSection: React.FC<{
     { name: "6 Soverom", value: "6 Soverom" },
   ];
   const TomtetypeArray: any = [
-    { name: "Flat", value: "Flat" },
+    { name: "Flat tomt", value: "Flat tomt" },
     { name: "Skrånet", value: "Skrånet" },
   ];
 

@@ -226,6 +226,7 @@ const TomtHouseDetails: React.FC<{
         askData={askData}
         CadastreDataFromApi={CadastreDataFromApi}
         lamdaDataFromApi={lamdaDataFromApi}
+        HouseModelData={HouseModelData}
       />
       <SideSpaceContainer>
         <LeadsBox />

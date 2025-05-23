@@ -107,7 +107,7 @@ const HouseDetailsection: React.FC<{
                   krever en
                 </p>
                 <p className="text-black text-sm md:text-base font-medium">
-                  Grunnflate på {HouseModelData?.Husdetaljer?.Bruksareal}
+                  Grunnflate på {HouseModelData?.Husdetaljer?.BebygdAreal}
                 </p>
               </div>
             </div>

@@ -15,6 +15,7 @@ const PropertyHusmodellDetail: React.FC<any> = ({
   isShow,
   loadingAdditionalData,
   additionalData,
+  HouseModelData,
 }) => {
   const { getAddress } = useAddress();
   const [askData, setAskData] = useState<any | null>(null);
@@ -107,9 +108,8 @@ const PropertyHusmodellDetail: React.FC<any> = ({
                       <p className="text-secondary text-sm font-semibold">
                         Boligen kan ha en{" "}
                         <span className="text-black">
-                          grunnflate på{" "}
-                          {askData?.bya_calculations?.input?.plot_size} m
-                          <sup>2</sup>
+                          Grunnflate på{" "}
+                          {HouseModelData?.Husdetaljer?.BebygdAreal}
                         </span>
                       </p>
                     </div>

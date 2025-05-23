@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Illustrasjoner, {
   formatCurrency,
@@ -106,6 +106,20 @@ const HouseDetailPage: React.FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const popup = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (popup.current && !popup.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="relative">
@@ -323,7 +337,10 @@ const HouseDetailPage: React.FC = () => {
       )}
       {isOpen && (
         <Modal isOpen={true} onClose={() => setIsPopupOpen(false)}>
-          <div className="bg-white p-2 md:p-6 rounded-lg mx-4 max-w-[85vw] md:max-w-4xl w-full relative">
+          <div
+            className="bg-white p-2 md:p-6 rounded-lg mx-4 max-w-[85vw] md:max-w-4xl w-full relative"
+            ref={popup}
+          >
             <button
               className="absolute top-3 right-0 md:right-3"
               onClick={() => setIsOpen(false)}

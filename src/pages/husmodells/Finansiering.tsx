@@ -205,6 +205,7 @@ const Finansiering: React.FC<{
             askData={askData}
             CadastreDataFromApi={CadastreDataFromApi}
             lamdaDataFromApi={lamdaDataFromApi}
+            HouseModelData={HouseModelData}
           /> */}
 
           <div className="pt-6 pb-8">
