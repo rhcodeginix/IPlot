@@ -39,7 +39,8 @@ const Tilpass: React.FC<{
 
   const Huskonfigurator =
     HouseModelData?.Huskonfigurator?.hovedkategorinavn || [];
-  const { updateCustomizeHouse } = useCustomizeHouse();
+  const { customizeHouse: custHouse, updateCustomizeHouse } =
+    useCustomizeHouse();
 
   const [selectedTab, setSelectedTab] = useState<number>(0);
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
@@ -176,6 +177,20 @@ const Tilpass: React.FC<{
       updateCustomizeHouse(selectedProductsArray);
     }
   }, [selectedProductsArray]);
+
+  const totalCustPris = custHouse
+    ? custHouse?.reduce(
+        (sum: any, item: any) =>
+          sum + Number(item?.product?.pris.replace(/\s/g, "")),
+        0
+      )
+    : 0;
+
+  const husPris =
+    Number(HouseModelData?.Husdetaljer?.pris?.replace(/\s/g, "")) || 0;
+
+  const totalPrice = totalCustPris + husPris;
+
   if (loadingLamdaData) {
     <Loader />;
   }
@@ -254,7 +269,7 @@ const Tilpass: React.FC<{
       <div className="py-5 md:py-8">
         <SideSpaceContainer>
           <h3 className="text-darkBlack text-lg md:text-xl desktop:text-2xl font-semibold mb-[22px]">
-            Her gjør du dine tilpassninger:
+            Her gjør du dine tilpasninger:
           </h3>
           {Huskonfigurator?.length > 0 ? (
             <div className="flex flex-col md:flex-row gap-6 relative">
@@ -446,7 +461,10 @@ const Tilpass: React.FC<{
                                 <h3 className="text-darkBlack font-medium text-sm md:text-base lg:text-lg truncate">
                                   {product?.Produktnavn}
                                 </h3>
-                                <div className="relative group">
+                                <p className="text-darkBlack text-xs md:text-sm two_line_elipse mb-1.5 md:mb-3">
+                                  {product?.Produktbeskrivelse}
+                                </p>
+                                {/* <div className="relative group">
                                   <p className="text-darkBlack text-xs md:text-sm two_line_elipse mb-1.5 md:mb-3 cursor-pointer">
                                     {product?.Produktbeskrivelse}
                                   </p>
@@ -460,7 +478,7 @@ const Tilpass: React.FC<{
                                       {product?.Produktbeskrivelse}
                                     </p>
                                   </div>
-                                </div>
+                                </div> */}
                               </div>
                               <div className="flex items-center gap-1 justify-between">
                                 <div>
@@ -520,23 +538,43 @@ const Tilpass: React.FC<{
         }}
       >
         <SideSpaceContainer>
-          <div className="flex justify-end gap-4 items-center">
-            <Button
-              text="Tilbake"
-              className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
-              onClick={() => {
-                handlePrevious();
-                const currIndex = 0;
-                localStorage.setItem("currIndex", currIndex.toString());
-              }}
-            />
-            <Button
-              text="Neste: Tilbud"
-              className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
-              onClick={() => {
-                handleNext();
-              }}
-            />
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+            <div className="flex gap-6 w-max">
+              <div>
+                <p className="text-secondary text-xs md:text-sm mb-1">
+                  Dine tillegg
+                </p>
+                <h4 className="text-darkBlack font-semibold text-base md:text-lg lg:text-xl">
+                  {totalCustPris ? formatCurrency(totalCustPris) : "kr 0"}
+                </h4>
+              </div>
+              <div>
+                <p className="text-secondary text-xs md:text-sm mb-1">
+                  Din pris med tilvalg
+                </p>
+                <h4 className="text-darkBlack font-semibold text-base md:text-lg lg:text-xl">
+                  {formatCurrency(totalPrice)}
+                </h4>
+              </div>
+            </div>
+            <div className="flex justify-end gap-4 items-center">
+              <Button
+                text="Tilbake"
+                className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
+                onClick={() => {
+                  handlePrevious();
+                  const currIndex = 0;
+                  localStorage.setItem("currIndex", currIndex.toString());
+                }}
+              />
+              <Button
+                text="Neste: Tilbud"
+                className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                onClick={() => {
+                  handleNext();
+                }}
+              />
+            </div>
           </div>
         </SideSpaceContainer>
       </div>

@@ -383,10 +383,10 @@ const HusmodellFilterSection: React.FC<{
                     </div>
                     <div className="flex items-center justify-between h-[30px] mt-2">
                       <div className="text-grayText text-sm lg:text-base">
-                        {formData?.minRangeForHusmodell} NOK
+                        {formData?.minRangeForHusmodell}
                       </div>
                       <div className="text-grayText text-sm lg:text-base">
-                        {formData?.maxRangeForHusmodell} NOK
+                        {formData?.maxRangeForHusmodell}
                       </div>
                     </div>
                   </div>

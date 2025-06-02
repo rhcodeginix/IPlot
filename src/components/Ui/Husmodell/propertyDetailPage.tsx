@@ -75,34 +75,34 @@ const PropertyDetailPage: React.FC<any> = ({ handleNext }) => {
     }
   }, [loginUser]);
 
-  const [supplierData, setSupplierData] = useState<any>(null);
+  // const [supplierData, setSupplierData] = useState<any>(null);
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const supplierDocRef = doc(
-          db,
-          "suppliers",
-          husmodellData?.Leverandører
-        );
-        const docSnap: any = await getDoc(supplierDocRef);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const supplierDocRef = doc(
+  //         db,
+  //         "suppliers",
+  //         husmodellData?.Leverandører
+  //       );
+  //       const docSnap: any = await getDoc(supplierDocRef);
 
-        if (docSnap.exists()) {
-          setSupplierData(docSnap.data());
-        } else {
-          console.error(
-            "No document found for ID:",
-            husmodellData?.Leverandører
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching supplier data:", error);
-      }
-    };
-    if (husmodellData?.Leverandører) {
-      getData();
-    }
-  }, [husmodellData?.Leverandører]);
+  //       if (docSnap.exists()) {
+  //         setSupplierData(docSnap.data());
+  //       } else {
+  //         console.error(
+  //           "No document found for ID:",
+  //           husmodellData?.Leverandører
+  //         );
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching supplier data:", error);
+  //     }
+  //   };
+  //   if (husmodellData?.Leverandører) {
+  //     getData();
+  //   }
+  // }, [husmodellData?.Leverandører]);
 
   const [loginPopup, setLoginPopup] = useState(false);
   const validationLoginSchema = Yup.object().shape({
@@ -146,7 +146,7 @@ const PropertyDetailPage: React.FC<any> = ({ handleNext }) => {
                 <h4 className="text-black mb-6 font-semibold text-2xl">
                   {husmodellData?.husmodell_name}
                 </h4>
-                <div className="relative">
+                {/* <div className="relative">
                   <img
                     src={husmodellData?.photo}
                     alt="image"
@@ -157,7 +157,7 @@ const PropertyDetailPage: React.FC<any> = ({ handleNext }) => {
                     alt="image"
                     className="absolute top-[12px] left-[12px] bg-[#FFFFFFB2] py-2 px-3 flex items-center justify-center rounded-[32px] w-[130px]"
                   />
-                </div>
+                </div> */}
                 <div className="my-[20px] flex items-center justify-between">
                   <div className="flex flex-col gap-2">
                     <p className="text-secondary text-base">Pris fra</p>
@@ -283,7 +283,9 @@ const PropertyDetailPage: React.FC<any> = ({ handleNext }) => {
                             Tomtetype
                           </td>
                           <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
-                            {husmodellData?.Tomtetype}
+                            {Array.isArray(husmodellData?.Tomtetype)
+                              ? husmodellData.Tomtetype.join(", ")
+                              : husmodellData?.Tomtetype}{" "}
                           </td>
                         </tr>
                       </tbody>

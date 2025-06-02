@@ -396,10 +396,10 @@ const PlotFilterSection: React.FC<{
                   </div>
                   <div className="flex items-center justify-between h-[30px] mt-2">
                     <div className="text-grayText text-sm lg:text-base">
-                      {minPrice} NOK
+                      kr {minPrice}
                     </div>
                     <div className="text-grayText text-sm lg:text-base">
-                      {maxPrice} NOK
+                      kr {maxPrice}
                     </div>
                   </div>
                 </>

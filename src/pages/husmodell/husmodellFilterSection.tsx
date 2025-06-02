@@ -45,7 +45,6 @@ type FormDataType = {
   AntallSoverom: string[];
   minRangeForHusmodell: number;
   maxRangeForHusmodell: number;
-  Tomtetype: string[];
 };
 
 const HusmodellFilterSection: React.FC<{
@@ -57,7 +56,6 @@ const HusmodellFilterSection: React.FC<{
     "Eiendomstype",
     "Type husmodell",
     "Antall soverom",
-    "Tomtetype",
     "Husmodell",
   ]);
 
@@ -87,12 +85,6 @@ const HusmodellFilterSection: React.FC<{
     { name: "2 Soverom", value: "2 Soverom" },
     { name: "3 Soverom", value: "3 Soverom" },
     { name: "4 Soverom", value: "4 Soverom" },
-    { name: "5 Soverom", value: "5 Soverom" },
-    { name: "6 Soverom", value: "6 Soverom" },
-  ];
-  const TomtetypeArray: any = [
-    { name: "Flat tomt", value: "Flat tomt" },
-    { name: "Skrånet", value: "Skrånet" },
   ];
 
   return (
@@ -112,7 +104,6 @@ const HusmodellFilterSection: React.FC<{
                 TypeHusmodell: [],
                 AntallSoverom: [],
                 minRangeForHusmodell: 0,
-                Tomtetype: [],
                 maxRangeForHusmodell: maxRangeData,
               }));
             }}
@@ -353,68 +344,6 @@ const HusmodellFilterSection: React.FC<{
             >
               <p
                 className={`text-darkBlack font-semibold text-base lg:text-lg flex items-center justify-between cursor-pointer`}
-                onClick={() => handleToggleAccordion("Tomtetype")}
-              >
-                Tomtetype
-                <Image
-                  src={Ic_chevron_down}
-                  alt="arrow"
-                  className={
-                    openIndex.includes("Tomtetype") ? "rotate-180" : ""
-                  }
-                  fetchPriority="auto"
-                />
-              </p>
-
-              {openIndex.includes("Tomtetype") && (
-                <>
-                  <div className="my-2.5 md:my-4 border-t border-[#DCDFEA]"></div>
-                  <div className="grid grid-cols-2 gap-3 laptop:gap-x-8 laptop:gap-y-4">
-                    {TomtetypeArray.map((data: any, index: number) => (
-                      <label
-                        className="container container_darkgray_withPurple truncate"
-                        htmlFor={data.name}
-                        key={index}
-                      >
-                        <span className="text-darkBlack text-sm laptop:text-base truncate">
-                          {data.name}
-                        </span>
-                        <input
-                          type="checkbox"
-                          id={data.name}
-                          value={data.name}
-                          checked={formData?.Tomtetype.includes(data.name)}
-                          onChange={() => {
-                            setFormData((prev: any) => {
-                              const updatedSet: any = new Set(prev.Tomtetype);
-                              updatedSet.has(data.name)
-                                ? updatedSet.delete(data.name)
-                                : updatedSet.add(data.name);
-                              return {
-                                ...prev,
-                                Tomtetype: Array.from(updatedSet),
-                              };
-                            });
-                          }}
-                          className="mr-2"
-                        />
-
-                        <span className="checkmark checkmark_darkgray_withPurple"></span>
-                      </label>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-            <div
-              className="w-full bg-white p-4 rounded-lg"
-              style={{
-                boxShadow:
-                  "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
-              }}
-            >
-              <p
-                className={`text-darkBlack font-semibold text-base lg:text-lg flex items-center justify-between cursor-pointer`}
                 onClick={() => handleToggleAccordion("Husmodell")}
               >
                 Husmodell
@@ -453,10 +382,10 @@ const HusmodellFilterSection: React.FC<{
                   </div>
                   <div className="flex items-center justify-between h-[30px] mt-2">
                     <div className="text-grayText text-sm lg:text-base">
-                      {formData?.minRangeForHusmodell} NOK
+                      {formData?.minRangeForHusmodell}
                     </div>
                     <div className="text-grayText text-sm lg:text-base">
-                      {formData?.maxRangeForHusmodell} NOK
+                      {formData?.maxRangeForHusmodell}
                     </div>
                   </div>
                 </>

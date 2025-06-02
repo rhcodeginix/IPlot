@@ -19,7 +19,6 @@ const HusmodellPropertyPage: React.FC = () => {
     AntallSoverom: [] as string[],
     minRangeForHusmodell: 0,
     maxRangeForHusmodell: maxRangeData,
-    Tomtetype: [] as string[],
   });
   const [total, setTotal] = useState();
 
@@ -56,12 +55,10 @@ const HusmodellPropertyPage: React.FC = () => {
           }))
           .sort((a: any, b: any) => {
             const priceA = parseInt(
-              a?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
-              10
+              a?.Husdetaljer?.pris?.replace(/\s/g, "") || "0"
             );
             const priceB = parseInt(
-              b?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
-              10
+              b?.Husdetaljer?.pris?.replace(/\s/g, "") || "0"
             );
             return priceA - priceB;
           });
@@ -101,12 +98,10 @@ const HusmodellPropertyPage: React.FC = () => {
           }))
           .sort((a: any, b: any) => {
             const priceA = parseInt(
-              a?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
-              10
+              a?.Husdetaljer?.pris?.replace(/\s/g, "") || "0"
             );
             const priceB = parseInt(
-              b?.Husdetaljer?.pris?.replace(/\s/g, "") || "0",
-              10
+              b?.Husdetaljer?.pris?.replace(/\s/g, "") || "0"
             );
             return priceA - priceB;
           });
@@ -118,8 +113,7 @@ const HusmodellPropertyPage: React.FC = () => {
           data.filter((house: any) => {
             const houseDetails = house?.Husdetaljer || {};
             const housePrice = parseInt(
-              houseDetails?.pris?.replace(/\s/g, "") || "0",
-              10
+              houseDetails?.pris?.replace(/\s/g, "") || "0"
             );
 
             const boligtype = houseDetails?.VelgBoligtype;

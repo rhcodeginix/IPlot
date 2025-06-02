@@ -411,7 +411,7 @@ const HomePageSearchTab: React.FC = () => {
                                     )
                                   )
                                 )
-                              : "0 NOK"}
+                              : "kr 0"}
                           </h6>
                         </div>
                         <div className="w-1/2">
@@ -422,7 +422,7 @@ const HomePageSearchTab: React.FC = () => {
                           <h6 className="text-xs md:text-sm font-semibold desktop:text-base">
                             {property?.plot?.pris
                               ? formatPrice(Math.round(property?.plot?.pris))
-                              : "0 NOK"}
+                              : "kr 0"}
                           </h6>
                         </div>
                       </div>
@@ -589,8 +589,8 @@ const HomePageSearchTab: React.FC = () => {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                 {data.houseModels.map((property: any, index: number) => {
-                  const supplierId = property?.Husdetaljer?.Leverandører;
-                  const finalData = data.supplierData[supplierId] || null;
+                  // const supplierId = property?.Husdetaljer?.Leverandører;
+                  // const finalData = data.supplierData[supplierId] || null;
                   return (
                     <div
                       key={index}
@@ -611,10 +611,10 @@ const HomePageSearchTab: React.FC = () => {
                         <span className="font-bold">
                           {property?.Husdetaljer?.husmodell_name}
                         </span>{" "}
-                        fra{" "}
+                        {/* fra{" "}
                         <span className="font-bold">
                           {finalData?.company_name}
-                        </span>
+                        </span> */}
                       </h4>
                       <img
                         src={property?.Husdetaljer?.photo}

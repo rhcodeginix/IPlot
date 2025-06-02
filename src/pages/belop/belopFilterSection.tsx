@@ -685,10 +685,10 @@ const BelopFilterSection: React.FC<{
                   </div>
                   <div className="flex items-center justify-between h-[30px] mt-2">
                     <div className="text-grayText text-sm lg:text-base">
-                      {formData?.minRangeForPlot.toFixed(2)} NOK
+                      {formData?.minRangeForPlot.toFixed(2)}
                     </div>
                     <div className="text-grayText text-sm lg:text-base">
-                      {maxPrice} NOK
+                      {maxPrice}
                     </div>
                   </div>
                 </>
@@ -754,10 +754,10 @@ const BelopFilterSection: React.FC<{
                   </div>
                   <div className="flex items-center justify-between h-[30px] mt-2">
                     <div className="text-grayText text-sm lg:text-base">
-                      {formData?.minRangeForHusmodell.toFixed(2)} NOK
+                      {formData?.minRangeForHusmodell.toFixed(2)}
                     </div>
                     <div className="text-grayText text-sm lg:text-base">
-                      {maxPrice} NOK
+                      {maxPrice}
                     </div>
                   </div>
                 </>

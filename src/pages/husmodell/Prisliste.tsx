@@ -74,7 +74,7 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
                       </p>
                     </div>
                     <h4 className="text-black font-medium text-sm md:text-base whitespace-nowrap">
-                      {item?.pris ? `${item.pris} NOK` : "inkl. i tilbud"}
+                      {item?.pris ? `kr ${item.pris}` : "inkl. i tilbud"}
                     </h4>
                   </div>
                 );
@@ -91,7 +91,7 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
                 </p>
               </div>
               <h4 className="text-black font-medium text-sm md:text-base whitespace-nowrap border flex items-center border-darkGray rounded-lg h-[40px] py-[10px] px-3 bg-white">
-                {totalCustPris ? formatCurrency(totalCustPris) : "0 NOK"}
+                {totalCustPris ? formatCurrency(totalCustPris) : "kr 0"}
               </h4>
             </div>
             <div className="flex items-center gap-2 justify-between">
@@ -109,7 +109,7 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
               <h4 className="text-black font-bold text-sm md:text-base">
                 {formattedNumberOfByggekostnader
                   ? formatCurrency(formattedNumberOfByggekostnader)
-                  : "0 NOK"}{" "}
+                  : "kr 0"}
               </h4>
             </div>
           </div>
@@ -138,7 +138,7 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
                       </p>
                     </div>
                     <h4 className="text-black font-medium text-sm md:text-base whitespace-nowrap">
-                      {item?.pris ? `${item.pris} NOK` : "inkl. i tilbud"}
+                      {item?.pris ? `kr ${item.pris}` : "inkl. i tilbud"}
                     </h4>
                   </div>
                 );
@@ -156,7 +156,7 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
                 </p>
               </div>
               <h4 className="text-black font-bold text-sm md:text-base">
-                {formattedNumber ? formatCurrency(formattedNumber) : "NOK"}
+                {formattedNumber ? formatCurrency(formattedNumber) : "kr 0"}
               </h4>
             </div>
           </div>

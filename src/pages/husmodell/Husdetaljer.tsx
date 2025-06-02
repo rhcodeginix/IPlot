@@ -269,7 +269,9 @@ const Husdetaljer: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
                       Tomtetype
                     </td>
                     <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
-                      {husmodellData?.Tomtetype}
+                      {Array.isArray(husmodellData?.Tomtetype)
+                        ? husmodellData.Tomtetype.join(", ")
+                        : husmodellData?.Tomtetype}{" "}
                     </td>
                   </tr>
                 </tbody>

@@ -17,15 +17,21 @@ import Loader from "@/components/Loader";
 import { onAuthStateChanged } from "firebase/auth";
 import Illustrasjoner from "./Illustrasjoner";
 
-export function formatCurrency(nokValue: number | string) {
+export function formatCurrency(value: number | string) {
   const number =
-    typeof nokValue === "string"
-      ? Number(nokValue.replace(/\s/g, ""))
-      : Number(nokValue);
+    typeof value === "string"
+      ? Number(value.replace(/\s/g, "").replace(/kr/i, ""))
+      : value;
 
-  return (
-    new Intl.NumberFormat("de-DE", { style: "decimal" }).format(number) + " NOK"
-  );
+  if (isNaN(Number(number))) return value;
+
+  const formatted = new Intl.NumberFormat("no-NO", {
+    style: "decimal",
+    useGrouping: true,
+    minimumFractionDigits: 0,
+  }).format(number);
+
+  return `kr ${formatted}`;
 }
 
 const PropertyDetailPage: React.FC<{
@@ -203,34 +209,34 @@ const PropertyDetailPage: React.FC<{
 
     fetchData();
   }, [plotId, husmodellId, user, leadId]);
-  const [supplierData, setSupplierData] = useState<any>(null);
+  // const [supplierData, setSupplierData] = useState<any>(null);
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const supplierDocRef = doc(
-          db,
-          "suppliers",
-          husmodellData?.Leverandører
-        );
-        const docSnap: any = await getDoc(supplierDocRef);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const supplierDocRef = doc(
+  //         db,
+  //         "suppliers",
+  //         husmodellData?.Leverandører
+  //       );
+  //       const docSnap: any = await getDoc(supplierDocRef);
 
-        if (docSnap.exists()) {
-          setSupplierData(docSnap.data());
-        } else {
-          console.error(
-            "No document found for ID:",
-            husmodellData?.Leverandører
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching supplier data:", error);
-      }
-    };
-    if (husmodellData?.Leverandører) {
-      getData();
-    }
-  }, [husmodellData?.Leverandører]);
+  //       if (docSnap.exists()) {
+  //         setSupplierData(docSnap.data());
+  //       } else {
+  //         console.error(
+  //           "No document found for ID:",
+  //           husmodellData?.Leverandører
+  //         );
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching supplier data:", error);
+  //     }
+  //   };
+  //   if (husmodellData?.Leverandører) {
+  //     getData();
+  //   }
+  // }, [husmodellData?.Leverandører]);
 
   return (
     <div className="relative">
@@ -246,7 +252,7 @@ const PropertyDetailPage: React.FC<{
                   <h4 className="text-black mb-6 font-semibold text-2xl">
                     {husmodellData?.husmodell_name}
                   </h4>
-                  <div className="relative">
+                  {/* <div className="relative">
                     <img
                       src={husmodellData?.photo}
                       alt="image"
@@ -257,7 +263,7 @@ const PropertyDetailPage: React.FC<{
                       alt="image"
                       className="absolute top-[12px] left-[12px] bg-[#FFFFFFB2] py-2 px-3 flex items-center justify-center rounded-[32px] w-[130px]"
                     />
-                  </div>
+                  </div> */}
                   <div className="my-[20px] flex items-center justify-between">
                     <div className="flex flex-col gap-2">
                       <p className="text-secondary text-base">Pris fra</p>
@@ -383,7 +389,9 @@ const PropertyDetailPage: React.FC<{
                               Tomtetype
                             </td>
                             <td className="text-left pb-[16px] text-black text-sm font-semibold whitespace-nowrap">
-                              {husmodellData?.Tomtetype}
+                              {Array.isArray(husmodellData?.Tomtetype)
+                                ? husmodellData.Tomtetype.join(", ")
+                                : husmodellData?.Tomtetype}{" "}
                             </td>
                           </tr>
                         </tbody>

@@ -20,7 +20,7 @@ const HouseDetailsection: React.FC<{
       >
         <SideSpaceContainer>
           <div className="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-2 md:gap-4 lg:justify-between">
-            <div className="w-full sm:w-[31%] lg:w-[20%] flex items-start gap-2 sm:gap-3">
+            {/* <div className="w-full sm:w-[31%] lg:w-[20%] flex items-start gap-2 sm:gap-3">
               <Image
                 fetchPriority="auto"
                 src={Ic_check_green_icon}
@@ -37,7 +37,7 @@ const HouseDetailsection: React.FC<{
                   Ferdig regulert til boligformål
                 </p>
               </div>
-            </div>
+            </div> */}
             <div className="w-full sm:w-[31%] lg:w-[20%] flex items-start gap-2 sm:gap-3">
               <Image
                 fetchPriority="auto"
@@ -49,10 +49,12 @@ const HouseDetailsection: React.FC<{
                   <span className="font-bold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
                   </span>{" "}
-                  krever
+                  passer for
                 </p>
                 <p className="text-black text-sm md:text-base font-medium">
-                  {HouseModelData?.Husdetaljer?.Tomtetype}
+                  {Array.isArray(HouseModelData?.Husdetaljer?.Tomtetype)
+                    ? HouseModelData?.Husdetaljer?.Tomtetype.join(", ")
+                    : HouseModelData?.Husdetaljer?.Tomtetype}
                 </p>
               </div>
             </div>
@@ -67,7 +69,7 @@ const HouseDetailsection: React.FC<{
                   <span className="font-bold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
                   </span>{" "}
-                  krever
+                  har
                 </p>
                 <p className="text-black text-sm md:text-base font-medium">
                   Mønehøyde på {HouseModelData?.Husdetaljer?.Mønehøyde} meter
@@ -104,10 +106,11 @@ const HouseDetailsection: React.FC<{
                   <span className="font-bold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
                   </span>{" "}
-                  krever en
+                  har en
                 </p>
                 <p className="text-black text-sm md:text-base font-medium">
-                  Grunnflate på {HouseModelData?.Husdetaljer?.BebygdAreal}
+                  Grunnflate på {HouseModelData?.Husdetaljer?.BebygdAreal} m
+                  <sup>2</sup>
                 </p>
               </div>
             </div>

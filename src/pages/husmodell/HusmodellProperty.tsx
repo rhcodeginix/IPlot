@@ -160,7 +160,7 @@ const HusmodellProperty: React.FC<{
                                       )
                                     )
                                   )
-                                : "0 NOK"}
+                                : "kr 0"}
                             </h6>
                           </div>
                           <Button

@@ -124,7 +124,7 @@ const PropertyHouseDetails: React.FC<{
               Dine tillegg
             </p>
             <h4 className="text-darkBlack font-semibold text-base md:text-lg lg:text-xl">
-              {totalCustPris ? formatCurrency(totalCustPris) : "0 NOK"}
+              {totalCustPris ? formatCurrency(totalCustPris) : "kr 0"}
             </h4>
           </div>
           <div>

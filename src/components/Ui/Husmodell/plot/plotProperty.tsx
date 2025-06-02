@@ -218,7 +218,7 @@ const PlotProperty: React.FC<{
                                       )
                                     )
                                   )
-                                : "0 NOK"}
+                                : "kr 0"}
                             </h6>
                           </div>
                           <div className="w-1/2">
@@ -229,7 +229,7 @@ const PlotProperty: React.FC<{
                             <h6 className="text-xs md:text-sm font-semibold desktop:text-base">
                               {property?.plot?.pris
                                 ? formatPrice(Math.round(property?.plot?.pris))
-                                : "0 NOK"}
+                                : "kr 0"}
                             </h6>
                           </div>
                         </div>

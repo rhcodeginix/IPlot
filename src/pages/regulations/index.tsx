@@ -23,7 +23,7 @@ import {
 } from "firebase/firestore";
 import { useUserLayoutContext } from "@/context/userLayoutContext";
 import toast from "react-hot-toast";
-import * as XLSX from "xlsx";
+// import * as XLSX from "xlsx";
 import Tilpass from "./Tilpass";
 import HouseModelSingleProperty from "@/components/Ui/regulation/houseModelSingleProperty";
 
@@ -69,412 +69,412 @@ const Regulations = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
 
-  useEffect(() => {
-    const findMatchingData = async (data: Record<string, any[]>) => {
-      const matches: any[] = [];
+  // useEffect(() => {
+  //   const findMatchingData = async (data: Record<string, any[]>) => {
+  //     const matches: any[] = [];
 
-      if (data) {
-        const sheetData: any = data["Vestland"];
-        const rowsToProcess = sheetData.slice(1);
-        for (const row of rowsToProcess) {
-          const lamdaApiData: any = {
-            kommunenummer: row["Matrikkel to be imported"],
-            gardsnummer: row["__EMPTY"],
-            bruksnummer: row["__EMPTY_1"],
-          };
-          let data;
-          try {
-            const response = await ApiUtils.LamdaApi(lamdaApiData);
-            const cleanAnswer = response.body
-              .replace(/```json|```/g, "")
-              .trim();
+  //     if (data) {
+  //       const sheetData: any = data["Vestland"];
+  //       const rowsToProcess = sheetData.slice(1);
+  //       for (const row of rowsToProcess) {
+  //         const lamdaApiData: any = {
+  //           kommunenummer: row["Matrikkel to be imported"],
+  //           gardsnummer: row["__EMPTY"],
+  //           bruksnummer: row["__EMPTY_1"],
+  //         };
+  //         let data;
+  //         try {
+  //           const response = await ApiUtils.LamdaApi(lamdaApiData);
+  //           const cleanAnswer = response.body
+  //             .replace(/```json|```/g, "")
+  //             .trim();
 
-            data = JSON.parse(cleanAnswer);
+  //           data = JSON.parse(cleanAnswer);
 
-            if (
-              data.message === "Request failed with status code 503" ||
-              data.message === "Request failed with status code 500" ||
-              !data.propertyId
-            ) {
-              // const EmptyPlotErrorDb = collection(db, "empty_plot_error");
-              // const finalData = {
-              //   lamdaApiData: JSON.stringify(lamdaApiData),
-              //   api1: false,
-              //   api2: false,
-              //   api3: false,
-              // };
-              // // const existingEmptyPlotError = query(EmptyPlotErrorDb);
-              // // const EmptyPlotErrorShot = await getDocs(existingEmptyPlotError);
+  //           if (
+  //             data.message === "Request failed with status code 503" ||
+  //             data.message === "Request failed with status code 500" ||
+  //             !data.propertyId
+  //           ) {
+  //             // const EmptyPlotErrorDb = collection(db, "empty_plot_error");
+  //             // const finalData = {
+  //             //   lamdaApiData: JSON.stringify(lamdaApiData),
+  //             //   api1: false,
+  //             //   api2: false,
+  //             //   api3: false,
+  //             // };
+  //             // // const existingEmptyPlotError = query(EmptyPlotErrorDb);
+  //             // // const EmptyPlotErrorShot = await getDocs(existingEmptyPlotError);
 
-              // // if (EmptyPlotErrorShot.empty) {
-              // await addDoc(EmptyPlotErrorDb, finalData);
-              // // }
-              continue;
-            }
-            const CadastreDataResponse =
-              await ApiUtils.fetchCadastreData(lamdaApiData);
+  //             // // if (EmptyPlotErrorShot.empty) {
+  //             // await addDoc(EmptyPlotErrorDb, finalData);
+  //             // // }
+  //             continue;
+  //           }
+  //           const CadastreDataResponse =
+  //             await ApiUtils.fetchCadastreData(lamdaApiData);
 
-            if (cleanAnswer) {
-              const areaDetails =
-                data?.eiendomsInformasjon?.basisInformasjon?.areal_beregnet ||
-                "";
-              const regionName =
-                CadastreDataResponse?.presentationAddressApi?.response?.item
-                  ?.municipality?.municipalityName;
+  //           if (cleanAnswer) {
+  //             const areaDetails =
+  //               data?.eiendomsInformasjon?.basisInformasjon?.areal_beregnet ||
+  //               "";
+  //             const regionName =
+  //               CadastreDataResponse?.presentationAddressApi?.response?.item
+  //                 ?.municipality?.municipalityName;
 
-              if (CadastreDataResponse.error || !CadastreDataResponse) {
-                continue;
-              }
-              const promt = {
-                question: `Hva er tillatt gesims- og mønehøyde, maksimal BYA inkludert parkeringskrav i henhold til parkeringsnormen i ${kommunenavn || regionName} kommune, og er det tillatt å bygge en enebolig med flatt tak eller takterrasse i dette området i ${kommunenavn || regionName}, sone GB? Tomtestørrelse for denne eiendommen er ${areaDetails}.`,
-              };
-              try {
-                const response = await ApiUtils.askApi(promt);
-                const property = {
-                  lamdaDataFromApi: data,
-                  additionalData: response,
-                  CadastreDataFromApi: CadastreDataResponse.apis,
-                  pris: row["__EMPTY_3"] || null,
-                };
-                const propertyId = property?.lamdaDataFromApi?.propertyId;
+  //             if (CadastreDataResponse.error || !CadastreDataResponse) {
+  //               continue;
+  //             }
+  //             const promt = {
+  //               question: `Hva er tillatt gesims- og mønehøyde, maksimal BYA inkludert parkeringskrav i henhold til parkeringsnormen i ${kommunenavn || regionName} kommune, og er det tillatt å bygge en enebolig med flatt tak eller takterrasse i dette området i ${kommunenavn || regionName}, sone GB? Tomtestørrelse for denne eiendommen er ${areaDetails}.`,
+  //             };
+  //             try {
+  //               const response = await ApiUtils.askApi(promt);
+  //               const property = {
+  //                 lamdaDataFromApi: data,
+  //                 additionalData: response,
+  //                 CadastreDataFromApi: CadastreDataResponse.apis,
+  //                 pris: row["__EMPTY_3"] || null,
+  //               };
+  //               const propertyId = property?.lamdaDataFromApi?.propertyId;
 
-                if (
-                  property?.CadastreDataFromApi?.buildingsApi?.response
-                    ?.items &&
-                  property?.CadastreDataFromApi?.buildingsApi?.response?.items
-                    .length === 0
-                ) {
-                  const EmptyPlotDb = collection(db, "empty_plot");
+  //               if (
+  //                 property?.CadastreDataFromApi?.buildingsApi?.response
+  //                   ?.items &&
+  //                 property?.CadastreDataFromApi?.buildingsApi?.response?.items
+  //                   .length === 0
+  //               ) {
+  //                 const EmptyPlotDb = collection(db, "empty_plot");
 
-                  const existingEmptyPlot = query(
-                    EmptyPlotDb,
-                    where("lamdaDataFromApi.propertyId", "==", propertyId)
-                  );
-                  const EmptyPlotShot = await getDocs(existingEmptyPlot);
+  //                 const existingEmptyPlot = query(
+  //                   EmptyPlotDb,
+  //                   where("lamdaDataFromApi.propertyId", "==", propertyId)
+  //                 );
+  //                 const EmptyPlotShot = await getDocs(existingEmptyPlot);
 
-                  if (EmptyPlotShot.empty) {
-                    await addDoc(EmptyPlotDb, property);
-                  }
-                } else {
-                  const buildings =
-                    property?.CadastreDataFromApi?.buildingsApi?.response
-                      ?.items;
+  //                 if (EmptyPlotShot.empty) {
+  //                   await addDoc(EmptyPlotDb, property);
+  //                 }
+  //               } else {
+  //                 const buildings =
+  //                   property?.CadastreDataFromApi?.buildingsApi?.response
+  //                     ?.items;
 
-                  const anyBuildingHasStatus = buildings.some(
-                    (building: any) => {
-                      const hasRequiredStatus =
-                        building.buildingStatus?.text ===
-                          "IGANGSETTINGSTILLATELSE" ||
-                        building.buildingStatus?.text === "RAMMETILLATELSE";
-                      return hasRequiredStatus;
-                    }
-                  );
+  //                 const anyBuildingHasStatus = buildings.some(
+  //                   (building: any) => {
+  //                     const hasRequiredStatus =
+  //                       building.buildingStatus?.text ===
+  //                         "IGANGSETTINGSTILLATELSE" ||
+  //                       building.buildingStatus?.text === "RAMMETILLATELSE";
+  //                     return hasRequiredStatus;
+  //                   }
+  //                 );
 
-                  if (anyBuildingHasStatus) {
-                    const EmptyPlotDb = collection(db, "empty_plot");
-                    const existingEmptyPlot = query(
-                      EmptyPlotDb,
-                      where("lamdaDataFromApi.propertyId", "==", propertyId)
-                    );
-                    const EmptyPlotShot = await getDocs(existingEmptyPlot);
+  //                 if (anyBuildingHasStatus) {
+  //                   const EmptyPlotDb = collection(db, "empty_plot");
+  //                   const existingEmptyPlot = query(
+  //                     EmptyPlotDb,
+  //                     where("lamdaDataFromApi.propertyId", "==", propertyId)
+  //                   );
+  //                   const EmptyPlotShot = await getDocs(existingEmptyPlot);
 
-                    if (EmptyPlotShot.empty) {
-                      await addDoc(EmptyPlotDb, property);
-                    }
-                  }
-                }
-              } catch (error: any) {
-                console.error(
-                  "Error fetching additional data from askApi:",
-                  error?.message
-                );
-              }
-            }
-          } catch (error: any) {
-            // const property = {
-            //   lamdaDataFromApi: data,
-            //   additionalData: null,
-            //   CadastreDataFromApi: null,
-            //   pris: row["__EMPTY_3"] || null,
-            // };
+  //                   if (EmptyPlotShot.empty) {
+  //                     await addDoc(EmptyPlotDb, property);
+  //                   }
+  //                 }
+  //               }
+  //             } catch (error: any) {
+  //               console.error(
+  //                 "Error fetching additional data from askApi:",
+  //                 error?.message
+  //               );
+  //             }
+  //           }
+  //         } catch (error: any) {
+  //           // const property = {
+  //           //   lamdaDataFromApi: data,
+  //           //   additionalData: null,
+  //           //   CadastreDataFromApi: null,
+  //           //   pris: row["__EMPTY_3"] || null,
+  //           // };
 
-            // const propertyId = property?.lamdaDataFromApi?.propertyId;
+  //           // const propertyId = property?.lamdaDataFromApi?.propertyId;
 
-            // const EmptyPlotDb = collection(db, "empty_plot");
-            // const existingEmptyPlot = query(
-            //   EmptyPlotDb,
-            //   where("lamdaDataFromApi.propertyId", "==", propertyId)
-            // );
-            // const EmptyPlotShot = await getDocs(existingEmptyPlot);
+  //           // const EmptyPlotDb = collection(db, "empty_plot");
+  //           // const existingEmptyPlot = query(
+  //           //   EmptyPlotDb,
+  //           //   where("lamdaDataFromApi.propertyId", "==", propertyId)
+  //           // );
+  //           // const EmptyPlotShot = await getDocs(existingEmptyPlot);
 
-            // if (EmptyPlotShot.empty) {
-            //   await addDoc(EmptyPlotDb, property);
-            // }
+  //           // if (EmptyPlotShot.empty) {
+  //           //   await addDoc(EmptyPlotDb, property);
+  //           // }
 
-            // const EmptyPlotErrorDb = collection(db, "empty_plot_error");
-            // const existingEmptyPlotError = query(
-            //   EmptyPlotErrorDb,
-            //   where("lamdaDataFromApi.propertyId", "==", propertyId)
-            // );
-            // const EmptyPlotErrorShot = await getDocs(existingEmptyPlotError);
-            // const finalData = {
-            //   lamdaApiData,
-            //   api1: true,
-            //   api2: false,
-            //   api3: false,
-            // };
+  //           // const EmptyPlotErrorDb = collection(db, "empty_plot_error");
+  //           // const existingEmptyPlotError = query(
+  //           //   EmptyPlotErrorDb,
+  //           //   where("lamdaDataFromApi.propertyId", "==", propertyId)
+  //           // );
+  //           // const EmptyPlotErrorShot = await getDocs(existingEmptyPlotError);
+  //           // const finalData = {
+  //           //   lamdaApiData,
+  //           //   api1: true,
+  //           //   api2: false,
+  //           //   api3: false,
+  //           // };
 
-            // if (EmptyPlotErrorShot.empty) {
-            //   await addDoc(EmptyPlotErrorDb, finalData);
-            // }
-            console.error("Error fetching additional data:", error?.message);
-          }
-        }
-      }
+  //           // if (EmptyPlotErrorShot.empty) {
+  //           //   await addDoc(EmptyPlotErrorDb, finalData);
+  //           // }
+  //           console.error("Error fetching additional data:", error?.message);
+  //         }
+  //       }
+  //     }
 
-      if (matches.length > 0) {
-        return { region: Object.keys(data)[0], results: matches };
-      }
-      return null;
-    };
+  //     if (matches.length > 0) {
+  //       return { region: Object.keys(data)[0], results: matches };
+  //     }
+  //     return null;
+  //   };
 
-    const executeFetchAndFind = async () => {
-      const response = await fetch("/Matrikkel.xlsx");
-      const arrayBuffer = await response?.arrayBuffer();
-      const workbook = XLSX.read(arrayBuffer, { type: "array" });
+  //   const executeFetchAndFind = async () => {
+  //     const response = await fetch("/Matrikkel.xlsx");
+  //     const arrayBuffer = await response?.arrayBuffer();
+  //     const workbook = XLSX.read(arrayBuffer, { type: "array" });
 
-      const allData: Record<string, any[]> = {};
+  //     const allData: Record<string, any[]> = {};
 
-      workbook.SheetNames.forEach((sheetName) => {
-        const sheet: any = workbook.Sheets[sheetName];
-        allData[sheetName] = XLSX.utils.sheet_to_json(sheet);
-      });
+  //     workbook.SheetNames.forEach((sheetName) => {
+  //       const sheet: any = workbook.Sheets[sheetName];
+  //       allData[sheetName] = XLSX.utils.sheet_to_json(sheet);
+  //     });
 
-      if (allData && kommunenummer && gardsnummer && bruksnummer) {
-        findMatchingData(allData);
-      }
-    };
+  //     if (allData && kommunenummer && gardsnummer && bruksnummer) {
+  //       findMatchingData(allData);
+  //     }
+  //   };
 
-    executeFetchAndFind();
-    // const findCabinMatchingData = async (data: Record<string, any[]>) => {
-    //   const matches: any[] = [];
+  //   executeFetchAndFind();
+  //   // const findCabinMatchingData = async (data: Record<string, any[]>) => {
+  //   //   const matches: any[] = [];
 
-    //   if (data) {
-    //     const sheetData: any = data["Sheet1"];
-    //     const rowsToProcess = sheetData.slice(1);
-    //     for (const row of rowsToProcess) {
-    //       const lamdaApiData: any = {
-    //         kommunenummer: Number(row.kommunenummer),
-    //         gardsnummer: Number(row.gnr),
-    //         bruksnummer: Number(row.bnr),
-    //       };
-    //       let data;
-    //       try {
-    //         const response = await ApiUtils.LamdaApi(lamdaApiData);
-    //         const cleanAnswer = response.body
-    //           .replace(/```json|```/g, "")
-    //           .trim();
+  //   //   if (data) {
+  //   //     const sheetData: any = data["Sheet1"];
+  //   //     const rowsToProcess = sheetData.slice(1);
+  //   //     for (const row of rowsToProcess) {
+  //   //       const lamdaApiData: any = {
+  //   //         kommunenummer: Number(row.kommunenummer),
+  //   //         gardsnummer: Number(row.gnr),
+  //   //         bruksnummer: Number(row.bnr),
+  //   //       };
+  //   //       let data;
+  //   //       try {
+  //   //         const response = await ApiUtils.LamdaApi(lamdaApiData);
+  //   //         const cleanAnswer = response.body
+  //   //           .replace(/```json|```/g, "")
+  //   //           .trim();
 
-    //         data = JSON.parse(cleanAnswer);
+  //   //         data = JSON.parse(cleanAnswer);
 
-    //         if (
-    //           data.message === "Request failed with status code 503" ||
-    //           data.message === "Request failed with status code 500" ||
-    //           !data.propertyId
-    //         ) {
-    //           const uniqueId = `${lamdaApiData.kommunenummer}${lamdaApiData.gardsnummer}${lamdaApiData.bruksnummer}`;
+  //   //         if (
+  //   //           data.message === "Request failed with status code 503" ||
+  //   //           data.message === "Request failed with status code 500" ||
+  //   //           !data.propertyId
+  //   //         ) {
+  //   //           const uniqueId = `${lamdaApiData.kommunenummer}${lamdaApiData.gardsnummer}${lamdaApiData.bruksnummer}`;
 
-    //           const EmptyPlotErrorDb = doc(db, "cabin_plot_error", uniqueId);
-    //           const finalData = {
-    //             lamdaApiData: JSON.stringify(lamdaApiData),
-    //             api1: false,
-    //             api2: false,
-    //             api3: false,
-    //           };
-    //           const existingEmptyPlotError = query(
-    //             collection(db, "cabin_plot")
-    //           );
-    //           const EmptyPlotErrorShot = await getDocs(existingEmptyPlotError);
+  //   //           const EmptyPlotErrorDb = doc(db, "cabin_plot_error", uniqueId);
+  //   //           const finalData = {
+  //   //             lamdaApiData: JSON.stringify(lamdaApiData),
+  //   //             api1: false,
+  //   //             api2: false,
+  //   //             api3: false,
+  //   //           };
+  //   //           const existingEmptyPlotError = query(
+  //   //             collection(db, "cabin_plot")
+  //   //           );
+  //   //           const EmptyPlotErrorShot = await getDocs(existingEmptyPlotError);
 
-    //           if (EmptyPlotErrorShot.empty) {
-    //             await setDoc(EmptyPlotErrorDb, finalData);
-    //           }
-    //           continue;
-    //         }
-    //         const CadastreDataResponse =
-    //           await ApiUtils.fetchCadastreData(lamdaApiData);
+  //   //           if (EmptyPlotErrorShot.empty) {
+  //   //             await setDoc(EmptyPlotErrorDb, finalData);
+  //   //           }
+  //   //           continue;
+  //   //         }
+  //   //         const CadastreDataResponse =
+  //   //           await ApiUtils.fetchCadastreData(lamdaApiData);
 
-    //         if (cleanAnswer) {
-    //           const areaDetails =
-    //             data?.eiendomsInformasjon?.basisInformasjon?.areal_beregnet ||
-    //             "";
-    //           const regionName =
-    //             CadastreDataResponse?.presentationAddressApi?.response?.item
-    //               ?.municipality?.municipalityName;
+  //   //         if (cleanAnswer) {
+  //   //           const areaDetails =
+  //   //             data?.eiendomsInformasjon?.basisInformasjon?.areal_beregnet ||
+  //   //             "";
+  //   //           const regionName =
+  //   //             CadastreDataResponse?.presentationAddressApi?.response?.item
+  //   //               ?.municipality?.municipalityName;
 
-    //           if (CadastreDataResponse.error || !CadastreDataResponse) {
-    //             continue;
-    //           }
-    //           const promt = {
-    //             question: `Hva er tillatt gesims- og mønehøyde, maksimal BYA inkludert parkeringskrav i henhold til parkeringsnormen i ${kommunenavn || regionName} kommune, og er det tillatt å bygge en enebolig med flatt tak eller takterrasse i dette området i ${kommunenavn || regionName}, sone GB? Tomtestørrelse for denne eiendommen er ${areaDetails}.`,
-    //           };
-    //           try {
-    //             const response = await ApiUtils.askApi(promt);
-    //             const uniqueId = `${lamdaApiData.kommunenummer}${lamdaApiData.gardsnummer}${lamdaApiData.bruksnummer}`;
-    //             const property = {
-    //               lamdaDataFromApi: data,
-    //               additionalData: response,
-    //               CadastreDataFromApi: CadastreDataResponse.apis,
-    //               pris: row.totalpris || 0,
-    //               uniqueId: uniqueId,
-    //               title: row.title,
-    //               area: row.area,
-    //               address: row.address,
-    //               kommune: row.kommune,
-    //               postnummer: row.postnummer,
-    //               poststed: row.poststed,
-    //               first_image: row.first_image,
-    //               image_count: row.image_count,
-    //               geonorge_api_url: row.geonorge_api_url,
-    //               tomteareal: row.tomteareal,
-    //               omkostninger: row.omkostninger,
-    //               url: row.url,
-    //               scraped_at: row.scraped_at,
-    //             };
+  //   //           if (CadastreDataResponse.error || !CadastreDataResponse) {
+  //   //             continue;
+  //   //           }
+  //   //           const promt = {
+  //   //             question: `Hva er tillatt gesims- og mønehøyde, maksimal BYA inkludert parkeringskrav i henhold til parkeringsnormen i ${kommunenavn || regionName} kommune, og er det tillatt å bygge en enebolig med flatt tak eller takterrasse i dette området i ${kommunenavn || regionName}, sone GB? Tomtestørrelse for denne eiendommen er ${areaDetails}.`,
+  //   //           };
+  //   //           try {
+  //   //             const response = await ApiUtils.askApi(promt);
+  //   //             const uniqueId = `${lamdaApiData.kommunenummer}${lamdaApiData.gardsnummer}${lamdaApiData.bruksnummer}`;
+  //   //             const property = {
+  //   //               lamdaDataFromApi: data,
+  //   //               additionalData: response,
+  //   //               CadastreDataFromApi: CadastreDataResponse.apis,
+  //   //               pris: row.totalpris || 0,
+  //   //               uniqueId: uniqueId,
+  //   //               title: row.title,
+  //   //               area: row.area,
+  //   //               address: row.address,
+  //   //               kommune: row.kommune,
+  //   //               postnummer: row.postnummer,
+  //   //               poststed: row.poststed,
+  //   //               first_image: row.first_image,
+  //   //               image_count: row.image_count,
+  //   //               geonorge_api_url: row.geonorge_api_url,
+  //   //               tomteareal: row.tomteareal,
+  //   //               omkostninger: row.omkostninger,
+  //   //               url: row.url,
+  //   //               scraped_at: row.scraped_at,
+  //   //             };
 
-    //             if (
-    //               property?.CadastreDataFromApi?.buildingsApi?.response
-    //                 ?.items &&
-    //               property?.CadastreDataFromApi?.buildingsApi?.response?.items
-    //                 .length === 0
-    //             ) {
-    //               const EmptyPlotDbRef = doc(db, "cabin_plot", uniqueId);
+  //   //             if (
+  //   //               property?.CadastreDataFromApi?.buildingsApi?.response
+  //   //                 ?.items &&
+  //   //               property?.CadastreDataFromApi?.buildingsApi?.response?.items
+  //   //                 .length === 0
+  //   //             ) {
+  //   //               const EmptyPlotDbRef = doc(db, "cabin_plot", uniqueId);
 
-    //               const existingEmptyPlot = query(
-    //                 collection(db, "cabin_plot"),
-    //                 where("uniqueId", "==", uniqueId)
-    //               );
-    //               const EmptyPlotShot = await getDocs(existingEmptyPlot);
+  //   //               const existingEmptyPlot = query(
+  //   //                 collection(db, "cabin_plot"),
+  //   //                 where("uniqueId", "==", uniqueId)
+  //   //               );
+  //   //               const EmptyPlotShot = await getDocs(existingEmptyPlot);
 
-    //               if (EmptyPlotShot.empty) {
-    //                 await setDoc(EmptyPlotDbRef, property);
-    //               }
-    //             } else {
-    //               const buildings =
-    //                 property?.CadastreDataFromApi?.buildingsApi?.response
-    //                   ?.items;
+  //   //               if (EmptyPlotShot.empty) {
+  //   //                 await setDoc(EmptyPlotDbRef, property);
+  //   //               }
+  //   //             } else {
+  //   //               const buildings =
+  //   //                 property?.CadastreDataFromApi?.buildingsApi?.response
+  //   //                   ?.items;
 
-    //               const anyBuildingHasStatus = buildings.some(
-    //                 (building: any) => {
-    //                   const hasRequiredStatus =
-    //                     building.buildingStatus?.text ===
-    //                       "IGANGSETTINGSTILLATELSE" ||
-    //                     building.buildingStatus?.text === "RAMMETILLATELSE";
-    //                   return hasRequiredStatus;
-    //                 }
-    //               );
+  //   //               const anyBuildingHasStatus = buildings.some(
+  //   //                 (building: any) => {
+  //   //                   const hasRequiredStatus =
+  //   //                     building.buildingStatus?.text ===
+  //   //                       "IGANGSETTINGSTILLATELSE" ||
+  //   //                     building.buildingStatus?.text === "RAMMETILLATELSE";
+  //   //                   return hasRequiredStatus;
+  //   //                 }
+  //   //               );
 
-    //               if (anyBuildingHasStatus) {
-    //                 const EmptyPlotDbRef = doc(db, "cabin_plot", uniqueId);
-    //                 const existingEmptyPlot = query(
-    //                   collection(db, "cabin_plot"),
-    //                   where("uniqueId", "==", uniqueId)
-    //                 );
-    //                 const EmptyPlotShot = await getDocs(existingEmptyPlot);
+  //   //               if (anyBuildingHasStatus) {
+  //   //                 const EmptyPlotDbRef = doc(db, "cabin_plot", uniqueId);
+  //   //                 const existingEmptyPlot = query(
+  //   //                   collection(db, "cabin_plot"),
+  //   //                   where("uniqueId", "==", uniqueId)
+  //   //                 );
+  //   //                 const EmptyPlotShot = await getDocs(existingEmptyPlot);
 
-    //                 if (EmptyPlotShot.empty) {
-    //                   await setDoc(EmptyPlotDbRef, property);
-    //                 }
-    //               }
-    //             }
-    //           } catch (error: any) {
-    //             console.error(
-    //               "Error fetching additional data from askApi:",
-    //               error?.message
-    //             );
-    //           }
-    //         }
-    //       } catch (error: any) {
-    //         const uniqueId = `${lamdaApiData.kommunenummer}${lamdaApiData.gardsnummer}${lamdaApiData.bruksnummer}`;
+  //   //                 if (EmptyPlotShot.empty) {
+  //   //                   await setDoc(EmptyPlotDbRef, property);
+  //   //                 }
+  //   //               }
+  //   //             }
+  //   //           } catch (error: any) {
+  //   //             console.error(
+  //   //               "Error fetching additional data from askApi:",
+  //   //               error?.message
+  //   //             );
+  //   //           }
+  //   //         }
+  //   //       } catch (error: any) {
+  //   //         const uniqueId = `${lamdaApiData.kommunenummer}${lamdaApiData.gardsnummer}${lamdaApiData.bruksnummer}`;
 
-    //         const property = {
-    //           lamdaDataFromApi: data,
-    //           additionalData: null,
-    //           CadastreDataFromApi: null,
-    //           pris: row.totalpris || 0,
-    //           uniqueId: uniqueId,
-    //           title: row.title,
-    //           area: row.area,
-    //           address: row.address,
-    //           kommune: row.kommune,
-    //           postnummer: row.postnummer,
-    //           poststed: row.poststed,
-    //           first_image: row.first_image,
-    //           image_count: row.image_count,
-    //           geonorge_api_url: row.geonorge_api_url,
-    //           tomteareal: row.tomteareal,
-    //           omkostninger: row.omkostninger,
-    //           url: row.url,
-    //           scraped_at: row.scraped_at,
-    //         };
+  //   //         const property = {
+  //   //           lamdaDataFromApi: data,
+  //   //           additionalData: null,
+  //   //           CadastreDataFromApi: null,
+  //   //           pris: row.totalpris || 0,
+  //   //           uniqueId: uniqueId,
+  //   //           title: row.title,
+  //   //           area: row.area,
+  //   //           address: row.address,
+  //   //           kommune: row.kommune,
+  //   //           postnummer: row.postnummer,
+  //   //           poststed: row.poststed,
+  //   //           first_image: row.first_image,
+  //   //           image_count: row.image_count,
+  //   //           geonorge_api_url: row.geonorge_api_url,
+  //   //           tomteareal: row.tomteareal,
+  //   //           omkostninger: row.omkostninger,
+  //   //           url: row.url,
+  //   //           scraped_at: row.scraped_at,
+  //   //         };
 
-    //         const EmptyPlotDbRef = doc(db, "cabin_plot", uniqueId);
-    //         const existingEmptyPlot = query(
-    //           collection(db, "cabin_plot"),
-    //           where("uniqueId", "==", uniqueId)
-    //         );
-    //         const EmptyPlotShot = await getDocs(existingEmptyPlot);
+  //   //         const EmptyPlotDbRef = doc(db, "cabin_plot", uniqueId);
+  //   //         const existingEmptyPlot = query(
+  //   //           collection(db, "cabin_plot"),
+  //   //           where("uniqueId", "==", uniqueId)
+  //   //         );
+  //   //         const EmptyPlotShot = await getDocs(existingEmptyPlot);
 
-    //         if (EmptyPlotShot.empty) {
-    //           await setDoc(EmptyPlotDbRef, property);
-    //         }
+  //   //         if (EmptyPlotShot.empty) {
+  //   //           await setDoc(EmptyPlotDbRef, property);
+  //   //         }
 
-    //         const EmptyPlotErrorDb = doc(db, "cabin_plot_error", uniqueId);
-    //         const existingEmptyPlotError = query(
-    //           collection(db, "cabin_plot_error"),
-    //           where("uniqueId", "==", uniqueId)
-    //         );
-    //         const EmptyPlotErrorShot = await getDocs(existingEmptyPlotError);
-    //         const finalData = {
-    //           lamdaApiData,
-    //           api1: true,
-    //           api2: false,
-    //           api3: false,
-    //         };
+  //   //         const EmptyPlotErrorDb = doc(db, "cabin_plot_error", uniqueId);
+  //   //         const existingEmptyPlotError = query(
+  //   //           collection(db, "cabin_plot_error"),
+  //   //           where("uniqueId", "==", uniqueId)
+  //   //         );
+  //   //         const EmptyPlotErrorShot = await getDocs(existingEmptyPlotError);
+  //   //         const finalData = {
+  //   //           lamdaApiData,
+  //   //           api1: true,
+  //   //           api2: false,
+  //   //           api3: false,
+  //   //         };
 
-    //         if (EmptyPlotErrorShot.empty) {
-    //           await setDoc(EmptyPlotErrorDb, finalData);
-    //         }
-    //         console.error("Error fetching additional data:", error?.message);
-    //       }
-    //     }
-    //   }
+  //   //         if (EmptyPlotErrorShot.empty) {
+  //   //           await setDoc(EmptyPlotErrorDb, finalData);
+  //   //         }
+  //   //         console.error("Error fetching additional data:", error?.message);
+  //   //       }
+  //   //     }
+  //   //   }
 
-    //   if (matches.length > 0) {
-    //     return { region: Object.keys(data)[0], results: matches };
-    //   }
-    //   return null;
-    // };
+  //   //   if (matches.length > 0) {
+  //   //     return { region: Object.keys(data)[0], results: matches };
+  //   //   }
+  //   //   return null;
+  //   // };
 
-    // const executeCabinFetchAndFind = async () => {
-    //   const response = await fetch("/CabinPlots.xlsx");
-    //   const arrayBuffer = await response?.arrayBuffer();
-    //   const workbook = XLSX.read(arrayBuffer, { type: "array" });
+  //   // const executeCabinFetchAndFind = async () => {
+  //   //   const response = await fetch("/CabinPlots.xlsx");
+  //   //   const arrayBuffer = await response?.arrayBuffer();
+  //   //   const workbook = XLSX.read(arrayBuffer, { type: "array" });
 
-    //   const allData: Record<string, any[]> = {};
+  //   //   const allData: Record<string, any[]> = {};
 
-    //   workbook.SheetNames.forEach((sheetName) => {
-    //     const sheet: any = workbook.Sheets[sheetName];
-    //     allData[sheetName] = XLSX.utils.sheet_to_json(sheet);
-    //   });
+  //   //   workbook.SheetNames.forEach((sheetName) => {
+  //   //     const sheet: any = workbook.Sheets[sheetName];
+  //   //     allData[sheetName] = XLSX.utils.sheet_to_json(sheet);
+  //   //   });
 
-    //   if (allData && kommunenummer && gardsnummer && bruksnummer) {
-    //     findCabinMatchingData(allData);
-    //   }
-    // };
+  //   //   if (allData && kommunenummer && gardsnummer && bruksnummer) {
+  //   //     findCabinMatchingData(allData);
+  //   //   }
+  //   // };
 
-    // executeCabinFetchAndFind();
-  }, [kommunenummer, gardsnummer, bruksnummer]);
+  //   // executeCabinFetchAndFind();
+  // }, [kommunenummer, gardsnummer, bruksnummer]);
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("min_tomt_login") === "true";
@@ -535,6 +535,7 @@ const Regulations = () => {
         setLamdaDataFromApi(data);
         setCadastreDataFromApi(CadastreDataResponse.apis);
         setLoadingLamdaData(false);
+        console.log(data);
 
         if (
           !cleanAnswer ||

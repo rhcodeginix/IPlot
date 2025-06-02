@@ -229,7 +229,7 @@ const PropertyDetailWithPrice: React.FC<any> = () => {
                   Tilbudpris
                 </p>
                 <h3 className="text-black font-semibold text-[24px] text-center">
-                  8.300.000 NOK
+                  kr 8 300 000
                 </h3>
                 <div className="text-secondary text-base text-center">
                   Tilbudet er gyldig til{" "}

@@ -9,8 +9,14 @@ import { db } from "@/config/firebaseConfig";
 import NorkartMap from "@/components/map";
 
 export function formatPrice(price: any) {
-  const formatted = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  return formatted + " NOK";
+  if (typeof price === "string" && /[\s\u00A0]/.test(price)) {
+    return "Kr " + price;
+  }
+
+  const num = typeof price === "number" ? price : parseInt(price, 10);
+  const formatted = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+  return "kr " + formatted;
 }
 
 const BelopProperty: React.FC<{
@@ -205,7 +211,7 @@ const BelopProperty: React.FC<{
                                       )
                                     )
                                   )
-                                : "0 NOK"}
+                                : "kr 0"}
                             </h6>
                           </div>
                           <div className="w-1/2">
@@ -216,7 +222,7 @@ const BelopProperty: React.FC<{
                             <h6 className="text-xs md:text-sm font-semibold desktop:text-base">
                               {property?.plot?.pris
                                 ? formatPrice(Math.round(property?.plot?.pris))
-                                : "0 NOK"}
+                                : "kr 0"}
                             </h6>
                           </div>
                         </div>
