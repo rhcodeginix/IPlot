@@ -119,29 +119,57 @@ const Tilpass: React.FC<{
     index: number
   ) => {
     const key = `${selectedTab}-${categoryIndex}`;
+    const currentSelected = selectedProducts[key];
 
-    setSelectedProducts((prev: any) => ({
-      ...prev,
-      [key]: {
-        category: selectedTab,
-        subCategory: categoryIndex,
-        product,
-        index,
-      },
-    }));
+    const isSameProduct =
+      currentSelected?.product?.Produktnavn === product.Produktnavn &&
+      currentSelected?.product?.pris === product.pris &&
+      currentSelected?.product?.IncludingOffer === product.IncludingOffer &&
+      currentSelected?.product?.Produktbeskrivelse ===
+        product.Produktbeskrivelse;
 
-    setSelectedProductsArray((prevArray) => {
-      const filteredArray = prevArray.filter(
+    if (isSameProduct) {
+      const updatedProducts = { ...selectedProducts };
+      delete updatedProducts[key];
+      setSelectedProducts(updatedProducts);
+
+      const filteredArray = selectedProductsArray.filter(
         (item) =>
-          !(item.category === selectedTab && item.subCategory === categoryIndex)
+          !(
+            item.category === selectedTab &&
+            item.subCategory === categoryIndex &&
+            item.product?.Produktnavn === product.Produktnavn
+          )
       );
+      setSelectedProductsArray(filteredArray);
+    } else {
+      setSelectedProducts((prev: any) => ({
+        ...prev,
+        [key]: {
+          category: selectedTab,
+          subCategory: categoryIndex,
+          product,
+          index,
+        },
+      }));
 
-      return [
-        ...filteredArray,
-        { category: selectedTab, subCategory: categoryIndex, product, index },
-      ];
-    });
+      setSelectedProductsArray((prevArray) => {
+        const filteredArray = prevArray.filter(
+          (item) =>
+            !(
+              item.category === selectedTab &&
+              item.subCategory === categoryIndex
+            )
+        );
+
+        return [
+          ...filteredArray,
+          { category: selectedTab, subCategory: categoryIndex, product, index },
+        ];
+      });
+    }
   };
+
   useEffect(() => {
     const stored = localStorage.getItem("customizeHouse");
 
