@@ -87,7 +87,7 @@ const HouseDetailsection: React.FC<{
                   <span className="font-bold">
                     {HouseModelData?.Husdetaljer?.husmodell_name}
                   </span>{" "}
-                  krever
+                  har
                 </p>
                 <p className="text-black text-sm md:text-base font-medium">
                   Gesimshøyde på {HouseModelData?.Husdetaljer?.Gesimshøyde}{" "}

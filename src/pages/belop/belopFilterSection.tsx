@@ -6,6 +6,7 @@ import { Slider, styled } from "@mui/material";
 import { useRouter } from "next/router";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
+import { convertCurrencyFormat } from "../housemodell-plot/Tilpass";
 
 const CustomSlider = styled(Slider)({
   color: "#6941C6",
@@ -103,8 +104,6 @@ const BelopFilterSection: React.FC<{
     { name: "2 Soverom", value: "2 Soverom" },
     { name: "3 Soverom", value: "3 Soverom" },
     { name: "4 Soverom", value: "4 Soverom" },
-    { name: "5 Soverom", value: "5 Soverom" },
-    { name: "6 Soverom", value: "6 Soverom" },
   ];
 
   const [OmrådeArray, setOmrådeArray] = useState([]);
@@ -685,10 +684,10 @@ const BelopFilterSection: React.FC<{
                   </div>
                   <div className="flex items-center justify-between h-[30px] mt-2">
                     <div className="text-grayText text-sm lg:text-base">
-                      {formData?.minRangeForPlot.toFixed(2)}
+                      {convertCurrencyFormat(formData?.minRangeForPlot)}
                     </div>
                     <div className="text-grayText text-sm lg:text-base">
-                      {maxPrice}
+                      {convertCurrencyFormat(maxPrice)}
                     </div>
                   </div>
                 </>
@@ -754,10 +753,10 @@ const BelopFilterSection: React.FC<{
                   </div>
                   <div className="flex items-center justify-between h-[30px] mt-2">
                     <div className="text-grayText text-sm lg:text-base">
-                      {formData?.minRangeForHusmodell.toFixed(2)}
+                      {convertCurrencyFormat(formData?.minRangeForHusmodell)}
                     </div>
                     <div className="text-grayText text-sm lg:text-base">
-                      {maxPrice}
+                      {convertCurrencyFormat(maxPrice)}
                     </div>
                   </div>
                 </>

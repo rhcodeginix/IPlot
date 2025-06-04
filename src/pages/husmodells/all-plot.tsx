@@ -11,6 +11,7 @@ import { Formik, Form } from "formik";
 import Img_vipps_login from "@/public/images/Img_vipps_login.png";
 import { useRouter } from "next/router";
 import VippsButton from "@/components/vipps";
+import { convertCurrencyFormat } from "../housemodell-plot/Tilpass";
 
 const bedroomOptions = [
   "1+ soverom",
@@ -300,10 +301,10 @@ const AllPlot = () => {
                       </div>
                       <div className="flex items-center justify-between h-[30px] mt-2">
                         <div className="border-gray2 border rounded-[8px] py-2 px-[14px] flex items-center justify-center text-secondary text-xs">
-                          {priceRange[0]} MNOK
+                          {convertCurrencyFormat(priceRange[0])}
                         </div>
                         <div className="border-gray2 border rounded-[8px] py-2 px-[14px] flex items-center justify-center text-secondary text-xs">
-                          {priceRange[1]} MNOK
+                          {convertCurrencyFormat(priceRange[1])}
                         </div>
                       </div>
                     </div>
