@@ -57,7 +57,20 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
           <div className="flex flex-col gap-2 md:gap-4 p-3 lg:p-5">
             {Byggekostnader &&
               Byggekostnader?.length > 0 &&
-              Byggekostnader?.map((item: any, index: number) => {
+              Byggekostnader?.sort((a: any, b: any) => {
+                const aPris =
+                  parseInt(String(a?.pris)?.replace(/\D/g, "")) || 0;
+                const bPris =
+                  parseInt(String(b?.pris)?.replace(/\D/g, "")) || 0;
+
+                const aHasPris = !!a?.pris;
+                const bHasPris = !!b?.pris;
+
+                if (aHasPris && !bHasPris) return -1;
+                if (!aHasPris && bHasPris) return 1;
+
+                return bPris - aPris;
+              }).map((item: any, index: number) => {
                 return (
                   <div
                     className="flex items-center gap-2 justify-between"
@@ -121,7 +134,20 @@ const Prisliste: React.FC<{ husmodellData: any }> = ({ husmodellData }) => {
           <div className="flex flex-col gap-2 md:gap-4 p-3 lg:p-5">
             {Tomtekost &&
               Tomtekost?.length > 0 &&
-              Tomtekost?.map((item: any, index: number) => {
+              Tomtekost?.sort((a: any, b: any) => {
+                const aPris =
+                  parseInt(String(a?.pris)?.replace(/\D/g, "")) || 0;
+                const bPris =
+                  parseInt(String(b?.pris)?.replace(/\D/g, "")) || 0;
+
+                const aHasPris = !!a?.pris;
+                const bHasPris = !!b?.pris;
+
+                if (aHasPris && !bHasPris) return -1;
+                if (!aHasPris && bHasPris) return 1;
+
+                return bPris - aPris;
+              }).map((item: any, index: number) => {
                 return (
                   <div
                     className="flex items-center gap-2 justify-between"
