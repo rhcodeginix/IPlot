@@ -77,11 +77,11 @@ const BelopProperty: React.FC<{
                 return (
                   <div
                     key={index}
-                    className="border border-gray3 rounded-[8px] p-3 laptop:p-5 cursor-pointer"
-                    style={{
-                      boxShadow:
-                        "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
-                    }}
+                    className="border border-gray3 rounded-[8px] p-3 laptop:p-5 cursor-pointer shadow-shadow4 hover:shadow-shadow1"
+                    // style={{
+                    //   boxShadow:
+                    //     "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
+                    // }}
                     onClick={() => {
                       router.push(
                         `${router.asPath}&propertyId=${property?.plot?.id}&husmodellId=${property?.house?.id}&emptyPlot=true`
