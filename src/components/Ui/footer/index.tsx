@@ -37,7 +37,7 @@ const Footer = () => {
             </div>
             <div>
               <div className="sm:items-center gap-y-2 gap-x-5 lg:gap-[38px] flex flex-wrap mb-6 md:mb-[12px]">
-                <Link
+                {/* <Link
                   href={""}
                   className="text-sm md:text-base text-white font-medium"
                 >
@@ -60,7 +60,7 @@ const Footer = () => {
                   className="text-sm md:text-base text-white font-medium"
                 >
                   Kontakt
-                </Link>
+                </Link> */}
                 <Link
                   href={""}
                   className="text-sm md:text-base text-white font-medium"

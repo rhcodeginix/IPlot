@@ -3,8 +3,8 @@ import SideSpaceContainer from "@/components/common/sideSpace";
 import Ic_vapp from "@/public/images/Ic_vapp.svg";
 import Link from "next/link";
 import Ic_logo from "@/public/images/Ic_logo.svg";
-import Ic_menu from "@/public/images/Ic_menu.svg";
-import Ic_close from "@/public/images/Ic_close.svg";
+// import Ic_menu from "@/public/images/Ic_menu.svg";
+// import Ic_close from "@/public/images/Ic_close.svg";
 import Ic_chevron_down from "@/public/images/Ic_chevron_down.svg";
 import Ic_search_file from "@/public/images/Ic_search_file.svg";
 import Ic_mic from "@/public/images/Ic_mic.svg";
@@ -22,11 +22,11 @@ const Header = () => {
   const { loginUser, setLoginUser } = useUserLayoutContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const router = useRouter();
-  const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
-  };
+  // const toggleDrawer = () => {
+  //   setIsDrawerOpen(!isDrawerOpen);
+  // };
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("min_tomt_login") === "true";
     setLoginUser(isLoggedIn);
@@ -120,13 +120,13 @@ const Header = () => {
         <SideSpaceContainer>
           <div className="py-[12px] md:py-[20px] flex justify-between gap-[32px] items-center">
             <div className="flex items-center gap-3">
-              <Image
+              {/* <Image
                 src={Ic_menu}
                 alt="menu"
                 className="lg:hidden"
                 onClick={toggleDrawer}
                 fetchPriority="auto"
-              />
+              /> */}
               <Link href={"/"} onClick={() => router.push("/")}>
                 <Image
                   src={Ic_logo}
@@ -138,7 +138,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="items-center justify-between flex lg:flex-grow">
-              <div className="items-center gap-10 hidden lg:flex">
+              {/* <div className="items-center gap-10 hidden lg:flex">
                 <Link
                   href={""}
                   className="text-base text-secondary font-medium"
@@ -163,8 +163,8 @@ const Header = () => {
                 >
                   Kontakt
                 </Link>
-              </div>
-
+              </div> */}
+              <div></div>
               {loginUser ? (
                 <div className="relative">
                   {userName && (
@@ -267,7 +267,7 @@ const Header = () => {
         </SideSpaceContainer>
       </div>
 
-      <div
+      {/* <div
         style={{
           transition: "transform 1s, box-shadow 1s",
           transform: isDrawerOpen ? "translateX(0)" : "translateX(-100%)",
@@ -307,7 +307,7 @@ const Header = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
