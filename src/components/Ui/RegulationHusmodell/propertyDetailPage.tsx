@@ -246,8 +246,7 @@ const PropertyDetailPage: React.FC<{
         <>
           <SideSpaceContainer>
             <div className="pt-[24px] pb-[86px]">
-              <Illustrasjoner />
-              <div className="w-full flex gap-[60px] mt-8">
+              <div className="w-full flex gap-[60px]">
                 <div className="w-[43%]">
                   <h4 className="text-black mb-6 font-semibold text-2xl">
                     {husmodellData?.husmodell_name}
@@ -428,6 +427,9 @@ const PropertyDetailPage: React.FC<{
                       ref={textareaRef}
                       readOnly
                     ></textarea>
+                  </div>
+                  <div className="mb-5 md:mb-[60px]">
+                    <Illustrasjoner />
                   </div>
                   <h2 className="text-black text-2xl font-semibold mb-4">
                     Film av {husmodellData?.husmodell_name}
