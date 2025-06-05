@@ -535,7 +535,6 @@ const Regulations = () => {
         setLamdaDataFromApi(data);
         setCadastreDataFromApi(CadastreDataResponse.apis);
         setLoadingLamdaData(false);
-        console.log(data);
 
         if (
           !cleanAnswer ||

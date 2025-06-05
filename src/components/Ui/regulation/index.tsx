@@ -119,9 +119,11 @@ const HusmodellPropertyPage: React.FC<{
             return priceA - priceB;
           });
         setTotal(data.length);
-        const soveromValues = formData?.AntallSoverom.map((item: any) =>
-          parseInt(item.replace(" Soverom", ""), 10)
-        );
+        const soveromValues = formData?.AntallSoverom.flatMap((item: any) => {
+          const value = parseInt(item.replace(" Soverom", ""), 10);
+
+          return Array.from({ length: 10 - value + 1 }, (_, i) => value + i);
+        });
         const filterData =
           data.filter((house: any) => {
             const housePrice = parseInt(

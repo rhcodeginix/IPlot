@@ -41,34 +41,17 @@ export const getVippsLoginUrl = (): string => {
 
   const fullUrl = authUrl.toString();
 
-  console.log("=== Vipps Login URL Generation ===");
-  console.log("Generated state:", state);
-  console.log("Redirecting to:", fullUrl);
-  console.log("URL parameters:", {
-    clientId: VIPPS_CONFIG.clientId,
-    redirectUri: VIPPS_CONFIG.redirectUri,
-    responseType: "code",
-    scope: VIPPS_CONFIG.scope,
-    state: state,
-  });
-
-  const verifyState = localStorage.getItem("vippsAuthState");
-  console.log("Verifying state was stored:", verifyState);
-
   return fullUrl;
 };
 
 export const parseUrlParams = (url: string): URLSearchParams => {
   try {
-    console.log("Parsing URL parameters from:", url);
     const parsedUrl = new URL(url);
 
     if (parsedUrl.hash) {
-      console.log("Found hash parameters:", parsedUrl.hash);
       return new URLSearchParams(parsedUrl.hash.substring(1));
     }
 
-    console.log("Using query parameters:", parsedUrl.search);
     return new URLSearchParams(parsedUrl.search);
   } catch (error) {
     console.error("Error parsing URL parameters:", error);

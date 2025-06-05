@@ -47,7 +47,7 @@ const TomtHouseDetails: React.FC<{
   lamdaDataFromApi,
   askData,
   user,
-  handlePrevious,
+  // handlePrevious,
 }) => {
   const router = useRouter();
   const { homePage } = router.query;
@@ -312,7 +312,7 @@ const TomtHouseDetails: React.FC<{
                 router.replace({ pathname, query: updatedQuery }, undefined, {
                   shallow: true,
                 });
-                handlePrevious();
+                // handlePrevious();
               }}
             />
             <Button

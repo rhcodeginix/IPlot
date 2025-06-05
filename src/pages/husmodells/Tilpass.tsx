@@ -208,7 +208,7 @@ const Tilpass: React.FC<any> = ({
   const extraPris = pris
     ? pris === 0
       ? 0
-      : parseInt(pris.replace(/\s/g, "").replace("kr", ""), 10)
+      : parseInt(String(pris).replace(/\s/g, "").replace("kr", ""), 10)
     : 0;
 
   const totalPrice = totalCustPris + husPris + extraPris;

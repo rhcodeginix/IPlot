@@ -12,8 +12,12 @@ import NorkartMap from "@/components/map";
 const PlotProperty: React.FC<{
   isLoading: any;
   HouseModelProperty: any;
-  handleNext: any;
-}> = ({ HouseModelProperty, isLoading, handleNext }) => {
+  // handleNext: any;
+}> = ({
+  HouseModelProperty,
+  isLoading,
+  //  handleNext
+}) => {
   const router = useRouter();
 
   const [supplierData, setSupplierData] = useState<{ [key: string]: any }>({});
@@ -94,7 +98,7 @@ const PlotProperty: React.FC<{
                         { shallow: true }
                       );
 
-                      handleNext();
+                      // handleNext();
                     }}
                   >
                     <div className="mb-2 md:mb-3 desktop:mb-4 flex items-start justify-between gap-3">
@@ -278,7 +282,7 @@ const PlotProperty: React.FC<{
                                 { shallow: true }
                               );
 
-                              handleNext();
+                              // handleNext();
                             }}
                           />
                         </div>

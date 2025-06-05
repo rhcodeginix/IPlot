@@ -467,7 +467,7 @@ const Tilbud: React.FC<{
         }}
       >
         <SideSpaceContainer>
-          <div className="flex justify-end gap-4 items-center">
+          <div className="flex flex-col sm:flex-row justify-end gap-4 sm:items-center">
             <Button
               text="Tilbake"
               className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
@@ -475,8 +475,16 @@ const Tilbud: React.FC<{
                 handlePrevious();
               }}
             />
+            <p className="text-sm md:text-base font-light text-center">
+              En innsending er{" "}
+              <span className="font-medium">uforpliktende</span> og du vil bli{" "}
+              <br className="hidden md:block" />
+              <span className="font-medium">
+                kontaktet av en hyttekonsulent
+              </span>
+            </p>
             <Button
-              text="Neste: Finansiering"
+              text="Send til Fjellheimhytta"
               className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
               onClick={() => {
                 handleNext();
