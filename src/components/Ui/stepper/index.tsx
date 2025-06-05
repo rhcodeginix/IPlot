@@ -13,6 +13,7 @@ interface StepperProps {
   currIndex: any;
   setCurrIndex: any;
   Style?: any;
+  total?: any;
 }
 
 const Stepper: React.FC<StepperProps> = ({
@@ -20,6 +21,7 @@ const Stepper: React.FC<StepperProps> = ({
   currIndex,
   setCurrIndex,
   Style,
+  total,
 }) => {
   const stepRefs = useRef<any>([]);
 
@@ -79,7 +81,7 @@ const Stepper: React.FC<StepperProps> = ({
                     </div>
                     {index < steps.length - 1 && (
                       <div
-                        className={`screen-indicator ${Style && "screen-more"} ${
+                        className={`screen-indicator ${total && "screen-4"} ${Style && "screen-more"} ${
                           index < currIndex
                             ? "completed"
                             : index === currIndex

@@ -5,7 +5,7 @@ import Tomt from "./Tomt";
 import Husmodell from "./Husmodell";
 import Tilbud from "./Tilbud";
 import Finansiering from "./Finansiering";
-import Oppsummering from "./Oppsummering";
+// import Oppsummering from "./Oppsummering";
 import { useRouter } from "next/router";
 import ApiUtils from "@/api";
 import ErrorPopup from "@/components/Ui/error";
@@ -1105,21 +1105,21 @@ const Regulations = () => {
         />
       ),
     },
-    {
-      name: "Oppsummering",
-      component: (
-        <Oppsummering
-          handleNext={handleNext}
-          lamdaDataFromApi={lamdaDataFromApi}
-          loadingLamdaData={loading}
-          CadastreDataFromApi={CadastreDataFromApi}
-          askData={askData}
-          HouseModelData={HouseModelData}
-          handlePrevious={handlePrevious}
-          supplierData={supplierData}
-        />
-      ),
-    },
+    // {
+    //   name: "Oppsummering",
+    //   component: (
+    //     <Oppsummering
+    //       handleNext={handleNext}
+    //       lamdaDataFromApi={lamdaDataFromApi}
+    //       loadingLamdaData={loading}
+    //       CadastreDataFromApi={CadastreDataFromApi}
+    //       askData={askData}
+    //       HouseModelData={HouseModelData}
+    //       handlePrevious={handlePrevious}
+    //       supplierData={supplierData}
+    //     />
+    //   ),
+    // },
   ];
 
   return (

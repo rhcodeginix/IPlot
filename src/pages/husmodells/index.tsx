@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Tomt from "./Tomt";
 import Tilbud from "./Tilbud";
 import Finansiering from "./Finansiering";
-import Oppsummering from "./Oppsummering";
+// import Oppsummering from "./Oppsummering";
 import ErrorPopup from "@/components/Ui/error";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/config/firebaseConfig";
@@ -331,22 +331,22 @@ const HusmodellDetail = () => {
         />
       ),
     },
-    {
-      name: "Oppsummering",
-      component: (
-        <Oppsummering
-          handleNext={handleNext}
-          lamdaDataFromApi={lamdaDataFromApi}
-          loading={loading}
-          CadastreDataFromApi={CadastreDataFromApi}
-          askData={askData}
-          HouseModelData={HouseModelData}
-          handlePrevious={handlePrevious}
-          supplierData={supplierData}
-          pris={pris}
-        />
-      ),
-    },
+    // {
+    //   name: "Oppsummering",
+    //   component: (
+    //     <Oppsummering
+    //       handleNext={handleNext}
+    //       lamdaDataFromApi={lamdaDataFromApi}
+    //       loading={loading}
+    //       CadastreDataFromApi={CadastreDataFromApi}
+    //       askData={askData}
+    //       HouseModelData={HouseModelData}
+    //       handlePrevious={handlePrevious}
+    //       supplierData={supplierData}
+    //       pris={pris}
+    //     />
+    //   ),
+    // },
   ];
   return (
     <>
@@ -354,7 +354,7 @@ const HusmodellDetail = () => {
         steps={steps}
         currIndex={currIndex}
         setCurrIndex={setCurrIndex}
-        Style="true"
+        // Style="true"
       />
       {showErrorPopup && <ErrorPopup />}
     </>

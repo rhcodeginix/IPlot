@@ -20,7 +20,7 @@ import Stepper from "@/components/Ui/stepper";
 import Tilpass from "./Tilpass";
 import Tilbud from "./Tilbud";
 import Finansiering from "./Finansiering";
-import Oppsummering from "./Oppsummering";
+// import Oppsummering from "./Oppsummering";
 
 const HusmodellPlot = () => {
   const [currIndex, setCurrIndex] = useState<number | null>(null);
@@ -462,22 +462,22 @@ const HusmodellPlot = () => {
         />
       ),
     },
-    {
-      name: "Oppsummering",
-      component: (
-        <Oppsummering
-          handleNext={handleNext}
-          lamdaDataFromApi={lamdaDataFromApi}
-          loadingLamdaData={loading}
-          CadastreDataFromApi={CadastreDataFromApi}
-          askData={askData}
-          HouseModelData={HouseModelData}
-          handlePrevious={handlePrevious}
-          supplierData={supplierData}
-          pris={pris}
-        />
-      ),
-    },
+    // {
+    //   name: "Oppsummering",
+    //   component: (
+    //     <Oppsummering
+    //       handleNext={handleNext}
+    //       lamdaDataFromApi={lamdaDataFromApi}
+    //       loadingLamdaData={loading}
+    //       CadastreDataFromApi={CadastreDataFromApi}
+    //       askData={askData}
+    //       HouseModelData={HouseModelData}
+    //       handlePrevious={handlePrevious}
+    //       supplierData={supplierData}
+    //       pris={pris}
+    //     />
+    //   ),
+    // },
   ];
 
   return (
@@ -486,6 +486,7 @@ const HusmodellPlot = () => {
         steps={steps}
         currIndex={currIndex}
         setCurrIndex={setCurrIndex}
+        total={true}
       />
       {showErrorPopup && <ErrorPopup />}
     </>
