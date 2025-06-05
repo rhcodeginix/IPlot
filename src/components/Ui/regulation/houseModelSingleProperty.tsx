@@ -320,7 +320,7 @@ const HouseModelSingleProperty: React.FC<{
             />
             <Button
               text={`Tilpass ${HouseModelData?.Husdetaljer?.husmodell_name} her`}
-              className="border border-primary bg-primary hover:bg-[#F5913E] hover:border-[#F5913E] focus:bg-[#CD6107] focus:border-[#CD6107] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+              className="border border-primary bg-primary hover:bg-[#7A5AF8] hover:border-[#7A5AF8] focus:bg-[#5925DC] focus:border-[#5925DC] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
               onClick={() => {
                 if (!loadingLamdaData && !loadingAdditionalData) {
                   handleNext();

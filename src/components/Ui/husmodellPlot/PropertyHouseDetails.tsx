@@ -19,7 +19,7 @@ const PropertyHouseDetails: React.FC<{
   const [kommune, setKommune] = useState<any>(null);
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-    const cityQuery = queryParams.get("Kommue");
+    const cityQuery = queryParams.get("kommunenavn");
     setKommune(cityQuery);
   }, []);
   const [equityAmount, setEquityAmount] = useState<any>(null);
