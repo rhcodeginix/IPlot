@@ -39,6 +39,7 @@ const Tilpass: React.FC<{
   handlePrevious: any;
   supplierData: any;
   pris: any;
+  CadastreDataFromApi: any;
 }> = ({
   handleNext,
   lamdaDataFromApi,
@@ -47,6 +48,7 @@ const Tilpass: React.FC<{
   handlePrevious,
   supplierData,
   pris,
+  CadastreDataFromApi,
 }) => {
   const Huskonfigurator =
     HouseModelData?.Huskonfigurator?.hovedkategorinavn || [];
@@ -268,6 +270,7 @@ const Tilpass: React.FC<{
             HouseModelData={HouseModelData}
             lamdaDataFromApi={lamdaDataFromApi}
             supplierData={supplierData}
+            CadastreDataFromApi={CadastreDataFromApi}
             pris={pris}
           />
         </SideSpaceContainer>
@@ -454,7 +457,7 @@ const Tilpass: React.FC<{
                                           </SwiperSlide>
                                         )
                                       )}
-                                      <div className="swiper-pagination"></div>
+                                      {/* <div className="swiper-pagination"></div> */}
                                     </Swiper>
                                   )}
                                   <div

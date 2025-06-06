@@ -62,7 +62,7 @@ const Footer = () => {
                   Kontakt
                 </Link> */}
                 <Link
-                  href={""}
+                  href={"/login"}
                   className="text-sm md:text-base text-white font-medium"
                 >
                   Logg inn

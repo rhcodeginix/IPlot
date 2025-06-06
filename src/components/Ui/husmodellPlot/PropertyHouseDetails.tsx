@@ -12,9 +12,18 @@ const PropertyHouseDetails: React.FC<{
   lamdaDataFromApi: any;
   supplierData: any;
   pris?: any;
-}> = ({ HouseModelData, lamdaDataFromApi, supplierData, pris }) => {
+  CadastreDataFromApi?: any;
+}> = ({
+  HouseModelData,
+  lamdaDataFromApi,
+  supplierData,
+  pris,
+  CadastreDataFromApi,
+}) => {
   const router = useRouter();
   const leadId = router.query["leadId"];
+  const { plotId, kommunenummer, propertyId } = router.query;
+
   const Husdetaljer = HouseModelData?.Husdetaljer;
   const [kommune, setKommune] = useState<any>(null);
   useEffect(() => {
@@ -78,15 +87,19 @@ const PropertyHouseDetails: React.FC<{
               </span>{" "}
               fra{" "}
               <span className="font-bold">{supplierData?.company_name}</span>{" "}
-              bygget i{" "}
-              <span className="font-bold">
-                {kommune ||
-                  lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
-                    ?.kommune}{" "}
-                Kommune
-              </span>
+              {(plotId || propertyId || kommunenummer) && (
+                <>
+                  bygget i{" "}
+                  <span className="font-bold">
+                    {kommune ||
+                      CadastreDataFromApi?.presentationAddressApi?.response
+                        ?.item?.municipality?.municipalityName}{" "}
+                    Kommune
+                  </span>
+                </>
+              )}
             </h4>
-            {lamdaDataFromApi && (
+            {lamdaDataFromApi && (plotId || propertyId || kommunenummer) && (
               <div className="flex items-center gap-4 mb-2">
                 {lamdaDataFromApi?.searchParameters?.gardsnummer && (
                   <div className="text-secondary text-xs md:text-sm lg:text-base">
@@ -101,6 +114,21 @@ const PropertyHouseDetails: React.FC<{
                     Bnr:{" "}
                     <span className="text-black font-semibold">
                       {lamdaDataFromApi.searchParameters.bruksnummer}
+                    </span>
+                  </div>
+                )}
+                {CadastreDataFromApi?.presentationAddressApi?.response?.item
+                  ?.formatted && (
+                  <div className="text-secondary text-xs md:text-sm lg:text-base">
+                    <span className="text-black font-semibold">
+                      {
+                        CadastreDataFromApi.presentationAddressApi.response
+                          ?.item?.formatted?.line1
+                      }
+                      {
+                        CadastreDataFromApi.presentationAddressApi.response
+                          ?.item?.formatted?.line2
+                      }
                     </span>
                   </div>
                 )}

@@ -427,6 +427,7 @@ const HusmodellPlot = () => {
           handlePrevious={handlePrevious}
           supplierData={supplierData}
           pris={pris}
+          CadastreDataFromApi={CadastreDataFromApi}
         />
       ),
     },

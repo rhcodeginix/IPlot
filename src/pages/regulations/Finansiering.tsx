@@ -223,6 +223,7 @@ const Finansiering: React.FC<{
               HouseModelData={HouseModelData}
               lamdaDataFromApi={lamdaDataFromApi}
               supplierData={supplierData}
+              CadastreDataFromApi={CadastreDataFromApi}
             />
           </div> */}
         </SideSpaceContainer>

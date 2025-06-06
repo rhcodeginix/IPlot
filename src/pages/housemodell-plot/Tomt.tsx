@@ -147,6 +147,7 @@ const Tomt: React.FC<{
             HouseModelData={HouseModelData}
             lamdaDataFromApi={lamdaDataFromApi}
             supplierData={supplierData}
+            CadastreDataFromApi={CadastreDataFromApi}
             pris={pris}
           />
         </SideSpaceContainer>

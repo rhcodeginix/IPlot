@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
 import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
-import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
+// import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
 import { Building2, House } from "lucide-react";
 import HouseDetailPage from "@/components/Ui/houseDetail";
 import {
@@ -47,7 +47,7 @@ const TomtHouseDetails: React.FC<{
   lamdaDataFromApi,
   askData,
   user,
-  // handlePrevious,
+  handlePrevious,
 }) => {
   const router = useRouter();
   const { homePage } = router.query;
@@ -191,21 +191,24 @@ const TomtHouseDetails: React.FC<{
                 <div
                   className="text-primary text-xs md:text-sm font-medium cursor-pointer"
                   onClick={() => {
-                    delete updatedQuery.propertyId;
-                    delete updatedQuery.husmodellId;
-                    delete updatedQuery.leadId;
-                    delete updatedQuery.emptyPlot;
-
-                    router.push(
-                      {
-                        pathname: router.pathname,
-                        query: updatedQuery,
-                      },
-                      undefined,
-                      { shallow: true }
-                    );
-                    const currIndex = 1;
-                    localStorage.setItem("currIndex", currIndex.toString());
+                    if (updatedQuery.kommunenummer)
+                      delete updatedQuery.kommunenummer;
+                    if (updatedQuery.bruksnummer)
+                      delete updatedQuery.bruksnummer;
+                    if (updatedQuery.gardsnummer)
+                      delete updatedQuery.gardsnummer;
+                    if (updatedQuery.kommunenavn)
+                      delete updatedQuery.kommunenavn;
+                    if (updatedQuery.empty) delete updatedQuery.empty;
+                    if (updatedQuery.leadId) delete updatedQuery.leadId;
+                    delete updatedQuery.plotId;
+                    router
+                      .replace({ pathname, query: updatedQuery }, undefined, {
+                        shallow: true,
+                      })
+                      .then(() => {
+                        handlePrevious();
+                      });
                   }}
                 >
                   Hva kan du bygge?
@@ -218,6 +221,7 @@ const TomtHouseDetails: React.FC<{
           <PropertyHouseDetails
             HouseModelData={HouseModelData}
             lamdaDataFromApi={lamdaDataFromApi}
+            CadastreDataFromApi={CadastreDataFromApi}
             supplierData={supplierData}
           />
         </SideSpaceContainer>
@@ -228,9 +232,9 @@ const TomtHouseDetails: React.FC<{
         lamdaDataFromApi={lamdaDataFromApi}
         HouseModelData={HouseModelData}
       />
-      <SideSpaceContainer>
+      {/* <SideSpaceContainer>
         <LeadsBox />
-      </SideSpaceContainer>
+      </SideSpaceContainer> */}
       <div id="regulationDocument">
         <div
           className="border-b border-gray3 py-6 pb-8"
@@ -303,7 +307,7 @@ const TomtHouseDetails: React.FC<{
       >
         <SideSpaceContainer>
           <div className="flex justify-end gap-4 items-center">
-            <Button
+            {/* <Button
               text="Tilbake"
               className="border-2 border-primary text-primary hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
               onClick={() => {
@@ -313,6 +317,26 @@ const TomtHouseDetails: React.FC<{
                   shallow: true,
                 });
                 // handlePrevious();
+              }}
+            /> */}
+            <Button
+              text="Tilbake"
+              className="border-2 border-primary text-primary hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
+              onClick={() => {
+                if (updatedQuery.kommunenummer)
+                  delete updatedQuery.kommunenummer;
+                if (updatedQuery.bruksnummer) delete updatedQuery.bruksnummer;
+                if (updatedQuery.gardsnummer) delete updatedQuery.gardsnummer;
+                if (updatedQuery.kommunenavn) delete updatedQuery.kommunenavn;
+                if (updatedQuery.empty) delete updatedQuery.empty;
+                if (updatedQuery.leadId) delete updatedQuery.leadId;
+                delete updatedQuery.plotId;
+                router.replace({ pathname, query: updatedQuery }, undefined, {
+                  shallow: true,
+                });
+                // .then(() => {
+                //   handlePrevious();
+                // });
               }}
             />
             <Button

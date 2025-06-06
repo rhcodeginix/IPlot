@@ -1072,6 +1072,7 @@ const Regulations = () => {
           HouseModelData={HouseModelData}
           handlePrevious={handlePrevious}
           supplierData={supplierData}
+          CadastreDataFromApi={CadastreDataFromApi}
         />
       ),
     },

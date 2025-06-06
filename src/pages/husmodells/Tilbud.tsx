@@ -50,28 +50,44 @@ const Tilbud: React.FC<{
   const Husdetaljer = HouseModelData?.Husdetaljer;
 
   const [user, setUser] = useState<any>(null);
-  const { plotId, husmodellId } = router.query;
+  const { plotId, husmodellId, noPlot } = router.query;
 
   const [finalData, setFinalData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const husmodellData = finalData?.husmodell?.Husdetaljer;
 
   useEffect(() => {
+    // if (!husmodellId || !plotId) return;
+
     const fetchData = async () => {
       try {
-        let plotCollectionRef = collection(db, "empty_plot");
+        // if (!noPlot) {
+        //   let plotCollectionRef = collection(db, "cabin_plot");
 
-        const plotDocRef = doc(plotCollectionRef, String(plotId));
-        const plotDocSnap = await getDoc(plotDocRef);
+        //   const plotDocRef = doc(plotCollectionRef, String(plotId));
+        //   const plotDocSnap = await getDoc(plotDocRef);
+        // }
+        let plotData = null;
+
+        if (!noPlot && plotId) {
+          const plotDocRef = doc(db, "cabin_plot", String(plotId));
+          const plotDocSnap = await getDoc(plotDocRef);
+
+          if (plotDocSnap.exists()) {
+            plotData = { id: plotId, ...plotDocSnap.data() };
+          } else {
+            console.warn("Plot document does not exist.");
+          }
+        }
 
         const husmodellDocRef = doc(db, "house_model", String(husmodellId));
         const husmodellDocSnap = await getDoc(husmodellDocRef);
 
-        if (plotDocSnap.exists() && husmodellDocSnap.exists()) {
-          let plotData = plotDocSnap.data();
+        if (husmodellDocSnap.exists()) {
+          // let plotData = plotDocSnap.data();
           let husmodellData = husmodellDocSnap.data();
           setFinalData({
-            plot: { id: plotId, ...plotData },
+            plot: plotData,
             husmodell: { id: husmodellId, ...husmodellData },
           });
         } else {
@@ -84,10 +100,10 @@ const Tilbud: React.FC<{
       }
     };
 
-    if (husmodellId && plotId) {
+    if (husmodellId && (plotId || noPlot)) {
       fetchData();
     }
-  }, [husmodellId, plotId]);
+  }, [husmodellId, plotId, noPlot]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
       if (user) {
@@ -287,6 +303,7 @@ const Tilbud: React.FC<{
                 </span>
               </div>
               <PropertyHouseDetails
+                CadastreDataFromApi={CadastreDataFromApi}
                 HouseModelData={HouseModelData}
                 lamdaDataFromApi={lamdaDataFromApi}
                 supplierData={supplierData}
@@ -314,19 +331,24 @@ const Tilbud: React.FC<{
                       <span className="font-semibold">
                         {HouseModelData?.Husdetaljer?.husmodell_name}
                       </span>{" "}
-                      bygget i{" "}
-                      {
-                        CadastreDataFromApi?.presentationAddressApi?.response
-                          ?.item?.formatted?.line1
-                      }{" "}
-                      <span className="text-secondary2">
-                        (
-                        {
-                          CadastreDataFromApi?.presentationAddressApi?.response
-                            ?.item?.street?.municipality?.municipalityName
-                        }
-                        )
-                      </span>
+                      {plotId && (
+                        <>
+                          bygget i{" "}
+                          {
+                            CadastreDataFromApi?.presentationAddressApi
+                              ?.response?.item?.formatted?.line1
+                          }{" "}
+                          <span className="text-secondary2">
+                            (
+                            {
+                              CadastreDataFromApi?.presentationAddressApi
+                                ?.response?.item?.street?.municipality
+                                ?.municipalityName
+                            }
+                            )
+                          </span>
+                        </>
+                      )}
                     </h4>
                     <p className="text-secondary2 text-xs md:text-sm">
                       {
@@ -334,8 +356,12 @@ const Tilbud: React.FC<{
                           ?.item?.formatted?.line2
                       }
                     </p>
-                    <div className="flex gap-2 h-[150px] sm:h-[189px] mb-2 md:mb-4">
-                      <div className="w-[63%] h-full relative">
+                    <div
+                      className={`flex gap-2 ${plotId && "h-[150px] sm:h-[189px]"} mb-2 md:mb-4`}
+                    >
+                      <div
+                        className={`${plotId ? "w-[63%]" : "w-full"} h-full relative`}
+                      >
                         <img
                           src={Husdetaljer?.photo}
                           alt="husmodell"
@@ -347,18 +373,25 @@ const Tilbud: React.FC<{
                           className="absolute top-[12px] left-[12px] bg-[#FFFFFFB2] py-2 px-3 flex items-center justify-center rounded-[32px] w-[107px]"
                         />
                       </div>
-                      <div className="w-[37%] rounded-[8px] overflow-hidden h-full">
-                        {lamdaDataFromApi?.coordinates
-                          ?.convertedCoordinates && (
-                          <NorkartMap
-                            coordinates={
-                              lamdaDataFromApi?.coordinates
-                                ?.convertedCoordinates
-                            }
-                            MAX_ZOOM={20}
-                          />
-                        )}
-                      </div>
+                      {plotId && (
+                        <div className="w-[37%] rounded-[8px] overflow-hidden h-full">
+                          {/* <GoogleMapComponent
+                          coordinates={
+                            lamdaDataFromApi?.coordinates?.convertedCoordinates
+                          }
+                        /> */}
+                          {lamdaDataFromApi?.coordinates
+                            ?.convertedCoordinates && (
+                            <NorkartMap
+                              coordinates={
+                                lamdaDataFromApi?.coordinates
+                                  ?.convertedCoordinates
+                              }
+                              MAX_ZOOM={20}
+                            />
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div className="flex gap-3 items-center">
                       <div className="text-darkBlack text-xs md:text-sm font-semibold">
@@ -440,7 +473,7 @@ const Tilbud: React.FC<{
                       </div>
                     </div>
                   </div>
-                  <LeadsBox col={true} />
+                  {!noPlot && <LeadsBox col={true} />}
                 </div>
                 <div className="w-full desktop:w-[60%] border border-[#DCDFEA] rounded-lg overflow-hidden">
                   <div className="p-3 md:p-5 border-b w-full border-[#DCDFEA] text-darkBlack text-base md:text-lg lg:text-xl font-semibold">
@@ -451,64 +484,6 @@ const Tilbud: React.FC<{
                     inkluderer
                   </div>
                   <div className="p-3 md:p-5 flex flex-col md:flex-row gap-4 lg:gap-8">
-                    <div className="w-full md:w-[62%]">
-                      {updatedArray?.length > 0 ? (
-                        <div className="flex flex-col gap-4 md:gap-4 lg:gap-6">
-                          {updatedArray.map((item: any, index: number) => (
-                            <div key={index}>
-                              <h4 className="text-black font-semibold text-sm md:text-base mb-2 md:mb-3">
-                                {item?.navn}
-                              </h4>
-                              <div className="flex flex-col gap-2 md:gap-3">
-                                {item?.Kategorinavn?.map(
-                                  (cat: any, catIndex: number) => (
-                                    <div key={catIndex}>
-                                      {cat?.produkter?.map(
-                                        (product: any, proIndex: number) => (
-                                          <div
-                                            key={proIndex}
-                                            className="flex gap-2 md:gap-4 w-full"
-                                          >
-                                            <div className="w-[57px] h-[40px] rounded-[4px] overflow-hidden">
-                                              <img
-                                                src={product?.Hovedbilde?.[0]}
-                                                alt="image"
-                                                className="w-full h-full object-cover"
-                                              />
-                                            </div>
-                                            <div className="flex items-center justify-between gap-2 w-full">
-                                              <div>
-                                                <p className="text-secondary2 text-xs md:text-sm">
-                                                  {product?.Produktnavn}
-                                                </p>
-                                                <h5 className="text-black text-xs md:text-sm font-medium">
-                                                  {cat?.navn}
-                                                </h5>
-                                              </div>
-                                              <div className="text-black font-semibold text-xs md:text-sm">
-                                                {product?.IncludingOffer
-                                                  ? "Standard"
-                                                  : formatCurrency(
-                                                      product?.pris
-                                                    )}
-                                              </div>
-                                            </div>
-                                          </div>
-                                        )
-                                      )}
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="text-center py-3 text-lg">
-                          Du har ikke noe alternativ.
-                        </p>
-                      )}
-                    </div>
                     <div className="w-full md:w-[38%] bg-lightPurple2 rounded-lg h-max overflow-hidden">
                       <div className="p-3 md:p-4">
                         <h5 className="text-black font-semibold text-sm md:text-base mb-2 md:mb-[14px]">
@@ -603,6 +578,64 @@ const Tilbud: React.FC<{
                           )}
                         </div>
                       </div>
+                    </div>
+                    <div className="w-full md:w-[62%]">
+                      {updatedArray?.length > 0 ? (
+                        <div className="flex flex-col gap-4 md:gap-4 lg:gap-6">
+                          {updatedArray.map((item: any, index: number) => (
+                            <div key={index}>
+                              <h4 className="text-black font-semibold text-sm md:text-base mb-2 md:mb-3">
+                                {item?.navn}
+                              </h4>
+                              <div className="flex flex-col gap-2 md:gap-3">
+                                {item?.Kategorinavn?.map(
+                                  (cat: any, catIndex: number) => (
+                                    <div key={catIndex}>
+                                      {cat?.produkter?.map(
+                                        (product: any, proIndex: number) => (
+                                          <div
+                                            key={proIndex}
+                                            className="flex gap-2 md:gap-4 w-full"
+                                          >
+                                            <div className="w-[57px] h-[40px] rounded-[4px] overflow-hidden">
+                                              <img
+                                                src={product?.Hovedbilde?.[0]}
+                                                alt="image"
+                                                className="w-full h-full object-cover"
+                                              />
+                                            </div>
+                                            <div className="flex items-center justify-between gap-2 w-full">
+                                              <div>
+                                                <h5 className="text-black text-xs md:text-sm font-medium">
+                                                  {cat?.navn}
+                                                </h5>
+                                                <p className="text-secondary2 text-xs md:text-sm">
+                                                  {product?.Produktnavn}
+                                                </p>
+                                              </div>
+                                              <div className="text-black font-semibold text-xs md:text-sm">
+                                                {product?.IncludingOffer
+                                                  ? "Standard"
+                                                  : formatCurrency(
+                                                      product?.pris
+                                                    )}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-center py-3 text-lg">
+                          Du har ikke noe alternativ.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>

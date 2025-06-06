@@ -43,6 +43,7 @@ const Finansiering: React.FC<{
 }) => {
   const router = useRouter();
   const Husdetaljer = HouseModelData?.Husdetaljer;
+  const { noPlot } = router.query;
 
   const [custHouse, setCusHouse] = useState<any>(null);
   useEffect(() => {
@@ -196,6 +197,7 @@ const Finansiering: React.FC<{
               HouseModelData={HouseModelData}
               lamdaDataFromApi={lamdaDataFromApi}
               supplierData={supplierData}
+              CadastreDataFromApi={CadastreDataFromApi}
               pris={pris}
             />
           </div> */}
@@ -229,228 +231,287 @@ const Finansiering: React.FC<{
               <div className="mb-4 md:mb-8">
                 <Prisliste husmodellData={HouseModelData?.Prisliste} />
               </div>
-              <div className="my-5 md:my-8">
-                <Formik
-                  initialValues={{
-                    equityAmount: "",
-                    sharingData: false,
-                    helpWithFinancing: false,
-                  }}
-                  validationSchema={validationSchema}
-                  onSubmit={handleSubmit}
-                >
-                  {({ values, setFieldValue, errors, touched }) => {
-                    useEffect(() => {
-                      (async () => {
-                        try {
-                          const docSnap = await getDoc(
-                            doc(db, "leads", String(leadId))
-                          );
+              {!noPlot && (
+                <div className="my-5 md:my-8">
+                  <Formik
+                    initialValues={{
+                      equityAmount: "",
+                      sharingData: false,
+                      helpWithFinancing: false,
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmit}
+                  >
+                    {({ values, setFieldValue, errors, touched }) => {
+                      useEffect(() => {
+                        (async () => {
+                          try {
+                            const docSnap = await getDoc(
+                              doc(db, "leads", String(leadId))
+                            );
 
-                          if (docSnap.exists()) {
-                            const data = docSnap.data();
+                            if (docSnap.exists()) {
+                              const data = docSnap.data();
 
-                            const value = data?.bankValue;
-                            if (data && data?.IsoptForBank) {
-                              setFieldValue(
-                                "sharingData",
-                                data?.IsoptForBank || false
-                              );
+                              const value = data?.bankValue;
+                              if (data && data?.IsoptForBank) {
+                                setFieldValue(
+                                  "sharingData",
+                                  data?.IsoptForBank || false
+                                );
+                              }
+                              if (value) {
+                                setFieldValue(
+                                  "equityAmount",
+                                  value?.equityAmount
+                                );
+                                setFieldValue(
+                                  "helpWithFinancing",
+                                  value?.helpWithFinancing || false
+                                );
+                              }
                             }
-                            if (value) {
-                              setFieldValue(
-                                "equityAmount",
-                                value?.equityAmount
-                              );
-                              setFieldValue(
-                                "helpWithFinancing",
-                                value?.helpWithFinancing || false
-                              );
-                            }
+                          } catch (error) {
+                            console.error(
+                              "Error fetching IsoptForBank status:",
+                              error
+                            );
                           }
-                        } catch (error) {
-                          console.error(
-                            "Error fetching IsoptForBank status:",
-                            error
-                          );
-                        }
-                      })();
-                    }, [leadId]);
-                    return (
-                      <Form>
-                        <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-[24px]">
-                          <div className="w-full lg:w-[50%]">
-                            <div className="flex flex-col gap-2 md:gap-4">
-                              <div className="flex items-center justify-between gap-1">
-                                <p className="text-black text-xs md:text-sm font-bold">
-                                  Totale bygge- og <br /> tomtekostnader (inkl.
-                                  mva)
-                                </p>
-                                <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
-                                  {formatCurrency(
-                                    formattedNumber +
-                                      formattedNumberOfByggekostnader
-                                  )}
-                                </h4>
-                              </div>
-                              <div className="flex items-center justify-between gap-1">
-                                <p className="text-black text-xs md:text-sm">
-                                  Egenkapital
-                                </p>
-                                <div className="flex items-center gap-2 md:gap-4">
-                                  <div>
-                                    <Field
-                                      id="equityAmount"
-                                      name="equityAmount"
-                                      className={`w-[160px] border border-darkGray focus:outline-none text-black rounded-[8px] py-2 px-4 text-sm ${
-                                        errors.equityAmount &&
-                                        touched.equityAmount
-                                          ? "border-red"
-                                          : "border-darkGray"
-                                      }`}
-                                      placeholder="Enter"
-                                      type="text"
-                                      inputMode="numeric"
-                                      onChange={(e: any) => {
-                                        let rawValue = e.target.value.replace(
-                                          /\D/g,
-                                          ""
-                                        );
-
-                                        if (rawValue) {
-                                          const formattedValue =
-                                            new Intl.NumberFormat(
-                                              "no-NO"
-                                            ).format(Number(rawValue));
-                                          setFieldValue(
-                                            "equityAmount",
-                                            formattedValue
+                        })();
+                      }, [leadId]);
+                      return (
+                        <Form>
+                          <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-[24px]">
+                            <div className="w-full lg:w-[50%]">
+                              <div className="flex flex-col gap-2 md:gap-4">
+                                <div className="flex items-center justify-between gap-1">
+                                  <p className="text-black text-xs md:text-sm font-bold">
+                                    Totale bygge- og <br /> tomtekostnader
+                                    (inkl. mva)
+                                  </p>
+                                  <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
+                                    {formatCurrency(
+                                      formattedNumber +
+                                        formattedNumberOfByggekostnader
+                                    )}
+                                  </h4>
+                                </div>
+                                <div className="flex items-center justify-between gap-1">
+                                  <p className="text-black text-xs md:text-sm">
+                                    Egenkapital
+                                  </p>
+                                  <div className="flex items-center gap-2 md:gap-4">
+                                    <div>
+                                      <Field
+                                        id="equityAmount"
+                                        name="equityAmount"
+                                        className={`w-[160px] border border-darkGray focus:outline-none text-black rounded-[8px] py-2 px-4 text-sm ${
+                                          errors.equityAmount &&
+                                          touched.equityAmount
+                                            ? "border-red"
+                                            : "border-darkGray"
+                                        }`}
+                                        placeholder="Enter"
+                                        type="text"
+                                        inputMode="numeric"
+                                        onChange={(e: any) => {
+                                          let rawValue = e.target.value.replace(
+                                            /\D/g,
+                                            ""
                                           );
-                                        } else {
-                                          setFieldValue("equityAmount", "");
-                                        }
-                                      }}
-                                    />
-                                    {touched.equityAmount &&
-                                      errors.equityAmount && (
-                                        <p className="text-red text-xs mt-1">
-                                          {errors.equityAmount}
-                                        </p>
-                                      )}
-                                  </div>
-                                  {/* <p className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer">
+
+                                          if (rawValue) {
+                                            const formattedValue =
+                                              new Intl.NumberFormat(
+                                                "no-NO"
+                                              ).format(Number(rawValue));
+                                            setFieldValue(
+                                              "equityAmount",
+                                              formattedValue
+                                            );
+                                          } else {
+                                            setFieldValue("equityAmount", "");
+                                          }
+                                        }}
+                                      />
+                                      {touched.equityAmount &&
+                                        errors.equityAmount && (
+                                          <p className="text-red text-xs mt-1">
+                                            {errors.equityAmount}
+                                          </p>
+                                        )}
+                                    </div>
+                                    {/* <p className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer">
                                     Legg til
                                   </p> */}
-                                  <p
-                                    className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer"
-                                    onClick={() => {
-                                      setSkipSharingDataValidation(true);
-                                      setTimeout(() => {
-                                        document
-                                          .querySelector("form")
-                                          ?.requestSubmit();
-                                      }, 0);
-                                    }}
-                                  >
-                                    Legg til
+                                    <p
+                                      className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer"
+                                      onClick={() => {
+                                        setSkipSharingDataValidation(true);
+                                        setTimeout(() => {
+                                          document
+                                            .querySelector("form")
+                                            ?.requestSubmit();
+                                        }, 0);
+                                      }}
+                                    >
+                                      Legg til
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center justify-between gap-1">
+                                  <p className="text-black text-xs md:text-sm font-bold">
+                                    Lånebeløp
                                   </p>
+                                  <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
+                                    {(() => {
+                                      const data: any =
+                                        formattedNumber +
+                                        formattedNumberOfByggekostnader;
+
+                                      if (values.equityAmount) {
+                                        const equityAmount: any =
+                                          typeof values.equityAmount ===
+                                          "number"
+                                            ? values.equityAmount
+                                            : values.equityAmount.replace(
+                                                /\s/g,
+                                                ""
+                                              );
+                                        const totalData: any =
+                                          Number(data) - Number(equityAmount);
+
+                                        return formatCurrency(totalData);
+                                      } else {
+                                        return formatCurrency(
+                                          formattedNumber +
+                                            formattedNumberOfByggekostnader
+                                        );
+                                      }
+                                    })()}
+                                  </h4>
                                 </div>
                               </div>
-                              <div className="flex items-center justify-between gap-1">
-                                <p className="text-black text-xs md:text-sm font-bold">
-                                  Lånebeløp
-                                </p>
-                                <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
-                                  {(() => {
-                                    const data: any =
-                                      formattedNumber +
-                                      formattedNumberOfByggekostnader;
-
-                                    if (values.equityAmount) {
-                                      const equityAmount: any =
-                                        typeof values.equityAmount === "number"
-                                          ? values.equityAmount
-                                          : values.equityAmount.replace(
-                                              /\s/g,
-                                              ""
-                                            );
-                                      const totalData: any =
-                                        Number(data) - Number(equityAmount);
-
-                                      return formatCurrency(totalData);
-                                    } else {
-                                      return formatCurrency(
-                                        formattedNumber +
-                                          formattedNumberOfByggekostnader
-                                      );
-                                    }
-                                  })()}
-                                </h4>
+                              <div className="hidden lg:block">
+                                <LeadsBox isShow={true} col={true} />
                               </div>
                             </div>
-                            <div className="hidden lg:block">
-                              <LeadsBox isShow={true} col={true} />
-                            </div>
-                          </div>
-                          <div className="w-full lg:w-[50%]">
-                            <div
-                              className="rounded-[8px] border border-[#DCDFEA]"
-                              style={{
-                                boxShadow:
-                                  "0px 2px 4px -2px #1018280F, 0px 4px 8px -2px #1018281A",
-                              }}
-                            >
-                              <div className="flex items-center justify-between border-b border-[#DCDFEA] p-3 md:p-5 gap-1">
-                                <h3 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
-                                  Søk byggelån{" "}
-                                  {(() => {
-                                    const data: any =
-                                      totalCustPris +
-                                      Number(
-                                        Husdetaljer?.pris?.replace(/\s/g, "")
-                                      );
-
-                                    if (values.equityAmount) {
-                                      const equityAmount: any =
-                                        typeof values.equityAmount === "number"
-                                          ? values.equityAmount
-                                          : values.equityAmount.replace(
-                                              /\s/g,
-                                              ""
-                                            );
-                                      const totalData: any =
-                                        Number(data) - Number(equityAmount);
-
-                                      return formatCurrency(totalData);
-                                    } else {
-                                      return formatCurrency(
+                            <div className="w-full lg:w-[50%]">
+                              <div
+                                className="rounded-[8px] border border-[#DCDFEA]"
+                                style={{
+                                  boxShadow:
+                                    "0px 2px 4px -2px #1018280F, 0px 4px 8px -2px #1018281A",
+                                }}
+                              >
+                                <div className="flex items-center justify-between border-b border-[#DCDFEA] p-3 md:p-5 gap-1">
+                                  <h3 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
+                                    Søk byggelån{" "}
+                                    {(() => {
+                                      const data: any =
                                         totalCustPris +
-                                          Number(
-                                            Husdetaljer?.pris?.replace(
-                                              /\s/g,
-                                              ""
+                                        Number(
+                                          Husdetaljer?.pris?.replace(/\s/g, "")
+                                        );
+
+                                      if (values.equityAmount) {
+                                        const equityAmount: any =
+                                          typeof values.equityAmount ===
+                                          "number"
+                                            ? values.equityAmount
+                                            : values.equityAmount.replace(
+                                                /\s/g,
+                                                ""
+                                              );
+                                        const totalData: any =
+                                          Number(data) - Number(equityAmount);
+
+                                        return formatCurrency(totalData);
+                                      } else {
+                                        return formatCurrency(
+                                          totalCustPris +
+                                            Number(
+                                              Husdetaljer?.pris?.replace(
+                                                /\s/g,
+                                                ""
+                                              )
                                             )
-                                          )
-                                      );
-                                    }
-                                  })()}{" "}
-                                  hos:
-                                </h3>
-                                <Image
-                                  fetchPriority="auto"
-                                  src={Ic_spareBank}
-                                  alt="icon"
-                                  className="w-[90px] sm:w-[119px] h-[30px]"
-                                />
-                              </div>
-                              {!values.helpWithFinancing && (
-                                <div className="p-3 md:p-5 border-b border-[#DCDFEA]">
-                                  <div className="flex flex-col sm:flex-row gap-2 sm:items-center justify-between">
+                                        );
+                                      }
+                                    })()}{" "}
+                                    hos:
+                                  </h3>
+                                  <Image
+                                    fetchPriority="auto"
+                                    src={Ic_spareBank}
+                                    alt="icon"
+                                    className="w-[90px] sm:w-[119px] h-[30px]"
+                                  />
+                                </div>
+                                {!values.helpWithFinancing && (
+                                  <div className="p-3 md:p-5 border-b border-[#DCDFEA]">
+                                    <div className="flex flex-col sm:flex-row gap-2 sm:items-center justify-between">
+                                      <div>
+                                        <label className="flex items-center container">
+                                          <Field
+                                            type="checkbox"
+                                            name="sharingData"
+                                          />
+
+                                          <span
+                                            className="checkmark checkmark_primary"
+                                            style={{ margin: "2px" }}
+                                          ></span>
+
+                                          <div className="text-secondary2 text-xs md:text-sm">
+                                            Jeg samtykker til{" "}
+                                            <span className="text-[#7839EE] font-bold">
+                                              deling av data
+                                            </span>{" "}
+                                            med{" "}
+                                            <span className="text-secondary2 font-bold">
+                                              SpareBank1 Hallingdal Valdres.
+                                            </span>
+                                          </div>
+                                        </label>
+                                        {touched.sharingData &&
+                                          errors.sharingData && (
+                                            <p className="text-red text-xs mt-1">
+                                              {errors.sharingData}
+                                            </p>
+                                          )}
+                                      </div>
+                                      <Button
+                                        text="Send inn lånesøknad"
+                                        className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-medium desktop:px-[20px] relative desktop:py-[16px]"
+                                        type="submit"
+                                      />
+                                    </div>
+                                    <div className="flex items-start gap-2 md:gap-3 mt-3 md:mt-5">
+                                      <Image
+                                        fetchPriority="auto"
+                                        src={Ic_Info_gray}
+                                        alt="icon"
+                                      />
+                                      <p className="text-[#667085] text-xs md:text-sm">
+                                        Lån for bygging av bolig/fritidsbolig.
+                                        Lånet vil bli konvertert til et
+                                        nedbetalingslån ved ferdigstillelse av
+                                        bolig/fritidsbolig. Rentesatsen vil
+                                        variere basert på en samlet vurdering av
+                                        betalingsevne og sikkerhet.
+                                      </p>
+                                    </div>
+                                  </div>
+                                )}
+                                <div className="w-full"></div>
+                                <div className="p-3 md:p-5">
+                                  <div className="flex items-center justify-between">
                                     <div>
                                       <label className="flex items-center container">
                                         <Field
                                           type="checkbox"
-                                          name="sharingData"
+                                          name="helpWithFinancing"
                                         />
 
                                         <span
@@ -458,93 +519,38 @@ const Finansiering: React.FC<{
                                           style={{ margin: "2px" }}
                                         ></span>
 
-                                        <div className="text-secondary2 text-xs md:text-sm">
-                                          Jeg samtykker til{" "}
-                                          <span className="text-[#7839EE] font-bold">
-                                            deling av data
-                                          </span>{" "}
-                                          med{" "}
-                                          <span className="text-secondary2 font-bold">
-                                            SpareBank1 Hallingdal Valdres.
-                                          </span>
+                                        <div className="text-darkBlack text-xs md:text-sm">
+                                          Jeg ønsker ikke hjelp med finansiering
                                         </div>
                                       </label>
-                                      {touched.sharingData &&
-                                        errors.sharingData && (
+                                      {touched.helpWithFinancing &&
+                                        errors.helpWithFinancing && (
                                           <p className="text-red text-xs mt-1">
-                                            {errors.sharingData}
+                                            {errors.helpWithFinancing}
                                           </p>
                                         )}
                                     </div>
-                                    <Button
-                                      text="Send inn lånesøknad"
-                                      className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-medium desktop:px-[20px] relative desktop:py-[16px]"
-                                      type="submit"
-                                    />
-                                  </div>
-                                  <div className="flex items-start gap-2 md:gap-3 mt-3 md:mt-5">
-                                    <Image
-                                      fetchPriority="auto"
-                                      src={Ic_Info_gray}
-                                      alt="icon"
-                                    />
-                                    <p className="text-[#667085] text-xs md:text-sm">
-                                      Lån for bygging av bolig/fritidsbolig.
-                                      Lånet vil bli konvertert til et
-                                      nedbetalingslån ved ferdigstillelse av
-                                      bolig/fritidsbolig. Rentesatsen vil
-                                      variere basert på en samlet vurdering av
-                                      betalingsevne og sikkerhet.
-                                    </p>
-                                  </div>
-                                </div>
-                              )}
-                              <div className="w-full"></div>
-                              <div className="p-3 md:p-5">
-                                <div className="flex items-center justify-between">
-                                  <div>
-                                    <label className="flex items-center container">
-                                      <Field
-                                        type="checkbox"
-                                        name="helpWithFinancing"
+                                    {values.helpWithFinancing && (
+                                      <Button
+                                        text="Send inn lånesøknad"
+                                        className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-medium desktop:px-[20px] relative desktop:py-[16px]"
+                                        type="submit"
                                       />
-
-                                      <span
-                                        className="checkmark checkmark_primary"
-                                        style={{ margin: "2px" }}
-                                      ></span>
-
-                                      <div className="text-darkBlack text-xs md:text-sm">
-                                        Jeg ønsker ikke hjelp med finansiering
-                                      </div>
-                                    </label>
-                                    {touched.helpWithFinancing &&
-                                      errors.helpWithFinancing && (
-                                        <p className="text-red text-xs mt-1">
-                                          {errors.helpWithFinancing}
-                                        </p>
-                                      )}
+                                    )}
                                   </div>
-                                  {values.helpWithFinancing && (
-                                    <Button
-                                      text="Send inn lånesøknad"
-                                      className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-medium desktop:px-[20px] relative desktop:py-[16px]"
-                                      type="submit"
-                                    />
-                                  )}
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="block lg:hidden">
-                          <LeadsBox isShow={true} col={true} />
-                        </div>
-                      </Form>
-                    );
-                  }}
-                </Formik>
-              </div>
+                          <div className="block lg:hidden">
+                            <LeadsBox isShow={true} col={true} />
+                          </div>
+                        </Form>
+                      );
+                    }}
+                  </Formik>
+                </div>
+              )}
             </SideSpaceContainer>
           </div>
 

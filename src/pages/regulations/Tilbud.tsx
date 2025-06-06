@@ -192,6 +192,7 @@ const Tilbud: React.FC<{
           <PropertyHouseDetails
             HouseModelData={HouseModelData}
             lamdaDataFromApi={lamdaDataFromApi}
+            CadastreDataFromApi={CadastreDataFromApi}
             supplierData={supplierData}
           />
         </SideSpaceContainer>
@@ -349,62 +350,6 @@ const Tilbud: React.FC<{
                 inkluderer
               </div>
               <div className="p-3 md:p-5 flex flex-col md:flex-row gap-4 lg:gap-8">
-                <div className="w-full md:w-[62%]">
-                  {updatedArray?.length > 0 ? (
-                    <div className="flex flex-col gap-4 md:gap-4 lg:gap-6">
-                      {updatedArray.map((item: any, index: number) => (
-                        <div key={index}>
-                          <h4 className="text-black font-semibold text-sm md:text-base mb-2 md:mb-3">
-                            {item?.navn}
-                          </h4>
-                          <div className="flex flex-col gap-2 md:gap-3">
-                            {item?.Kategorinavn?.map(
-                              (cat: any, catIndex: number) => (
-                                <div key={catIndex}>
-                                  {cat?.produkter?.map(
-                                    (product: any, proIndex: number) => (
-                                      <div
-                                        key={proIndex}
-                                        className="flex gap-2 md:gap-4 w-full"
-                                      >
-                                        <div className="w-[57px] h-[40px] rounded-[4px] overflow-hidden">
-                                          <img
-                                            src={product?.Hovedbilde?.[0]}
-                                            alt="image"
-                                            className="w-full h-full object-cover"
-                                          />
-                                        </div>
-                                        <div className="flex items-center justify-between gap-2 w-full">
-                                          <div>
-                                            <p className="text-secondary2 text-xs md:text-sm">
-                                              {product?.Produktnavn}
-                                            </p>
-                                            <h5 className="text-black text-xs md:text-sm font-medium">
-                                              {cat?.navn}
-                                            </h5>
-                                          </div>
-                                          <div className="text-black font-semibold text-xs md:text-sm">
-                                            {product?.IncludingOffer
-                                              ? "Standard"
-                                              : formatCurrency(product?.pris)}
-                                          </div>
-                                        </div>
-                                      </div>
-                                    )
-                                  )}
-                                </div>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-center py-3 text-lg">
-                      Du har ikke noe alternativ.
-                    </p>
-                  )}
-                </div>
                 <div className="w-full md:w-[38%] bg-lightPurple2 rounded-lg h-max overflow-hidden">
                   <div className="p-3 md:p-4">
                     <h5 className="text-black font-semibold text-sm md:text-base mb-2 md:mb-[14px]">
@@ -480,6 +425,62 @@ const Tilbud: React.FC<{
                       )}
                     </div>
                   </div>
+                </div>
+                <div className="w-full md:w-[62%]">
+                  {updatedArray?.length > 0 ? (
+                    <div className="flex flex-col gap-4 md:gap-4 lg:gap-6">
+                      {updatedArray.map((item: any, index: number) => (
+                        <div key={index}>
+                          <h4 className="text-black font-semibold text-sm md:text-base mb-2 md:mb-3">
+                            {item?.navn}
+                          </h4>
+                          <div className="flex flex-col gap-2 md:gap-3">
+                            {item?.Kategorinavn?.map(
+                              (cat: any, catIndex: number) => (
+                                <div key={catIndex}>
+                                  {cat?.produkter?.map(
+                                    (product: any, proIndex: number) => (
+                                      <div
+                                        key={proIndex}
+                                        className="flex gap-2 md:gap-4 w-full"
+                                      >
+                                        <div className="w-[57px] h-[40px] rounded-[4px] overflow-hidden">
+                                          <img
+                                            src={product?.Hovedbilde?.[0]}
+                                            alt="image"
+                                            className="w-full h-full object-cover"
+                                          />
+                                        </div>
+                                        <div className="flex items-center justify-between gap-2 w-full">
+                                          <div>
+                                            <h5 className="text-black text-xs md:text-sm font-medium">
+                                              {cat?.navn}
+                                            </h5>
+                                            <p className="text-secondary2 text-xs md:text-sm">
+                                              {product?.Produktnavn}
+                                            </p>
+                                          </div>
+                                          <div className="text-black font-semibold text-xs md:text-sm">
+                                            {product?.IncludingOffer
+                                              ? "Standard"
+                                              : formatCurrency(product?.pris)}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    )
+                                  )}
+                                </div>
+                              )
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-center py-3 text-lg">
+                      Du har ikke noe alternativ.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
