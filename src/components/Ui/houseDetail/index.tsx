@@ -317,7 +317,8 @@ const HouseDetailPage: React.FC = () => {
               </div>
 
               <h2 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
-                Film av {husmodellData?.husmodell_name}
+                {/* Film av {husmodellData?.husmodell_name} */}
+                {husmodellData?.TittelVideo}
               </h2>
               <div
                 style={{
