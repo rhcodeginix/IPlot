@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SideSpaceContainer from "@/components/common/sideSpace";
 import Image from "next/image";
+import Ic_close from "@/public/images/Ic_close.svg";
 import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Button from "@/components/common/button";
 import Loader from "@/components/Loader";
@@ -19,6 +20,7 @@ import Ic_spareBank from "@/public/images/Ic_spareBank.svg";
 import Ic_Info_gray from "@/public/images/Ic_Info_gray.svg";
 import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjoner";
 import Prisliste from "../husmodell/Prisliste";
+import Modal from "@/components/common/modal";
 
 const Finansiering: React.FC<{
   handleNext: any;
@@ -31,7 +33,7 @@ const Finansiering: React.FC<{
   loading: any;
   supplierData: any;
 }> = ({
-  handleNext,
+  // handleNext,
   // lamdaDataFromApi,
   // askData,
   // CadastreDataFromApi,
@@ -127,7 +129,15 @@ const Finansiering: React.FC<{
       }, 0)
     : 0;
   const formattedNumberOfByggekostnader = totalPrisOfByggekostnader;
+  const [isOpen, setIsOpen] = useState(false);
 
+  const handlePopup = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  };
   return (
     <div className="relative">
       {loading ? (
@@ -575,13 +585,41 @@ const Finansiering: React.FC<{
                   text="Neste: Oppsummering"
                   className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                   onClick={() => {
-                    handleNext();
+                    // handleNext();
+                    handlePopup();
                   }}
                 />
               </div>
             </SideSpaceContainer>
           </div>
         </>
+      )}
+
+      {isOpen && (
+        <Modal isOpen={true} onClose={handlePopup}>
+          <div className="bg-white p-4 sm:p-5 md:p-6 rounded-lg max-w-2xl w-full relative">
+            <button
+              className="absolute top-3 right-3"
+              onClick={() => setIsOpen(false)}
+            >
+              <Image src={Ic_close} alt="close" />
+            </button>
+
+            <h3 className="text-darkBlack text-center text-base md:text-lg desktop:text-xl font-semibold lg:px-2 mb-4">
+              Takk for at du registrerte deg som interessert i husmodellen vår.{" "}
+              Noen fra teamet vårt vil kontakte deg.
+            </h3>
+            <div className="flex justify-center">
+              <Button
+                text="Ok"
+                className="border border-primary bg-primary hover:bg-[#1E5F5C] hover:border-[#1E5F5C] focus:bg-[#003A37] focus:border-[#003A37] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                onClick={() => {
+                  router.push("/");
+                }}
+              />
+            </div>
+          </div>
+        </Modal>
       )}
     </div>
   );
