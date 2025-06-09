@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Img_vipps_login from "@/public/images/Img_vipps_login.png";
 import * as Yup from "yup";
-import { Formik, Form } from "formik";
+import { Formik, Form } from "formik";import Ic_close from "@/public/images/Ic_close.svg";
+
 import Loader from "@/components/Loader";
 import LoginForm from "../login/loginForm";
 import { useRouter } from "next/router";
@@ -108,18 +109,27 @@ const TomtHusmodell: React.FC<{
 
       {isPopupOpen && !loginUser && (
         <div
-          className="fixed top-0 left-0 flex justify-center items-center h-full w-full"
+          className="fixed top-0 left-0 flex justify-center items-center h-full w-full bg-black bg-opacity-50"
           style={{
             zIndex: 999999,
           }}
         >
           <div
-            className="bg-white mx-4 p-4 md:p-8 rounded-[8px] w-full max-w-[787px]"
+            className="bg-white mx-4 p-4 md:p-8 rounded-[8px] w-full max-w-[787px] relative"
             style={{
               boxShadow:
                 "0px 8px 8px -4px rgba(16, 24, 40, 0.031), 0px 20px 24px -4px rgba(16, 24, 40, 0.078)",
             }}
           >
+            <button
+              className="absolute top-2 md:top-3 right-0 md:right-3"
+              onClick={() => {
+                setIsPopupOpen(false);
+                router.push("/");
+              }}
+            >
+              <Image src={Ic_close} alt="close" />
+            </button>
             <div className="flex justify-center w-full mb-[46px]">
               <Image src={Img_vipps_login} alt="vipps login" />
             </div>
@@ -128,7 +138,7 @@ const TomtHusmodell: React.FC<{
             </h2>
             <p className="text-black text-xs md:text-sm desktop:text-base text-center mb-4">
               Logg inn for å få tilgang til alt{" "}
-              <span className="font-bold">MinTomt</span> har å by på.
+              <span className="font-bold">MinTomt x Fjellheimhytta</span> har å by på.
             </p>
             <Formik
               initialValues={{ terms_condition: false }}

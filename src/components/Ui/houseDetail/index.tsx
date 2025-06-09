@@ -184,7 +184,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           BRA total (bruksareal)
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.BRATotal} m<sup>2</sup>
                         </td>
                       </tr>
@@ -192,7 +192,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           GUA (Gulvareal):
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.PRom} m<sup>2</sup>
                         </td>
                       </tr>
@@ -200,7 +200,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           Bebygd Areal
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.BebygdAreal} m<sup>2</sup>
                         </td>
                       </tr>
@@ -208,7 +208,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           Lengde
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.Lengde}
                         </td>
                       </tr>
@@ -216,7 +216,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           Bredde
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.Bredde}
                         </td>
                       </tr>
@@ -224,7 +224,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           Soverom
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.Soverom}
                         </td>
                       </tr>
@@ -238,7 +238,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           Bad
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.Bad}
                         </td>
                       </tr>
@@ -246,7 +246,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           Innvendig bod
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.InnvendigBod}
                         </td>
                       </tr>
@@ -254,7 +254,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           Energimerking
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.Energimerking}
                         </td>
                       </tr>
@@ -262,7 +262,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           Tilgjengelig bolig
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {husmodellData?.TilgjengeligBolig}
                         </td>
                       </tr>
@@ -270,7 +270,7 @@ const HouseDetailPage: React.FC = () => {
                         <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
                           Tomtetype
                         </td>
-                        <td className="text-left pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
                           {Array.isArray(husmodellData?.Tomtetype)
                             ? husmodellData.Tomtetype.join(", ")
                             : husmodellData?.Tomtetype}

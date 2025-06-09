@@ -311,14 +311,16 @@ const Tilbud: React.FC<{
               />
             </SideSpaceContainer>
           </div>
-          <div className="hidden lg:block">
-            <PropertyDetails
-              askData={askData}
-              CadastreDataFromApi={CadastreDataFromApi}
-              lamdaDataFromApi={lamdaDataFromApi}
-              HouseModelData={HouseModelData}
-            />
-          </div>
+          {!noPlot && (
+            <div className="hidden lg:block">
+              <PropertyDetails
+                askData={askData}
+                CadastreDataFromApi={CadastreDataFromApi}
+                lamdaDataFromApi={lamdaDataFromApi}
+                HouseModelData={HouseModelData}
+              />
+            </div>
+          )}
           <div className="pt-6 pb-8">
             <SideSpaceContainer>
               <h5 className="text-darkBlack text-base md:text-lg desktop:text-xl font-semibold mb-2 md:mb-4">
