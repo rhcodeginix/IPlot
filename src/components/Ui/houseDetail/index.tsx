@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import Illustrasjoner, {
-  formatCurrency,
-} from "../RegulationHusmodell/Illustrasjoner";
+import Illustrasjoner from // formatCurrency,
+"../RegulationHusmodell/Illustrasjoner";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
 import { useUserLayoutContext } from "@/context/userLayoutContext";
@@ -129,9 +128,9 @@ const HouseDetailPage: React.FC = () => {
         <div>
           <div className="w-full flex flex-col lg:flex-row gap-5 md:gap-6 lg:gap-10 desktop:gap-[60px] mb-8">
             <div className="w-full lg:w-[43%]">
-              <h4 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
+              {/* <h4 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
                 {husmodellData?.husmodell_name}
-              </h4>
+              </h4> */}
               {/* <div className="relative">
                 <img
                   src={husmodellData?.photo}
@@ -144,7 +143,7 @@ const HouseDetailPage: React.FC = () => {
                   className="absolute top-[12px] left-[12px] bg-[#FFFFFFB2] py-2 px-3 flex items-center justify-center rounded-[32px] w-[130px]"
                 />
               </div> */}
-              <div className="my-4 md:my-[20px] flex items-center justify-between">
+              {/* <div className="my-4 md:my-[20px] flex items-center justify-between">
                 <div className="flex flex-col gap-1 md:gap-2">
                   <p className="text-secondary text-sm md:text-base">
                     Pris fra
@@ -175,7 +174,7 @@ const HouseDetailPage: React.FC = () => {
                     bad
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="w-full flex flex-col sm:flex-row gap-4 md:gap-6 desktop:gap-8 mb-8 md:mb-[60px]">
                 <div className="w-full sm:w-1/2 border-t-2 border-b-0 border-l-0 border-r-0 border-purple pt-3 md:pt-4">
                   <table className="table-auto border-0 w-full text-left property_detail_tbl">
