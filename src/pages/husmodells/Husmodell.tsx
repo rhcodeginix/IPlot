@@ -9,6 +9,17 @@ import Img_vipps_login from "@/public/images/Img_vipps_login.png";
 import { Formik, Form } from "formik";
 import LoginForm from "../login/loginForm";
 import VippsButton from "@/components/vipps";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import { db } from "@/config/firebaseConfig";
 
 const Husmodell: React.FC<any> = ({
   handleNext,
@@ -20,6 +31,7 @@ const Husmodell: React.FC<any> = ({
   HouseModelData,
   pris,
   lamdaDataFromApi,
+  user,
   supplierData,
 }) => {
   const [hasMounted, setHasMounted] = useState(false);
@@ -59,6 +71,77 @@ const Husmodell: React.FC<any> = ({
   useEffect(() => {
     setHasMounted(true);
   }, []);
+
+  const id = router.query["husmodellId"];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!id) return;
+
+      const queryParams = new URLSearchParams(window.location.search);
+      const currentLeadId = queryParams.get("leadId");
+      queryParams.delete("leadId");
+
+      try {
+        const [husmodellDocSnap] = await Promise.all([
+          getDoc(doc(db, "house_model", String(id))),
+        ]);
+
+        const finalData = {
+          husmodell: { id: String(id), ...husmodellDocSnap.data() },
+          plot: null,
+        };
+
+        let leadsQueryRef = query(
+          collection(db, "leads"),
+          where("finalData.husmodell.id", "==", String(id)),
+          where("finalData.plot", "==", null)
+        );
+
+        if (user?.id) {
+          leadsQueryRef = query(leadsQueryRef, where("user.id", "==", user.id));
+        }
+
+        const leadsQuerySnapshot: any = await getDocs(leadsQueryRef);
+        if (!leadsQuerySnapshot.empty) {
+          const existingLeadId = leadsQuerySnapshot.docs[0].id;
+          await updateDoc(doc(db, "leads", existingLeadId), {
+            updatedAt: new Date(),
+          });
+
+          if (currentLeadId !== existingLeadId) {
+            queryParams.set("leadId", existingLeadId);
+            router.replace({
+              pathname: router.pathname,
+              query: Object.fromEntries(queryParams),
+            });
+          }
+          return;
+        }
+
+        const newDocRef = await addDoc(collection(db, "leads"), {
+          finalData,
+          ...(user && { user }),
+          Isopt: false,
+          IsoptForBank: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+
+        queryParams.set("leadId", newDocRef.id);
+        router.replace({
+          pathname: router.pathname,
+          query: Object.fromEntries(queryParams),
+        });
+      } catch (error) {
+        console.error("Firestore operation failed:", error);
+      }
+    };
+
+    if (id) {
+      fetchData();
+    }
+  }, [id, user]);
 
   if (!hasMounted) return null;
 

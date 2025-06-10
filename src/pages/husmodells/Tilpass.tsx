@@ -16,6 +16,18 @@ import { Navigation, Pagination } from "swiper/modules";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
 import { useCustomizeHouse } from "@/context/selectHouseContext";
 import { convertCurrencyFormat } from "../housemodell-plot/Tilpass";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import { db } from "@/config/firebaseConfig";
+import { useRouter } from "next/router";
 
 const Tilpass: React.FC<any> = ({
   handleNext,
@@ -25,6 +37,7 @@ const Tilpass: React.FC<any> = ({
   lamdaDataFromApi,
   supplierData,
   pris,
+  user,
 }) => {
   const Huskonfigurator =
     HouseModelData?.Huskonfigurator?.hovedkategorinavn || [];
@@ -215,6 +228,77 @@ const Tilpass: React.FC<any> = ({
     : 0;
 
   const totalPrice = totalCustPris + husPris + extraPris;
+  const router = useRouter();
+
+  const id = router.query["husmodellId"];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!user || !id) return;
+
+      const queryParams = new URLSearchParams(window.location.search);
+      const currentLeadId = queryParams.get("leadId");
+      queryParams.delete("leadId");
+
+      try {
+        const [husmodellDocSnap] = await Promise.all([
+          getDoc(doc(db, "house_model", String(id))),
+        ]);
+
+        const finalData = {
+          husmodell: { id: String(id), ...husmodellDocSnap.data() },
+          plot: null,
+        };
+
+        const leadsQuerySnapshot: any = await getDocs(
+          query(
+            collection(db, "leads"),
+            where("finalData.husmodell.id", "==", String(id)),
+            where("finalData.plot", "==", null),
+            where("user.id", "==", user.id)
+          )
+        );
+
+        if (!leadsQuerySnapshot.empty) {
+          const existingLeadId = leadsQuerySnapshot.docs[0].id;
+          await updateDoc(doc(db, "leads", existingLeadId), {
+            updatedAt: new Date(),
+            ...(user && { user }),
+          });
+
+          if (currentLeadId !== existingLeadId) {
+            queryParams.set("leadId", existingLeadId);
+            router.replace({
+              pathname: router.pathname,
+              query: Object.fromEntries(queryParams),
+            });
+          }
+          return;
+        }
+
+        const newDocRef = await addDoc(collection(db, "leads"), {
+          finalData,
+          ...(user && { user }),
+          Isopt: false,
+          IsoptForBank: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+
+        queryParams.set("leadId", newDocRef.id);
+        router.replace({
+          pathname: router.pathname,
+          query: Object.fromEntries(queryParams),
+        });
+      } catch (error) {
+        console.error("Firestore operation failed:", error);
+      }
+    };
+
+    if (id && user) {
+      fetchData();
+    }
+  }, [id, user]);
 
   if (loading) {
     <Loader />;

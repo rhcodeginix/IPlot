@@ -66,7 +66,6 @@ const SelectPlot: React.FC<{
     if (updatedQuery.gardsnummer) delete updatedQuery.gardsnummer;
     if (updatedQuery.kommunenavn) delete updatedQuery.kommunenavn;
     if (updatedQuery.empty) delete updatedQuery.empty;
-    if (updatedQuery.leadId) delete updatedQuery.leadId;
     if (updatedQuery.plotId) delete updatedQuery.plotId;
     if (updatedQuery.omrade) delete updatedQuery.omrade;
     if (updatedQuery.hasReload) delete updatedQuery.hasReload;

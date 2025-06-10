@@ -19,6 +19,7 @@ import {
   getDoc,
   getDocs,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
@@ -79,7 +80,7 @@ const TomtHouseDetails: React.FC<{
       const queryParams = new URLSearchParams(window.location.search);
       const isEmptyPlot = queryParams.get("empty");
       const currentLeadId = queryParams.get("leadId");
-      queryParams.delete("leadId");
+      // queryParams.delete("leadId");
 
       try {
         let plotCollectionRef = collection(
@@ -120,12 +121,16 @@ const TomtHouseDetails: React.FC<{
           query(
             collection(db, "leads"),
             where("finalData.plot.id", "==", correctPlotId),
-            where("finalData.husmodell.id", "==", id)
+            where("finalData.husmodell.id", "==", id),
+            where("user.id", "==", user.id)
           )
         );
 
         if (!leadsQuerySnapshot.empty) {
           const existingLeadId = leadsQuerySnapshot.docs[0].id;
+          await updateDoc(doc(db, "leads", existingLeadId), {
+            updatedAt: new Date(),
+          });
           if (currentLeadId !== existingLeadId) {
             queryParams.set("leadId", existingLeadId);
             router.replace({
@@ -133,6 +138,22 @@ const TomtHouseDetails: React.FC<{
               query: Object.fromEntries(queryParams),
             });
           }
+          return;
+        }
+
+        if (currentLeadId) {
+          const oldLeadRef = doc(db, "leads", currentLeadId);
+          await updateDoc(oldLeadRef, {
+            finalData,
+            user,
+            updatedAt: new Date(),
+            IsEmptyPlot: isEmptyPlot === "true",
+          });
+
+          router.replace({
+            pathname: router.pathname,
+            query: Object.fromEntries(queryParams),
+          });
           return;
         }
 
@@ -200,7 +221,7 @@ const TomtHouseDetails: React.FC<{
                     if (updatedQuery.kommunenavn)
                       delete updatedQuery.kommunenavn;
                     if (updatedQuery.empty) delete updatedQuery.empty;
-                    if (updatedQuery.leadId) delete updatedQuery.leadId;
+                    // if (updatedQuery.leadId) delete updatedQuery.leadId;
                     delete updatedQuery.plotId;
                     router
                       .replace({ pathname, query: updatedQuery }, undefined, {
@@ -329,7 +350,7 @@ const TomtHouseDetails: React.FC<{
                 if (updatedQuery.gardsnummer) delete updatedQuery.gardsnummer;
                 if (updatedQuery.kommunenavn) delete updatedQuery.kommunenavn;
                 if (updatedQuery.empty) delete updatedQuery.empty;
-                if (updatedQuery.leadId) delete updatedQuery.leadId;
+                // if (updatedQuery.leadId) delete updatedQuery.leadId;
                 delete updatedQuery.plotId;
                 router.replace({ pathname, query: updatedQuery }, undefined, {
                   shallow: true,

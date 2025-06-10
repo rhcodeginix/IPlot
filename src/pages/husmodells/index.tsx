@@ -395,6 +395,7 @@ const HusmodellDetail = () => {
           pris={pris}
           lamdaDataFromApi={lamdaDataFromApi}
           supplierData={supplierData}
+          user={user}
         />
       ),
     },
@@ -409,6 +410,7 @@ const HusmodellDetail = () => {
           lamdaDataFromApi={lamdaDataFromApi}
           supplierData={supplierData}
           pris={pris}
+          user={user}
         />
       ),
     },

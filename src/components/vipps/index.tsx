@@ -3,12 +3,15 @@ import { getVippsLoginUrl } from "@/utils/vippsAuth";
 import Ic_vipps from "@/public/images/Ic_vipps.svg";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
+import Cookies from "js-cookie";
 
 const VippsButton = () => {
   const { toast } = useToast();
 
   const handleVippsLogin = () => {
     try {
+      Cookies.set("vipps_redirect_old_path", window.location.href);
+
       const vippsUrl = getVippsLoginUrl();
 
       toast({
