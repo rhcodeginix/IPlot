@@ -107,7 +107,9 @@ const index = () => {
               }
             } catch (error) {
               console.error("Login error:", error);
-              toast.error("Login failed.");
+              toast.error("Login failed.", {
+                position: "top-right",
+              });
             }
           } else {
             try {
@@ -194,7 +196,9 @@ const index = () => {
                 } catch (error) {
                   console.error("Login error:", error);
                   router.push("/login");
-                  toast.error("Vipps login failed.");
+                  toast.error("Vipps login failed.", {
+                    position: "top-right",
+                  });
                 }
               } else {
                 console.error("Error:", error.message);
