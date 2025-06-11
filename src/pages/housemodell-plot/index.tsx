@@ -20,6 +20,7 @@ import Stepper from "@/components/Ui/stepper";
 import Tilpass from "./Tilpass";
 import Tilbud from "./Tilbud";
 import Finansiering from "./Finansiering";
+import Verdivurdering from "./Verdivurdering";
 // import Oppsummering from "./Oppsummering";
 
 const HusmodellPlot = () => {
@@ -502,6 +503,22 @@ const HusmodellPlot = () => {
         />
       ),
     },
+    {
+      name: "Verdivurdering",
+      component: (
+        <Verdivurdering
+          handleNext={handleNext}
+          lamdaDataFromApi={lamdaDataFromApi}
+          loading={loading}
+          CadastreDataFromApi={CadastreDataFromApi}
+          askData={askData}
+          HouseModelData={HouseModelData}
+          handlePrevious={handlePrevious}
+          pris={pris}
+          supplierData={supplierData}
+        />
+      ),
+    },
     // {
     //   name: "Oppsummering",
     //   component: (
@@ -526,7 +543,7 @@ const HusmodellPlot = () => {
         steps={steps}
         currIndex={currIndex}
         setCurrIndex={setCurrIndex}
-        total={true}
+        // total={true}
       />
       {showErrorPopup && <ErrorPopup />}
     </>

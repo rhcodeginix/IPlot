@@ -23,6 +23,7 @@ import {
 import { useUserLayoutContext } from "@/context/userLayoutContext";
 import Tilpass from "./Tilpass";
 import ApiUtils from "@/api";
+import Verdivurdering from "./Verdivurdering";
 // import TomtHouseDetails from "./tomtDetail";
 
 const HusmodellDetail = () => {
@@ -500,6 +501,22 @@ const HusmodellDetail = () => {
     //     />
     //   ),
     // },
+    {
+      name: "Verdivurdering",
+      component: (
+        <Verdivurdering
+          handleNext={handleNext}
+          lamdaDataFromApi={lamdaDataFromApi}
+          loading={loading}
+          CadastreDataFromApi={CadastreDataFromApi}
+          askData={askData}
+          HouseModelData={HouseModelData}
+          handlePrevious={handlePrevious}
+          pris={pris}
+          supplierData={supplierData}
+        />
+      ),
+    },
   ];
   return (
     <>
@@ -507,7 +524,7 @@ const HusmodellDetail = () => {
         steps={steps}
         currIndex={currIndex}
         setCurrIndex={setCurrIndex}
-        // Style="true"
+        Style="true"
       />
       {showErrorPopup && <ErrorPopup />}
     </>

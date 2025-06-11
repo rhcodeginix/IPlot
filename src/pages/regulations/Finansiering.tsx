@@ -8,7 +8,6 @@ import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
 import toast from "react-hot-toast";
@@ -19,8 +18,8 @@ import Ic_spareBank from "@/public/images/Ic_spareBank.svg";
 import Ic_Info_gray from "@/public/images/Ic_Info_gray.svg";
 import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjoner";
 import Prisliste from "../husmodell/Prisliste";
-import Modal from "@/components/common/modal";
-import Ic_close from "@/public/images/Ic_close.svg";
+import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
+import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
 
 const Finansiering: React.FC<{
   handleNext: any;
@@ -32,11 +31,11 @@ const Finansiering: React.FC<{
   handlePrevious: any;
   supplierData: any;
 }> = ({
-  // handleNext,
-  // lamdaDataFromApi,
-  // askData,
+  handleNext,
+  lamdaDataFromApi,
+  askData,
   loadingLamdaData,
-  // CadastreDataFromApi,
+  CadastreDataFromApi,
   HouseModelData,
   handlePrevious,
   supplierData,
@@ -45,7 +44,6 @@ const Finansiering: React.FC<{
   const { homePage } = router.query;
   const { query } = router;
   const updatedQuery = { ...query };
-  const Husdetaljer = HouseModelData?.Husdetaljer;
 
   const [custHouse, setCusHouse] = useState<any>(null);
   useEffect(() => {
@@ -60,8 +58,7 @@ const Finansiering: React.FC<{
       sum + Number(item?.product?.pris.replace(/\s/g, "")),
     0
   );
-  const [skipSharingDataValidation, setSkipSharingDataValidation] =
-    useState(false);
+  const [skipSharingDataValidation] = useState(false);
 
   const validationSchema = Yup.object().shape({
     equityAmount: Yup.number()
@@ -129,15 +126,17 @@ const Finansiering: React.FC<{
       }, 0)
     : 0;
   const formattedNumberOfByggekostnader = totalPrisOfByggekostnader;
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
-  const handlePopup = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
-  };
+  // const handlePopup = () => {
+  //   if (isOpen) {
+  //     setIsOpen(false);
+  //   } else {
+  //     setIsOpen(true);
+  //   }
+  // };
+  const { noPlot } = router.query;
+
   if (loadingLamdaData) {
     <Loader />;
   }
@@ -229,44 +228,26 @@ const Finansiering: React.FC<{
               Finansiering
             </span>
           </div>
-          {/* <div className="mt-4 md:mt-6">
+          <div className="mt-4 md:mt-6">
             <PropertyHouseDetails
               HouseModelData={HouseModelData}
               lamdaDataFromApi={lamdaDataFromApi}
               supplierData={supplierData}
               CadastreDataFromApi={CadastreDataFromApi}
             />
-          </div> */}
+          </div>
         </SideSpaceContainer>
       </div>
-      {/* <PropertyDetails
-        askData={askData}
-        CadastreDataFromApi={CadastreDataFromApi}
-        lamdaDataFromApi={lamdaDataFromApi}
-        HouseModelData={HouseModelData}
-      /> */}
-
+      {!noPlot && (
+        <PropertyDetails
+          askData={askData}
+          CadastreDataFromApi={CadastreDataFromApi}
+          lamdaDataFromApi={lamdaDataFromApi}
+          HouseModelData={HouseModelData}
+        />
+      )}
       <div className="pt-6 pb-8">
         <SideSpaceContainer>
-          <h5 className="text-darkBlack text-base md:text-lg lg:text-xl font-semibold mb-2 md:mb-4">
-            Finansieringstilbud
-          </h5>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2 md:mb-4">
-            <h5 className="text-darkBlack text-base md:text-lg lg:text-xl font-semibold">
-              {Husdetaljer?.husmodell_name}{" "}
-              <span className="font-normal">fra</span>{" "}
-              {supplierData?.company_name}
-            </h5>
-            <p className="text-secondary text-sm md:text-base lg:text-lg">
-              Pris fra:{" "}
-              <span className="text-black font-semibold">
-                ({formatCurrency(Husdetaljer?.pris)})
-              </span>
-            </p>
-          </div>
-          <div className="mb-4 md:mb-8">
-            <Prisliste husmodellData={HouseModelData?.Prisliste} />
-          </div>
           <div className="my-5 md:my-8">
             <Formik
               initialValues={{
@@ -314,112 +295,50 @@ const Finansiering: React.FC<{
                 return (
                   <Form>
                     <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-[24px]">
-                      <div className="w-full lg:w-[50%]">
-                        <div className="flex flex-col gap-2 md:gap-4">
-                          <div className="flex items-center justify-between gap-1">
-                            <p className="text-black text-xs md:text-sm font-bold">
-                              Totale bygge- og <br /> tomtekostnader (inkl. mva)
-                            </p>
-                            <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
-                              {formatCurrency(
-                                formattedNumber +
-                                  formattedNumberOfByggekostnader
-                              )}
-                            </h4>
-                          </div>
-                          <div className="flex items-center justify-between gap-1">
-                            <p className="text-black text-xs md:text-sm">
-                              Egenkapital
-                            </p>
-                            <div className="flex items-center gap-2 md:gap-4">
-                              <div>
-                                <Field
-                                  id="equityAmount"
-                                  name="equityAmount"
-                                  className={`w-[160px] border border-darkGray focus:outline-none text-black rounded-[8px] py-2 px-4 text-sm ${
-                                    errors.equityAmount && touched.equityAmount
-                                      ? "border-red"
-                                      : "border-darkGray"
-                                  }`}
-                                  placeholder="Enter"
-                                  type="text"
-                                  inputMode="numeric"
-                                  onChange={(e: any) => {
-                                    let rawValue = e.target.value.replace(
-                                      /\D/g,
-                                      ""
-                                    );
-
-                                    if (rawValue) {
-                                      const formattedValue =
-                                        new Intl.NumberFormat("no-NO").format(
-                                          Number(rawValue)
-                                        );
-                                      setFieldValue(
-                                        "equityAmount",
-                                        formattedValue
-                                      );
-                                    } else {
-                                      setFieldValue("equityAmount", "");
-                                    }
-                                  }}
-                                />
-                                {touched.equityAmount &&
-                                  errors.equityAmount && (
-                                    <p className="text-red text-xs mt-1">
-                                      {errors.equityAmount}
-                                    </p>
-                                  )}
-                              </div>
-                              <p
-                                className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] text-sm sm:text-base rounded-[40px] w-max h-[40px] font-medium flex items-center justify-center px-3 md:px-5 cursor-pointer"
-                                onClick={() => {
-                                  setSkipSharingDataValidation(true);
-                                  setTimeout(() => {
-                                    document
-                                      .querySelector("form")
-                                      ?.requestSubmit();
-                                  }, 0);
-                                }}
-                              >
-                                Legg til
-                              </p>
+                      <div className="w-full lg:w-[38%]">
+                        <div className="rounded-lg p-3 md:p-5 bg-lightBlue">
+                          <h3 className="text-black text-base md:text-xl desktop:text-lg font-semibold mb-3">
+                            Trenger du hjelp med finansiering?
+                          </h3>
+                          <p className="text-[#555D5C] text-xs md:text-sm mb-6">
+                            Vi setter deg i kontakt med{" "}
+                            <span className="font-bold">
+                              SpareBank 1 Hallingdal Valdres
+                            </span>
+                            , vår strategiske partner på byggelånsfinansiering.
+                            De kjenner BoligPartner og alle deres husmodeller –
+                            og gir deg rask og trygg hjelp med
+                            finansieringsprosessen.
+                          </p>
+                          <div className="flex items-center gap-4">
+                            <div
+                              onClick={() =>
+                                setFieldValue("helpWithFinancing", true)
+                              }
+                              className={`cursor-pointer bg-white h-[40px] md:h-[48px] rounded-lg py-3 md:py-3.5 px-3 md:px-4 flex items-center justify-center w-1/2 text-xs md:text-sm text-black border-2 ${
+                                values.helpWithFinancing === true
+                                  ? "border-primary font-semibold"
+                                  : "border-transparent"
+                              }`}
+                            >
+                              Få hjelp med finansiering
+                            </div>
+                            <div
+                              onClick={() =>
+                                setFieldValue("helpWithFinancing", false)
+                              }
+                              className={`cursor-pointer bg-white h-[40px] md:h-[48px] rounded-lg py-3 md:py-3.5 px-3 md:px-4 flex items-center justify-center w-1/2 text-xs md:text-sm text-black border-2 ${
+                                values.helpWithFinancing === false
+                                  ? "border-primary font-semibold"
+                                  : "border-transparent"
+                              }`}
+                            >
+                              Nei, jeg ordner det selv
                             </div>
                           </div>
-                          <div className="flex items-center justify-between gap-1">
-                            <p className="text-black text-xs md:text-sm font-bold">
-                              Lånebeløp
-                            </p>
-                            <h4 className="text-black text-sm md:text-base desktop:text-xl font-semibold whitespace-nowrap">
-                              {(() => {
-                                const data: any =
-                                  formattedNumber +
-                                  formattedNumberOfByggekostnader;
-
-                                if (values.equityAmount) {
-                                  const equityAmount: any =
-                                    typeof values.equityAmount === "number"
-                                      ? values.equityAmount
-                                      : values.equityAmount.replace(/\s/g, "");
-                                  const totalData: any =
-                                    Number(data) - Number(equityAmount);
-
-                                  return formatCurrency(totalData);
-                                } else {
-                                  return formatCurrency(
-                                    formattedNumber +
-                                      formattedNumberOfByggekostnader
-                                  );
-                                }
-                              })()}
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="hidden lg:block">
-                          <LeadsBox isShow={true} col={true} />
                         </div>
                       </div>
-                      <div className="w-full lg:w-[50%]">
+                      <div className="w-full lg:w-[62%]">
                         <div
                           className="rounded-[8px] border border-[#DCDFEA]"
                           style={{
@@ -428,138 +347,150 @@ const Finansiering: React.FC<{
                           }}
                         >
                           <div className="flex items-center justify-between border-b border-[#DCDFEA] p-3 md:p-5 gap-1">
-                            <h3 className="text-black text-sm md:text-base desktop:text-xl font-semibold">
-                              Søk byggelån{" "}
-                              {(() => {
-                                const data: any =
-                                  totalCustPris +
-                                  Number(Husdetaljer?.pris?.replace(/\s/g, ""));
-
-                                if (values.equityAmount) {
-                                  const equityAmount: any =
-                                    typeof values.equityAmount === "number"
-                                      ? values.equityAmount
-                                      : values.equityAmount.replace(/\s/g, "");
-                                  const totalData: any =
-                                    Number(data) - Number(equityAmount);
-
-                                  return formatCurrency(totalData);
-                                } else {
-                                  return formatCurrency(
-                                    totalCustPris +
-                                      Number(
-                                        Husdetaljer?.pris?.replace(/\s/g, "")
-                                      )
-                                  );
-                                }
-                              })()}{" "}
-                              hos:
-                            </h3>
+                            <h2 className="text-xs md:text-sm desktop:text-base text-black font-semibold">
+                              Beregn ditt byggelån hos:
+                            </h2>
                             <Image
                               fetchPriority="auto"
                               src={Ic_spareBank}
                               alt="icon"
-                              className="w-[90px] sm:w-[119px] h-[30px]"
+                              className="w-[90px] sm:w-auto sm:h-auto h-[30px]"
                             />
                           </div>
-                          {!values.helpWithFinancing && (
-                            <div className="p-3 md:p-5 border-b border-[#DCDFEA]">
-                              <div className="flex flex-col sm:flex-row gap-2 sm:items-center justify-between">
+                          <div className="flex flex-col gap-2 md:gap-4 p-3 md:p-5">
+                            <div className="flex items-center justify-between gap-1">
+                              <p className="text-[#555D5C] text-xs md:text-sm font-medium">
+                                Totale bygge- og tomtekostnader (inkl. mva)
+                              </p>
+                              <h4 className="text-[#555D5C] text-xs md:text-sm desktop:text-base whitespace-nowrap">
+                                {formatCurrency(
+                                  formattedNumber +
+                                    formattedNumberOfByggekostnader
+                                )}
+                              </h4>
+                            </div>
+                            <div className="flex items-center justify-between gap-1">
+                              <p className="text-[#555D5C] text-xs md:text-sm">
+                                <span className="font-bold">
+                                  Din egenkapital
+                                </span>{" "}
+                                <i>
+                                  Hvor mye egenkapital planlegger du å bruke?
+                                </i>
+                              </p>
+                              <div className="flex items-center gap-2 md:gap-4">
                                 <div>
-                                  <label className="flex items-center container">
-                                    <Field type="checkbox" name="sharingData" />
+                                  <Field
+                                    id="equityAmount"
+                                    name="equityAmount"
+                                    className={`w-[160px] border border-darkGray focus:outline-none text-black rounded-[8px] py-2 px-4 text-sm ${
+                                      errors.equityAmount &&
+                                      touched.equityAmount
+                                        ? "border-red"
+                                        : "border-darkGray"
+                                    }`}
+                                    placeholder="Enter"
+                                    type="text"
+                                    inputMode="numeric"
+                                    onChange={(e: any) => {
+                                      let rawValue = e.target.value.replace(
+                                        /\D/g,
+                                        ""
+                                      );
 
-                                    <span
-                                      className="checkmark checkmark_primary"
-                                      style={{ margin: "2px" }}
-                                    ></span>
-
-                                    <div className="text-secondary2 text-xs md:text-sm">
-                                      Jeg samtykker til{" "}
-                                      <span className="text-[#7839EE] font-bold">
-                                        deling av data
-                                      </span>{" "}
-                                      med{" "}
-                                      <span className="text-secondary2 font-bold">
-                                        SpareBank1 Hallingdal Valdres.
-                                      </span>
-                                    </div>
-                                  </label>
-                                  {touched.sharingData &&
-                                    errors.sharingData && (
+                                      if (rawValue) {
+                                        const formattedValue =
+                                          new Intl.NumberFormat("no-NO").format(
+                                            Number(rawValue)
+                                          );
+                                        setFieldValue(
+                                          "equityAmount",
+                                          formattedValue
+                                        );
+                                      } else {
+                                        setFieldValue("equityAmount", "");
+                                      }
+                                    }}
+                                  />
+                                  {touched.equityAmount &&
+                                    errors.equityAmount && (
                                       <p className="text-red text-xs mt-1">
-                                        {errors.sharingData}
+                                        {errors.equityAmount}
                                       </p>
                                     )}
                                 </div>
-                                <Button
-                                  text="Send inn lånesøknad"
-                                  className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-medium desktop:px-[20px] relative desktop:py-[16px]"
-                                  type="submit"
-                                />
-                              </div>
-                              <div className="flex items-start gap-2 md:gap-3 mt-3 md:mt-5">
-                                <Image
-                                  fetchPriority="auto"
-                                  src={Ic_Info_gray}
-                                  alt="icon"
-                                />
-                                <p className="text-[#667085] text-xs md:text-sm">
-                                  Lån for bygging av bolig/fritidsbolig. Lånet
-                                  vil bli konvertert til et nedbetalingslån ved
-                                  ferdigstillelse av bolig/fritidsbolig.
-                                  Rentesatsen vil variere basert på en samlet
-                                  vurdering av betalingsevne og sikkerhet.
-                                </p>
                               </div>
                             </div>
-                          )}
-                          <div className="w-full"></div>
-                          <div className="p-3 md:p-5">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <label className="flex items-center container">
-                                  <Field
-                                    type="checkbox"
-                                    name="helpWithFinancing"
-                                  />
+                            <div className="flex items-center justify-between gap-1">
+                              <p className="text-[#00231D] text-xs md:text-sm font-semibold">
+                                Estimert byggelån:
+                              </p>
+                              <h4 className="text-[#00231D] text-xs md:text-sm desktop:text-base font-semibold whitespace-nowrap">
+                                {(() => {
+                                  const data: any =
+                                    formattedNumber +
+                                    formattedNumberOfByggekostnader;
 
-                                  <span
-                                    className="checkmark checkmark_primary"
-                                    style={{ margin: "2px" }}
-                                  ></span>
+                                  if (values.equityAmount) {
+                                    const equityAmount: any =
+                                      typeof values.equityAmount === "number"
+                                        ? values.equityAmount
+                                        : values.equityAmount.replace(
+                                            /\s/g,
+                                            ""
+                                          );
+                                    const totalData: any =
+                                      Number(data) - Number(equityAmount);
+                                    const finalData = new Intl.NumberFormat(
+                                      "nb-NO"
+                                    ).format(totalData);
 
-                                  <div className="text-darkBlack text-xs md:text-sm">
-                                    Jeg ønsker ikke hjelp med finansiering
-                                  </div>
-                                </label>
-                                {touched.helpWithFinancing &&
-                                  errors.helpWithFinancing && (
-                                    <p className="text-red text-xs mt-1">
-                                      {errors.helpWithFinancing}
-                                    </p>
-                                  )}
-                              </div>
-                              {values.helpWithFinancing && (
-                                <Button
-                                  text="Send inn lånesøknad"
-                                  className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[40px] font-medium desktop:px-[20px] relative desktop:py-[16px]"
-                                  type="submit"
-                                />
-                              )}
+                                    return formatCurrency(finalData);
+                                  } else {
+                                    return formatCurrency(
+                                      formattedNumber +
+                                        formattedNumberOfByggekostnader
+                                    );
+                                  }
+                                })()}
+                              </h4>
+                            </div>
+                          </div>
+                          <div className="p-3 md:p-5 border-t border-[#DCDFEA]">
+                            <div className="flex items-start gap-2 md:gap-3">
+                              <Image
+                                fetchPriority="auto"
+                                src={Ic_Info_gray}
+                                alt="icon"
+                              />
+                              <p className="text-[#667085] text-xs md:text-sm">
+                                Dette er et lån til bygging av bolig eller
+                                fritidsbolig. <br /> Når boligen står ferdig,
+                                blir lånet automatisk omgjort til et
+                                nedbetalingslån. <br /> Renten fastsettes etter
+                                en totalvurdering av økonomi og sikkerhet.
+                              </p>
                             </div>
                           </div>
                         </div>
+                        <div className="mt-4 flex justify-end text-xs md:text-sm">
+                          🔒 Dine tall deles kun med banken etter ditt samtykke
+                        </div>
                       </div>
-                    </div>
-                    <div className="block lg:hidden">
-                      <LeadsBox isShow={true} col={true} />
                     </div>
                   </Form>
                 );
               }}
             </Formik>
           </div>
+          <div className="mb-4 md:mb-8">
+            <Prisliste husmodellData={HouseModelData?.Prisliste} />
+          </div>
+          <span className="mb-4 md:mb-8 text-xs md:text-sm text-center">
+            📄 Dette er et estimat basert på dagens priser og forutsetter
+            standard leveranse fra BoligPartner. Eventuelle avvik, tillegg eller
+            fratrekk kan påvirke totalsummen.
+          </span>
         </SideSpaceContainer>
       </div>
       <div
@@ -582,33 +513,19 @@ const Finansiering: React.FC<{
             <Button
               text="Neste: Oppsummering"
               className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
-              onClick={async () => {
-                handlePopup();
-                try {
-                  if (leadId) {
-                    await updateDoc(doc(db, "leads", String(leadId)), {
-                      IsoptForBank: true,
-                      updatedAt: new Date(),
-                      Isopt: true,
-                    });
-                    toast.success("Lead Updated successfully.", {
-                      position: "top-right",
-                    });
-                  } else {
-                    toast.error("Lead id not found.", {
-                      position: "top-right",
-                    });
-                  }
-                } catch (error) {
-                  console.error("Firestore update operation failed:", error);
-                }
+              onClick={() => {
+                setTimeout(() => {
+                  document.querySelector("form")?.requestSubmit();
+                }, 0);
+                // handlePopup();
+                handleNext();
               }}
             />
           </div>
         </SideSpaceContainer>
       </div>
 
-      {isOpen && (
+      {/* {isOpen && (
         <Modal isOpen={true} onClose={handlePopup}>
           <div className="bg-white p-4 sm:p-5 md:p-6 rounded-lg max-w-2xl w-full relative">
             <button
@@ -633,7 +550,7 @@ const Finansiering: React.FC<{
             </div>
           </div>
         </Modal>
-      )}
+      )} */}
     </div>
   );
 };

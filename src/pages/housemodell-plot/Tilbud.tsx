@@ -14,6 +14,10 @@ import "swiper/css/pagination";
 import { addDaysToDate } from "@/components/Ui/stepperUi/productDetailWithPrice";
 import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
 import NorkartMap from "@/components/map";
+import { useRouter } from "next/router";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "@/config/firebaseConfig";
+import { toast } from "react-hot-toast";
 
 const Tilbud: React.FC<{
   handleNext: any;
@@ -106,6 +110,8 @@ const Tilbud: React.FC<{
       setUpdatedArray(mergedArray);
     }
   }, [Huskonfigurator, custHouse]);
+  const router = useRouter();
+  const leadId = router.query["leadId"];
 
   if (loadingLamdaData) {
     <Loader />;
@@ -488,8 +494,26 @@ const Tilbud: React.FC<{
               <Button
                 text="Send til Fjellheimhytta"
                 className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
-                onClick={() => {
+                onClick={async () => {
                   handleNext();
+                  try {
+                    if (leadId) {
+                      await updateDoc(doc(db, "leads", String(leadId)), {
+                        IsoptForBank: true,
+                        updatedAt: new Date(),
+                        Isopt: true,
+                      });
+                      toast.success("Lead Updated successfully.", {
+                        position: "top-right",
+                      });
+                    } else {
+                      toast.error("Lead id not found.", {
+                        position: "top-right",
+                      });
+                    }
+                  } catch (error) {
+                    console.error("Firestore update operation failed:", error);
+                  }
                 }}
               />
             </div>

@@ -26,6 +26,7 @@ import toast from "react-hot-toast";
 // import * as XLSX from "xlsx";
 import Tilpass from "./Tilpass";
 import HouseModelSingleProperty from "@/components/Ui/regulation/houseModelSingleProperty";
+import Verdivurdering from "./Verdivurdering";
 
 const Regulations = () => {
   const [currIndex, setCurrIndex] = useState<number | null>(null);
@@ -1121,6 +1122,21 @@ const Regulations = () => {
     //     />
     //   ),
     // },
+    {
+      name: "Verdivurdering",
+      component: (
+        <Verdivurdering
+          handleNext={handleNext}
+          lamdaDataFromApi={lamdaDataFromApi}
+          loading={loading}
+          CadastreDataFromApi={CadastreDataFromApi}
+          askData={askData}
+          HouseModelData={HouseModelData}
+          handlePrevious={handlePrevious}
+          supplierData={supplierData}
+        />
+      ),
+    },
   ];
 
   return (
