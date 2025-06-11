@@ -622,7 +622,7 @@ const Tilpass: React.FC<any> = ({
           >
             <SideSpaceContainer>
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                <div className="flex gap-6 w-max">
+                <div className="hidden md:flex gap-6 w-max">
                   <div>
                     <p className="text-secondary text-xs md:text-sm mb-1">
                       Dine tillegg

@@ -312,7 +312,7 @@ const Verdivurdering: React.FC<{
                     kontaktet av en hyttekonsulent
                   </span>
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
+                <div className="flex flex-row gap-4 sm:items-center">
                   <Button
                     text="Tilbake"
                     className="border-2 border-primary text-primary hover:border-[#1E5F5C] hover:text-[#1E5F5C] focus:border-[#003A37] focus:text-[#003A37] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
