@@ -124,7 +124,7 @@ const PropertyHouseDetails: React.FC<{
                       {
                         CadastreDataFromApi.presentationAddressApi.response
                           ?.item?.formatted?.line1
-                      }
+                      }{" "}
                       {
                         CadastreDataFromApi.presentationAddressApi.response
                           ?.item?.formatted?.line2

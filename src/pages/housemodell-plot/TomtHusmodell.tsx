@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Img_vipps_login from "@/public/images/Img_vipps_login.png";
 import * as Yup from "yup";
-import { Formik, Form } from "formik";import Ic_close from "@/public/images/Ic_close.svg";
+import { Formik, Form } from "formik";
+import Ic_close from "@/public/images/Ic_close.svg";
 
 import Loader from "@/components/Loader";
 import LoginForm from "../login/loginForm";
@@ -26,6 +27,9 @@ const TomtHusmodell: React.FC<{
   HouseModelData: any;
   supplierData: any;
   pris: any;
+  setAdditionalData: any;
+  setLamdaDataFromApi: any;
+  setCadastreDataFromApi: any;
 }> = ({
   handleNext,
   lamdaDataFromApi,
@@ -41,6 +45,9 @@ const TomtHusmodell: React.FC<{
   HouseModelData,
   supplierData,
   pris,
+  setAdditionalData,
+  setLamdaDataFromApi,
+  setCadastreDataFromApi,
 }) => {
   const router = useRouter();
 
@@ -95,7 +102,11 @@ const TomtHusmodell: React.FC<{
           pris={pris}
         />
       ) : (
-        <Belop />
+        <Belop
+          setAdditionalData={setAdditionalData}
+          setLamdaDataFromApi={setLamdaDataFromApi}
+          setCadastreDataFromApi={setCadastreDataFromApi}
+        />
       )}
       {!loginUser && (
         <div
@@ -138,7 +149,8 @@ const TomtHusmodell: React.FC<{
             </h2>
             <p className="text-black text-xs md:text-sm desktop:text-base text-center mb-4">
               Logg inn for å få tilgang til alt{" "}
-              <span className="font-bold">MinTomt x Fjellheimhytta</span> har å by på.
+              <span className="font-bold">MinTomt x Fjellheimhytta</span> har å
+              by på.
             </p>
             <Formik
               initialValues={{ terms_condition: false }}

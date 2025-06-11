@@ -52,7 +52,8 @@ const HusmodellFilterSection: React.FC<{
   setFormData: any;
   formData: FormDataType;
   maxRangeData: number;
-}> = ({ setFormData, formData, maxRangeData }) => {
+  minRangeData: number;
+}> = ({ setFormData, formData, maxRangeData, minRangeData }) => {
   const [openIndex, setOpenIndex] = useState<string[]>([
     "Eiendomstype",
     "Type husmodell",
@@ -376,7 +377,7 @@ const HusmodellFilterSection: React.FC<{
                       }}
                       valueLabelDisplay="on"
                       aria-labelledby="range-slider"
-                      min={0}
+                      min={minRangeData}
                       max={maxRangeData}
                       step={100}
                     />

@@ -449,6 +449,9 @@ const HusmodellPlot = () => {
           HouseModelData={HouseModelData}
           supplierData={supplierData}
           pris={pris}
+          setAdditionalData={setAdditionalData}
+          setLamdaDataFromApi={setLamdaDataFromApi}
+          setCadastreDataFromApi={setCadastreDataFromApi}
         />
       ),
     },

@@ -19,7 +19,11 @@ import { Settings2, X } from "lucide-react";
 import { Drawer } from "@mui/material";
 import Loading from "@/components/Loading";
 
-const Belop: React.FC = () => {
+const Belop: React.FC<{
+  setAdditionalData: any;
+  setLamdaDataFromApi: any;
+  setCadastreDataFromApi: any;
+}> = ({ setAdditionalData, setLamdaDataFromApi, setCadastreDataFromApi }) => {
   const router: any = useRouter();
   const [HouseModelProperty, setHouseModelProperty] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -351,6 +355,12 @@ const Belop: React.FC = () => {
       if (navbar) navbar.style.zIndex = "9999";
     }
   }, [openDrawer]);
+
+  useEffect(() => {
+    setAdditionalData(null);
+    setLamdaDataFromApi(null);
+    setCadastreDataFromApi(null);
+  }, []);
 
   return (
     <>

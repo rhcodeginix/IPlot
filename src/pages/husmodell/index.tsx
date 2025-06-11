@@ -11,19 +11,21 @@ import { Drawer } from "@mui/material";
 const HusmodellPropertyPage: React.FC = () => {
   const [HouseModelProperty, setHouseModelProperty] = useState([]);
   const [maxRangeData, setMaxRangeData] = useState<number>(0);
+  const [minRangeData, setMinRangeData] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     address: "",
     Eiendomstype: [] as string[],
     TypeHusmodell: [] as string[],
     AntallSoverom: [] as string[],
-    minRangeForHusmodell: 0,
+    minRangeForHusmodell: minRangeData,
     maxRangeForHusmodell: maxRangeData,
   });
   const [total, setTotal] = useState();
 
   useEffect(() => {
     const storedMaxPrice = sessionStorage.getItem("maxHousePrice");
+    const storedMinPrice = sessionStorage.getItem("minHousePrice");
     if (storedMaxPrice) {
       setMaxRangeData(parseInt(storedMaxPrice, 10));
       setFormData((prev) => ({
@@ -31,7 +33,14 @@ const HusmodellPropertyPage: React.FC = () => {
         maxRangeForHusmodell: parseInt(storedMaxPrice, 10),
       }));
     }
-  }, []);
+    if (storedMinPrice) {
+      setMinRangeData(parseInt(storedMinPrice, 10));
+      setFormData((prev) => ({
+        ...prev,
+        minRangeForHusmodell: parseInt(storedMinPrice, 10),
+      }));
+    }
+  }, [maxRangeData, minRangeData]);
 
   const [kommune, setKommune] = useState<any>(null);
   useEffect(() => {
@@ -68,9 +77,16 @@ const HusmodellPropertyPage: React.FC = () => {
             parseInt(house?.Husdetaljer?.pris.replace(/\s/g, ""), 10)
           )
         );
+        const minHousePrice = Math.min(
+          ...data?.map((house: any) =>
+            parseInt(house?.Husdetaljer?.pris.replace(/\s/g, ""), 10)
+          )
+        );
 
         sessionStorage.setItem("maxHousePrice", maxHousePrice.toString());
+        sessionStorage.setItem("minHousePrice", minHousePrice.toString());
         setMaxRangeData(maxHousePrice);
+        setMinRangeData(minHousePrice);
       } catch (error) {
         console.error("Error fetching max price:", error);
       }
@@ -213,6 +229,7 @@ const HusmodellPropertyPage: React.FC = () => {
                   formData={formData}
                   setFormData={setFormData}
                   maxRangeData={maxRangeData}
+                  minRangeData={minRangeData}
                 />
               </div>
             </div>
@@ -261,6 +278,7 @@ const HusmodellPropertyPage: React.FC = () => {
             formData={formData}
             setFormData={setFormData}
             maxRangeData={maxRangeData}
+            minRangeData={minRangeData}
           />
           <div className="absolute top-3 right-2" onClick={toggleDrawer(false)}>
             <X className="h-4 w-4" />
