@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MainSection from "./homepage/mainSection";
 import HowItWorks from "./homepage/howItWorks";
 import Advantages from "./homepage/advantages";
@@ -25,9 +25,11 @@ import {
 } from "firebase/auth";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
+import Loader from "@/components/Loader";
 
 const index = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -42,6 +44,8 @@ const index = () => {
     }
 
     function callApi(code: any) {
+      setLoading(true);
+
       fetch(
         "https://ox9ncjtau6.execute-api.eu-north-1.amazonaws.com/prod/auth",
         {
@@ -110,6 +114,8 @@ const index = () => {
               toast.error("Login failed.", {
                 position: "top-right",
               });
+            } finally {
+              setLoading(false);
             }
           } else {
             try {
@@ -199,6 +205,8 @@ const index = () => {
                   toast.error("Vipps login failed.", {
                     position: "top-right",
                   });
+                } finally {
+                  setLoading(false);
                 }
               } else {
                 console.error("Error:", error.message);
@@ -207,6 +215,8 @@ const index = () => {
                   position: "top-right",
                 });
               }
+            } finally {
+              setLoading(false);
             }
           }
         })
@@ -220,15 +230,26 @@ const index = () => {
     }
   }, []);
   return (
-    <div className="relative">
-      <MainSection />
-      {/* <HouseCabinMould /> */}
-      <HowItWorks />
-      <OurPartners />
-      <Advantages />
-      <Analysis />
-      <Footer />
-    </div>
+    <>
+      <div
+        className="relative"
+        style={{
+          zIndex: 99999,
+        }}
+      >
+        {loading && <Loader />}
+      </div>
+
+      <div className="relative">
+        <MainSection />
+        {/* <HouseCabinMould /> */}
+        <HowItWorks />
+        <OurPartners />
+        <Advantages />
+        <Analysis />
+        <Footer />
+      </div>
+    </>
   );
 };
 
