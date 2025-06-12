@@ -21,10 +21,16 @@ const Plots: React.FC<{
   handlePrevious: any;
   // handleNext: any;
   HouseModelData: any;
+  setLamdaDataFromApi: any;
+  setCadastreDataFromApi: any;
+  setAdditionalData: any;
 }> = ({
   handlePrevious,
   //  handleNext,
   HouseModelData,
+  setLamdaDataFromApi,
+  setCadastreDataFromApi,
+  setAdditionalData,
 }) => {
   const router: any = useRouter();
   const [HouseModelProperty, setHouseModelProperty] = useState([]);
@@ -62,7 +68,11 @@ const Plots: React.FC<{
         : prev.minRangeForPlot,
     }));
   }, []);
-
+  useEffect(() => {
+    setLamdaDataFromApi(null);
+    setCadastreDataFromApi(null);
+    setAdditionalData(null);
+  }, []);
   useEffect(() => {
     const fetchProperty = async () => {
       setIsLoading(true);

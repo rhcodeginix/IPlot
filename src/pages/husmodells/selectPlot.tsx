@@ -14,17 +14,7 @@ const SelectPlot: React.FC<{
   HouseModelData: any;
   setIsPlot: any;
   handleNext: any;
-  setLamdaDataFromApi: any;
-  setCadastreDataFromApi: any;
-  setAdditionalData: any;
-}> = ({
-  HouseModelData,
-  setIsPlot,
-  handleNext,
-  setLamdaDataFromApi,
-  setCadastreDataFromApi,
-  setAdditionalData,
-}) => {
+}> = ({ HouseModelData, setIsPlot, handleNext }) => {
   const { setStoreAddress } = useAddress();
   const router = useRouter();
 
@@ -130,9 +120,6 @@ const SelectPlot: React.FC<{
                         className="p-2 desktop:p-3 flex items-center gap-2 hover:bg-lightGreen cursor-pointer"
                         key={index}
                         onClick={() => {
-                          setLamdaDataFromApi(null);
-                          setCadastreDataFromApi(null);
-                          setAdditionalData(null);
                           localStorage.setItem(
                             "IPlot_Address",
                             JSON.stringify(address)
@@ -180,9 +167,6 @@ const SelectPlot: React.FC<{
               className="border border-primary bg-primary hover:bg-[#7A5AF8] hover:border-[#7A5AF8] focus:bg-[#5925DC] focus:border-[#5925DC] text-white sm:text-base rounded-[40px] w-full h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
               onClick={() => {
                 handleNext();
-                setLamdaDataFromApi(null);
-                setCadastreDataFromApi(null);
-                setAdditionalData(null);
                 router.push(`${router.asPath}&noPlot=true`);
               }}
             />
@@ -208,9 +192,6 @@ const SelectPlot: React.FC<{
               className="border border-primary bg-primary hover:bg-[#7A5AF8] hover:border-[#7A5AF8] focus:bg-[#5925DC] focus:border-[#5925DC] text-white sm:text-base rounded-[40px] w-full h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
               onClick={() => {
                 setIsPlot(true);
-                setLamdaDataFromApi(null);
-                setCadastreDataFromApi(null);
-                setAdditionalData(null);
               }}
             />
           </div>
