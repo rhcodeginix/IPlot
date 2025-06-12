@@ -167,7 +167,7 @@ const SelectPlot: React.FC<{
               <Image src={Img_No_plot} alt="plot" />
               <div>
                 <h4 className="text-[#30374F] font-medium text-sm mb-2">
-                Nei, jeg vil velge tomt senere
+                  Nei, jeg vil velge tomt senere
                 </h4>
                 <h3 className="text-secondary2 text-xs">
                   Velg å gå videre uten tomt om du vil se på tomt på et senere
