@@ -13,12 +13,14 @@ const PropertyHouseDetails: React.FC<{
   supplierData: any;
   pris?: any;
   CadastreDataFromApi?: any;
+  hidden?: any;
 }> = ({
   HouseModelData,
   lamdaDataFromApi,
   supplierData,
   pris,
   CadastreDataFromApi,
+  hidden,
 }) => {
   const router = useRouter();
   const leadId = router.query["leadId"];
@@ -146,26 +148,28 @@ const PropertyHouseDetails: React.FC<{
           </div>
         </div>
 
-        <div className="flex gap-6 w-max">
-          <div>
-            <p className="text-secondary text-xs md:text-sm mb-2">
-              Dine tillegg
-            </p>
-            <h4 className="text-darkBlack font-semibold text-base md:text-lg lg:text-xl">
-              {totalCustPris ? formatCurrency(totalCustPris) : "kr 0"}
-            </h4>
-          </div>
-          <div>
-            <p className="text-secondary text-xs md:text-sm mb-2">
-              Din pris med tilvalg
-            </p>
-            <h4 className="text-darkBlack font-semibold text-base md:text-lg lg:text-xl">
-              {formatCurrency(totalPrice)}
-            </h4>
+        <div className={`${hidden ? "hidden md:block" : "block"}`}>
+          <div className="flex gap-6 w-max">
+            <div>
+              <p className="text-secondary text-xs md:text-sm mb-2">
+                Dine tillegg
+              </p>
+              <h4 className="text-darkBlack font-semibold text-base md:text-lg lg:text-xl">
+                {totalCustPris ? formatCurrency(totalCustPris) : "kr 0"}
+              </h4>
+            </div>
+            <div>
+              <p className="text-secondary text-xs md:text-sm mb-2">
+                Din pris med tilvalg
+              </p>
+              <h4 className="text-darkBlack font-semibold text-base md:text-lg lg:text-xl">
+                {formatCurrency(totalPrice)}
+              </h4>
 
-            <p className="text-secondary text-xs md:text-sm">
-              Inkludert tomtepris ({formatCurrency(pris)})
-            </p>
+              <p className="text-secondary text-xs md:text-sm">
+                Inkludert tomtepris ({formatCurrency(pris)})
+              </p>
+            </div>
           </div>
         </div>
       </div>

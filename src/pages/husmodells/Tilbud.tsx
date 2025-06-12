@@ -474,7 +474,15 @@ const Tilbud: React.FC<{
                       <div className="text-secondary text-sm md:text-base text-center">
                         Tilbudet gjelder til{" "}
                         <span className="text-[#101828] font-semibold">
-                          01.12.2024
+                          {new Date(
+                            new Date().getFullYear(),
+                            11,
+                            31
+                          ).toLocaleDateString("no-NO", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                          })}
                         </span>
                       </div>
                     </div>

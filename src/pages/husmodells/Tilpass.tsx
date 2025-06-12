@@ -338,6 +338,7 @@ const Tilpass: React.FC<any> = ({
                 HouseModelData={HouseModelData}
                 lamdaDataFromApi={lamdaDataFromApi}
                 supplierData={supplierData}
+                hidden={true}
                 pris={pris}
               />
             </SideSpaceContainer>
@@ -621,8 +622,8 @@ const Tilpass: React.FC<any> = ({
             }}
           >
             <SideSpaceContainer>
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                <div className="hidden md:flex gap-6 w-max">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex gap-6 w-max">
                   <div>
                     <p className="text-secondary text-xs md:text-sm mb-1">
                       Dine tillegg
@@ -650,7 +651,7 @@ const Tilpass: React.FC<any> = ({
                     </p>
                   </div>
                 </div>
-                <div className="flex justify-end gap-4 items-center">
+                <div className="flex gap-4 items-center justify-between sm:justify-end">
                   <Button
                     text="Tilbake"
                     className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
