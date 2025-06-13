@@ -15,7 +15,16 @@ import { addDaysToDate } from "@/components/Ui/stepperUi/productDetailWithPrice"
 import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
 import { useRouter } from "next/router";
 import NorkartMap from "@/components/map";
-import { doc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
 import { toast } from "react-hot-toast";
 
@@ -28,6 +37,7 @@ const Tilbud: React.FC<{
   HouseModelData: any;
   handlePrevious: any;
   supplierData: any;
+  user: any;
 }> = ({
   handleNext,
   lamdaDataFromApi,
@@ -37,11 +47,13 @@ const Tilbud: React.FC<{
   HouseModelData,
   handlePrevious,
   supplierData,
+  user,
 }) => {
   const router = useRouter();
-  const { homePage } = router.query;
-  const { query } = router;
-  const updatedQuery = { ...query };
+  const { query: queryy } = router;
+  const updatedQuery = { ...queryy };
+  const { husmodellId, homePage } = router.query;
+  const plotId = router.query["plotId"];
 
   const Huskonfigurator =
     HouseModelData?.Huskonfigurator?.hovedkategorinavn || [];
@@ -115,6 +127,85 @@ const Tilbud: React.FC<{
   }, [Huskonfigurator, custHouse]);
 
   const leadId = router.query["leadId"];
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!user || !plotId || !husmodellId) return;
+
+      const queryParams = new URLSearchParams(window.location.search);
+      const isEmptyPlot = queryParams.get("empty");
+      queryParams.delete("leadId");
+
+      try {
+        const plotDocSnap = await getDoc(doc(db, "empty_plot", String(plotId)));
+        const husmodellDocSnap = await getDoc(
+          doc(db, "house_model", String(husmodellId))
+        );
+
+        const finalData = {
+          plot: { id: plotId, ...plotDocSnap.data() },
+          husmodell: { id: husmodellId, ...husmodellDocSnap.data() },
+        };
+
+        const leadsQuerySnapshot: any = await getDocs(
+          query(
+            collection(db, "leads"),
+            where("finalData.husmodell.id", "==", husmodellId),
+            where("finalData.plot.id", "==", String(plotId)),
+            where("user.id", "==", user.id)
+          )
+        );
+
+        let leadIdToSet: any = "";
+
+        if (!leadsQuerySnapshot.empty) {
+          leadIdToSet = leadsQuerySnapshot.docs[0].id;
+          const data = leadsQuerySnapshot.docs[0].data();
+          if (data.Isopt === true || data.IsoptForBank === true) {
+            const timestamp = leadsQuerySnapshot.docs[0].data().updatedAt;
+
+            const finalDate = new Date(
+              timestamp.seconds * 1000 + timestamp.nanoseconds / 1_000_000
+            );
+            setDate(finalDate);
+          }
+        } else {
+          const docRef = await addDoc(collection(db, "leads"), {
+            finalData,
+            user,
+            Isopt: false,
+            IsoptForBank: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            IsEmptyPlot: isEmptyPlot === "true",
+          });
+          leadIdToSet = docRef.id;
+        }
+
+        queryParams.set("leadId", leadIdToSet);
+        router.replace({
+          pathname: router.pathname,
+          query: Object.fromEntries(queryParams),
+        });
+      } catch (error) {
+        console.error("Firestore operation failed:", error);
+      }
+    };
+
+    if (husmodellId && user && plotId) {
+      fetchData();
+    }
+  }, [plotId, husmodellId, user]);
+
+  const totalByggestartDays = [
+    Husdetaljer?.signConractConstructionDrawing +
+      Husdetaljer?.neighborNotification +
+      Husdetaljer?.appSubmitApprove +
+      Husdetaljer?.constuctionDayStart,
+  ].reduce((acc, curr) => acc + (curr || 0), 0);
+
+  const ByggestartDate = addDaysToDate(date, totalByggestartDays);
 
   if (loadingLamdaData) {
     <Loader />;
@@ -311,10 +402,7 @@ const Tilbud: React.FC<{
                       Estimert byggestart
                     </p>
                     <h5 className="text-black text-sm font-semibold whitespace-nowrap">
-                      {addDaysToDate(
-                        HouseModelData?.createdAt,
-                        Husdetaljer?.appSubmitApprove
-                      )}
+                      {ByggestartDate}
                     </h5>
                   </div>
                   <div className="flex flex-col gap-1 w-max">
@@ -322,7 +410,7 @@ const Tilbud: React.FC<{
                       Estimert Innflytting
                     </p>
                     <h5 className="text-black text-sm font-semibold text-right whitespace-nowrap">
-                      {addDaysToDate(HouseModelData?.createdAt, totalDays)}
+                      {addDaysToDate(date, totalDays)}
                     </h5>
                   </div>
                 </div>
@@ -537,8 +625,10 @@ const Tilbud: React.FC<{
                         IsoptForBank: true,
                         updatedAt: new Date(),
                         Isopt: true,
+                        EstimertByggestart: ByggestartDate,
+                        EstimertInnflytting: addDaysToDate(date, totalDays),
                       });
-                      toast.success("Lead Updated successfully.", {
+                      toast.success("Lead sendt.", {
                         position: "top-right",
                       });
                     } else {

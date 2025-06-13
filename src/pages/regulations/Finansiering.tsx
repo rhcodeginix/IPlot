@@ -58,39 +58,34 @@ const Finansiering: React.FC<{
       sum + Number(item?.product?.pris.replace(/\s/g, "")),
     0
   );
-  const [skipSharingDataValidation] = useState(false);
+  const [value, setValue] = useState<any>(null);
 
   const validationSchema = Yup.object().shape({
     equityAmount: Yup.number()
       .typeError("Must be a number")
       .min(1, "Amount must be greater than 0")
       .optional(),
-    helpWithFinancing: Yup.boolean().optional(),
-    sharingData: Yup.boolean().when(
-      "helpWithFinancing",
-      ([helpWithFinancing], schema) => {
-        return helpWithFinancing || skipSharingDataValidation
-          ? schema.notRequired()
-          : schema
-              .oneOf([true], "You must accept the sharing data")
-              .required("Påkrevd");
-      }
-    ),
+    helpWithFinancing: Yup.boolean()
+      .nullable()
+      .required("This field is required"),
   });
 
   const leadId = router.query["leadId"];
 
   const handleSubmit = async (values: any) => {
     const bankValue = values;
+    if (values.helpWithFinancing === null) {
+      return;
+    }
 
     try {
       if (leadId) {
         await updateDoc(doc(db, "leads", String(leadId)), {
-          IsoptForBank: values.sharingData,
           updatedAt: new Date(),
           bankValue,
         });
         toast.success("Update Lead successfully.", { position: "top-right" });
+        handleNext();
       } else {
         toast.error("Lead id not found.", { position: "top-right" });
       }
@@ -252,11 +247,16 @@ const Finansiering: React.FC<{
             <Formik
               initialValues={{
                 equityAmount: "",
-                sharingData: false,
-                helpWithFinancing: false,
+                helpWithFinancing: null,
               }}
               validationSchema={validationSchema}
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
+              onSubmit={(values, { setTouched }) => {
+                if (values.helpWithFinancing === null) {
+                  setTouched({ helpWithFinancing: true });
+                }
+                handleSubmit(values);
+              }}
             >
               {({ values, setFieldValue, errors, touched }) => {
                 useEffect(() => {
@@ -270,17 +270,12 @@ const Finansiering: React.FC<{
                         const data = docSnap.data();
 
                         const value = data?.bankValue;
-                        if (data && data?.IsoptForBank) {
-                          setFieldValue(
-                            "sharingData",
-                            data?.IsoptForBank || false
-                          );
-                        }
+
                         if (value) {
                           setFieldValue("equityAmount", value?.equityAmount);
                           setFieldValue(
                             "helpWithFinancing",
-                            value?.helpWithFinancing || false
+                            value?.helpWithFinancing
                           );
                         }
                       }
@@ -306,15 +301,16 @@ const Finansiering: React.FC<{
                               SpareBank 1 Hallingdal Valdres
                             </span>
                             , vår strategiske partner på byggelånsfinansiering.
-                            De kjenner BoligPartner og alle deres husmodeller –
-                            og gir deg rask og trygg hjelp med
-                            finansieringsprosessen.
+                            De kjenner {supplierData?.company_name}
+                            og alle deres husmodeller – og gir deg rask og trygg
+                            hjelp med finansieringsprosessen.
                           </p>
                           <div className="flex items-center gap-4">
                             <div
-                              onClick={() =>
-                                setFieldValue("helpWithFinancing", true)
-                              }
+                              onClick={() => {
+                                setFieldValue("helpWithFinancing", true);
+                                setValue(true);
+                              }}
                               className={`cursor-pointer bg-white h-[40px] md:h-[48px] rounded-lg py-3 md:py-3.5 px-3 md:px-4 flex items-center justify-center w-1/2 text-xs md:text-sm text-black border-2 ${
                                 values.helpWithFinancing === true
                                   ? "border-primary font-semibold"
@@ -324,9 +320,10 @@ const Finansiering: React.FC<{
                               Få hjelp med finansiering
                             </div>
                             <div
-                              onClick={() =>
-                                setFieldValue("helpWithFinancing", false)
-                              }
+                              onClick={() => {
+                                setFieldValue("helpWithFinancing", false);
+                                setValue(false);
+                              }}
                               className={`cursor-pointer bg-white h-[40px] md:h-[48px] rounded-lg py-3 md:py-3.5 px-3 md:px-4 flex items-center justify-center w-1/2 text-xs md:text-sm text-black border-2 ${
                                 values.helpWithFinancing === false
                                   ? "border-primary font-semibold"
@@ -336,6 +333,12 @@ const Finansiering: React.FC<{
                               Nei, jeg ordner det selv
                             </div>
                           </div>
+                          {touched.helpWithFinancing &&
+                            errors.helpWithFinancing && (
+                              <div className="text-red text-sm mt-2">
+                                {errors.helpWithFinancing}
+                              </div>
+                            )}
                         </div>
                       </div>
                       <div className="w-full lg:w-[62%]">
@@ -488,8 +491,8 @@ const Finansiering: React.FC<{
           </div>
           <span className="mb-4 md:mb-8 text-xs md:text-sm text-center">
             📄 Dette er et estimat basert på dagens priser og forutsetter
-            standard leveranse fra BoligPartner. Eventuelle avvik, tillegg eller
-            fratrekk kan påvirke totalsummen.
+            standard leveranse fra {supplierData?.company_name}. Eventuelle
+            avvik, tillegg eller fratrekk kan påvirke totalsummen.
           </span>
         </SideSpaceContainer>
       </div>
@@ -511,14 +514,18 @@ const Finansiering: React.FC<{
               }}
             />
             <Button
-              text="Neste: Oppsummering"
+              text={
+                value === false
+                  ? "Send til SpareBank1"
+                  : "Neste: Verdivurdering"
+              }
               className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
               onClick={() => {
                 setTimeout(() => {
                   document.querySelector("form")?.requestSubmit();
                 }, 0);
                 // handlePopup();
-                handleNext();
+                // handleNext();
               }}
             />
           </div>

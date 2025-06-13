@@ -375,7 +375,7 @@ const Oppsummering: React.FC<{
                                   </span>{" "}
                                   med{" "}
                                   <span className="text-black font-medium">
-                                    BoligPartner.
+                                    {supplierData?.company_name}.
                                   </span>
                                 </div>
                               </label>

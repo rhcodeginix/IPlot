@@ -4,7 +4,6 @@ import Img_vipps_login from "@/public/images/Img_vipps_login.png";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import Ic_close from "@/public/images/Ic_close.svg";
-
 import Loader from "@/components/Loader";
 import LoginForm from "../login/loginForm";
 import { useRouter } from "next/router";

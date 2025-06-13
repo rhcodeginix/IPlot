@@ -80,47 +80,23 @@ const TomtHouseDetails: React.FC<{
       const queryParams = new URLSearchParams(window.location.search);
       const isEmptyPlot = queryParams.get("empty");
       const currentLeadId = queryParams.get("leadId");
-      // queryParams.delete("leadId");
+      queryParams.delete("leadId");
 
       try {
-        let plotCollectionRef = collection(
-          db,
-          isEmptyPlot === "true" ? "cabin_plot" : "plot_building"
-        );
-
-        const allLeadsSnapshot = await getDocs(query(plotCollectionRef));
-        if (allLeadsSnapshot.empty) {
-          console.warn("No leads found in the collection.");
-          return;
-        }
-
-        let correctPlotId: string | null = null;
-        for (const doc of allLeadsSnapshot.docs) {
-          if (doc.id) {
-            correctPlotId = doc.id;
-            break;
-          }
-        }
-
-        if (!correctPlotId) {
-          console.error("No valid plotId found.");
-          return;
-        }
-
         const [plotDocSnap, husmodellDocSnap] = await Promise.all([
-          getDoc(doc(plotCollectionRef, correctPlotId)),
+          getDoc(doc(db, "empty_plot", String(plotId))),
           getDoc(doc(db, "house_model", String(id))),
         ]);
 
         const finalData = {
-          plot: { id: correctPlotId, ...plotDocSnap.data() },
+          plot: { id: plotId, ...plotDocSnap.data() },
           husmodell: { id: String(id), ...husmodellDocSnap.data() },
         };
 
         const leadsQuerySnapshot: any = await getDocs(
           query(
             collection(db, "leads"),
-            where("finalData.plot.id", "==", correctPlotId),
+            where("finalData.plot.id", "==", String(plotId)),
             where("finalData.husmodell.id", "==", id),
             where("user.id", "==", user.id)
           )
@@ -128,9 +104,9 @@ const TomtHouseDetails: React.FC<{
 
         if (!leadsQuerySnapshot.empty) {
           const existingLeadId = leadsQuerySnapshot.docs[0].id;
-          await updateDoc(doc(db, "leads", existingLeadId), {
-            updatedAt: new Date(),
-          });
+          // await updateDoc(doc(db, "leads", existingLeadId), {
+          //   updatedAt: new Date(),
+          // });
           if (currentLeadId !== existingLeadId) {
             queryParams.set("leadId", existingLeadId);
             router.replace({
@@ -139,16 +115,22 @@ const TomtHouseDetails: React.FC<{
             });
           }
           return;
-        }
-
-        if (currentLeadId) {
+        } else if (currentLeadId) {
           const oldLeadRef = doc(db, "leads", currentLeadId);
-          await updateDoc(oldLeadRef, {
-            finalData,
-            user,
-            updatedAt: new Date(),
-            IsEmptyPlot: isEmptyPlot === "true",
-          });
+          const leadSnapshot = await getDoc(oldLeadRef);
+          if (leadSnapshot.exists()) {
+            const existingLead = leadSnapshot.data();
+            queryParams.set("leadId", currentLeadId);
+
+            if (existingLead.finalData.plot === null) {
+              await updateDoc(oldLeadRef, {
+                finalData,
+                user,
+                updatedAt: new Date(),
+                IsEmptyPlot: isEmptyPlot === "true",
+              });
+            }
+          }
 
           router.replace({
             pathname: router.pathname,

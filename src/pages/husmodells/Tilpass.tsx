@@ -261,10 +261,12 @@ const Tilpass: React.FC<any> = ({
 
         if (!leadsQuerySnapshot.empty) {
           const existingLeadId = leadsQuerySnapshot.docs[0].id;
-          await updateDoc(doc(db, "leads", existingLeadId), {
-            updatedAt: new Date(),
-            ...(user && { user }),
-          });
+          if (!leadsQuerySnapshot.docs[0].data().user) {
+            await updateDoc(doc(db, "leads", existingLeadId), {
+              updatedAt: new Date(),
+              ...(user && { user }),
+            });
+          }
 
           if (currentLeadId !== existingLeadId) {
             queryParams.set("leadId", existingLeadId);

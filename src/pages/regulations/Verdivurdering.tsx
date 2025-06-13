@@ -46,19 +46,24 @@ const Verdivurdering: React.FC<{
   const { noPlot } = router.query;
 
   const validationSchema = Yup.object().shape({
-    IsEie: Yup.boolean().optional(),
+    IsEie: Yup.boolean().nullable().required("This field is required"),
   });
+  const [value, setValue] = useState<any>(null);
 
   const leadId = router.query["leadId"];
 
   const handleSubmit = async (values: any) => {
+    if (values.helpWithFinancing === null) {
+      return;
+    }
     try {
       if (leadId) {
         await updateDoc(doc(db, "leads", String(leadId)), {
-          IsEie: values.IsEie ?? false,
+          IsEie: values.IsEie,
           updatedAt: new Date(),
         });
         if (values.IsEie == true) {
+          handlePopup();
           toast.success("Lead sent successfully.", { position: "top-right" });
         }
       } else {
@@ -173,17 +178,22 @@ const Verdivurdering: React.FC<{
             />
           )}
 
-          <div className="pt-6 pb-8">
+          <div className="pt-6 pb-8 mb-12">
             <SideSpaceContainer>
               <div className="my-5 md:my-8">
                 <Formik
                   initialValues={{
-                    IsEie: false,
+                    IsEie: null,
                   }}
                   validationSchema={validationSchema}
-                  onSubmit={handleSubmit}
+                  onSubmit={(values, { setTouched }) => {
+                    if (values.IsEie === null) {
+                      setTouched({ IsEie: true });
+                    }
+                    handleSubmit(values);
+                  }}
                 >
-                  {({ values, setFieldValue }) => {
+                  {({ values, setFieldValue, errors, touched }) => {
                     useEffect(() => {
                       (async () => {
                         try {
@@ -195,7 +205,7 @@ const Verdivurdering: React.FC<{
                             const data = docSnap.data();
 
                             if (data && data?.IsEie) {
-                              setFieldValue("IsEie", data?.IsEie || false);
+                              setFieldValue("IsEie", data?.IsEie);
                             }
                           }
                         } catch (error) {
@@ -216,12 +226,16 @@ const Verdivurdering: React.FC<{
                                 <span className="font-bold">
                                   Eiendomsmegling
                                 </span>
-                                , som kjenner BoligPartner og deres husmodeller.
-                                Du får en rask og uforpliktende vurdering.
+                                , som kjenner {supplierData?.company_name} og
+                                deres husmodeller. Du får en rask og
+                                uforpliktende vurdering.
                               </p>
                               <div className="flex items-center gap-4">
                                 <div
-                                  onClick={() => setFieldValue("IsEie", true)}
+                                  onClick={() => {
+                                    setFieldValue("IsEie", true);
+                                    setValue(true);
+                                  }}
                                   className={`cursor-pointer bg-white h-[40px] md:h-[48px] rounded-lg py-3 md:py-3.5 px-3 md:px-4 flex items-center justify-center w-1/2 text-xs md:text-sm text-black border-2 ${
                                     values.IsEie === true
                                       ? "border-primary font-semibold"
@@ -231,7 +245,10 @@ const Verdivurdering: React.FC<{
                                   Få hjelp med finansiering
                                 </div>
                                 <div
-                                  onClick={() => setFieldValue("IsEie", false)}
+                                  onClick={() => {
+                                    setFieldValue("IsEie", false);
+                                    setValue(false);
+                                  }}
                                   className={`cursor-pointer bg-white h-[40px] md:h-[48px] rounded-lg py-3 md:py-3.5 px-3 md:px-4 flex items-center justify-center w-1/2 text-xs md:text-sm text-black border-2 ${
                                     values.IsEie === false
                                       ? "border-primary font-semibold"
@@ -241,6 +258,11 @@ const Verdivurdering: React.FC<{
                                   Nei, jeg ordner det selv
                                 </div>
                               </div>
+                              {touched.IsEie && errors.IsEie && (
+                                <div className="text-red text-sm mt-2">
+                                  {errors.IsEie}
+                                </div>
+                              )}
                             </div>
                           </div>
                           <div className="w-full lg:w-[62%]">
@@ -295,7 +317,7 @@ const Verdivurdering: React.FC<{
           </div>
 
           <div
-            className="sticky bottom-0 bg-white py-4"
+            className="fixed w-full bottom-0 bg-white py-4"
             style={{
               boxShadow:
                 "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",
@@ -315,19 +337,22 @@ const Verdivurdering: React.FC<{
                 <div className="flex flex-row gap-4 sm:items-center">
                   <Button
                     text="Tilbake"
-                    className="border-2 border-primary text-primary hover:border-[#1E5F5C] hover:text-[#1E5F5C] focus:border-[#003A37] focus:text-[#003A37] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
+                    className="border-2 border-primary text-primary hover:border-[#28AA6C] hover:text-[#28AA6C] focus:border-[#09723F] focus:text-[#09723F] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
                     onClick={() => {
                       handlePrevious();
                     }}
                   />
                   <Button
-                    text="Send til Eie Eiendomsmegling"
-                    className="border border-primary bg-primary hover:bg-[#1E5F5C] hover:border-[#1E5F5C] focus:bg-[#003A37] focus:border-[#003A37] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                    text={
+                      value === false
+                        ? "Send til Eie Eiendomsmegling"
+                        : "Fullfør"
+                    }
+                    className="border border-greenBtn bg-greenBtn hover:bg-[#28AA6C] hover:border-[#28AA6C] focus:bg-[#09723F] focus:border-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                     onClick={() => {
                       setTimeout(() => {
                         document.querySelector("form")?.requestSubmit();
                       }, 0);
-                      handlePopup();
                     }}
                   />
                 </div>
@@ -354,7 +379,7 @@ const Verdivurdering: React.FC<{
             <div className="flex justify-center">
               <Button
                 text="Ok"
-                className="border border-primary bg-primary hover:bg-[#1E5F5C] hover:border-[#1E5F5C] focus:bg-[#003A37] focus:border-[#003A37] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                className="border border-primary bg-primary hover:bg-[#28AA6C] hover:border-[#28AA6C] focus:bg-[#09723F] focus:border-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
                 onClick={() => {
                   router.push("/");
                 }}

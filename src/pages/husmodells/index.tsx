@@ -245,7 +245,7 @@ const HusmodellDetail = () => {
 
           const isEmptyPlot =
             !CadastreDataResponse?.apis?.buildingsApi?.response?.items?.length;
-          const collectionName = isEmptyPlot ? "cabin_plot" : "plot_building";
+          const collectionName = isEmptyPlot ? "empty_plot" : "plot_building";
           queryParams.set("empty", isEmptyPlot ? "true" : "false");
 
           const collectionRef = collection(db, collectionName);
@@ -466,6 +466,7 @@ const HusmodellDetail = () => {
           supplierData={supplierData}
           handlePrevious={handlePrevious}
           pris={pris}
+          user={user}
         />
       ),
     },

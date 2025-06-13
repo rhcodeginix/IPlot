@@ -68,7 +68,7 @@ const PropertyHouseDetails: React.FC<{
 
   return (
     <>
-      <div className="pb-4 flex flex-col laptop:flex-row laptop:items-center gap-4 laptop:justify-between">
+      <div className="pb-4 flex flex-col laptop:flex-row laptop:items-center gap-4 laptop:justify-between mt-4">
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
           <div className="relative">
             <img

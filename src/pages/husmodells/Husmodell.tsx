@@ -16,7 +16,7 @@ import {
   getDoc,
   getDocs,
   query,
-  updateDoc,
+  // updateDoc,
   where,
 } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
@@ -105,9 +105,9 @@ const Husmodell: React.FC<any> = ({
         const leadsQuerySnapshot: any = await getDocs(leadsQueryRef);
         if (!leadsQuerySnapshot.empty) {
           const existingLeadId = leadsQuerySnapshot.docs[0].id;
-          await updateDoc(doc(db, "leads", existingLeadId), {
-            updatedAt: new Date(),
-          });
+          // await updateDoc(doc(db, "leads", existingLeadId), {
+          //   updatedAt: new Date(),
+          // });
 
           if (currentLeadId !== existingLeadId) {
             queryParams.set("leadId", existingLeadId);

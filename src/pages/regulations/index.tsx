@@ -1081,6 +1081,7 @@ const Regulations = () => {
       name: "Tilbud",
       component: (
         <Tilbud
+          user={user}
           handleNext={handleNext}
           lamdaDataFromApi={lamdaDataFromApi}
           loadingLamdaData={loading}

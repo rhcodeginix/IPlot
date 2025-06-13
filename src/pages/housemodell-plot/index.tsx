@@ -332,6 +332,7 @@ const HusmodellPlot = () => {
       });
     }
   }, [leadId]);
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     const fetchData = async () => {
@@ -372,6 +373,15 @@ const HusmodellPlot = () => {
             query: { ...router.query, leadId: querySnapshot.docs[0].id },
           });
           setLeadId(querySnapshot.docs[0].id);
+          const data = querySnapshot.docs[0].data();
+          if (data.Isopt === true || data.IsoptForBank === true) {
+            const timestamp = data.updatedAt;
+
+            const finalDate = new Date(
+              timestamp.seconds * 1000 + timestamp.nanoseconds / 1_000_000
+            );
+            setDate(finalDate);
+          }
 
           return;
         }
@@ -385,6 +395,7 @@ const HusmodellPlot = () => {
           updatedAt: new Date(),
           IsEmptyPlot: isEmptyPlot === "true",
         });
+        setDate(new Date());
 
         router.replace({
           pathname: router.pathname,
@@ -484,6 +495,8 @@ const HusmodellPlot = () => {
           supplierData={supplierData}
           handlePrevious={handlePrevious}
           pris={pris}
+          date={date}
+          setDate={setDate}
         />
       ),
     },
