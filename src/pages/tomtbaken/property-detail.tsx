@@ -1526,7 +1526,10 @@ const TomtBakenPropertyDetail: React.FC = () => {
                 </>
               )}
               {activeTab === "Eierinformasjon" && (
-                <Eierinformasjon data={lamdaDataFromApi?.latestOwnership} />
+                <Eierinformasjon
+                  data={lamdaDataFromApi?.latestOwnership}
+                  loadingAdditionalData={loadingLamdaData}
+                />
               )}
               {activeTab === "Bygninger" && (
                 <>

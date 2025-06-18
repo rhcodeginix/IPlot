@@ -5,7 +5,7 @@ import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Link from "next/link";
 import Image from "next/image";
 import HouseDetailsection from "@/components/Ui/houseDetail/houseDetailSection";
-import Loader from "@/components/Loader";
+// import Loader from "@/components/Loader";
 import HouseDetailPage from "@/components/Ui/houseDetail";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
 import { useRouter } from "next/router";
@@ -26,9 +26,9 @@ const HusmodellDetail: React.FC<{
   supplierData,
 }) => {
   const router = useRouter();
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
   return (
     <>
       <div className="relative">
@@ -52,6 +52,7 @@ const HusmodellDetail: React.FC<{
               // CadastreDataFromApi={CadastreDataFromApi}
               supplierData={supplierData}
               pris={pris}
+              loading={loading}
             />
           </SideSpaceContainer>
         </div>

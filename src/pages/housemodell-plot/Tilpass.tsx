@@ -276,6 +276,7 @@ const Tilpass: React.FC<{
             CadastreDataFromApi={CadastreDataFromApi}
             hidden={true}
             pris={pris}
+            loading={loadingLamdaData}
           />
         </SideSpaceContainer>
       </div>

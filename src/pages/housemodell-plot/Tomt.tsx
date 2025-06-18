@@ -154,6 +154,7 @@ const Tomt: React.FC<{
             supplierData={supplierData}
             CadastreDataFromApi={CadastreDataFromApi}
             pris={pris}
+            loading={loadingLamdaData}
           />
         </SideSpaceContainer>
       </div>
@@ -162,6 +163,7 @@ const Tomt: React.FC<{
         CadastreDataFromApi={CadastreDataFromApi}
         lamdaDataFromApi={lamdaDataFromApi}
         HouseModelData={HouseModelData}
+        loading={loadingLamdaData}
       />
       <SideSpaceContainer>
         <LeadsBox />

@@ -192,6 +192,7 @@ const Finansiering: React.FC<{
               supplierData={supplierData}
               CadastreDataFromApi={CadastreDataFromApi}
               pris={pris}
+              loading={loadingLamdaData}
             />
           </div>
         </SideSpaceContainer>
@@ -202,6 +203,7 @@ const Finansiering: React.FC<{
           CadastreDataFromApi={CadastreDataFromApi}
           lamdaDataFromApi={lamdaDataFromApi}
           HouseModelData={HouseModelData}
+          loading={loadingLamdaData}
         />
       )}
 
@@ -451,7 +453,10 @@ const Finansiering: React.FC<{
             </Formik>
           </div>
           <div className="mb-4 md:mb-8">
-            <Prisliste husmodellData={HouseModelData?.Prisliste} />
+            <Prisliste
+              husmodellData={HouseModelData?.Prisliste}
+              loading={loadingLamdaData}
+            />
           </div>
           <span className="mb-4 md:mb-8 text-xs md:text-sm text-center">
             📄 Dette er et estimat basert på dagens priser og forutsetter

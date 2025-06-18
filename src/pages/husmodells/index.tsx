@@ -209,7 +209,7 @@ const HusmodellDetail = () => {
         const data = JSON.parse(cleanAnswer);
         const CadastreDataResponse =
           await ApiUtils.fetchCadastreData(lamdaApiData);
-
+        setLamdaDataFromApi(data);
         if (
           !cleanAnswer ||
           data.message === "Request failed with status code 503" ||
@@ -219,7 +219,9 @@ const HusmodellDetail = () => {
           setShowErrorPopup(true);
           return;
         }
-
+        if (CadastreDataResponse && CadastreDataResponse?.apis) {
+          setCadastreDataFromApi(CadastreDataResponse?.apis);
+        }
         const areaDetails =
           data?.eiendomsInformasjon?.basisInformasjon?.areal_beregnet || "";
         const regionName =
@@ -305,13 +307,13 @@ const HusmodellDetail = () => {
             pathname: router.pathname,
             query: Object.fromEntries(queryParams),
           });
-          if (additionalResponse) {
-            setLamdaDataFromApi(data);
-            if (CadastreDataResponse && CadastreDataResponse?.apis) {
-              setCadastreDataFromApi(CadastreDataResponse?.apis);
-            }
-            setAdditionalData(additionalResponse);
-          }
+          // if (additionalResponse) {
+          //   setLamdaDataFromApi(data);
+          //   if (CadastreDataResponse && CadastreDataResponse?.apis) {
+          //     setCadastreDataFromApi(CadastreDataResponse?.apis);
+          //   }
+          setAdditionalData(additionalResponse);
+          // }
         } catch (error) {
           console.error("Error fetching additional data from askApi:", error);
           setShowErrorPopup(true);

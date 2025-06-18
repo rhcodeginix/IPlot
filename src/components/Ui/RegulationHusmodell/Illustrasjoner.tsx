@@ -7,7 +7,6 @@ import { db } from "@/config/firebaseConfig";
 // import Ic_chevron_down from "@/public/images/Ic_chevron_down.svg";
 import Modal from "@/components/common/modal";
 import Ic_download_primary from "@/public/images/Ic_download.svg";
-import Loader from "@/components/Loader";
 import { useRouter } from "next/router";
 import FileInfo from "@/components/FileInfo";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
@@ -145,12 +144,9 @@ const Illustrasjoner: React.FC = () => {
   }, []);
   return (
     <div className="relative">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="border border-[#DCDFEA] rounded-lg overflow-hidden">
-            {/* <button
+      <>
+        <div className="border border-[#DCDFEA] rounded-lg overflow-hidden">
+          {/* <button
               className={`bg-white flex justify-between items-center w-full p-2 sm:p-3 md:p-5 duration-1000 ${isOpen ? "active" : ""}`}
               onClick={toggleAccordion}
             >
@@ -176,6 +172,26 @@ const Illustrasjoner: React.FC = () => {
                 )}
               </div>
             </button> */}
+          {loading ? (
+            <div className="grid gap-3 md:gap-6 grid-cols-3 p-2 md:p-5">
+              <div
+                className="w-full h-[100px] rounded-lg custom-shimmer"
+                style={{ borderRadius: "8px" }}
+              ></div>
+              <div
+                className="w-full h-[100px] rounded-lg custom-shimmer"
+                style={{ borderRadius: "8px" }}
+              ></div>
+              <div
+                className="w-full h-[100px] rounded-lg custom-shimmer"
+                style={{ borderRadius: "8px" }}
+              ></div>
+              <div
+                className="w-full h-[100px] rounded-lg custom-shimmer"
+                style={{ borderRadius: "8px" }}
+              ></div>
+            </div>
+          ) : (
             <div
               className={`overflow-hidden max-h-0 p-2 md:p-5`}
               style={{
@@ -260,9 +276,10 @@ const Illustrasjoner: React.FC = () => {
                   )}
               </div>
             </div>
-          </div>
-        </>
-      )}
+          )}
+        </div>
+      </>
+
       {isPopupOpen && (
         <Modal isOpen={true} onClose={() => setIsPopupOpen(false)}>
           <div

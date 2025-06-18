@@ -147,6 +147,7 @@ const Tomt: React.FC<{
         CadastreDataFromApi={CadastreDataFromApi}
         lamdaDataFromApi={lamdaDataFromApi}
         askData={askData}
+        loading={loadingLamdaData}
       />
 
       <div id="regulationDocument">

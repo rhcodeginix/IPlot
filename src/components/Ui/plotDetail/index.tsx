@@ -7,8 +7,6 @@ import Ic_check from "@/public/images/Ic_check.svg";
 import Ic_x_close from "@/public/images/Ic_x_close.svg";
 import Ic_chevron_up from "@/public/images/Ic_chevron_up.svg";
 import Ic_chevron_right from "@/public/images/Ic_chevron_right.svg";
-import Loader from "@/components/Loader";
-import Loading from "@/components/Loading";
 import GoogleMapNearByComponent from "@/components/Ui/map/nearbyBuiildingMap";
 import Eierinformasjon from "@/components/Ui/regulationChart/Eierinformasjon";
 import { Building, ClipboardList, FileText, FileUser } from "lucide-react";
@@ -189,9 +187,6 @@ const PlotDetailPage: React.FC<{
   ];
   const [PlotActiveTab, setPlotActiveTab] = useState<string>(plotTabs[0].id);
 
-  if (loadingLamdaData) {
-    <Loader />;
-  }
   return (
     <>
       <div className="rounded-lg border border-[#EFF1F5] w-full">
@@ -251,102 +246,127 @@ const PlotDetailPage: React.FC<{
                     <p className="text-xs md:text-sm text-grayText">
                       Areal beregnet
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
-                        ?.areal_beregnet ? (
-                        <>
-                          {
-                            lamdaDataFromApi?.eiendomsInformasjon
-                              ?.basisInformasjon?.areal_beregnet
-                          }{" "}
-                          m<sup>2</sup>
-                        </>
-                      ) : (
-                        "-"
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
+                          ?.areal_beregnet ? (
+                          <>
+                            {
+                              lamdaDataFromApi?.eiendomsInformasjon
+                                ?.basisInformasjon?.areal_beregnet
+                            }{" "}
+                            m<sup>2</sup>
+                          </>
+                        ) : (
+                          "-"
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Etableringsårs dato
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
-                        ?.etableringsdato
-                        ? formatDateToDDMMYYYY(
-                            lamdaDataFromApi?.eiendomsInformasjon
-                              ?.basisInformasjon?.etableringsdato
-                          )
-                        : "-"}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
+                          ?.etableringsdato
+                          ? formatDateToDDMMYYYY(
+                              lamdaDataFromApi?.eiendomsInformasjon
+                                ?.basisInformasjon?.etableringsdato
+                            )
+                          : "-"}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Sist oppdatert
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
-                        ?.sist_oppdatert
-                        ? formatDateToDDMMYYYY(
-                            lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon?.sist_oppdatert.split(
-                              "T"
-                            )[0]
-                          )
-                        : "-"}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
+                          ?.sist_oppdatert
+                          ? formatDateToDDMMYYYY(
+                              lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon?.sist_oppdatert.split(
+                                "T"
+                              )[0]
+                            )
+                          : "-"}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Tomtens totale BYA
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {askData?.bya_calculations?.results?.total_allowed_bya ? (
-                        <>
-                          {
-                            askData?.bya_calculations?.results
-                              ?.total_allowed_bya
-                          }{" "}
-                          m<sup>2</sup>
-                        </>
-                      ) : (
-                        "-"
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {askData?.bya_calculations?.results
+                          ?.total_allowed_bya ? (
+                          <>
+                            {
+                              askData?.bya_calculations?.results
+                                ?.total_allowed_bya
+                            }{" "}
+                            m<sup>2</sup>
+                          </>
+                        ) : (
+                          "-"
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Er registrert land
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .isRegisteredLand === "Ja" ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .isRegisteredLand === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .isRegisteredLand === "Ja" ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .isRegisteredLand === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Festenummer
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
-                        ?.festenummer
-                        ? lamdaDataFromApi?.eiendomsInformasjon
-                            ?.basisInformasjon?.festenummer
-                        : "-"}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
+                          ?.festenummer
+                          ? lamdaDataFromApi?.eiendomsInformasjon
+                              ?.basisInformasjon?.festenummer
+                          : "-"}
+                      </h5>
+                    )}
                   </div>
                 </div>
               </div>
@@ -381,70 +401,94 @@ const PlotDetailPage: React.FC<{
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">Kommune</p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {
-                        CadastreDataFromApi?.presentationAddressApi?.response
-                          ?.item?.municipality?.municipalityName
-                      }
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {
+                          CadastreDataFromApi?.presentationAddressApi?.response
+                            ?.item?.municipality?.municipalityName
+                        }
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Kommunenummer
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
-                        ?.kommunenr
-                        ? lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
-                            ?.kommunenr
-                        : "-"}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
+                          ?.kommunenr
+                          ? lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
+                              ?.kommunenr
+                          : "-"}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Gårdsnummer
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
-                        ?.gaardsnummer
-                        ? lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
-                            ?.gaardsnummer
-                        : "-"}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
+                          ?.gaardsnummer
+                          ? lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
+                              ?.gaardsnummer
+                          : "-"}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Bruksnummer
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
-                        ?.bruksnummer
-                        ? lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
-                            ?.bruksnummer
-                        : "-"}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
+                          ?.bruksnummer
+                          ? lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
+                              ?.bruksnummer
+                          : "-"}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Seksjonsnummer
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
-                        ?.seksjonsnr
-                        ? lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
-                            ?.seksjonsnr
-                        : "-"}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
+                          ?.seksjonsnr
+                          ? lamdaDataFromApi?.eiendomsInformasjon?.kommune_info
+                              ?.seksjonsnr
+                          : "-"}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">Fylke</p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .municipality?.regionName
-                        ? CadastreDataFromApi?.cadastreApi?.response?.item
-                            .municipality?.regionName
-                        : "-"}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .municipality?.regionName
+                          ? CadastreDataFromApi?.cadastreApi?.response?.item
+                              .municipality?.regionName
+                          : "-"}
+                      </h5>
+                    )}
                   </div>
                 </div>
               </div>
@@ -481,116 +525,136 @@ const PlotDetailPage: React.FC<{
                     <p className="text-xs md:text-sm text-grayText">
                       Kan selges
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .canBeSold === true ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .canBeSold === "Ja" ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .canBeSold === true ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .canBeSold === "Ja" ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Kan belånes
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .canBeMortgaged === true ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .canBeMortgaged === "Ja" ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .canBeMortgaged === true ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .canBeMortgaged === "Ja" ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Har bygning
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasBuilding === true ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasBuilding === "Ja" ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasBuilding === true ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasBuilding === "Ja" ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Har fritidsbolig
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasHolidayHome === true ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasHolidayHome === "Ja" ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasHolidayHome === true ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasHolidayHome === "Ja" ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Har bolig
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasHousing === true ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasHousing === "Ja" ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasHousing === true ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasHousing === "Ja" ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                 </div>
               </div>
@@ -627,79 +691,95 @@ const PlotDetailPage: React.FC<{
                     <p className="text-xs md:text-sm text-grayText">
                       Parkering reservert plass
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {askData?.bya_calculations?.results?.parking
-                        ?.required_spaces ? (
-                        <>
-                          {
-                            askData?.bya_calculations?.results?.parking
-                              ?.required_spaces
-                          }{" "}
-                          stk
-                        </>
-                      ) : (
-                        "-"
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {askData?.bya_calculations?.results?.parking
+                          ?.required_spaces ? (
+                          <>
+                            {
+                              askData?.bya_calculations?.results?.parking
+                                ?.required_spaces
+                            }{" "}
+                            stk
+                          </>
+                        ) : (
+                          "-"
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Parkering område per plass
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {askData?.bya_calculations?.results?.parking
-                        ?.area_per_space ? (
-                        <>
-                          {
-                            askData?.bya_calculations?.results?.parking
-                              ?.area_per_space
-                          }{" "}
-                          m<sup>2</sup>
-                        </>
-                      ) : (
-                        "-"
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {askData?.bya_calculations?.results?.parking
+                          ?.area_per_space ? (
+                          <>
+                            {
+                              askData?.bya_calculations?.results?.parking
+                                ?.area_per_space
+                            }{" "}
+                            m<sup>2</sup>
+                          </>
+                        ) : (
+                          "-"
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Totalt parkeringsområde
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {askData?.bya_calculations?.results?.parking
-                        ?.total_parking_area ? (
-                        <>
-                          {
-                            askData?.bya_calculations?.results?.parking
-                              ?.total_parking_area
-                          }{" "}
-                          m<sup>2</sup>
-                        </>
-                      ) : (
-                        "-"
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {askData?.bya_calculations?.results?.parking
+                          ?.total_parking_area ? (
+                          <>
+                            {
+                              askData?.bya_calculations?.results?.parking
+                                ?.total_parking_area
+                            }{" "}
+                            m<sup>2</sup>
+                          </>
+                        ) : (
+                          "-"
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Parkering er usikker
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {askData?.bya_calculations?.results?.parking
-                        ?.is_uncertain === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {askData?.bya_calculations?.results?.parking
+                          ?.is_uncertain === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                 </div>
               </div>
@@ -738,116 +818,136 @@ const PlotDetailPage: React.FC<{
                     <p className="text-xs md:text-sm text-grayText">
                       Har forurensning
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasSoilContamination === "Ja" ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasSoilContamination === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasSoilContamination === "Ja" ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasSoilContamination === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Har aktive festegrunner
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasActiveLeasedLand === "Ja" ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .hasActiveLeasedLand === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasActiveLeasedLand === "Ja" ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .hasActiveLeasedLand === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Inngår i samlet eiendom
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .includedInTotalRealEstate === "Ja" ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .includedInTotalRealEstate === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .includedInTotalRealEstate === "Ja" ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .includedInTotalRealEstate === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Kulturminner registrert
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.kulturminner_registrert === "Ja" ||
-                      lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.kulturminner_registrert === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.kulturminner_registrert === "Ja" ||
+                        lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.kulturminner_registrert === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Grunnforurensning
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.grunnforurensning === "Ja" ||
-                      lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.grunnforurensning === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.grunnforurensning === "Ja" ||
+                        lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.grunnforurensning === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                 </div>
               </div>
@@ -884,134 +984,168 @@ const PlotDetailPage: React.FC<{
                     <p className="text-xs md:text-sm text-grayText">
                       Sammenslåtte tomter
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {CadastreDataFromApi?.cadastreApi?.response?.item
-                        .numberOfPlots === "Ja" ||
-                      CadastreDataFromApi?.cadastreApi?.response?.item
-                        .numberOfPlots === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {CadastreDataFromApi?.cadastreApi?.response?.item
+                          .numberOfPlots === "Ja" ||
+                        CadastreDataFromApi?.cadastreApi?.response?.item
+                          .numberOfPlots === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">Tinglyst</p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
-                        ?.tinglyst === "Ja" ||
-                      lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
-                        ?.tinglyst === true ? (
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
+                          ?.tinglyst === "Ja" ||
+                        lamdaDataFromApi?.eiendomsInformasjon?.basisInformasjon
+                          ?.tinglyst === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-between gap-1">
+                    <p className="text-xs md:text-sm text-grayText">Ugyldig</p>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
                         <Image
                           fetchPriority="auto"
                           src={Ic_check}
                           alt="check"
                         />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
-                  </div>
-                  <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">Ugyldig</p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      <Image fetchPriority="auto" src={Ic_check} alt="check" />
-                    </h5>
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Oppmåling ikke fullført
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.oppmaling_ikke_fullfort === "Ja" ||
-                      lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.oppmaling_ikke_fullfort === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.oppmaling_ikke_fullfort === "Ja" ||
+                        lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.oppmaling_ikke_fullfort === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Mangler grenseoppmerking
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.mangler_grensepunktmerking === "Ja" ||
-                      lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.mangler_grensepunktmerking === true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.mangler_grensepunktmerking === "Ja" ||
+                        lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.mangler_grensepunktmerking === true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     <p className="text-xs md:text-sm text-grayText">
                       Under sammenslåing
                     </p>
-                    <h5 className="text-sm md:text-base text-black font-medium">
-                      {lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.under_sammenslaing === "Ja" ||
-                      (lamdaDataFromApi?.eiendomsInformasjon?.status
-                        ?.under_sammenslaing ===
-                        "Ja") ===
-                        true ? (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_check}
-                          alt="check"
-                        />
-                      ) : (
-                        <Image
-                          fetchPriority="auto"
-                          src={Ic_x_close}
-                          alt="check"
-                        />
-                      )}
-                    </h5>
+                    {loadingAdditionalData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h5 className="text-sm md:text-base text-black font-medium">
+                        {lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.under_sammenslaing === "Ja" ||
+                        (lamdaDataFromApi?.eiendomsInformasjon?.status
+                          ?.under_sammenslaing ===
+                          "Ja") ===
+                          true ? (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_check}
+                            alt="check"
+                          />
+                        ) : (
+                          <Image
+                            fetchPriority="auto"
+                            src={Ic_x_close}
+                            alt="check"
+                          />
+                        )}
+                      </h5>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
             <div className="rounded-lg sm:rounded-[12px] overflow-hidden w-full h-[300px] desktop:h-auto desktop:w-[407px]">
-              {lamdaDataFromApi?.coordinates?.convertedCoordinates && (
-                <NorkartMap
-                  coordinates={
-                    lamdaDataFromApi?.coordinates?.convertedCoordinates
-                  }
-                  MAX_ZOOM={18}
-                />
+              {loadingAdditionalData ? (
+                <div className="w-full h-full rounded-lg custom-shimmer"></div>
+              ) : (
+                <>
+                  {lamdaDataFromApi?.coordinates?.convertedCoordinates && (
+                    <NorkartMap
+                      coordinates={
+                        lamdaDataFromApi?.coordinates?.convertedCoordinates
+                      }
+                      MAX_ZOOM={18}
+                    />
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -1040,261 +1174,31 @@ const PlotDetailPage: React.FC<{
         <div>
           {PlotActiveTab === "Regulering" && (
             <>
-              {loadingLamdaData ? (
-                <Loader />
-              ) : (
-                <>
-                  <div className="relative">
-                    {loadingAdditionalData ? (
-                      <Loading />
-                    ) : (
-                      <div className="flex flex-col md:flex-row gap-5 lg:gap-9 desktop:gap-[60px]">
-                        <div className="relative w-full md:w-1/2">
-                          <div>
-                            <div className="flex justify-between items-center mb-4 lg:mb-6">
-                              <h2 className="text-black text-base md:text-lg lg:text-xl desktop:text-2xl font-semibold">
-                                Reguleringsplan
-                              </h2>
-                              <Image
-                                fetchPriority="auto"
-                                src={Ic_generelt}
-                                alt="image"
-                              />
-                            </div>
-                            <div className="flex flex-col gap-2 md:gap-3">
-                              <>
-                                {askData &&
-                                  askData?.conclusion?.map(
-                                    (a: any, index: number) => (
-                                      <div
-                                        className="flex items-start gap-2 md:gap-3 text-secondary text-sm lg:text-base"
-                                        key={index}
-                                      >
-                                        <Image
-                                          fetchPriority="auto"
-                                          src={Ic_check_true}
-                                          alt="image"
-                                        />
-                                        <span>{a}</span>
-                                      </div>
-                                    )
-                                  )}
-                              </>
-                            </div>
-                          </div>
-                          <div className="w-full flex flex-col gap-5 md:gap-6 lg:gap-8 items-center mt-[36px] md:mt-[46px] lg:mt-[55px]">
-                            <div className="rounded-[12px] overflow-hidden w-full relative border border-[#7D89B0] h-[400px] lg:h-[590px]">
-                              {loading && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-10">
-                                  <div className="spinner-border animate-spin border-t-4 border-b-4 border-blue-500 w-12 h-12 border-solid rounded-full"></div>
-                                </div>
-                              )}
-                              <img
-                                src={selectedImage?.src}
-                                alt={selectedImage?.alt}
-                                className="h-full w-full"
-                                onLoad={() => setLoading(false)}
-                                onError={() => setLoading(false)}
-                              />
-                              <div
-                                className="absolute top-0 left-[4px] flex items-center justify-center h-full"
-                                style={{
-                                  zIndex: 99999,
-                                }}
-                              >
-                                <div
-                                  className={`bg-white h-[36px] w-[36px] md:h-[44px] md:w-[44px] rounded-full flex items-center justify-center ${selectedImage?.id === images[0]?.id ? "opacity-50" : "opacity-100"}`}
-                                  style={{
-                                    boxShadow:
-                                      "0px 2px 4px -2px #1018280F, 0px 4px 8px -2px #1018281A",
-                                  }}
-                                  onClick={() => {
-                                    if (selectedImage?.id !== images[0]?.id) {
-                                      const currentIndex = images.findIndex(
-                                        (img) => img.id === selectedImage.id
-                                      );
-                                      setLoading(true);
-
-                                      const nextIndex = currentIndex - 1;
-                                      if (nextIndex >= 0) {
-                                        setSelectedImage(images[nextIndex]);
-                                        handleScrollUp();
-                                      }
-                                    }
-                                  }}
-                                >
-                                  <Image
-                                    fetchPriority="auto"
-                                    src={Ic_chevron_right}
-                                    alt="arrow"
-                                    className={`${selectedImage?.id !== images[0]?.id && "cursor-pointer"} rotate-180`}
-                                  />
-                                </div>
-                              </div>
-                              <div
-                                className={`absolute bottom-0 right-[4px] flex items-center justify-center h-full`}
-                                style={{
-                                  zIndex: 99999,
-                                }}
-                              >
-                                <div
-                                  className={`bg-white h-[36px] w-[36px] md:h-[44px] md:w-[44px] rounded-full flex items-center justify-center ${selectedImage?.id === images[images.length - 1]?.id ? "opacity-50" : "opacity-100"}`}
-                                  style={{
-                                    boxShadow:
-                                      "0px 2px 4px -2px #1018280F, 0px 4px 8px -2px #1018281A",
-                                  }}
-                                  onClick={() => {
-                                    if (
-                                      selectedImage?.id !==
-                                      images[images.length - 1]?.id
-                                    ) {
-                                      const currentIndex = images.findIndex(
-                                        (img) => img.id === selectedImage.id
-                                      );
-                                      setLoading(true);
-
-                                      const nextIndex = currentIndex + 1;
-                                      if (nextIndex < images.length) {
-                                        setSelectedImage(images[nextIndex]);
-                                      }
-                                      handleScrollDown();
-                                    }
-                                  }}
-                                >
-                                  <Image
-                                    fetchPriority="auto"
-                                    src={Ic_chevron_right}
-                                    alt="arrow"
-                                    className={`${selectedImage?.id !== images[images.length - 1]?.id && "cursor-pointer"}`}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                            <div className="relative w-full flex justify-center">
-                              <div
-                                className="gap-4 md:gap-6 lg:gap-8 flex overflow-x-auto overFlowScrollHidden"
-                                ref={scrollContainerRef}
-                              >
-                                {images.map((image, index) => (
-                                  <div
-                                    className="relative min-w-[90px] max-w-[90px]"
-                                    key={index}
-                                  >
-                                    <img
-                                      src={image.src}
-                                      alt={image.alt}
-                                      className={`h-[90px] w-full rounded-[12px] cursor-pointer ${selectedImage?.id === image?.id ? "border-2 border-primary" : "border border-[#7D89B033]"}`}
-                                      style={{
-                                        zIndex: 999,
-                                      }}
-                                      onClick={() => handleImageClick(image)}
-                                    />
-                                  </div>
-                                ))}
-                              </div>
-                              {images.length > 5 && (
-                                <div
-                                  className="absolute top-0 right-0 h-[90px] w-[90px]"
-                                  style={{
-                                    zIndex: 9999,
-                                    background:
-                                      "linear-gradient(-90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 90.63%)",
-                                  }}
-                                ></div>
-                              )}
-                              {images.length > 5 && (
-                                <div
-                                  className="absolute top-0 left-0 h-[90px] w-[90px]"
-                                  style={{
-                                    zIndex: 9999,
-                                    background:
-                                      "linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 90.63%)",
-                                  }}
-                                ></div>
-                              )}
-                              {images.length > 5 && (
-                                <div
-                                  className="absolute top-0 left-0 flex items-center justify-center h-full"
-                                  style={{
-                                    zIndex: 99999,
-                                  }}
-                                >
-                                  <Image
-                                    fetchPriority="auto"
-                                    src={Ic_chevron_right}
-                                    alt="arrow"
-                                    className={`${selectedImage?.id !== images[0]?.id ? "cursor-pointer opacity-100" : "opacity-50"} rotate-180`}
-                                    onClick={() => {
-                                      if (selectedImage?.id !== images[0]?.id) {
-                                        const currentIndex = images.findIndex(
-                                          (img) => img.id === selectedImage.id
-                                        );
-                                        setLoading(true);
-
-                                        const nextIndex = currentIndex - 1;
-                                        if (nextIndex >= 0) {
-                                          setSelectedImage(images[nextIndex]);
-                                          handleScrollUp();
-                                        }
-                                      }
-                                    }}
-                                  />
-                                </div>
-                              )}
-                              {images.length > 5 && (
-                                <div
-                                  className="absolute top-0 right-0 flex items-center justify-center h-full"
-                                  style={{
-                                    zIndex: 99999,
-                                  }}
-                                >
-                                  <Image
-                                    fetchPriority="auto"
-                                    src={Ic_chevron_right}
-                                    alt="arrow"
-                                    className={`${selectedImage?.id !== images[images.length - 1]?.id ? "cursor-pointer opacity-100" : "opacity-50"}`}
-                                    onClick={() => {
-                                      if (
-                                        selectedImage?.id !==
-                                        images[images.length - 1]?.id
-                                      ) {
-                                        const currentIndex = images.findIndex(
-                                          (img) => img.id === selectedImage.id
-                                        );
-                                        setLoading(true);
-
-                                        const nextIndex = currentIndex + 1;
-                                        if (nextIndex < images.length) {
-                                          setSelectedImage(images[nextIndex]);
-                                        }
-                                        handleScrollDown();
-                                      }
-                                    }}
-                                  />
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="relative w-full md:w-1/2">
-                          <div className="flex justify-between items-center mb-4 lg:mb-6">
-                            <h2 className="text-black text-base md:text-lg lg:text-xl desktop:text-2xl font-semibold">
-                              Kommuneplan for{" "}
-                              {
-                                CadastreDataFromApi?.presentationAddressApi
-                                  ?.response?.item?.municipality
-                                  ?.municipalityName
-                              }
-                            </h2>
-                            <Image
-                              fetchPriority="auto"
-                              src={Ic_generelt}
-                              alt="image"
-                            />
-                          </div>
-                          <div className="flex flex-col gap-2 md:gap-3">
+              <div className="flex flex-col md:flex-row gap-5 lg:gap-9 desktop:gap-[60px]">
+                <div className="relative w-full md:w-1/2">
+                  <div>
+                    <div className="flex justify-between items-center mb-4 lg:mb-6">
+                      <h2 className="text-black text-base md:text-lg lg:text-xl desktop:text-2xl font-semibold">
+                        Reguleringsplan
+                      </h2>
+                      <Image
+                        fetchPriority="auto"
+                        src={Ic_generelt}
+                        alt="image"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2 md:gap-3">
+                      <>
+                        {loadingAdditionalData ? (
+                          <>
+                            <div className="w-full h-[25px] rounded-lg custom-shimmer"></div>
+                            <div className="w-full h-[25px] rounded-lg custom-shimmer"></div>
+                            <div className="w-full h-[25px] rounded-lg custom-shimmer"></div>
+                          </>
+                        ) : (
+                          <>
                             {askData &&
-                              askData?.applicable_rules?.map(
+                              askData?.conclusion?.map(
                                 (a: any, index: number) => (
                                   <div
                                     className="flex items-start gap-2 md:gap-3 text-secondary text-sm lg:text-base"
@@ -1305,39 +1209,277 @@ const PlotDetailPage: React.FC<{
                                       src={Ic_check_true}
                                       alt="image"
                                     />
-                                    <div>
-                                      {a.rule}{" "}
-                                      <span className="text-primary font-bold">
-                                        {a.section}
-                                      </span>
-                                    </div>
+                                    <span>{a}</span>
                                   </div>
                                 )
                               )}
+                          </>
+                        )}
+                      </>
+                    </div>
+                  </div>
+                  {loadingAdditionalData ? (
+                    <div className="w-full h-[400px] lg:h-[590px] rounded-lg custom-shimmer"></div>
+                  ) : (
+                    <div className="w-full flex flex-col gap-5 md:gap-6 lg:gap-8 items-center mt-[36px] md:mt-[46px] lg:mt-[55px]">
+                      <div className="rounded-[12px] overflow-hidden w-full relative border border-[#7D89B0] h-[400px] lg:h-[590px]">
+                        {loading && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-10">
+                            <div className="spinner-border animate-spin border-t-4 border-b-4 border-blue-500 w-12 h-12 border-solid rounded-full"></div>
+                          </div>
+                        )}
+                        <img
+                          src={selectedImage?.src}
+                          alt={selectedImage?.alt}
+                          className="h-full w-full"
+                          onLoad={() => setLoading(false)}
+                          onError={() => setLoading(false)}
+                        />
+                        <div
+                          className="absolute top-0 left-[4px] flex items-center justify-center h-full"
+                          style={{
+                            zIndex: 99999,
+                          }}
+                        >
+                          <div
+                            className={`bg-white h-[36px] w-[36px] md:h-[44px] md:w-[44px] rounded-full flex items-center justify-center ${selectedImage?.id === images[0]?.id ? "opacity-50" : "opacity-100"}`}
+                            style={{
+                              boxShadow:
+                                "0px 2px 4px -2px #1018280F, 0px 4px 8px -2px #1018281A",
+                            }}
+                            onClick={() => {
+                              if (selectedImage?.id !== images[0]?.id) {
+                                const currentIndex = images.findIndex(
+                                  (img) => img.id === selectedImage.id
+                                );
+                                setLoading(true);
+
+                                const nextIndex = currentIndex - 1;
+                                if (nextIndex >= 0) {
+                                  setSelectedImage(images[nextIndex]);
+                                  handleScrollUp();
+                                }
+                              }
+                            }}
+                          >
+                            <Image
+                              fetchPriority="auto"
+                              src={Ic_chevron_right}
+                              alt="arrow"
+                              className={`${selectedImage?.id !== images[0]?.id && "cursor-pointer"} rotate-180`}
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className={`absolute bottom-0 right-[4px] flex items-center justify-center h-full`}
+                          style={{
+                            zIndex: 99999,
+                          }}
+                        >
+                          <div
+                            className={`bg-white h-[36px] w-[36px] md:h-[44px] md:w-[44px] rounded-full flex items-center justify-center ${selectedImage?.id === images[images.length - 1]?.id ? "opacity-50" : "opacity-100"}`}
+                            style={{
+                              boxShadow:
+                                "0px 2px 4px -2px #1018280F, 0px 4px 8px -2px #1018281A",
+                            }}
+                            onClick={() => {
+                              if (
+                                selectedImage?.id !==
+                                images[images.length - 1]?.id
+                              ) {
+                                const currentIndex = images.findIndex(
+                                  (img) => img.id === selectedImage.id
+                                );
+                                setLoading(true);
+
+                                const nextIndex = currentIndex + 1;
+                                if (nextIndex < images.length) {
+                                  setSelectedImage(images[nextIndex]);
+                                }
+                                handleScrollDown();
+                              }
+                            }}
+                          >
+                            <Image
+                              fetchPriority="auto"
+                              src={Ic_chevron_right}
+                              alt="arrow"
+                              className={`${selectedImage?.id !== images[images.length - 1]?.id && "cursor-pointer"}`}
+                            />
                           </div>
                         </div>
                       </div>
+                      <div className="relative w-full flex justify-center">
+                        <div
+                          className="gap-4 md:gap-6 lg:gap-8 flex overflow-x-auto overFlowScrollHidden"
+                          ref={scrollContainerRef}
+                        >
+                          {images.map((image, index) => (
+                            <div
+                              className="relative min-w-[90px] max-w-[90px]"
+                              key={index}
+                            >
+                              <img
+                                src={image.src}
+                                alt={image.alt}
+                                className={`h-[90px] w-full rounded-[12px] cursor-pointer ${selectedImage?.id === image?.id ? "border-2 border-primary" : "border border-[#7D89B033]"}`}
+                                style={{
+                                  zIndex: 999,
+                                }}
+                                onClick={() => handleImageClick(image)}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        {images.length > 5 && (
+                          <div
+                            className="absolute top-0 right-0 h-[90px] w-[90px]"
+                            style={{
+                              zIndex: 9999,
+                              background:
+                                "linear-gradient(-90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 90.63%)",
+                            }}
+                          ></div>
+                        )}
+                        {images.length > 5 && (
+                          <div
+                            className="absolute top-0 left-0 h-[90px] w-[90px]"
+                            style={{
+                              zIndex: 9999,
+                              background:
+                                "linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 90.63%)",
+                            }}
+                          ></div>
+                        )}
+                        {images.length > 5 && (
+                          <div
+                            className="absolute top-0 left-0 flex items-center justify-center h-full"
+                            style={{
+                              zIndex: 99999,
+                            }}
+                          >
+                            <Image
+                              fetchPriority="auto"
+                              src={Ic_chevron_right}
+                              alt="arrow"
+                              className={`${selectedImage?.id !== images[0]?.id ? "cursor-pointer opacity-100" : "opacity-50"} rotate-180`}
+                              onClick={() => {
+                                if (selectedImage?.id !== images[0]?.id) {
+                                  const currentIndex = images.findIndex(
+                                    (img) => img.id === selectedImage.id
+                                  );
+                                  setLoading(true);
+
+                                  const nextIndex = currentIndex - 1;
+                                  if (nextIndex >= 0) {
+                                    setSelectedImage(images[nextIndex]);
+                                    handleScrollUp();
+                                  }
+                                }
+                              }}
+                            />
+                          </div>
+                        )}
+                        {images.length > 5 && (
+                          <div
+                            className="absolute top-0 right-0 flex items-center justify-center h-full"
+                            style={{
+                              zIndex: 99999,
+                            }}
+                          >
+                            <Image
+                              fetchPriority="auto"
+                              src={Ic_chevron_right}
+                              alt="arrow"
+                              className={`${selectedImage?.id !== images[images.length - 1]?.id ? "cursor-pointer opacity-100" : "opacity-50"}`}
+                              onClick={() => {
+                                if (
+                                  selectedImage?.id !==
+                                  images[images.length - 1]?.id
+                                ) {
+                                  const currentIndex = images.findIndex(
+                                    (img) => img.id === selectedImage.id
+                                  );
+                                  setLoading(true);
+
+                                  const nextIndex = currentIndex + 1;
+                                  if (nextIndex < images.length) {
+                                    setSelectedImage(images[nextIndex]);
+                                  }
+                                  handleScrollDown();
+                                }
+                              }}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="relative w-full md:w-1/2">
+                  <div className="flex justify-between items-center mb-4 lg:mb-6">
+                    <h2 className="text-black text-base md:text-lg lg:text-xl desktop:text-2xl font-semibold">
+                      Kommuneplan for{" "}
+                      {
+                        CadastreDataFromApi?.presentationAddressApi?.response
+                          ?.item?.municipality?.municipalityName
+                      }
+                    </h2>
+                    <Image fetchPriority="auto" src={Ic_generelt} alt="image" />
+                  </div>
+                  <div className="flex flex-col gap-2 md:gap-3">
+                    {loadingAdditionalData ? (
+                      <>
+                        <div className="w-full h-[25px] rounded-lg custom-shimmer"></div>
+                        <div className="w-full h-[25px] rounded-lg custom-shimmer"></div>
+                        <div className="w-full h-[25px] rounded-lg custom-shimmer"></div>
+                        <div className="w-full h-[25px] rounded-lg custom-shimmer"></div>
+                      </>
+                    ) : (
+                      <>
+                        {askData &&
+                          askData?.applicable_rules?.map(
+                            (a: any, index: number) => (
+                              <div
+                                className="flex items-start gap-2 md:gap-3 text-secondary text-sm lg:text-base"
+                                key={index}
+                              >
+                                <Image
+                                  fetchPriority="auto"
+                                  src={Ic_check_true}
+                                  alt="image"
+                                />
+                                <div>
+                                  {a.rule}{" "}
+                                  <span className="text-primary font-bold">
+                                    {a.section}
+                                  </span>
+                                </div>
+                              </div>
+                            )
+                          )}
+                      </>
                     )}
                   </div>
-                </>
-              )}
+                </div>
+              </div>
             </>
           )}
           {PlotActiveTab === "Eierinformasjon" && (
-            <Eierinformasjon data={lamdaDataFromApi?.latestOwnership} />
+            <Eierinformasjon
+              data={lamdaDataFromApi?.latestOwnership}
+              loadingAdditionalData={loadingLamdaData}
+            />
           )}
           {PlotActiveTab === "Bygninger" && (
             <>
-              {loadingLamdaData ? (
-                <div className="relative">
-                  <Loading />
-                </div>
-              ) : (
+              {CadastreDataFromApi?.buildingsApi?.response?.items.length > 0 ? (
                 <>
-                  {CadastreDataFromApi?.buildingsApi?.response?.items.length >
-                  0 ? (
-                    <>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    {loadingAdditionalData ? (
+                      <div className="w-full h-[300px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <>
                         {CadastreDataFromApi?.buildingsApi?.response?.items.map(
                           (item: any, index: number) => (
                             <div
@@ -1437,37 +1579,33 @@ const PlotDetailPage: React.FC<{
                             </div>
                           )
                         )}
-                      </div>
-                    </>
-                  ) : (
-                    <p>Ingen bygningsdata funnet.</p>
-                  )}
+                      </>
+                    )}
+                  </div>
                 </>
+              ) : (
+                <p>Ingen bygningsdata funnet.</p>
               )}
             </>
           )}
           {PlotActiveTab === "Plandokumenter" && (
             <>
-              {loadingLamdaData ? (
-                <div className="relative">
-                  <Loading />
-                </div>
-              ) : (
-                <>
-                  {isValidBBOX && featureInfo && (
-                    <div>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: featureInfo,
-                        }}
-                        style={{
-                          width: "100%",
-                          height: "820px",
-                        }}
-                      />
-                    </div>
+              {isValidBBOX && featureInfo && (
+                <div>
+                  {loadingAdditionalData ? (
+                    <div className="w-full h-[600px] rounded-lg custom-shimmer"></div>
+                  ) : (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: featureInfo,
+                      }}
+                      style={{
+                        width: "100%",
+                        height: "820px",
+                      }}
+                    />
                   )}
-                </>
+                </div>
               )}
             </>
           )}

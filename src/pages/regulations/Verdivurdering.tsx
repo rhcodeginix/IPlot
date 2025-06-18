@@ -165,6 +165,7 @@ const Verdivurdering: React.FC<{
                   lamdaDataFromApi={lamdaDataFromApi}
                   CadastreDataFromApi={CadastreDataFromApi}
                   supplierData={supplierData}
+                  loading={loading}
                 />
               </div>
             </SideSpaceContainer>
@@ -175,6 +176,7 @@ const Verdivurdering: React.FC<{
               CadastreDataFromApi={CadastreDataFromApi}
               lamdaDataFromApi={lamdaDataFromApi}
               HouseModelData={HouseModelData}
+              loading={loading}
             />
           )}
 

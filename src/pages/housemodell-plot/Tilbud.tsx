@@ -170,6 +170,7 @@ const Tilbud: React.FC<{
             CadastreDataFromApi={CadastreDataFromApi}
             supplierData={supplierData}
             pris={pris}
+            loading={loadingLamdaData}
           />
         </SideSpaceContainer>
       </div>
@@ -179,6 +180,7 @@ const Tilbud: React.FC<{
           CadastreDataFromApi={CadastreDataFromApi}
           lamdaDataFromApi={lamdaDataFromApi}
           HouseModelData={HouseModelData}
+          loading={loadingLamdaData}
         />
       </div>
 

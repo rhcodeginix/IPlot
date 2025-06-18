@@ -6,7 +6,10 @@ const getRandomColor = (index: number) => {
   const variation = (index * 20) % 40;
   return `hsl(${baseHue + variation}, 65%, ${50 + (index % 10)}%)`;
 };
-const EierinformasjonChart: React.FC<{ chartData: any }> = ({ chartData }) => {
+const EierinformasjonChart: React.FC<{
+  chartData: any;
+  loadingAdditionalData: any;
+}> = ({ chartData, loadingAdditionalData }) => {
   const data = chartData?.map((item: any) => ({
     name: item.Navn,
     value: parseFloat(item.value),
@@ -26,9 +29,15 @@ const EierinformasjonChart: React.FC<{ chartData: any }> = ({ chartData }) => {
               fill="#8884d8"
               dataKey="value"
             >
-              {data?.map((_entry: any, index: any) => (
-                <Cell key={`cell-${index}`} fill={getRandomColor(index)} />
-              ))}
+              {loadingAdditionalData ? (
+                <div className="w-[200px] h-[20px] rounded-lg custom-shimmer"></div>
+              ) : (
+                <>
+                  {data?.map((_entry: any, index: any) => (
+                    <Cell key={`cell-${index}`} fill={getRandomColor(index)} />
+                  ))}
+                </>
+              )}
             </Pie>
           </PieChart>
         </ResponsiveContainer>
@@ -42,18 +51,30 @@ const EierinformasjonChart: React.FC<{ chartData: any }> = ({ chartData }) => {
           {data?.map((item: any, index: any) => (
             <div key={index} className="flex items-start gap-2">
               <div className="h-[26px] w-3 flex items-center">
-                <div
-                  className="w-full h-3 rounded-full"
-                  style={{ backgroundColor: getRandomColor(index) }}
-                ></div>
+                {loadingAdditionalData ? (
+                  <div className="w-full h-3 rounded-lg custom-shimmer"></div>
+                ) : (
+                  <div
+                    className="w-full h-3 rounded-full"
+                    style={{ backgroundColor: getRandomColor(index) }}
+                  ></div>
+                )}
               </div>
               <div>
-                <div className="font-semibold text-lg md:text-[20px] h-[26px]">
-                  {item.value}%
-                </div>
-                <span className="text-sm font-medium text-darkBlack">
-                  {item.name}
-                </span>
+                {loadingAdditionalData ? (
+                  <div className="w-[200px] h-[26px] rounded-lg custom-shimmer"></div>
+                ) : (
+                  <div className="font-semibold text-lg md:text-[20px] h-[26px]">
+                    {item.value}%
+                  </div>
+                )}
+                {loadingAdditionalData ? (
+                  <div className="w-[200px] h-[20px] rounded-lg custom-shimmer"></div>
+                ) : (
+                  <span className="text-sm font-medium text-darkBlack">
+                    {item.name}
+                  </span>
+                )}
               </div>
             </div>
           ))}

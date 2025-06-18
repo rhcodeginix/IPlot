@@ -1,7 +1,10 @@
 import React from "react";
 import EierinformasjonChart from "./chart";
 
-const Eierinformasjon: React.FC<{ data: any }> = ({ data }) => {
+const Eierinformasjon: React.FC<{ data: any; loadingAdditionalData: any }> = ({
+  data,
+  loadingAdditionalData,
+}) => {
   function calculateOwnership(andel: any) {
     let [owned, total] = andel.split("/").map(Number);
     let percentage = (owned / total) * 100;
@@ -23,7 +26,10 @@ const Eierinformasjon: React.FC<{ data: any }> = ({ data }) => {
         <h5 className="text-black text-base desktop:text-lg font-semibold mb-4 md:mb-6 lg:mb-8">
           Eierskap
         </h5>
-        <EierinformasjonChart chartData={EierinformasjonData} />
+        <EierinformasjonChart
+          chartData={EierinformasjonData}
+          loadingAdditionalData={loadingAdditionalData}
+        />
       </div>
       <div className="w-full lg:w-2/3">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
@@ -39,19 +45,31 @@ const Eierinformasjon: React.FC<{ data: any }> = ({ data }) => {
                   key={index}
                 >
                   <div>
-                    <h5 className="text-black text-sm md:text-base lg:text-lg font-semibold mb-2">
-                      ID: {item?.eierId}
-                    </h5>
-                    <h6 className="text-black text-xs md:text-sm font-medium">
-                      FØDSELSNUMMER (Code: {item?.personalNumberType?.code})
-                    </h6>
+                    {loadingAdditionalData ? (
+                      <div className="w-[200px] h-[20px] rounded-lg custom-shimmer mb-2"></div>
+                    ) : (
+                      <h5 className="text-black text-sm md:text-base lg:text-lg font-semibold mb-2">
+                        ID: {item?.eierId}
+                      </h5>
+                    )}
+                    {loadingAdditionalData ? (
+                      <div className="w-[200px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h6 className="text-black text-xs md:text-sm font-medium">
+                        FØDSELSNUMMER (Code: {item?.personalNumberType?.code})
+                      </h6>
+                    )}
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
                       <p className="text-grayText text-xs mb-1">Eierandel</p>
-                      <h6 className="text-black text-sm font-medium">
-                        {calculateOwnership(item?.andel)}
-                      </h6>
+                      {loadingAdditionalData ? (
+                        <div className="w-[200px] h-[20px] rounded-lg custom-shimmer"></div>
+                      ) : (
+                        <h6 className="text-black text-sm font-medium">
+                          {calculateOwnership(item?.andel)}
+                        </h6>
+                      )}
                     </div>
                   </div>
                 </div>

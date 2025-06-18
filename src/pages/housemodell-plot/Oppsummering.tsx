@@ -185,6 +185,7 @@ const Oppsummering: React.FC<{
             CadastreDataFromApi={CadastreDataFromApi}
             supplierData={supplierData}
             pris={pris}
+            loading={loadingLamdaData}
           />
         </SideSpaceContainer>
       </div>
@@ -193,6 +194,7 @@ const Oppsummering: React.FC<{
         CadastreDataFromApi={CadastreDataFromApi}
         lamdaDataFromApi={lamdaDataFromApi}
         HouseModelData={HouseModelData}
+        loading={loadingLamdaData}
       />
 
       <div className="pt-6 pb-8">

@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import Illustrasjoner from // formatCurrency,
-"../RegulationHusmodell/Illustrasjoner";
+import Illustrasjoner from "../RegulationHusmodell/Illustrasjoner"; // formatCurrency,
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
 import { useUserLayoutContext } from "@/context/userLayoutContext";
 import Ic_close from "@/public/images/Ic_close.svg";
-import Loader from "@/components/Loader";
 import Modal from "@/components/common/modal";
 import Image from "next/image";
 
@@ -122,16 +120,12 @@ const HouseDetailPage: React.FC = () => {
 
   return (
     <div className="relative">
-      {loading ? (
-        <Loader />
-      ) : (
-        <div>
-          <div className="w-full flex flex-col lg:flex-row gap-5 md:gap-6 lg:gap-10 desktop:gap-[60px] mb-8">
-            <div className="w-full lg:w-[43%]">
-              {/* <h4 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
+      <div className="w-full flex flex-col lg:flex-row gap-5 md:gap-6 lg:gap-10 desktop:gap-[60px] mb-8">
+        <div className="w-full lg:w-[43%]">
+          {/* <h4 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
                 {husmodellData?.husmodell_name}
               </h4> */}
-              {/* <div className="relative">
+          {/* <div className="relative">
                 <img
                   src={husmodellData?.photo}
                   alt="image"
@@ -143,7 +137,7 @@ const HouseDetailPage: React.FC = () => {
                   className="absolute top-[12px] left-[12px] bg-[#FFFFFFB2] py-2 px-3 flex items-center justify-center rounded-[32px] w-[130px]"
                 />
               </div> */}
-              {/* <div className="my-4 md:my-[20px] flex items-center justify-between">
+          {/* <div className="my-4 md:my-[20px] flex items-center justify-between">
                 <div className="flex flex-col gap-1 md:gap-2">
                   <p className="text-secondary text-sm md:text-base">
                     Pris fra
@@ -175,114 +169,208 @@ const HouseDetailPage: React.FC = () => {
                   </div>
                 </div>
               </div> */}
-              <div className="w-full flex flex-col sm:flex-row gap-4 md:gap-6 desktop:gap-8 mb-8 md:mb-[60px]">
-                <div className="w-full sm:w-1/2 border-t-2 border-b-0 border-l-0 border-r-0 border-purple pt-3 md:pt-4">
-                  <table className="table-auto border-0 w-full text-left property_detail_tbl">
-                    <tbody>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          BRA total (bruksareal)
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.BRATotal} m<sup>2</sup>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          GUA (Gulvareal):
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.PRom} m<sup>2</sup>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          Bebygd Areal
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.BebygdAreal} m<sup>2</sup>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          Lengde
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.Lengde}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          Bredde
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.Bredde}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          Soverom
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.Soverom}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className="w-full sm:w-1/2 border-t-2 border-b-0 border-l-0 border-r-0 border-purple pt-3 md:pt-4">
-                  <table className="table-auto border-0 w-full text-left property_detail_tbl">
-                    <tbody>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          Bad
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.Bad}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          Innvendig bod
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.InnvendigBod}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          Energimerking
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.Energimerking}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          Tilgjengelig bolig
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {husmodellData?.TilgjengeligBolig}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
-                          Tomtetype
-                        </td>
-                        <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
-                          {Array.isArray(husmodellData?.Tomtetype)
-                            ? husmodellData.Tomtetype.join(", ")
-                            : husmodellData?.Tomtetype}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <h2 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
-                Plantegninger og fasader
-              </h2>
-              <div className="grid grid-cols-2 gap-3 md:gap-4">
+          <div className="w-full flex flex-col sm:flex-row gap-4 md:gap-6 desktop:gap-8 mb-8 md:mb-[60px]">
+            <div className="w-full sm:w-1/2 border-t-2 border-b-0 border-l-0 border-r-0 border-purple pt-3 md:pt-4">
+              <table className="table-auto border-0 w-full text-left property_detail_tbl">
+                <tbody>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      BRA total (bruksareal)
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.BRATotal} m<sup>2</sup>
+                      </td>
+                    )}
+                  </tr>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      GUA (Gulvareal):
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.PRom} m<sup>2</sup>
+                      </td>
+                    )}
+                  </tr>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      Bebygd Areal
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.BebygdAreal} m<sup>2</sup>
+                      </td>
+                    )}
+                  </tr>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      Lengde
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.Lengde}
+                      </td>
+                    )}
+                  </tr>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      Bredde
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.Bredde}
+                      </td>
+                    )}
+                  </tr>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      Soverom
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.Soverom}
+                      </td>
+                    )}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="w-full sm:w-1/2 border-t-2 border-b-0 border-l-0 border-r-0 border-purple pt-3 md:pt-4">
+              <table className="table-auto border-0 w-full text-left property_detail_tbl">
+                <tbody>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      Bad
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.Bad}
+                      </td>
+                    )}
+                  </tr>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      Innvendig bod
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.InnvendigBod}
+                      </td>
+                    )}
+                  </tr>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      Energimerking
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.Energimerking}
+                      </td>
+                    )}
+                  </tr>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      Tilgjengelig bolig
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {husmodellData?.TilgjengeligBolig}
+                      </td>
+                    )}
+                  </tr>
+                  <tr>
+                    <td className="text-left pb-3 md:pb-[16px] text-secondary text-xs md:text-sm whitespace-nowrap">
+                      Tomtetype
+                    </td>
+                    {loading ? (
+                      <div
+                        className="w-[80px] h-[20px] rounded-lg custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    ) : (
+                      <td className="text-right pb-3 md:pb-[16px] text-black text-xs md:text-sm font-semibold whitespace-nowrap">
+                        {Array.isArray(husmodellData?.Tomtetype)
+                          ? husmodellData.Tomtetype.join(", ")
+                          : husmodellData?.Tomtetype}
+                      </td>
+                    )}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <h2 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
+            Plantegninger og fasader
+          </h2>
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
+            {loading ? (
+              <>
+                <div
+                  className="w-full h-[100px] rounded-lg custom-shimmer mb-2"
+                  style={{ borderRadius: "8px" }}
+                ></div>
+                <div
+                  className="w-full h-[100px] rounded-lg custom-shimmer mb-2"
+                  style={{ borderRadius: "8px" }}
+                ></div>
+                <div
+                  className="w-full h-[100px] rounded-lg custom-shimmer mb-2"
+                  style={{ borderRadius: "8px" }}
+                ></div>
+              </>
+            ) : (
+              <>
                 {husmodellData?.PlantegningerFasader &&
                   husmodellData?.PlantegningerFasader?.map(
                     (item: string, index: number) => {
@@ -300,46 +388,71 @@ const HouseDetailPage: React.FC = () => {
                       );
                     }
                   )}
-              </div>
-            </div>
-            <div className="w-full lg:w-[57%]">
-              <h2 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
-                {husmodellData?.Hustittel}
-              </h2>
-              <div className="mb-5 md:mb-[60px]">
-                <p className="text-sm md:text-base text-secondary h-full focus-within:outline-none resize-none">
-                  {husmodellData?.OmHusmodellen}
-                </p>
-              </div>
-              <div className="mb-5 md:mb-[60px]">
-                <Illustrasjoner />
-              </div>
-
-              <h2 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
-                {/* Film av {husmodellData?.husmodell_name} */}
-                {husmodellData?.TittelVideo}
-              </h2>
-              <div
-                style={{
-                  width: "100%",
-                  height: "400px",
-                }}
-              >
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={getEmbedUrl(husmodellData?.VideoLink)}
-                  title={husmodellData?.TittelVideo}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
+              </>
+            )}
           </div>
         </div>
-      )}
+        <div className="w-full lg:w-[57%]">
+          {loading ? (
+            <div
+              className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-4"
+              style={{ borderRadius: "8px" }}
+            ></div>
+          ) : (
+            <h2 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
+              {husmodellData?.Hustittel}
+            </h2>
+          )}
+          <div className="mb-5 md:mb-[60px]">
+            {loading ? (
+              <div
+                className="w-full h-[40px] rounded-lg custom-shimmer"
+                style={{ borderRadius: "8px" }}
+              ></div>
+            ) : (
+              <p className="text-sm md:text-base text-secondary h-full focus-within:outline-none resize-none">
+                {husmodellData?.OmHusmodellen}
+              </p>
+            )}
+          </div>
+          <div className="mb-5 md:mb-[60px]">
+            <Illustrasjoner />
+          </div>
+
+          {loading ? (
+            <div
+              className="w-full h-[40px] rounded-lg custom-shimmer mb-4 md:mb-6"
+              style={{ borderRadius: "8px" }}
+            ></div>
+          ) : (
+            <h2 className="text-black mb-4 md:mb-6 font-semibold text-lg md:text-xl desktop:text-2xl">
+              {/* Film av {husmodellData?.husmodell_name} */}
+              {husmodellData?.TittelVideo}
+            </h2>
+          )}
+          <div
+            style={{
+              width: "100%",
+              height: "400px",
+            }}
+          >
+            {loading ? (
+              <div className="w-full h-full rounded-lg custom-shimmer"></div>
+            ) : (
+              <iframe
+                width="100%"
+                height="100%"
+                src={getEmbedUrl(husmodellData?.VideoLink)}
+                title={husmodellData?.TittelVideo}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            )}
+          </div>
+        </div>
+      </div>
       {isOpen && (
         <Modal isOpen={true} onClose={() => setIsPopupOpen(false)}>
           <div

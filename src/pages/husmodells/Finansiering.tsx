@@ -4,7 +4,6 @@ import Image from "next/image";
 // import Ic_close from "@/public/images/Ic_close.svg";
 import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Button from "@/components/common/button";
-import Loader from "@/components/Loader";
 import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -135,143 +134,146 @@ const Finansiering: React.FC<{
 
   return (
     <div className="relative">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="bg-lightPurple2 py-2 md:py-4">
-            <SideSpaceContainer>
-              <div className="flex items-center flex-wrap gap-1">
-                <Link
-                  href={"/"}
-                  className="text-[#7839EE] text-xs md:text-sm font-medium"
-                >
-                  Hjem
-                </Link>
-                <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-                <div
-                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
-                  onClick={() => {
-                    const currIndex = 0;
-                    localStorage.setItem("currIndex", currIndex.toString());
-                    handlePrevious();
-                  }}
-                >
-                  Tomt og husmodell
-                </div>
-                <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-                <div
-                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
-                  onClick={() => {
-                    const currIndex = 1;
-                    localStorage.setItem("currIndex", currIndex.toString());
-                    handlePrevious();
-                  }}
-                >
-                  Tilpass
-                </div>
-                <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-                <div
-                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
-                  onClick={() => {
-                    const currIndex = 2;
-                    localStorage.setItem("currIndex", currIndex.toString());
-                    handlePrevious();
-                  }}
-                >
-                  Tomt
-                </div>
-                <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-                <div
-                  className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
-                  onClick={() => {
-                    const currIndex = 3;
-                    localStorage.setItem("currIndex", currIndex.toString());
-                    handlePrevious();
-                  }}
-                >
-                  Tilbud
-                </div>
-                <Image src={Ic_breadcrumb_arrow} alt="arrow" />
-                <span className="text-secondary2 text-xs md:text-sm">
-                  Finansiering
-                </span>
+      <>
+        <div className="bg-lightPurple2 py-2 md:py-4">
+          <SideSpaceContainer>
+            <div className="flex items-center flex-wrap gap-1">
+              <Link
+                href={"/"}
+                className="text-[#7839EE] text-xs md:text-sm font-medium"
+              >
+                Hjem
+              </Link>
+              <Image src={Ic_breadcrumb_arrow} alt="arrow" />
+              <div
+                className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
+                onClick={() => {
+                  const currIndex = 0;
+                  localStorage.setItem("currIndex", currIndex.toString());
+                  handlePrevious();
+                }}
+              >
+                Tomt og husmodell
               </div>
-              <PropertyHouseDetails
-                HouseModelData={HouseModelData}
-                lamdaDataFromApi={lamdaDataFromApi}
-                CadastreDataFromApi={CadastreDataFromApi}
-                supplierData={supplierData}
-                pris={pris}
-              />
-            </SideSpaceContainer>
-          </div>
-          {!noPlot && (
-            <PropertyDetails
-              askData={askData}
-              CadastreDataFromApi={CadastreDataFromApi}
-              lamdaDataFromApi={lamdaDataFromApi}
+              <Image src={Ic_breadcrumb_arrow} alt="arrow" />
+              <div
+                className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
+                onClick={() => {
+                  const currIndex = 1;
+                  localStorage.setItem("currIndex", currIndex.toString());
+                  handlePrevious();
+                }}
+              >
+                Tilpass
+              </div>
+              <Image src={Ic_breadcrumb_arrow} alt="arrow" />
+              <div
+                className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
+                onClick={() => {
+                  const currIndex = 2;
+                  localStorage.setItem("currIndex", currIndex.toString());
+                  handlePrevious();
+                }}
+              >
+                Tomt
+              </div>
+              <Image src={Ic_breadcrumb_arrow} alt="arrow" />
+              <div
+                className="text-[#7839EE] text-xs md:text-sm font-medium cursor-pointer"
+                onClick={() => {
+                  const currIndex = 3;
+                  localStorage.setItem("currIndex", currIndex.toString());
+                  handlePrevious();
+                }}
+              >
+                Tilbud
+              </div>
+              <Image src={Ic_breadcrumb_arrow} alt="arrow" />
+              <span className="text-secondary2 text-xs md:text-sm">
+                Finansiering
+              </span>
+            </div>
+            <PropertyHouseDetails
               HouseModelData={HouseModelData}
+              lamdaDataFromApi={lamdaDataFromApi}
+              CadastreDataFromApi={CadastreDataFromApi}
+              supplierData={supplierData}
+              pris={pris}
+              loading={loading}
             />
-          )}
+          </SideSpaceContainer>
+        </div>
+        {!noPlot && (
+          <PropertyDetails
+            askData={askData}
+            CadastreDataFromApi={CadastreDataFromApi}
+            lamdaDataFromApi={lamdaDataFromApi}
+            HouseModelData={HouseModelData}
+            loading={loading}
+          />
+        )}
 
-          <div className="pt-6 pb-8">
-            <SideSpaceContainer>
-              <div className="my-5 md:my-8">
-                <Formik
-                  initialValues={{
-                    equityAmount: "",
-                    helpWithFinancing: null,
-                  }}
-                  validationSchema={validationSchema}
-                  // onSubmit={handleSubmit}
-                  onSubmit={(values, { setTouched }) => {
-                    if (values.helpWithFinancing === null) {
-                      setTouched({ helpWithFinancing: true });
-                    }
-                    handleSubmit(values);
-                  }}
-                >
-                  {({ values, setFieldValue, errors, touched }) => {
-                    useEffect(() => {
-                      (async () => {
-                        try {
-                          const docSnap = await getDoc(
-                            doc(db, "leads", String(leadId))
-                          );
+        <div className="pt-6 pb-8">
+          <SideSpaceContainer>
+            <div className="my-5 md:my-8">
+              <Formik
+                initialValues={{
+                  equityAmount: "",
+                  helpWithFinancing: null,
+                }}
+                validationSchema={validationSchema}
+                // onSubmit={handleSubmit}
+                onSubmit={(values, { setTouched }) => {
+                  if (values.helpWithFinancing === null) {
+                    setTouched({ helpWithFinancing: true });
+                  }
+                  handleSubmit(values);
+                }}
+              >
+                {({ values, setFieldValue, errors, touched }) => {
+                  useEffect(() => {
+                    (async () => {
+                      try {
+                        const docSnap = await getDoc(
+                          doc(db, "leads", String(leadId))
+                        );
 
-                          if (docSnap.exists()) {
-                            const data = docSnap.data();
+                        if (docSnap.exists()) {
+                          const data = docSnap.data();
 
-                            const value = data?.bankValue;
+                          const value = data?.bankValue;
 
-                            if (value) {
-                              setFieldValue(
-                                "equityAmount",
-                                value?.equityAmount
-                              );
-                              setFieldValue(
-                                "helpWithFinancing",
-                                value?.helpWithFinancing
-                              );
-                            }
+                          if (value) {
+                            setFieldValue("equityAmount", value?.equityAmount);
+                            setFieldValue(
+                              "helpWithFinancing",
+                              value?.helpWithFinancing
+                            );
                           }
-                        } catch (error) {
-                          console.error(
-                            "Error fetching IsoptForBank status:",
-                            error
-                          );
                         }
-                      })();
-                    }, [leadId]);
-                    return (
-                      <Form>
-                        <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-[24px]">
-                          <div className="w-full lg:w-[38%]">
-                            <div className="rounded-lg p-3 md:p-5 bg-lightBlue">
+                      } catch (error) {
+                        console.error(
+                          "Error fetching IsoptForBank status:",
+                          error
+                        );
+                      }
+                    })();
+                  }, [leadId]);
+                  return (
+                    <Form>
+                      <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-[24px]">
+                        <div className="w-full lg:w-[38%]">
+                          <div className="rounded-lg p-3 md:p-5 bg-lightBlue">
+                            {loading ? (
+                              <div className="w-[140px] h-[20px] rounded-lg custom-shimmer mb-3"></div>
+                            ) : (
                               <h3 className="text-black text-base md:text-xl desktop:text-lg font-semibold mb-3">
                                 Trenger du hjelp med finansiering?
                               </h3>
+                            )}
+                            {loading ? (
+                              <div className="w-240px] h-[20px] rounded-lg custom-shimmer mb-6"></div>
+                            ) : (
                               <p className="text-[#555D5C] text-xs md:text-sm mb-6">
                                 Vi setter deg i kontakt med{" "}
                                 <span className="font-bold">
@@ -283,7 +285,11 @@ const Finansiering: React.FC<{
                                 og alle deres husmodeller – og gir deg rask og
                                 trygg hjelp med finansieringsprosessen.
                               </p>
-                              <div className="flex items-center gap-4">
+                            )}
+                            <div className="flex items-center gap-4">
+                              {loading ? (
+                                <div className="w-1/2 h-[40px] rounded-lg custom-shimmer"></div>
+                              ) : (
                                 <div
                                   onClick={() => {
                                     setFieldValue("helpWithFinancing", true);
@@ -297,6 +303,10 @@ const Finansiering: React.FC<{
                                 >
                                   Få hjelp med finansiering
                                 </div>
+                              )}
+                              {loading ? (
+                                <div className="w-1/2 h-[40px] rounded-lg custom-shimmer"></div>
+                              ) : (
                                 <div
                                   onClick={() => {
                                     setFieldValue("helpWithFinancing", false);
@@ -310,47 +320,67 @@ const Finansiering: React.FC<{
                                 >
                                   Nei, jeg ordner det selv
                                 </div>
-                              </div>
-                              {touched.helpWithFinancing &&
-                                errors.helpWithFinancing && (
-                                  <div className="text-red text-sm mt-2">
-                                    {errors.helpWithFinancing}
-                                  </div>
-                                )}
+                              )}
                             </div>
+                            {touched.helpWithFinancing &&
+                              errors.helpWithFinancing && (
+                                <div className="text-red text-sm mt-2">
+                                  {errors.helpWithFinancing}
+                                </div>
+                              )}
                           </div>
-                          <div className="w-full lg:w-[62%]">
-                            <div
-                              className="rounded-[8px] border border-[#DCDFEA]"
-                              style={{
-                                boxShadow:
-                                  "0px 2px 4px -2px #1018280F, 0px 4px 8px -2px #1018281A",
-                              }}
-                            >
-                              <div className="flex items-center justify-between border-b border-[#DCDFEA] p-3 md:p-5 gap-1">
+                        </div>
+                        <div className="w-full lg:w-[62%]">
+                          <div
+                            className="rounded-[8px] border border-[#DCDFEA]"
+                            style={{
+                              boxShadow:
+                                "0px 2px 4px -2px #1018280F, 0px 4px 8px -2px #1018281A",
+                            }}
+                          >
+                            <div className="flex items-center justify-between border-b border-[#DCDFEA] p-3 md:p-5 gap-1">
+                              {loading ? (
+                                <div className="w-[140px] h-[20px] rounded-lg custom-shimmer"></div>
+                              ) : (
                                 <h2 className="text-xs md:text-sm desktop:text-base text-black font-semibold">
                                   Beregn ditt byggelån hos:
                                 </h2>
+                              )}
+                              {loading ? (
+                                <div className="w-[90px] sm:w-auto sm:h-auto h-[30px] rounded-lg custom-shimmer"></div>
+                              ) : (
                                 <Image
                                   fetchPriority="auto"
                                   src={Ic_spareBank}
                                   alt="icon"
                                   className="w-[90px] sm:w-auto sm:h-auto h-[30px]"
                                 />
-                              </div>
-                              <div className="flex flex-col gap-2 md:gap-4 p-3 md:p-5">
-                                <div className="flex items-center justify-between gap-1">
+                              )}
+                            </div>
+                            <div className="flex flex-col gap-2 md:gap-4 p-3 md:p-5">
+                              <div className="flex items-center justify-between gap-1">
+                                {loading ? (
+                                  <div className="w-[140px] h-[20px] rounded-lg custom-shimmer"></div>
+                                ) : (
                                   <p className="text-[#555D5C] text-xs md:text-sm font-medium">
                                     Totale bygge- og tomtekostnader (inkl. mva)
                                   </p>
+                                )}
+                                {loading ? (
+                                  <div className="w-[140px] h-[20px] rounded-lg custom-shimmer"></div>
+                                ) : (
                                   <h4 className="text-[#555D5C] text-xs md:text-sm desktop:text-base whitespace-nowrap">
                                     {formatCurrency(
                                       formattedNumber +
                                         formattedNumberOfByggekostnader
                                     )}
                                   </h4>
-                                </div>
-                                <div className="flex items-center justify-between gap-1">
+                                )}
+                              </div>
+                              <div className="flex items-center justify-between gap-1">
+                                {loading ? (
+                                  <div className="w-[140px] h-[20px] rounded-lg custom-shimmer mb-3"></div>
+                                ) : (
                                   <p className="text-[#555D5C] text-xs md:text-sm">
                                     <span className="font-bold">
                                       Din egenkapital
@@ -360,7 +390,11 @@ const Finansiering: React.FC<{
                                       bruke?
                                     </i>
                                   </p>
-                                  <div className="flex items-center gap-2 md:gap-4">
+                                )}
+                                <div className="flex items-center gap-2 md:gap-4">
+                                  {loading ? (
+                                    <div className="w-[160px] h-[30px] rounded-lg custom-shimmer mb-3"></div>
+                                  ) : (
                                     <div>
                                       <Field
                                         id="equityAmount"
@@ -401,12 +435,20 @@ const Finansiering: React.FC<{
                                           </p>
                                         )}
                                     </div>
-                                  </div>
+                                  )}
                                 </div>
-                                <div className="flex items-center justify-between gap-1">
+                              </div>
+                              <div className="flex items-center justify-between gap-1">
+                                {loading ? (
+                                  <div className="w-[140px] h-[20px] rounded-lg custom-shimmer"></div>
+                                ) : (
                                   <p className="text-[#00231D] text-xs md:text-sm font-semibold">
                                     Estimert byggelån:
                                   </p>
+                                )}
+                                {loading ? (
+                                  <div className="w-[140px] h-[20px] rounded-lg custom-shimmer"></div>
+                                ) : (
                                   <h4 className="text-[#00231D] text-xs md:text-sm desktop:text-base font-semibold whitespace-nowrap">
                                     {(() => {
                                       const data: any =
@@ -437,9 +479,13 @@ const Finansiering: React.FC<{
                                       }
                                     })()}
                                   </h4>
-                                </div>
+                                )}
                               </div>
-                              <div className="p-3 md:p-5 border-t border-[#DCDFEA]">
+                            </div>
+                            <div className="p-3 md:p-5 border-t border-[#DCDFEA]">
+                              {loading ? (
+                                <div className="w-[140px] h-[20px] rounded-lg custom-shimmer"></div>
+                              ) : (
                                 <div className="flex items-start gap-2 md:gap-3">
                                   <Image
                                     fetchPriority="auto"
@@ -455,65 +501,76 @@ const Finansiering: React.FC<{
                                     sikkerhet.
                                   </p>
                                 </div>
-                              </div>
+                              )}
                             </div>
+                          </div>
+                          {loading ? (
+                            <div className="w-[140px] h-[20px] rounded-lg custom-shimmer mt-4"></div>
+                          ) : (
                             <div className="mt-4 flex justify-end text-xs md:text-sm">
                               🔒 Dine tall deles kun med banken etter ditt
                               samtykke
                             </div>
-                          </div>
+                          )}
                         </div>
-                      </Form>
-                    );
-                  }}
-                </Formik>
-              </div>
-              <div className="mb-4 md:mb-8">
-                <Prisliste husmodellData={HouseModelData?.Prisliste} />
-              </div>
+                      </div>
+                    </Form>
+                  );
+                }}
+              </Formik>
+            </div>
+            <div className="mb-4 md:mb-8">
+              <Prisliste
+                husmodellData={HouseModelData?.Prisliste}
+                loading={loading}
+              />
+            </div>
+            {loading ? (
+              <div className="w-full h-[40px] rounded-lg custom-shimmer mb-4 md:mb-8"></div>
+            ) : (
               <span className="mb-4 md:mb-8 text-xs md:text-sm text-center">
                 📄 Dette er et estimat basert på dagens priser og forutsetter
                 standard leveranse fra {supplierData?.company_name}. Eventuelle
                 avvik, tillegg eller fratrekk kan påvirke totalsummen.
               </span>
-            </SideSpaceContainer>
-          </div>
-          <div
-            className="sticky bottom-0 bg-white py-4"
-            style={{
-              boxShadow:
-                "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",
-              zIndex: 9999,
-            }}
-          >
-            <SideSpaceContainer>
-              <div className="flex justify-end gap-4 items-center">
-                <Button
-                  text="Tilbake"
-                  className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
-                  onClick={() => {
-                    handlePrevious();
-                  }}
-                />
-                <Button
-                  text={
-                    value === false
-                      ? "Send til SpareBank1"
-                      : "Neste: Verdivurdering"
-                  }
-                  className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
-                  onClick={() => {
-                    setTimeout(() => {
-                      document.querySelector("form")?.requestSubmit();
-                    }, 0);
-                    // handlePopup();
-                  }}
-                />
-              </div>
-            </SideSpaceContainer>
-          </div>
-        </>
-      )}
+            )}
+          </SideSpaceContainer>
+        </div>
+        <div
+          className="sticky bottom-0 bg-white py-4"
+          style={{
+            boxShadow:
+              "0px -4px 6px -2px #10182808, 0px -12px 16px -4px #10182814",
+            zIndex: 9999,
+          }}
+        >
+          <SideSpaceContainer>
+            <div className="flex justify-end gap-4 items-center">
+              <Button
+                text="Tilbake"
+                className="border-2 border-[#6927DA] text-[#6927DA] hover:border-[#7A5AF8] hover:text-[#7A5AF8] focus:border-[#5925DC] focus:text-[#5925DC] sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-medium desktop:px-[46px] relative desktop:py-[16px]"
+                onClick={() => {
+                  handlePrevious();
+                }}
+              />
+              <Button
+                text={
+                  value === false
+                    ? "Send til SpareBank1"
+                    : "Neste: Verdivurdering"
+                }
+                className="border border-greenBtn bg-greenBtn hover:border-[#28AA6C] focus:border-[#09723F] hover:bg-[#28AA6C] focus:bg-[#09723F] text-white sm:text-base rounded-[40px] w-max h-[36px] md:h-[40px] lg:h-[48px] font-semibold relative desktop:px-[28px] desktop:py-[16px]"
+                onClick={() => {
+                  setTimeout(() => {
+                    document.querySelector("form")?.requestSubmit();
+                  }, 0);
+                  // handlePopup();
+                }}
+              />
+            </div>
+          </SideSpaceContainer>
+        </div>
+      </>
     </div>
   );
 };

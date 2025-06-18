@@ -15,7 +15,7 @@ import PlotFilterSection from "./plotFilterSection";
 import PlotProperty from "./plotProperty";
 import { Settings2, X } from "lucide-react";
 import { Drawer } from "@mui/material";
-import Loading from "@/components/Loading";
+// import Loading from "@/components/Loading";
 
 const Plots: React.FC<{
   handlePrevious: any;
@@ -293,11 +293,11 @@ const Plots: React.FC<{
                 />
               </div>
             </div>
-            {isLoading ? (
+            {/* {isLoading ? (
               <div className="relative w-full lg:w-[65%]">
                 <Loading />
               </div>
-            ) : (
+            ) : ( */}
               <div className="w-full lg:w-[65%]">
                 <PlotProperty
                   HouseModelProperty={currentPlots}
@@ -334,7 +334,7 @@ const Plots: React.FC<{
                   </button>
                 </div>
               </div>
-            )}
+            {/* )} */}
           </div>
         </SideSpaceContainer>
 

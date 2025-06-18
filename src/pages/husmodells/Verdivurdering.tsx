@@ -168,6 +168,7 @@ const Verdivurdering: React.FC<{
                   CadastreDataFromApi={CadastreDataFromApi}
                   supplierData={supplierData}
                   pris={pris}
+                  loading={loading}
                 />
               </div>
             </SideSpaceContainer>
@@ -178,6 +179,7 @@ const Verdivurdering: React.FC<{
               CadastreDataFromApi={CadastreDataFromApi}
               lamdaDataFromApi={lamdaDataFromApi}
               HouseModelData={HouseModelData}
+              loading={loading}
             />
           )}
 
@@ -261,12 +263,11 @@ const Verdivurdering: React.FC<{
                                   Nei, jeg ordner det selv
                                 </div>
                               </div>
-                              {touched.IsEie &&
-                                errors.IsEie && (
-                                  <div className="text-red text-sm mt-2">
-                                    {errors.IsEie}
-                                  </div>
-                                )}
+                              {touched.IsEie && errors.IsEie && (
+                                <div className="text-red text-sm mt-2">
+                                  {errors.IsEie}
+                                </div>
+                              )}
                             </div>
                           </div>
                           <div className="w-full lg:w-[62%]">

@@ -342,6 +342,7 @@ const Tilpass: React.FC<any> = ({
                 supplierData={supplierData}
                 hidden={true}
                 pris={pris}
+                loading={loading}
               />
             </SideSpaceContainer>
           </div>

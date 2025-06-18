@@ -111,7 +111,10 @@ const HusmodellDetail = () => {
                 <Husdetaljer husmodellData={husmodellData?.Husdetaljer} />
               )}
               {activeTab === 1 && (
-                <Prisliste husmodellData={husmodellData?.Prisliste} />
+                <Prisliste
+                  husmodellData={husmodellData?.Prisliste}
+                  loading={loading}
+                />
               )}
             </SideSpaceContainer>
           </div>
