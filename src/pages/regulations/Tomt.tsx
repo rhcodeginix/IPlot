@@ -13,7 +13,7 @@ import Ic_cabin from "@/public/images/Ic_cabin.svg";
 import Button from "@/components/common/button";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
-import Loader from "@/components/Loader";
+// import Loader from "@/components/Loader";
 import LoginForm from "../login/loginForm";
 import { useRouter } from "next/router";
 import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
@@ -120,9 +120,6 @@ const Tomt: React.FC<{
     null
   );
 
-  if (loadingLamdaData) {
-    <Loader />;
-  }
   return (
     <div className="relative">
       <div className="bg-lightPurple2 py-2 md:py-4">
@@ -140,6 +137,7 @@ const Tomt: React.FC<{
           <PropertyDetail
             CadastreDataFromApi={CadastreDataFromApi}
             lamdaDataFromApi={lamdaDataFromApi}
+            loading={loadingLamdaData}
           />
         </SideSpaceContainer>
       </div>

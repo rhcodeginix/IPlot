@@ -3,7 +3,7 @@ import SideSpaceContainer from "@/components/common/sideSpace";
 import Image from "next/image";
 import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Button from "@/components/common/button";
-import Loader from "@/components/Loader";
+// import Loader from "@/components/Loader";
 import Link from "next/link";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
 import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
@@ -207,9 +207,6 @@ const Tilbud: React.FC<{
 
   const ByggestartDate = addDaysToDate(date, totalByggestartDays);
 
-  if (loadingLamdaData) {
-    <Loader />;
-  }
   return (
     <div className="relative">
       <div className="bg-lightPurple2 py-2 md:py-4">
@@ -362,10 +359,7 @@ const Tilbud: React.FC<{
                 </div>
                 <div className="flex gap-3 items-center">
                   <div className="text-darkBlack text-xs md:text-sm font-semibold">
-                    {
-                      askData?.bya_calculations?.results
-                        ?.available_building_area
-                    }{" "}
+                    {Husdetaljer?.BebygdAreal}{" "}
                     <span className="text-[#4A5578] font-normal">m²</span>
                   </div>
                   <div className="border-l border-[#EAECF0] h-[12px]"></div>
@@ -378,10 +372,12 @@ const Tilbud: React.FC<{
                     {Husdetaljer?.Bad}{" "}
                     <span className="text-[#4A5578] font-normal">bad</span>
                   </div>
-                  <div className="text-darkBlack text-xs md:text-sm font-semibold ml-auto">
-                    {askData?.bya_calculations?.input?.plot_size}{" "}
-                    <span className="text-[#4A5578] font-normal">m²</span>
-                  </div>
+                  {askData?.bya_calculations?.input?.plot_size && (
+                    <div className="text-darkBlack text-xs md:text-sm font-semibold ml-auto">
+                      {askData?.bya_calculations?.input?.plot_size}{" "}
+                      <span className="text-[#4A5578] font-normal">m²</span>
+                    </div>
+                  )}
                 </div>
                 <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
                 <div className="flex items-center justify-between gap-2 mb-3">

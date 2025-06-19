@@ -1,4 +1,3 @@
-import Loading from "@/components/Loading";
 import Image from "next/image";
 import Ic_wishlist_heart from "@/public/images/Ic_wishlist_heart.svg";
 import Button from "@/components/common/button";
@@ -53,9 +52,78 @@ const HusmodellProperty: React.FC<{
     <>
       <div>
         {isLoading ? (
-          <div className="relative">
-            <Loading />
-          </div>
+          Array.from({ length: 5 }).map((_, index) => (
+            <div
+              key={index}
+              className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer shadow-shadow4 hover:shadow-shadow1 mb-4 lg:mb-6 desktop:mb-8"
+            >
+              <div className="mb-2 md:mb-3 desktop:mb-4 flex items-start justify-between gap-3">
+                <div
+                  className="w-[200px] h-[20px] rounded-md custom-shimmer"
+                  style={{ borderRadius: "8px" }}
+                ></div>
+                <div
+                  className="w-6 h-6 rounded-md custom-shimmer"
+                  style={{ borderRadius: "8px" }}
+                ></div>
+              </div>
+              <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-4">
+                <div className="flex gap-2 w-full sm:w-[40%] relative">
+                  <div
+                    className="w-full h-[180px] rounded-lg custom-shimmer"
+                    style={{ borderRadius: "8px" }}
+                  ></div>
+                </div>
+                <div className="w-full sm:w-[60%]">
+                  <h5 className="text-darkBlack font-medium text-sm md:text-lg mb-1 one_line_elipse">
+                    <div
+                      className="w-[200px] h-[20px] rounded-md custom-shimmer"
+                      style={{ borderRadius: "8px" }}
+                    ></div>
+                  </h5>
+                  <h5 className="text-[#4A5578] text-xs md:text-sm mb-2 md:mb-4 two_line_elipse">
+                    <div
+                      className="w-[200px] h-[20px] rounded-md custom-shimmer"
+                      style={{ borderRadius: "8px" }}
+                    ></div>
+                  </h5>
+                  <div className="flex gap-3 items-center">
+                    <div
+                      className="w-[100px] h-[20px] rounded-md custom-shimmer"
+                      style={{ borderRadius: "8px" }}
+                    ></div>
+                    <div className="border-l border-[#EAECF0] h-[12px]"></div>
+                    <div
+                      className="w-[100px] h-[20px] rounded-md custom-shimmer"
+                      style={{ borderRadius: "8px" }}
+                    ></div>
+                    <div className="border-l border-[#EAECF0] h-[12px]"></div>
+                    <div
+                      className="w-[100px] h-[20px] rounded-md custom-shimmer"
+                      style={{ borderRadius: "8px" }}
+                    ></div>
+                  </div>
+                  <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
+                  <div className="gap-4 md:gap-5 lg:gap-6 flex items-center justify-between">
+                    <div>
+                      <div
+                        className="w-[200px] h-[20px] rounded-md custom-shimmer mb-2"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                      <div
+                        className="w-[200px] h-[20px] rounded-md custom-shimmer"
+                        style={{ borderRadius: "8px" }}
+                      ></div>
+                    </div>
+                    <div
+                      className="w-[200px] h-[40px] rounded-md custom-shimmer"
+                      style={{ borderRadius: "8px" }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
         ) : (
           <div className="flex flex-col gap-4 lg:gap-6 desktop:gap-8">
             {HouseModelProperty && HouseModelProperty.length > 0 ? (

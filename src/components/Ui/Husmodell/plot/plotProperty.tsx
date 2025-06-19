@@ -59,7 +59,7 @@ const PlotProperty: React.FC<{
     <>
       <div>
         {isLoading ? (
-          <div className="relative">
+          <div className="relative flex flex-col gap-4 lg:gap-6 desktop:gap-8">
             {Array.from({ length: 8 }).map((_, index) => {
               return (
                 <div

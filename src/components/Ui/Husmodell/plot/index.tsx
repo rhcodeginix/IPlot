@@ -293,48 +293,41 @@ const Plots: React.FC<{
                 />
               </div>
             </div>
-            {/* {isLoading ? (
-              <div className="relative w-full lg:w-[65%]">
-                <Loading />
+            <div className="w-full lg:w-[65%]">
+              <PlotProperty
+                HouseModelProperty={currentPlots}
+                isLoading={isLoading}
+                // handleNext={handleNext}
+              />
+              <div className="flex justify-center mt-6 space-x-2">
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
+                  disabled={currentPage === 1}
+                  className="px-4 py-2 border rounded disabled:opacity-50"
+                >
+                  Previous
+                </button>
+                <span className="px-4 py-2">{currentPage}</span>
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) =>
+                      prev < Math.ceil(HouseModelProperty.length / itemsPerPage)
+                        ? prev + 1
+                        : prev
+                    )
+                  }
+                  disabled={
+                    currentPage ===
+                    Math.ceil(HouseModelProperty.length / itemsPerPage)
+                  }
+                  className="px-4 py-2 border rounded disabled:opacity-50"
+                >
+                  Next
+                </button>
               </div>
-            ) : ( */}
-              <div className="w-full lg:w-[65%]">
-                <PlotProperty
-                  HouseModelProperty={currentPlots}
-                  isLoading={isLoading}
-                  // handleNext={handleNext}
-                />
-                <div className="flex justify-center mt-6 space-x-2">
-                  <button
-                    onClick={() =>
-                      setCurrentPage((prev) => Math.max(prev - 1, 1))
-                    }
-                    disabled={currentPage === 1}
-                    className="px-4 py-2 border rounded disabled:opacity-50"
-                  >
-                    Previous
-                  </button>
-                  <span className="px-4 py-2">{currentPage}</span>
-                  <button
-                    onClick={() =>
-                      setCurrentPage((prev) =>
-                        prev <
-                        Math.ceil(HouseModelProperty.length / itemsPerPage)
-                          ? prev + 1
-                          : prev
-                      )
-                    }
-                    disabled={
-                      currentPage ===
-                      Math.ceil(HouseModelProperty.length / itemsPerPage)
-                    }
-                    className="px-4 py-2 border rounded disabled:opacity-50"
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            {/* )} */}
+            </div>
           </div>
         </SideSpaceContainer>
 

@@ -26,9 +26,7 @@ const HusmodellDetail: React.FC<{
   supplierData,
 }) => {
   const router = useRouter();
-  // if (loading) {
-  //   return <Loader />;
-  // }
+
   return (
     <>
       <div className="relative">

@@ -13,7 +13,6 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
-import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
 import { formatPrice } from "@/pages/belop/belopProperty";
 import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
@@ -245,35 +244,48 @@ const HomePageSearchTab: React.FC = () => {
       </div>
       <div className="bg-lightPurple2 py-[48px] lg:py-[60px]">
         <SideSpaceContainer>
-          {data.isLoading ? (
-            <div className="relative">
-              <Loading />
-            </div>
-          ) : (
-            <div className="flex flex-col md:flex-row items-start gap-3 md:gap-5">
+          <div className="flex flex-col md:flex-row items-start gap-3 md:gap-5">
+            {data?.isLoading ? (
+              <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+            ) : (
               <h5 className="text-darkBlack font-semibold text-sm md:text-base">
                 Tomte<span className="text-purple2">Banken</span>:
               </h5>
+            )}
+            {data?.isLoading ? (
+              <div className="flex gap-2 sm:gap-3 flex-wrap">
+                {Array.from({ length: 15 }).map((_: any, index: number) => (
+                  <div
+                    key={index}
+                    className="border flex items-center gap-2 border-[#ECE9FE] bg-white rounded-[50px] text-xs md:text-sm py-[7px] px-3 cursor-pointer"
+                  >
+                    <div className="w-[50px] h-[20px] rounded-lg custom-shimmer"></div>{" "}
+                    <div className="w-[35px] h-[20px] rounded-lg custom-shimmer"></div>
+                  </div>
+                ))}
+              </div>
+            ) : (
               <div className="flex gap-2 sm:gap-3 flex-wrap">
                 {data.cities.map((city: any, index: number) => (
                   <div
                     key={index}
-                    className="border border-[#ECE9FE] bg-white rounded-[50px] text-xs md:text-sm py-[7px] px-3 cursor-pointer"
+                    className="border flex items-center gap-2 border-[#ECE9FE] bg-white rounded-[50px] text-xs md:text-sm py-[7px] px-3 cursor-pointer"
                     onClick={() => {
                       router.push(
                         `tomtbaken?city=${`${city.name} (${city?.total_entries})`}`
                       );
                     }}
                   >
-                    <span className="text-[#30374F]">{city?.name}</span>{" "}
+                    <span className="text-[#30374F]">{city?.name}</span>
+
                     <span className="text-secondary2">
                       ({city?.total_entries})
                     </span>
                   </div>
                 ))}
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </SideSpaceContainer>
       </div>
       <div className="py-[44px] md:py-[58px] desktop:py-[120px]">
@@ -284,8 +296,65 @@ const HomePageSearchTab: React.FC = () => {
               <span className="font-bold text-purple2">Akershus</span>
             </h2>
             {data.isLoading ? (
-              <div className="relative">
-                <Loading />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                {Array.from({ length: 3 }).map((_: any, index: number) => {
+                  return (
+                    <div
+                      key={index}
+                      className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer"
+                      style={{
+                        boxShadow:
+                          "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
+                      }}
+                    >
+                      <div className="w-full h-[24px] rounded-lg custom-shimmer mb-1"></div>
+                      <div className="w-[150px] h-[20px] rounded-lg custom-shimmer mb-1"></div>
+                      <p className="mb-2 md:mb-3 desktop:mb-4">
+                        <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                      </p>
+                      <div className="flex gap-2 mb-3 desktop:mb-4 h-[160px] sm:h-[185px]">
+                        <div className="w-[63%] relative">
+                          <div className="w-full h-full rounded-lg custom-shimmer"></div>
+                        </div>
+                        <div className="w-[37%] rounded-[8px] overflow-hidden h-full">
+                          <div className="w-full h-full rounded-lg custom-shimmer"></div>
+                        </div>
+                      </div>
+                      <div className="flex gap-3 items-center justify-between">
+                        <div className="flex gap-3 items-center">
+                          <div className="text-darkBlack text-xs md:text-sm font-semibold">
+                            <div className="w-[70px] h-[20px] rounded-lg custom-shimmer"></div>
+                          </div>
+                          <div className="border-l border-[#EAECF0] h-[12px]"></div>
+                          <div className="text-darkBlack text-xs md:text-sm font-semibold">
+                            <div className="w-[70px] h-[20px] rounded-lg custom-shimmer"></div>
+                          </div>
+                        </div>
+                        <div className="text-darkBlack text-xs md:text-sm font-semibold">
+                          <div className="w-[70px] h-[20px] rounded-lg custom-shimmer"></div>
+                        </div>
+                      </div>
+                      <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
+                      <div className="gap-4 md:gap-5 lg:gap-6 flex items-center mb-2 md:mb-3 desktop:mb-4">
+                        <div className="w-1/2">
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-1"></div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        </div>
+                        <div className="w-1/2">
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-1"></div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        </div>
+                      </div>
+                      <div className="gap-4 md:gap-5 lg:gap-6 flex items-center justify-between">
+                        <div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-1"></div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        </div>
+                        <div className="w-[100px] h-[40px] rounded-lg custom-shimmer"></div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
@@ -476,8 +545,44 @@ const HomePageSearchTab: React.FC = () => {
               <span className="font-bold text-purple2">Akershus</span>
             </h2>
             {data?.isLoading ? (
-              <div className="relative">
-                <Loading />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                {Array.from({ length: 3 }).map((_: any, index: number) => (
+                  <div
+                    key={index}
+                    className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer"
+                    style={{
+                      boxShadow:
+                        "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
+                    }}
+                  >
+                    <div className="w-[180px] h-[20px] rounded-lg custom-shimmer mb-2"></div>
+                    <p className="mb-2 md:mb-3 desktop:mb-4">
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    </p>
+                    <div className="relative mb-3 desktop:mb-4">
+                      <div className="w-full h-[200px] md:h-[234px] rounded-[8px] overflow-hidden">
+                        <div className="w-full h-full rounded-lg custom-shimmer"></div>
+                      </div>
+                    </div>
+                    <div className="flex gap-3 items-center">
+                      <div className="text-darkBlack text-xs md:text-sm font-semibold">
+                        <div className="w-[70px] h-[20px] rounded-lg custom-shimmer"></div>
+                      </div>
+                      <div className="border-l border-[#EAECF0] h-[12px]"></div>
+                      <div className="text-darkBlack text-xs md:text-sm font-semibold">
+                        <div className="w-[70px] h-[20px] rounded-lg custom-shimmer"></div>
+                      </div>
+                    </div>
+                    <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
+                    <div className="gap-4 md:gap-5 lg:gap-6 flex items-center justify-between">
+                      <div>
+                        <div className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-1"></div>
+                        <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                      </div>
+                      <div className="w-[100px] h-[40px] rounded-lg custom-shimmer"></div>
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
@@ -583,14 +688,42 @@ const HomePageSearchTab: React.FC = () => {
               <span className="font-bold text-purple2">Asker</span>
             </h2>
             {data.isLoading ? (
-              <div className="relative">
-                <Loading />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                {Array.from({ length: 3 }).map((_: any, index: number) => {
+                  return (
+                    <div
+                      key={index}
+                      className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer"
+                      style={{
+                        boxShadow:
+                          "0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A",
+                      }}
+                    >
+                      <div className="w-[150px] h-[20px] rounded-lg custom-shimmer mb-3"></div>
+                      <div className="w-full h-[230px] md:h-[304px] mb-3 desktop:mb-4 rounded-lg custom-shimmer"></div>
+                      <div className="w-full h-[30px] rounded-lg custom-shimmer mb-2"></div>
+                      <div className="flex gap-3 items-center">
+                        <div className="w-[70px] h-[20px] rounded-lg custom-shimmer"></div>
+                        <div className="border-l border-[#EAECF0] h-[12px]"></div>
+                        <div className="w-[70px] h-[20px] rounded-lg custom-shimmer"></div>
+                        <div className="border-l border-[#EAECF0] h-[12px]"></div>
+                        <div className="w-[70px] h-[20px] rounded-lg custom-shimmer"></div>
+                      </div>
+                      <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
+                      <div className="gap-4 md:gap-5 lg:gap-6 flex items-center justify-between">
+                        <div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-1"></div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        </div>
+                        <div className="w-[100px] h-[40px] rounded-lg custom-shimmer"></div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                 {data.houseModels.map((property: any, index: number) => {
-                  // const supplierId = property?.Husdetaljer?.Leverandører;
-                  // const finalData = data.supplierData[supplierId] || null;
                   return (
                     <div
                       key={index}

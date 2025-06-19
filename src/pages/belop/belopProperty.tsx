@@ -1,4 +1,3 @@
-import Loading from "@/components/Loading";
 import Image from "next/image";
 import Ic_wishlist_heart from "@/public/images/Ic_wishlist_heart.svg";
 import Button from "@/components/common/button";
@@ -65,8 +64,61 @@ const BelopProperty: React.FC<{
     <>
       <div>
         {isLoading ? (
-          <div className="relative">
-            <Loading />
+          <div className="relative flex flex-col gap-4 lg:gap-6 desktop:gap-8">
+            {Array.from({ length: 8 }).map((_, index) => {
+              return (
+                <div
+                  key={index}
+                  className="border border-gray3 rounded-[8px] p-3 laptop:p-5 shadow-shadow4 hover:shadow-shadow1"
+                >
+                  <div className="mb-2 md:mb-3 desktop:mb-4 flex items-start justify-between gap-3">
+                    <div>
+                      <div className="w-[250px] h-[20px] rounded-lg custom-shimmer mb-2"></div>
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-2"></div>
+                    </div>
+                    <div className="w-6 h-6 rounded-lg custom-shimmer"></div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row items-center gap-3 laptop:gap-4">
+                    <div className="flex gap-2 w-full sm:w-1/2">
+                      <div className="w-[63%] h-[160px] relative">
+                        <div className="w-full h-full rounded-lg custom-shimmer"></div>
+                      </div>
+                      <div className="w-[37%] rounded-[8px] overflow-hidden h-[160px]">
+                        <div className="w-full h-full rounded-lg custom-shimmer"></div>
+                      </div>
+                    </div>
+                    <div className="w-full sm:w-1/2">
+                      <div className="flex gap-2 md:gap-3 lg:gap-1.5 laptop:gap-3 items-center">
+                        <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        <div className="border-l border-[#EAECF0] h-[12px]"></div>
+                        <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        <div className="border-l border-[#EAECF0] h-[12px]"></div>
+                        <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                      </div>
+                      <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
+                      <div className="gap-4 md:gap-5 lg:gap-6 flex items-center mb-2 md:mb-3 desktop:mb-4">
+                        <div className="w-1/2">
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-1"></div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        </div>
+                        <div className="w-1/2">
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-1"></div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        </div>
+                      </div>
+                      <div className="gap-4 md:gap-5 lg:gap-6 flex items-center justify-between">
+                        <div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer mb-1"></div>
+                          <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                        </div>
+                        <div className="w-[120px] h-[40px] rounded-lg custom-shimmer"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div className="flex flex-col gap-4 lg:gap-6 desktop:gap-8">

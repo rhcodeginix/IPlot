@@ -5,7 +5,6 @@ import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Ic_info_circle from "@/public/images/Ic_info_circle.svg";
 import Ic_close from "@/public/images/Ic_close.svg";
 import Button from "@/components/common/button";
-import Loader from "@/components/Loader";
 import Link from "next/link";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
 import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjoner";
@@ -224,9 +223,6 @@ const Tilpass: React.FC<{
 
   const totalPrice = totalCustPris + husPris;
 
-  if (loadingLamdaData) {
-    <Loader />;
-  }
   return (
     <div className="relative">
       <div className="bg-lightPurple2 py-2 md:py-4">

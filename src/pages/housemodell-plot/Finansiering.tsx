@@ -3,7 +3,6 @@ import SideSpaceContainer from "@/components/common/sideSpace";
 import Image from "next/image";
 import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Button from "@/components/common/button";
-import Loader from "@/components/Loader";
 import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -133,9 +132,6 @@ const Finansiering: React.FC<{
   // };
   const { noPlot } = router.query;
 
-  if (loadingLamdaData) {
-    <Loader />;
-  }
   return (
     <div className="relative">
       <div className="bg-lightPurple2 py-2 md:py-4">

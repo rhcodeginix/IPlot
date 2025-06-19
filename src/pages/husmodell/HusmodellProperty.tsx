@@ -54,7 +54,7 @@ const HusmodellProperty: React.FC<{
           Array.from({ length: 5 }).map((_, index) => (
             <div
               key={index}
-              className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer shadow-shadow4 hover:shadow-shadow1"
+              className="border border-gray3 rounded-[8px] p-3 md:p-5 cursor-pointer shadow-shadow4 hover:shadow-shadow1 mb-4 lg:mb-6 desktop:mb-8"
             >
               <div className="mb-2 md:mb-3 desktop:mb-4 flex items-start justify-between gap-3">
                 <div

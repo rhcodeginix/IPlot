@@ -4,7 +4,6 @@ import Img_vipps_login from "@/public/images/Img_vipps_login.png";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import Ic_close from "@/public/images/Ic_close.svg";
-import Loader from "@/components/Loader";
 import LoginForm from "../login/loginForm";
 import { useRouter } from "next/router";
 import Tomt from "./Tomt";
@@ -79,9 +78,7 @@ const TomtHusmodell: React.FC<{
   delete router_query.login_popup;
 
   const queryString = new URLSearchParams(router_query).toString();
-  if (loadingLamdaData) {
-    <Loader />;
-  }
+
   return (
     <div className="relative">
       {propertyId ? (

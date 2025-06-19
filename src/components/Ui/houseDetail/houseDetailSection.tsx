@@ -6,9 +6,6 @@ const HouseDetailsection: React.FC<{
   loading: any;
   HouseModelData: any;
 }> = ({ loading, HouseModelData }) => {
-  // if (loading) {
-  //   return <Loader />;
-  // }
   return (
     <>
       <div

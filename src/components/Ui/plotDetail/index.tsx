@@ -1219,7 +1219,7 @@ const PlotDetailPage: React.FC<{
                     </div>
                   </div>
                   {loadingAdditionalData ? (
-                    <div className="w-full h-[400px] lg:h-[590px] rounded-lg custom-shimmer"></div>
+                    <div className="w-full h-[400px] lg:h-[590px] rounded-lg custom-shimmer mt-[36px] md:mt-[46px] lg:mt-[55px]"></div>
                   ) : (
                     <div className="w-full flex flex-col gap-5 md:gap-6 lg:gap-8 items-center mt-[36px] md:mt-[46px] lg:mt-[55px]">
                       <div className="rounded-[12px] overflow-hidden w-full relative border border-[#7D89B0] h-[400px] lg:h-[590px]">
@@ -1473,13 +1473,17 @@ const PlotDetailPage: React.FC<{
           )}
           {PlotActiveTab === "Bygninger" && (
             <>
-              {CadastreDataFromApi?.buildingsApi?.response?.items.length > 0 ? (
+              {loadingAdditionalData ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                  <div className="w-full h-[300px] rounded-lg custom-shimmer"></div>
+                  <div className="w-full h-[300px] rounded-lg custom-shimmer"></div>
+                </div>
+              ) : (
                 <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                    {loadingAdditionalData ? (
-                      <div className="w-full h-[300px] rounded-lg custom-shimmer"></div>
-                    ) : (
-                      <>
+                  {CadastreDataFromApi?.buildingsApi?.response?.items.length >
+                  0 ? (
+                    <>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                         {CadastreDataFromApi?.buildingsApi?.response?.items.map(
                           (item: any, index: number) => (
                             <div
@@ -1579,12 +1583,12 @@ const PlotDetailPage: React.FC<{
                             </div>
                           )
                         )}
-                      </>
-                    )}
-                  </div>
+                      </div>
+                    </>
+                  ) : (
+                    <p>Ingen bygningsdata funnet.</p>
+                  )}
                 </>
-              ) : (
-                <p>Ingen bygningsdata funnet.</p>
               )}
             </>
           )}

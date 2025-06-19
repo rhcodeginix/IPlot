@@ -7,7 +7,6 @@ import Img_vipps_login from "@/public/images/Img_vipps_login.png";
 import Button from "@/components/common/button";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
-import Loader from "@/components/Loader";
 import LoginForm from "../login/loginForm";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -103,9 +102,6 @@ const Tomt: React.FC<{
 
   const [activeTab, setActiveTab] = useState<string>(tabs[0].id);
 
-  if (loadingLamdaData) {
-    <Loader />;
-  }
   return (
     <div className="relative">
       <div className="bg-lightPurple2 py-2 md:py-4">

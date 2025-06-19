@@ -4,7 +4,6 @@ import Image from "next/image";
 import Ic_breadcrumb_arrow from "@/public/images/Ic_breadcrumb_arrow.svg";
 import Ic_logo from "@/public/images/Ic_logo.svg";
 import Button from "@/components/common/button";
-import Loader from "@/components/Loader";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
@@ -47,6 +46,7 @@ const HouseModelSingleProperty: React.FC<{
   lamdaDataFromApi,
   askData,
   user,
+  handlePrevious,
 }) => {
   const router = useRouter();
   const { homePage } = router.query;
@@ -159,9 +159,6 @@ const HouseModelSingleProperty: React.FC<{
     }
   }, [plotId, id, user]);
 
-  if (loadingLamdaData) {
-    <Loader />;
-  }
   return (
     <div className="relative">
       <div className="bg-lightPurple2 py-2 md:py-4">
@@ -319,6 +316,7 @@ const HouseModelSingleProperty: React.FC<{
                 });
                 const currIndex = 0;
                 localStorage.setItem("currIndex", currIndex.toString());
+                handlePrevious();
               }}
             />
             <Button

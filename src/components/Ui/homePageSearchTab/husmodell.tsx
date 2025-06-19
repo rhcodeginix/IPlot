@@ -4,7 +4,6 @@ import Ic_Search2 from "@/public/images/Ic_Search2.svg";
 import Ic_chevron_down from "@/public/images/Ic_chevron_down.svg";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
-import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
 
 const HusmodellTab = () => {
@@ -204,8 +203,8 @@ const HusmodellTab = () => {
                   }}
                 >
                   {isLoading ? (
-                    <div className="relative h-[80px]">
-                      <Loading />
+                    <div className="px-3 md:px-4 py-2 md:py-[14px]">
+                      <div className="w-[180px] h-[20px] rounded-lg custom-shimmer"></div>
                     </div>
                   ) : filteredCities.length > 0 ? (
                     filteredCities.map((city: any, index) => (

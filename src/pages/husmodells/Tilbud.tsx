@@ -339,10 +339,6 @@ const Tilbud: React.FC<{
   const ByggestartDate = addDaysToDate(date, totalByggestartDays);
 
   return (
-    // <div className="relative">
-    //   {loading ? (
-    //     <Loader />
-    //   ) : (
     <>
       <div className="bg-lightPurple2 py-2 md:py-4">
         <SideSpaceContainer>
@@ -507,10 +503,7 @@ const Tilbud: React.FC<{
                     <div className="w-[200px] h-[20px] rounded-lg custom-shimmer"></div>
                   ) : (
                     <div className="text-darkBlack text-xs md:text-sm font-semibold">
-                      {
-                        askData?.bya_calculations?.results
-                          ?.available_building_area
-                      }{" "}
+                      {Husdetaljer?.BebygdAreal}{" "}
                       <span className="text-[#4A5578] font-normal">m²</span>
                     </div>
                   )}
@@ -534,13 +527,17 @@ const Tilbud: React.FC<{
                       <span className="text-[#4A5578] font-normal">bad</span>
                     </div>
                   )}
-                  {loading ? (
-                    <div className="w-[200px] h-[20px] rounded-lg custom-shimmer ml-auto"></div>
-                  ) : (
-                    <div className="text-darkBlack text-xs md:text-sm font-semibold ml-auto">
-                      {askData?.bya_calculations?.input?.plot_size}{" "}
-                      <span className="text-[#4A5578] font-normal">m²</span>
-                    </div>
+                  {askData?.bya_calculations?.input?.plot_size && (
+                    <>
+                      {loading ? (
+                        <div className="w-[200px] h-[20px] rounded-lg custom-shimmer ml-auto"></div>
+                      ) : (
+                        <div className="text-darkBlack text-xs md:text-sm font-semibold ml-auto">
+                          {askData?.bya_calculations?.input?.plot_size}{" "}
+                          <span className="text-[#4A5578] font-normal">m²</span>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
                 <div className="border-t border-[#EAECF0] w-full my-2 md:my-3 desktop:my-4"></div>
@@ -931,8 +928,6 @@ const Tilbud: React.FC<{
         </SideSpaceContainer>
       </div>
     </>
-    //   )}
-    // </div>
   );
 };
 

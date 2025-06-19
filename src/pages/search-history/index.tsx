@@ -1,6 +1,5 @@
 "use client";
 import SideSpaceContainer from "@/components/common/sideSpace";
-import Loader from "@/components/Loader";
 import NorkartMap from "@/components/map";
 import { auth, db } from "@/config/firebaseConfig";
 import { useAddress } from "@/context/addressContext";
@@ -47,8 +46,19 @@ const index = () => {
     <div className="pt-[44px] pb-[66px]">
       <SideSpaceContainer>
         {loading ? (
-          <div className="h-screen">
-            <Loader />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 desktop:grid-cols-4 gap-x-4 lg:gap-x-6 desktop:gap-x-8 gap-y-7 lg:gap-y-9 desktop:gap-y-12">
+            {Array.from({ length: 8 }).map((_: any, index) => (
+              <div key={index} className="relative">
+                <div className="flex flex-col gap-3 cursor-pointer relative z-40">
+                  <div className="h-[300px] md:h-[350px] cursor-pointer">
+                    <div className="w-full h-full rounded-lg custom-shimmer"></div>
+                  </div>
+
+                  <div className="w-[200px] h-[20px] rounded-lg custom-shimmer"></div>
+                </div>
+                <div className="absolute z-50 top-0 left-0 h-full w-full"></div>
+              </div>
+            ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 desktop:grid-cols-4 gap-x-4 lg:gap-x-6 desktop:gap-x-8 gap-y-7 lg:gap-y-9 desktop:gap-y-12">

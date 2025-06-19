@@ -521,6 +521,8 @@ const Regulations = () => {
 
   useEffect(() => {
     setLoadingLamdaData(true);
+    setLoadingAdditionalData(true);
+
     const fetchData = async () => {
       if (!(kommunenummer && gardsnummer && bruksnummer)) return;
 
