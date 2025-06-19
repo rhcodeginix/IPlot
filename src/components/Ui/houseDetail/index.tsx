@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import Illustrasjoner from "../RegulationHusmodell/Illustrasjoner"; // formatCurrency,
+import Illustrasjoner from "../RegulationHusmodell/Illustrasjoner";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
 import { useUserLayoutContext } from "@/context/userLayoutContext";

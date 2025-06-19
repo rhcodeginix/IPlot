@@ -1,13 +1,13 @@
 import Img_product_3d_img1 from "@/public/images/Img_product_3d_img1.png";
 import Ic_close from "@/public/images/Ic_close.svg";
 import React, { useEffect, useRef, useState } from "react";
-import { formatCurrency } from "@/components/Ui/RegulationHusmodell/propertyDetailPage";
 import Image from "next/image";
 import Modal from "@/components/common/modal";
 import FileInfo from "@/components/FileInfo";
 import Ic_download from "@/public/images/Ic_download.svg";
 import Ic_file from "@/public/images/Ic_file.svg";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { formatCurrency } from "@/components/Ui/RegulationHusmodell/Illustrasjoner";
 
 const handleDownload = async (filePath: string) => {
   try {

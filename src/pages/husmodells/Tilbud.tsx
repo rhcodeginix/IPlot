@@ -16,13 +16,13 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { addDaysToDate } from "@/components/Ui/stepperUi/productDetailWithPrice";
 import Link from "next/link";
 import PropertyDetails from "@/components/Ui/husmodellPlot/properyDetails";
 import LeadsBox from "@/components/Ui/husmodellPlot/leadsBox";
 import PropertyHouseDetails from "@/components/Ui/husmodellPlot/PropertyHouseDetails";
 import NorkartMap from "@/components/map";
 import { toast } from "react-hot-toast";
+import { addDaysToDate } from "@/components/Ui/husmodellPlot/Tilbudsdetaljer";
 
 const Tilbud: React.FC<{
   handleNext: any;
