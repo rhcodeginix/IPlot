@@ -203,9 +203,22 @@ const HusmodellTab = () => {
                   }}
                 >
                   {isLoading ? (
+                    <>
                     <div className="px-3 md:px-4 py-2 md:py-[14px]">
                       <div className="w-[180px] h-[20px] rounded-lg custom-shimmer"></div>
                     </div>
+                    <div className="px-3 md:px-4 py-2 md:py-[14px]">
+                      <div className="w-[180px] h-[20px] rounded-lg custom-shimmer"></div>
+                    </div>
+                    <div className="px-3 md:px-4 py-2 md:py-[14px]">
+                      <div className="w-[180px] h-[20px] rounded-lg custom-shimmer"></div>
+                    </div>
+                    <div className="px-3 md:px-4 py-2 md:py-[14px]">
+                      <div className="w-[180px] h-[20px] rounded-lg custom-shimmer"></div>
+                    </div><div className="px-3 md:px-4 py-2 md:py-[14px]">
+                      <div className="w-[180px] h-[20px] rounded-lg custom-shimmer"></div>
+                    </div>
+                    </>
                   ) : filteredCities.length > 0 ? (
                     filteredCities.map((city: any, index) => (
                       <li
