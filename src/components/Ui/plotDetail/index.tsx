@@ -218,33 +218,37 @@ const PlotDetailPage: React.FC<{
           <div className="flex flex-col desktop:flex-row gap-4 lg:gap-6 justify-between">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 desktop:gap-6">
               <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
-                <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
-                  Tomteopplysninger
-                  <div className="relative">
-                    <Image
-                      fetchPriority="auto"
-                      src={Ic_info_circle}
-                      alt="info"
-                      className="notShow cursor-pointer"
-                      onClick={() => toggleDropdown("Tomteopplysninger")}
-                    />
-                    {dropdownState.Tomteopplysninger && (
-                      <div
-                        className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
-                        style={{
-                          boxShadow:
-                            "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
-                          zIndex: 999999999,
-                          transform: "translateX(-50%)",
-                          left: "50%",
-                        }}
-                        ref={dropdownRef}
-                      >
-                        Info kommer
-                      </div>
-                    )}
-                  </div>
-                </h2>
+                {loadingLamdaData ? (
+                  <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                ) : (
+                  <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
+                    Tomteopplysninger
+                    <div className="relative">
+                      <Image
+                        fetchPriority="auto"
+                        src={Ic_info_circle}
+                        alt="info"
+                        className="notShow cursor-pointer"
+                        onClick={() => toggleDropdown("Tomteopplysninger")}
+                      />
+                      {dropdownState.Tomteopplysninger && (
+                        <div
+                          className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
+                          style={{
+                            boxShadow:
+                              "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
+                            zIndex: 999999999,
+                            transform: "translateX(-50%)",
+                            left: "50%",
+                          }}
+                          ref={dropdownRef}
+                        >
+                          Info kommer
+                        </div>
+                      )}
+                    </div>
+                  </h2>
+                )}
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
                     {loadingLamdaData ? (
@@ -399,33 +403,37 @@ const PlotDetailPage: React.FC<{
                 </div>
               </div>
               <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
-                <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
-                  Kommunale data
-                  <div className="relative">
-                    <Image
-                      fetchPriority="auto"
-                      src={Ic_info_circle}
-                      alt="info"
-                      className="notShow cursor-pointer"
-                      onClick={() => toggleDropdown("KommunaleData")}
-                    />
-                    {dropdownState.KommunaleData && (
-                      <div
-                        className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
-                        style={{
-                          boxShadow:
-                            "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
-                          zIndex: 999999999,
-                          transform: "translateX(-50%)",
-                          left: "50%",
-                        }}
-                        ref={dropdownRef}
-                      >
-                        Info kommer
-                      </div>
-                    )}
-                  </div>
-                </h2>
+                {loadingLamdaData ? (
+                  <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                ) : (
+                  <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
+                    Kommunale data
+                    <div className="relative">
+                      <Image
+                        fetchPriority="auto"
+                        src={Ic_info_circle}
+                        alt="info"
+                        className="notShow cursor-pointer"
+                        onClick={() => toggleDropdown("KommunaleData")}
+                      />
+                      {dropdownState.KommunaleData && (
+                        <div
+                          className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
+                          style={{
+                            boxShadow:
+                              "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
+                            zIndex: 999999999,
+                            transform: "translateX(-50%)",
+                            left: "50%",
+                          }}
+                          ref={dropdownRef}
+                        >
+                          Info kommer
+                        </div>
+                      )}
+                    </div>
+                  </h2>
+                )}
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
                     {loadingLamdaData ? (
@@ -547,33 +555,37 @@ const PlotDetailPage: React.FC<{
                 </div>
               </div>
               <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
-                <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
-                  Eiendomsstatus
-                  <div className="relative">
-                    <Image
-                      fetchPriority="auto"
-                      src={Ic_info_circle}
-                      alt="info"
-                      className="notShow cursor-pointer"
-                      onClick={() => toggleDropdown("Eiendomsstatus")}
-                    />
-                    {dropdownState.Eiendomsstatus && (
-                      <div
-                        className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
-                        style={{
-                          boxShadow:
-                            "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
-                          zIndex: 999999999,
-                          transform: "translateX(-50%)",
-                          left: "50%",
-                        }}
-                        ref={dropdownRef}
-                      >
-                        Info kommer
-                      </div>
-                    )}
-                  </div>
-                </h2>
+                {loadingLamdaData ? (
+                  <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                ) : (
+                  <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
+                    Eiendomsstatus
+                    <div className="relative">
+                      <Image
+                        fetchPriority="auto"
+                        src={Ic_info_circle}
+                        alt="info"
+                        className="notShow cursor-pointer"
+                        onClick={() => toggleDropdown("Eiendomsstatus")}
+                      />
+                      {dropdownState.Eiendomsstatus && (
+                        <div
+                          className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
+                          style={{
+                            boxShadow:
+                              "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
+                            zIndex: 999999999,
+                            transform: "translateX(-50%)",
+                            left: "50%",
+                          }}
+                          ref={dropdownRef}
+                        >
+                          Info kommer
+                        </div>
+                      )}
+                    </div>
+                  </h2>
+                )}
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
                     {loadingLamdaData ? (
@@ -733,33 +745,37 @@ const PlotDetailPage: React.FC<{
                 </div>
               </div>
               <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
-                <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
-                  Parkeringsinformasjon
-                  <div className="relative">
-                    <Image
-                      fetchPriority="auto"
-                      src={Ic_info_circle}
-                      alt="info"
-                      className="notShow cursor-pointer"
-                      onClick={() => toggleDropdown("Parkeringsinformasjon")}
-                    />
-                    {dropdownState.Parkeringsinformasjon && (
-                      <div
-                        className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
-                        style={{
-                          boxShadow:
-                            "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
-                          zIndex: 999999999,
-                          transform: "translateX(-50%)",
-                          left: "50%",
-                        }}
-                        ref={dropdownRef}
-                      >
-                        Info kommer
-                      </div>
-                    )}
-                  </div>
-                </h2>
+                {loadingLamdaData ? (
+                  <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                ) : (
+                  <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
+                    Parkeringsinformasjon
+                    <div className="relative">
+                      <Image
+                        fetchPriority="auto"
+                        src={Ic_info_circle}
+                        alt="info"
+                        className="notShow cursor-pointer"
+                        onClick={() => toggleDropdown("Parkeringsinformasjon")}
+                      />
+                      {dropdownState.Parkeringsinformasjon && (
+                        <div
+                          className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
+                          style={{
+                            boxShadow:
+                              "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
+                            zIndex: 999999999,
+                            transform: "translateX(-50%)",
+                            left: "50%",
+                          }}
+                          ref={dropdownRef}
+                        >
+                          Info kommer
+                        </div>
+                      )}
+                    </div>
+                  </h2>
+                )}
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
                     {loadingLamdaData ? (
@@ -874,35 +890,39 @@ const PlotDetailPage: React.FC<{
                 </div>
               </div>
               <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
-                <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
-                  Ytterligere eiendomsforhold
-                  <div className="relative">
-                    <Image
-                      fetchPriority="auto"
-                      src={Ic_info_circle}
-                      alt="info"
-                      className="notShow cursor-pointer"
-                      onClick={() =>
-                        toggleDropdown("YtterligereEiendomsforhold")
-                      }
-                    />
-                    {dropdownState.YtterligereEiendomsforhold && (
-                      <div
-                        className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
-                        style={{
-                          boxShadow:
-                            "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
-                          zIndex: 999999999,
-                          transform: "translateX(-50%)",
-                          left: "50%",
-                        }}
-                        ref={dropdownRef}
-                      >
-                        Info kommer
-                      </div>
-                    )}
-                  </div>
-                </h2>
+                {loadingLamdaData ? (
+                  <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                ) : (
+                  <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
+                    Ytterligere eiendomsforhold
+                    <div className="relative">
+                      <Image
+                        fetchPriority="auto"
+                        src={Ic_info_circle}
+                        alt="info"
+                        className="notShow cursor-pointer"
+                        onClick={() =>
+                          toggleDropdown("YtterligereEiendomsforhold")
+                        }
+                      />
+                      {dropdownState.YtterligereEiendomsforhold && (
+                        <div
+                          className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
+                          style={{
+                            boxShadow:
+                              "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
+                            zIndex: 999999999,
+                            transform: "translateX(-50%)",
+                            left: "50%",
+                          }}
+                          ref={dropdownRef}
+                        >
+                          Info kommer
+                        </div>
+                      )}
+                    </div>
+                  </h2>
+                )}
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
                     {loadingLamdaData ? (
@@ -1062,33 +1082,39 @@ const PlotDetailPage: React.FC<{
                 </div>
               </div>
               <div className="bg-gray3 rounded-lg p-3.5 md:p-5 flex flex-col gap-3 md:gap-4">
-                <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
-                  Spesielle registreringer
-                  <div className="relative">
-                    <Image
-                      fetchPriority="auto"
-                      src={Ic_info_circle}
-                      alt="info"
-                      className="notShow cursor-pointer"
-                      onClick={() => toggleDropdown("SpesielleRegistreringer")}
-                    />
-                    {dropdownState.SpesielleRegistreringer && (
-                      <div
-                        className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
-                        style={{
-                          boxShadow:
-                            "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
-                          zIndex: 999999999,
-                          transform: "translateX(-50%)",
-                          left: "50%",
-                        }}
-                        ref={dropdownRef}
-                      >
-                        Info kommer
-                      </div>
-                    )}
-                  </div>
-                </h2>
+                {loadingLamdaData ? (
+                  <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                ) : (
+                  <h2 className="text-black text-sm md:text-base desktop:text-lg font-semibold flex items-center gap-1 md:gap-2">
+                    Spesielle registreringer
+                    <div className="relative">
+                      <Image
+                        fetchPriority="auto"
+                        src={Ic_info_circle}
+                        alt="info"
+                        className="notShow cursor-pointer"
+                        onClick={() =>
+                          toggleDropdown("SpesielleRegistreringer")
+                        }
+                      />
+                      {dropdownState.SpesielleRegistreringer && (
+                        <div
+                          className="flex flex-col gap-2 absolute text-grayText font-normal text-sm p-3 rounded-[8px] bg-white w-48 dropdown-arrow"
+                          style={{
+                            boxShadow:
+                              "0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814",
+                            zIndex: 999999999,
+                            transform: "translateX(-50%)",
+                            left: "50%",
+                          }}
+                          ref={dropdownRef}
+                        >
+                          Info kommer
+                        </div>
+                      )}
+                    </div>
+                  </h2>
+                )}
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
                     {loadingLamdaData ? (
