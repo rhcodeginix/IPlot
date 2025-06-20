@@ -194,9 +194,13 @@ const PlotDetailPage: React.FC<{
           className="flex items-center justify-between gap-2 cursor-pointer p-4 md:p-5"
           onClick={toggleAccordion}
         >
-          <h3 className="text-black text-lg md:text-xl desktop:text-2xl font-semibold">
-            Eiendomsinformasjon
-          </h3>
+          {loadingLamdaData ? (
+            <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+          ) : (
+            <h3 className="text-black text-lg md:text-xl desktop:text-2xl font-semibold">
+              Eiendomsinformasjon
+            </h3>
+          )}
           {isOpen ? (
             <Image fetchPriority="auto" src={Ic_chevron_up} alt="arrow" />
           ) : (
@@ -243,10 +247,14 @@ const PlotDetailPage: React.FC<{
                 </h2>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Areal beregnet
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Areal beregnet
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -266,10 +274,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Etableringsårs dato
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Etableringsårs dato
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -284,10 +296,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Sist oppdatert
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Sist oppdatert
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -303,10 +319,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Tomtens totale BYA
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Tomtens totale BYA
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -326,10 +346,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Er registrert land
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Er registrert land
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -353,10 +377,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Festenummer
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Festenummer
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -400,8 +428,14 @@ const PlotDetailPage: React.FC<{
                 </h2>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">Kommune</p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Kommune
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -413,10 +447,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Kommunenummer
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Kommunenummer
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -429,10 +467,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Gårdsnummer
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Gårdsnummer
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -445,10 +487,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Bruksnummer
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Bruksnummer
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -461,10 +507,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Seksjonsnummer
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Seksjonsnummer
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -477,8 +527,12 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">Fylke</p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">Fylke</p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -522,10 +576,14 @@ const PlotDetailPage: React.FC<{
                 </h2>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Kan selges
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Kan selges
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -549,10 +607,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Kan belånes
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Kan belånes
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -576,10 +638,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Har bygning
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Har bygning
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -603,10 +669,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Har fritidsbolig
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Har fritidsbolig
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -630,10 +700,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Har bolig
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Har bolig
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -688,10 +762,14 @@ const PlotDetailPage: React.FC<{
                 </h2>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Parkering reservert plass
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Parkering reservert plass
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -711,10 +789,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Parkering område per plass
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Parkering område per plass
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -734,10 +816,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Totalt parkeringsområde
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Totalt parkeringsområde
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -757,10 +843,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Parkering er usikker
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Parkering er usikker
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -815,10 +905,14 @@ const PlotDetailPage: React.FC<{
                 </h2>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Har forurensning
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Har forurensning
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -842,10 +936,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Har aktive festegrunner
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Har aktive festegrunner
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -869,10 +967,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Inngår i samlet eiendom
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Inngår i samlet eiendom
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -896,10 +998,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Kulturminner registrert
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Kulturminner registrert
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -923,10 +1029,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Grunnforurensning
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Grunnforurensning
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -981,10 +1091,14 @@ const PlotDetailPage: React.FC<{
                 </h2>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Sammenslåtte tomter
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Sammenslåtte tomter
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -1008,8 +1122,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">Tinglyst</p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Tinglyst
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -1033,8 +1153,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">Ugyldig</p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Ugyldig
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -1047,10 +1173,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Oppmåling ikke fullført
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Oppmåling ikke fullført
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -1074,10 +1204,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Mangler grenseoppmerking
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Mangler grenseoppmerking
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -1101,10 +1235,14 @@ const PlotDetailPage: React.FC<{
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                    <p className="text-xs md:text-sm text-grayText">
-                      Under sammenslåing
-                    </p>
-                    {loadingAdditionalData ? (
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <p className="text-xs md:text-sm text-grayText">
+                        Under sammenslåing
+                      </p>
+                    )}
+                    {loadingLamdaData ? (
                       <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
                     ) : (
                       <h5 className="text-sm md:text-base text-black font-medium">
@@ -1133,7 +1271,7 @@ const PlotDetailPage: React.FC<{
               </div>
             </div>
             <div className="rounded-lg sm:rounded-[12px] overflow-hidden w-full h-[300px] desktop:h-auto desktop:w-[407px]">
-              {loadingAdditionalData ? (
+              {loadingLamdaData ? (
                 <div className="w-full h-full rounded-lg custom-shimmer"></div>
               ) : (
                 <>
@@ -1178,9 +1316,13 @@ const PlotDetailPage: React.FC<{
                 <div className="relative w-full md:w-1/2">
                   <div>
                     <div className="flex justify-between items-center mb-4 lg:mb-6">
-                      <h2 className="text-black text-base md:text-lg lg:text-xl desktop:text-2xl font-semibold">
-                        Reguleringsplan
-                      </h2>
+                      {loadingLamdaData ? (
+                        <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                      ) : (
+                        <h2 className="text-black text-base md:text-lg lg:text-xl desktop:text-2xl font-semibold">
+                          Reguleringsplan
+                        </h2>
+                      )}
                       <Image
                         fetchPriority="auto"
                         src={Ic_generelt}
@@ -1418,13 +1560,17 @@ const PlotDetailPage: React.FC<{
                 </div>
                 <div className="relative w-full md:w-1/2">
                   <div className="flex justify-between items-center mb-4 lg:mb-6">
-                    <h2 className="text-black text-base md:text-lg lg:text-xl desktop:text-2xl font-semibold">
-                      Kommuneplan for{" "}
-                      {
-                        CadastreDataFromApi?.presentationAddressApi?.response
-                          ?.item?.municipality?.municipalityName
-                      }
-                    </h2>
+                    {loadingLamdaData ? (
+                      <div className="w-[100px] h-[20px] rounded-lg custom-shimmer"></div>
+                    ) : (
+                      <h2 className="text-black text-base md:text-lg lg:text-xl desktop:text-2xl font-semibold">
+                        Kommuneplan for{" "}
+                        {
+                          CadastreDataFromApi?.presentationAddressApi?.response
+                            ?.item?.municipality?.municipalityName
+                        }
+                      </h2>
+                    )}
                     <Image fetchPriority="auto" src={Ic_generelt} alt="image" />
                   </div>
                   <div className="flex flex-col gap-2 md:gap-3">
