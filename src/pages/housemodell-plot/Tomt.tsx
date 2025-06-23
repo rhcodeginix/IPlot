@@ -159,7 +159,7 @@ const Tomt: React.FC<{
         CadastreDataFromApi={CadastreDataFromApi}
         lamdaDataFromApi={lamdaDataFromApi}
         HouseModelData={HouseModelData}
-        loading={loadingLamdaData}
+        loading={loadingAdditionalData}
       />
       <SideSpaceContainer>
         <LeadsBox />

@@ -665,7 +665,7 @@ const Tilbud: React.FC<{
                       </h5>
                     )}
                     <div className="flex flex-col gap-2 md:gap-3">
-                      {updatedArray?.length > 0 ? (
+                      {/* {updatedArray?.length > 0 ? (
                         <div className="flex flex-col gap-2 md:gap-3">
                           {updatedArray.map((item: any, index: number) => (
                             <div
@@ -711,7 +711,7 @@ const Tilbud: React.FC<{
                           Ingen tilpasning.
                         </p>
                       )}
-                      <div className="w-full border-t border-[#DCDFEA]"></div>
+                      <div className="w-full border-t border-[#DCDFEA]"></div> */}
                       <div className="flex gap-2 w-full justify-between">
                         {loading ? (
                           <div className="w-[180px] h-[20px] rounded-lg custom-shimmer"></div>

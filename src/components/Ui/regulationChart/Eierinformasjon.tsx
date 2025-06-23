@@ -62,7 +62,11 @@ const Eierinformasjon: React.FC<{ data: any; loadingAdditionalData: any }> = ({
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <p className="text-grayText text-xs mb-1">Eierandel</p>
+                      {loadingAdditionalData ? (
+                        <div className="w-[200px] h-[20px] rounded-lg custom-shimmer mb-2"></div>
+                      ) : (
+                        <p className="text-grayText text-xs mb-1">Eierandel</p>
+                      )}
                       {loadingAdditionalData ? (
                         <div className="w-[200px] h-[20px] rounded-lg custom-shimmer"></div>
                       ) : (
