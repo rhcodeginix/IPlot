@@ -17,6 +17,8 @@ const ContactForm: React.FC<{ leadId?: any }> = ({ leadId }) => {
   const validationSchema = Yup.object().shape({
     checkbox: Yup.boolean().oneOf([true], "Påkrevd").required("Påkrevd"),
   });
+  const stored = localStorage.getItem("customizeHouse");
+
   useEffect(() => {
     (async () => {
       try {
@@ -39,6 +41,7 @@ const ContactForm: React.FC<{ leadId?: any }> = ({ leadId }) => {
         await updateDoc(doc(db, "leads", leadId), {
           Isopt: true,
           updatedAt: new Date(),
+          stored,
         });
         toast.success("Added successfully.", { position: "top-right" });
       } else {

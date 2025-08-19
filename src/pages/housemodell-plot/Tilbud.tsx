@@ -122,6 +122,7 @@ const Tilbud: React.FC<{
   ].reduce((acc, curr) => acc + (curr || 0), 0);
 
   const leadId = router.query["leadId"];
+  const stored = localStorage.getItem("customizeHouse");
 
   const ByggestartDate = addDaysToDate(date, totalByggestartDays);
 
@@ -519,6 +520,7 @@ const Tilbud: React.FC<{
                         Isopt: true,
                         EstimertByggestart: ByggestartDate,
                         EstimertInnflytting: addDaysToDate(date, totalDays),
+                        stored,
                       });
                       setDate(new Date());
 

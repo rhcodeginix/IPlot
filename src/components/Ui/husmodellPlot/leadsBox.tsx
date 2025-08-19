@@ -64,6 +64,8 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
 
     return () => unsubscribe();
   }, []);
+  const stored = localStorage.getItem("customizeHouse");
+
   useEffect(() => {
     const fetchData = async () => {
       if (!user || !propertyId || !husmodellId) {
@@ -113,6 +115,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
           createdAt: new Date(),
           updatedAt: new Date(),
           IsEmptyPlot: isEmptyPlot === "true",
+          stored,
         });
 
         router.replace({
@@ -136,6 +139,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
         await updateDoc(doc(db, "leads", String(leadId)), {
           Isopt: true,
           updatedAt: new Date(),
+          stored,
         });
         toast.success("Update Lead successfully.", { position: "top-right" });
       } else {
@@ -155,6 +159,7 @@ const LeadsBox: React.FC<{ col?: any; isShow?: any }> = ({ col, isShow }) => {
           IsoptForBank: true,
           updatedAt: new Date(),
           bankValue,
+          stored,
         });
         toast.success("Update Bank Lead successfully.", {
           position: "top-right",

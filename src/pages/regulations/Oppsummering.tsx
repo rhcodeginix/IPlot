@@ -84,6 +84,7 @@ const Oppsummering: React.FC<{
   });
 
   const leadId = router.query["leadId"];
+  const stored = localStorage.getItem("customizeHouse");
 
   const handleSubmit = async (values: any) => {
     const bankValue = values;
@@ -95,6 +96,7 @@ const Oppsummering: React.FC<{
           IsoptForBank: true,
           updatedAt: new Date(),
           bankValue,
+          stored,
         });
         toast.success("Update Lead successfully.", { position: "top-right" });
       } else {

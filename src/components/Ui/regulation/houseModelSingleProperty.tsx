@@ -70,6 +70,7 @@ const HouseModelSingleProperty: React.FC<{
 
   const id = router.query["husmodellId"];
   const plotId = router.query["plotId"];
+  const stored = localStorage.getItem("customizeHouse");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -143,6 +144,7 @@ const HouseModelSingleProperty: React.FC<{
           createdAt: new Date(),
           updatedAt: new Date(),
           IsEmptyPlot: isEmptyPlot === "true",
+          stored,
         });
 
         queryParams.set("leadId", newDocRef.id);

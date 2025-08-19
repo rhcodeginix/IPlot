@@ -230,6 +230,7 @@ const Tilpass: React.FC<any> = ({
   const router = useRouter();
 
   const id = router.query["husmodellId"];
+  const stored = localStorage.getItem("customizeHouse");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -284,6 +285,7 @@ const Tilpass: React.FC<any> = ({
           IsoptForBank: false,
           createdAt: new Date(),
           updatedAt: new Date(),
+          stored,
         });
 
         queryParams.set("leadId", newDocRef.id);
