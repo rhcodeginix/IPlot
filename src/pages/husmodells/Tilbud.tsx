@@ -108,8 +108,12 @@ const Tilbud: React.FC<{
   }, [husmodellId, plotId, noPlot]);
 
   const [date, setDate] = useState(new Date());
-  const stored = localStorage.getItem("customizeHouse");
+  const [stored, setStored] = useState<any>();
 
+  useEffect(() => {
+    const store = localStorage.getItem("customizeHouse");
+    setStored(store);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       if (!user || !plotId || !husmodellId) return;

@@ -84,8 +84,12 @@ const Oppsummering: React.FC<{
   });
 
   const leadId = router.query["leadId"];
-  const stored = localStorage.getItem("customizeHouse");
+  const [stored, setStored] = useState<any>();
 
+  useEffect(() => {
+    const store = localStorage.getItem("customizeHouse");
+    setStored(store);
+  }, []);
   const handleSubmit = async (values: any) => {
     const bankValue = values;
     setSkipSharingDataValidation(false);

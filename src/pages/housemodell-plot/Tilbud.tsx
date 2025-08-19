@@ -122,8 +122,12 @@ const Tilbud: React.FC<{
   ].reduce((acc, curr) => acc + (curr || 0), 0);
 
   const leadId = router.query["leadId"];
-  const stored = localStorage.getItem("customizeHouse");
+  const [stored, setStored] = useState<any>();
 
+  useEffect(() => {
+    const store = localStorage.getItem("customizeHouse");
+    setStored(store);
+  }, []);
   const ByggestartDate = addDaysToDate(date, totalByggestartDays);
 
   return (

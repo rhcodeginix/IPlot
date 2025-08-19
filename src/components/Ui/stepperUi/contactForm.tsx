@@ -17,8 +17,12 @@ const ContactForm: React.FC<{ leadId?: any }> = ({ leadId }) => {
   const validationSchema = Yup.object().shape({
     checkbox: Yup.boolean().oneOf([true], "Påkrevd").required("Påkrevd"),
   });
-  const stored = localStorage.getItem("customizeHouse");
+  const [stored, setStored] = useState<any>();
 
+  useEffect(() => {
+    const store = localStorage.getItem("customizeHouse");
+    setStored(store);
+  }, []);
   useEffect(() => {
     (async () => {
       try {

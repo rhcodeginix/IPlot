@@ -70,7 +70,12 @@ const HouseModelSingleProperty: React.FC<{
 
   const id = router.query["husmodellId"];
   const plotId = router.query["plotId"];
-  const stored = localStorage.getItem("customizeHouse");
+  const [stored, setStored] = useState<any>();
+
+  useEffect(() => {
+    const store = localStorage.getItem("customizeHouse");
+    setStored(store);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

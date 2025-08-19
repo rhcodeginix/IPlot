@@ -73,8 +73,12 @@ const Husmodell: React.FC<any> = ({
   }, []);
 
   const id = router.query["husmodellId"];
-  const stored = localStorage.getItem("customizeHouse");
+  const [stored, setStored] = useState<any>();
 
+  useEffect(() => {
+    const store = localStorage.getItem("customizeHouse");
+    setStored(store);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       if (!id) return;
