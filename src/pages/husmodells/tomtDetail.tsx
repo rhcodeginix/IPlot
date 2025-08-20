@@ -79,7 +79,7 @@ const TomtHouseDetails: React.FC<{
   }, []);
   useEffect(() => {
     const fetchData = async () => {
-      if (!user || !plotId || !id) return;
+      if (!user || !plotId || !id || !stored) return;
 
       const queryParams = new URLSearchParams(window.location.search);
       const isEmptyPlot = queryParams.get("empty");
@@ -164,10 +164,10 @@ const TomtHouseDetails: React.FC<{
       }
     };
 
-    if (plotId && id && user) {
+    if (plotId && id && user && stored) {
       fetchData();
     }
-  }, [plotId, id, user]);
+  }, [plotId, id, user, stored]);
 
   return (
     <div className="relative">
